@@ -60,7 +60,9 @@ class Search {
 					{
 						$this->professions_result[] = $value;
 					}
-					$this->unified_search_terms['profession'] = $this->professions_result;
+					if( count($this->professions_result) != 0 ){
+						$this->unified_search_terms['profession'] = $this->professions_result;
+					}
 				}
 			}
 
@@ -72,7 +74,9 @@ class Search {
 					{
 						$this->location_result[] = $value;
 					}
-					$this->unified_search_terms['location'] = $this->location_result;
+					if( count( $this->location_result != 0 ) ){
+						$this->unified_search_terms['location'] = $this->location_result;
+					}
 				}
 			}
 
@@ -117,6 +121,7 @@ class Search {
 		}
 
 		$query = $this->model->search( $search_terms );
+
 		print json_encode( $query->result() );
 	}
 
