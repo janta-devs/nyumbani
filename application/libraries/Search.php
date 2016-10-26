@@ -13,15 +13,17 @@ class Search {
 	public $unified_search_terms = [];
 	public $db_results = [];
 
+	public $model;
+
 	public function __construct()
 	{
 
 		$CI =& get_instance();
 		$CI->load->model('Jobseeker');
-		$jobseeker = new Jobseeker();
+		$this->model = new Jobseeker();
 
-		$prof = $jobseeker->getData('profession');
-		$loc = $jobseeker->getData('location');
+		$prof = $this->model->getData('profession');
+		$loc = $this->model->getData('location');
 		$profession = [];
 		$location = [];
 
@@ -103,6 +105,7 @@ class Search {
 	{
 		// refactoring the information gotten from the search into searcheable SQL queries
 		// e.g. SELECT * FROM `SOME_TABLE.FIELD` WHERE `profession` LIKE %{$this->unified_search_terns["profession"]}% etc
+		
 		$search_terms = [];
 
 		foreach ($this->unified_search_terms as $k => $v)
@@ -112,7 +115,9 @@ class Search {
 				$search_terms[$k] = $value;
 			}
 		}
-		print_r( $search_terms );
+
+		$query = $this->model->search( $search_terms );
+		print json_encode( $query->result() );
 	}
 
 }

@@ -8,5 +8,10 @@ class Jobseeker extends CI_Model{
 		$query = $this->db->get('MOCK_DATA');
 		return $query;
 	}
+	function search( $query ){
+		$this->db->like( $query );
+		$query = $this->db->get( 'MOCK_DATA' );
+		return $query;
+	}
 }
 ?>
