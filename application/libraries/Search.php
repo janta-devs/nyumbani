@@ -76,7 +76,9 @@ class Search {
 				}
 			}
 
-			$this->refactor();
+			$res = $this->refactor();
+
+			return $res;
 		}
 		else
 		{
@@ -119,7 +121,7 @@ class Search {
 
 		$query = $this->model->search( $search_terms );
 
-		print json_encode( $query->result() );
+		return json_encode( $query->result() );
 	}
 
 }

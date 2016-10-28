@@ -22,6 +22,8 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->library('Search');
 		$search = new Search();
-		$search->get_terms();
+		$results = $search->get_terms('looking for a programmer');
+
+		print $results;
 	}
 }
