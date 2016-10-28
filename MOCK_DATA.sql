@@ -1,3 +1,8 @@
+create table MOCK_DATA ( id INT, first_name VARCHAR(50), last_name VARCHAR(50), email VARCHAR(50), gender VARCHAR(50), ip_address VARCHAR(20), profession VARCHAR(50), location VARCHAR(50) );
+
+
+
+
 insert into MOCK_DATA (id, first_name, last_name, email, gender, ip_address, profession, location) values (1, 'Donald', 'Turner', 'dturner0@smugmug.com', 'Male', '79.164.175.250', 'Structural Analysis Engineer', 'Mamedkala');
 insert into MOCK_DATA (id, first_name, last_name, email, gender, ip_address, profession, location) values (2, 'Wayne', 'Burns', 'wburns1@jigsy.com', 'Male', '93.214.121.145', 'Developer I', 'Xingren');
 insert into MOCK_DATA (id, first_name, last_name, email, gender, ip_address, profession, location) values (3, 'Betty', 'Bennett', 'bbennett2@loc.gov', 'Female', '18.148.184.43', 'Environmental Specialist', 'Jabłonica Polska');
