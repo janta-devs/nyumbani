@@ -7,9 +7,7 @@ class Search {
 	//Defined global variables
 
 	public $professions_result = [];
-	public $education_result = [];
 	public $location_result = [];
-	public $skill_result = [];
 	public $unified_search_terms = [];
 	public $db_results = [];
 
@@ -24,13 +22,11 @@ class Search {
 
 		$prof = $this->model->getData('profession');
 		$loc = $this->model->getData('location');
-		$profession = [];
-		$location = [];
 
 		$this->DBdata( $prof, $loc );
 	}
 
-	public function get_terms( $term )
+	public function get_terms( $term = "" )
 	{
 		$sanitized_data = strip_tags( $term );
 
@@ -105,6 +101,7 @@ class Search {
 		}
 		return ( $this->db_results );
 	}
+
 	public function refactor()
 	{
 		// refactoring the information gotten from the search into searcheable SQL queries
