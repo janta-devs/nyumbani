@@ -37,15 +37,12 @@ class Search {
 		*/
 		if( isset( $sanitized_data) && !empty( $sanitized_data ) )
 		{
-
-
 			foreach( $this->db_results['profession'] as $key => $value )
 			{
 				/*
 				* Leave the "@" delimeters in the REGEX,otherwise it 
 				* throws some undefined errors of 'unknown mofifier "c"'
 				*/
-				
 				if (preg_match("@".$value."@i", $sanitized_data))
 				{
 					/*
@@ -84,8 +81,6 @@ class Search {
 		{
 			print("Enter your search term in the searchbox\n\n\n");
 		}
-			
-		
 	}
 	public function DBdata($profession, $location)
 	{
@@ -103,7 +98,6 @@ class Search {
 		}
 		return ( $this->db_results );
 	}
-
 	public function refactor()
 	{
 		// refactoring the information gotten from the search into searcheable SQL queries
@@ -118,9 +112,7 @@ class Search {
 				$search_terms[$k] = $value;
 			}
 		}
-
 		$query = $this->model->search( $search_terms );
-
 		return json_encode( $query->result() );
 	}
 
