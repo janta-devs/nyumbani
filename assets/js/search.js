@@ -82,7 +82,7 @@ var Search = React.createClass({
 		var n = e.target , $n = $( n ).parent();
 
 		var self = this;
-
+		
 		$.ajax({
 			url: '/nyumbani/index.php/welcome/search',
 			type: 'POST',

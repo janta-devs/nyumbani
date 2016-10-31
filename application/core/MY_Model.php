@@ -1,8 +1,7 @@
 <?php
+class MY_Model extends CI_Model{
 
-class MY_Crud extends CI_Model{
-
-	public const TABLE = "abstract";
+	const TABLE = "abstract";
 
 
 	public function check( $data )
@@ -24,7 +23,8 @@ class MY_Crud extends CI_Model{
 
 		return $$query->result();
 	}
-	public function update( $primary_key, $unique_field, $data ){
+	public function update( $primary_key, $unique_field, $data )
+	{
 
 		//primary_key   => This represents the field in the database which is going to be searched
 		//unique_field  => this is a value from the user which needs to be searched in the specified field e.g. email or id
@@ -52,6 +52,18 @@ class MY_Crud extends CI_Model{
 	public function delete( $user_id )
 	{
 		return ($this->db->delete( $this::TABLE, $user_id )) ? true : false;
+	}
+	public function getData( $required_field )
+	{
+		$this->db->select($required_field);
+		$query = $this->db->get( $this::TABLE );
+		return $query;
+	}
+	function search( $query )
+	{
+		$this->db->like( $query );
+		$query = $this->db->get( $this::TABLE );
+		return $query;
 	}
 }
 
