@@ -1,7 +1,6 @@
 var SearchBar = React.createClass({
 	render: function() {
 		return (
-<<<<<<< HEAD
 			<div className="form-group label-floating">
 				<form>
 					<div className="input-group">
@@ -13,13 +12,7 @@ var SearchBar = React.createClass({
 					    </span>
 					</div>
 				</form>
-=======
-			<div>
-					<form>
-					    <input className="mdl-textfield__input" type="text" id="sample1" name = "search_term"/>
-					    <button className = "btn btn-primary" onClick = {this.props.search}>Search</button>
-					</form>
->>>>>>> f62563a5d5ca753681d12bb6bc7ac7356cb8c1f2
+
 			</div>
 		);
 	}
@@ -48,13 +41,8 @@ var ResultTable = React.createClass({
 		email = {x.email} location = {x.location} ip_address = {x.ip_address.toString()} profession = {x.profession}/>);
 
 		return (
-<<<<<<< HEAD
 				<table className = "table table-striped table-hover">
 						<thead>
-=======
-				<table className = "mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
-						<thead className = "mdl-data-table__cell--non-numeric">
->>>>>>> f62563a5d5ca753681d12bb6bc7ac7356cb8c1f2
 							<tr>
 								<td>First Name</td>
 								<td>Last Name</td>
@@ -98,21 +86,17 @@ var Search = React.createClass({
 		e.preventDefault();
 		e.stopPropagation();
 
-		var n = e.target , $n = $( n ).parent();
+		var n = e.target , $n = $( n ).parent().parent().parent().parent().find('input[type="text"]').val();
 
 		var self = this;
-<<<<<<< HEAD
-
-=======
-		
->>>>>>> f62563a5d5ca753681d12bb6bc7ac7356cb8c1f2
 		$.ajax({
-			url: '/nyumbani/index.php/welcome/search',
+			url: '/nyumbani/index.php/Timeline/get',
 			type: 'POST',
 			dataType: 'json',
-			data: $n.serialize(),
+			data: 'search_term='+$n,
 		})
 		.done(function( res ) {
+			
 			self.setState({ data: res });
 		})
 	},

@@ -77,12 +77,8 @@ $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
 	'username' => 'root',
-	'password' => 'dexter123',
-<<<<<<< HEAD
-	'database' => '2016nyumbanidb',
-=======
+	'password' => 'a',
 	'database' => '2016olycraftdb',
->>>>>>> f62563a5d5ca753681d12bb6bc7ac7356cb8c1f2
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
