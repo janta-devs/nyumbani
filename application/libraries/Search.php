@@ -82,7 +82,11 @@ class Search {
 			print("Enter your search term in the searchbox\n\n\n");
 		}
 	}
+<<<<<<< HEAD
 	public function DBdata($profession, $location)
+=======
+	public function DBdata($profession, $location )
+>>>>>>> f62563a5d5ca753681d12bb6bc7ac7356cb8c1f2
 	{
 		/*
 		*Preg_Match only allows the search of one phrase at a time
