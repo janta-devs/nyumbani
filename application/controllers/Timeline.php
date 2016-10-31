@@ -20,6 +20,18 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		$this->load->view('timeline');
+	}
+	public function search(){
+		$this->load->library('Search');
+		$search = new Search();
+
+		$data  = $this->input->post();
+
+		if( isset( $data ) && !empty( $data ) && count( $data ) != 0 ){
+			$results = $search->get_terms( $data['search_term'] );
+			print $results;
+		}
+
 	}
 }
