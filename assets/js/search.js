@@ -205,7 +205,7 @@ var ResultTable = React.createClass({
 		email = {x.email} location = {x.location} ip_address = {x.ip_address.toString()} profession = {x.profession}/>);
 
 		return (
-				<table className = "table table-striped table-hover">
+				<table className = "mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
 						<thead>
 							<tr>
 								<td>First Name</td>
