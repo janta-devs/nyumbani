@@ -38,7 +38,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <![endif]-->
     <!--<link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/font-awesome/css/font-awesome.min.css">-->
     <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap/dist/css/custom.css">
-
+    <style>
+        .mdl-data-table{
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
