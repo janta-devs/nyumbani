@@ -57,11 +57,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right" style="display: inline; vertical-align: center;">
                         <li>
-                            <a href="timeline/postJob/">
-                            <button class="btn btn-raised btn-warning">Post Job</button>
-                            </a>
-                        </li>
-                        <li>
                             <a href="#"><span class="pe-7s-bell pe-va pe-2x" aria-hidden="true"></span> </a>
                         </li>
                         <li>

@@ -57,11 +57,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right" style="display: inline; vertical-align: center;">
                         <li>
-                            <a href="timeline/postJob/">
-                            <button class="btn btn-raised btn-warning">Post Job</button>
-                            </a>
-                        </li>
-                        <li>
                             <a href="#"><span class="pe-7s-bell pe-va pe-2x" aria-hidden="true"></span> </a>
                         </li>
                         <li>
@@ -111,7 +106,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <a href="#"><span class="pe-7s-home pe-lg" aria-hidden="true"></span> Home</a>
                 </li>
                  <li>
-                    <a href="timeline/profile/"><span class="pe-7s-id pe-lg" aria-hidden="true"></span> My Profile</a>
+                    <a href="<?php echo site_url();?>/timeline/profile/"><span class="pe-7s-id pe-lg" aria-hidden="true"></span> My Profile</a>
                 </li> 
                 <li>
                     <a href="#"><span class="pe-7s-wallet pe-lg" aria-hidden="true"></span> Wallet</a>
