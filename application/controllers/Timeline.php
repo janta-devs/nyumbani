@@ -1,8 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Timeline extends CI_Controller 
-{
+class Timeline extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -23,9 +22,16 @@ class Timeline extends CI_Controller
 	{
 		$this->load->view('timeline');
 	}
+	public function postJob (){
+		$this->load->view('post-job');
+	}
+	public function createJob () {
+		//$profession = new Profession ();
+		$results= $this->Job_Model->readAll();
+		echo $result;
+	}
 	public function get()
 	{
-
 		// print json_encode( $this->input->post() );
 		$this->load->library('Search');
 		$search = new Search();
@@ -37,7 +43,9 @@ class Timeline extends CI_Controller
 			$results = $search->get_terms( $data['search_term'] );
 			print $results;
 		}
-
+	}
+	public function profile (){
+		$this->load->view('profile');
 	}
 }
 

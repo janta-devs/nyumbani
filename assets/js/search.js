@@ -1,3 +1,177 @@
+//post job component starts here
+var PostJobComponent = React.createClass ({
+	getInitialState: function () {
+		return {
+			profession: [],
+			selectedProfessionId: -1,
+			title: '',
+			description: '',
+			start: '',
+			end: '',
+			budget: '',
+			successPost: null
+		};
+	},
+	componentDidMount: function () {
+		this.serverRequest = $.get("/nyumbani/index.php/timeline/readAllProfessions", function (profession) {
+			this.setState ({
+				profession: JSON.parse(profession)
+			});
+		}.bind(this));
+		$('.page-header h1').text('Post A Job');
+	},
+	componentWillUnMount: function () {
+		this.serverRequest.abort();
+	},
+	onProfessionChange: function ( e ) {
+		this.setState ({selectedProfessionId: e.target.value});
+	},
+	onTitleChange: function ( e ) {
+		this.setState ({title: e.target.value});
+	},
+	onDescriptionChange: function ( e ) {
+		this.setState ({
+			description: e.target.value
+		});
+	},
+	onStartChange: function ( e ) {
+		this.setState ({
+			start: e.target.value
+		});
+	},
+	onEndChange: function ( e ) {
+		this.setState ({end: e.target.value});
+	},
+	onBudgetChnage: function ( e ) {
+		this.setState ({
+			budget: e.target.value
+		});
+	},
+	onSave: function ( e ) {
+		$.post("/nyumbani/index.php/timeline/createJob", {
+			profession_id: this.state.selectedProfessionId,
+			title: this.state.title,
+			description: this.state.description,
+			start: this.state.start,
+			end: this.state.end,
+			budget: this.state.budget
+		},
+		function (res) {
+			this.setState ({successPost: res});
+			this.setState ({title: ""});
+			this.setState ({description: ""});
+			this.setState ({start: ""});
+			this.setState ({end: ""});
+			this.setState ({budget: ""});
+			this.setState ({selectedProfessionId: -1});
+		}.bind(this));
+		e.preventDefault ();
+	},
+	render: function () {
+		var professionOptions = this.state.profession.map ( function ( profession ) {
+			return (
+				<option key={profession.id} value={profession.id} > {profession.title} </option>
+			);
+		});
+		return (
+			<div>
+			{
+				this.state.successPost == "true" ?
+				<div className='alert alert-success'>
+				Job posting was successful.
+				</div>
+				:null
+			}
+			{
+				this.state.successPost == "false" ?
+				<div className='alert alert-danger'>
+				Sorry! Job posting failed. Please try again.
+				</div>
+				: null
+			}
+			<a href='#'
+			onClick={() => this.props.changeAppMode('search')}
+			className='btn btn-raised btn-info margin-bottom-1em'>
+			Back to Search
+			</a>
+			<form onSubmit={this.onSave}>
+				<div className="col-md-6">
+					<div className="col-md-12">
+						<div className="form-group label-floating">
+		                        <label className="control-label" htmlFor="profession">I am Looking For</label>
+		                        <input type="text" id="profession" name="profession" className="form-control" value={this.state.profession_id} />
+						</div>
+					</div>
+					<div className="col-md-6">
+						<div className="form-group label-floating">
+		                        <label className="control-label" htmlFor="job_title">Job Title</label>
+		                        <input type="text" id="job_title" name="job_title" className="form-control" value={this.state.title} />
+						</div>
+					</div>
+					<div className="col-md-6">
+						<div className="form-group label-floating">
+		                        <label className="control-label" htmlFor="location">Location</label>
+		                        <input type="text" id="location" name="location" className="form-control" value={this.state.location} />
+						</div>
+					</div>	
+					<div className="col-md-6">
+						<div className="form-group label-floating">
+		                        <label className="control-label" htmlFor="startDate">Start Date</label>
+		                        <input type="date" id="startDate" name="start" className="form-control" value={this.state.start} data-dtp="" />
+						</div>
+					</div>
+					<div className="col-md-6">
+						<div className="form-group label-floating">
+		                        <label className="control-label" htmlFor="endDate">End Date</label>
+		                        <input type="date" id="endDate" name="end" className="form-control" value={this.state.end} />
+						</div>
+					</div>
+					<div className="col-md-12">
+						<div className="form-group label-floating">
+		                        <label className="control-label" htmlFor="budget">Budget/Remuneration</label>
+		                        <input type="text" id="budget" name="budget" className="form-control" value={this.state.budget} />
+						</div>
+					</div>
+					</div>
+					<div className="col-md-6">
+						<div className="form-group label-floating">
+						    <label htmlFor="t1" className="control-label">Job description goes here</label>
+						    <textarea id="t1" className="form-control" rows="5"></textarea>
+						</div>
+						<div className="form-group">
+						<input type="file" id="attach-file" multiple="" />
+	    				<div className="input-group">
+						    <input type="text" readOnly="" className="form-control" placeholder="Attach files" />
+							    <span className="input-group-btn input-group-sm">
+							      <button type="button" className="btn btn-fab">
+							        <i className="pe-7s-paperclip pe-va pe-lg"></i>
+							      </button>
+							    </span>
+						 </div>
+						</div>
+					</div>
+				<div className="col-md-6">
+					<button className="btn btn-block btn-raised btn-info" onClick={this.onSave}>Submit</button>
+				</div>
+			</form>
+			</div>
+		);
+	}
+});
+//component rendering the post job action button and other actions
+var TopActionComponent = React.createClass ({
+	render: function () {
+		return (
+			<div className="col-md-1 col-md-offset-11">
+			<a href="#"
+				onClick = {() => this.props.changeAppMode ('jobPosting')}
+				className = 'btn btn-raised btn-lg btn-info' > Post Job
+			</a>
+			</div>	
+		);
+	}
+});
+//search bar component starts here
 var SearchBar = React.createClass({
 	render: function() {
 		return (
@@ -8,7 +182,7 @@ var SearchBar = React.createClass({
 					    <input className="form-control input-lg" type="text" id="sample1" name = "search_term"/>
 					    <p className="help-block">Enter a search term to finds professionals near you.</p>
 					    <span className="input-group-btn">
-					    <button className = "btn btn-raised btn-warning" onClick = {this.props.search}><i className="pe-7s-search pe-va pe-3x"></i></button>
+					    <button className = "btn btn-fab" onClick = {this.props.search}><i className="pe-7s-search pe-va pe-lg"></i></button>
 					    </span>
 					</div>
 				</form>
@@ -103,11 +277,40 @@ var Search = React.createClass({
 	render: function() {
 		return (
 			<div>
+            	<TopActionComponent changeAppMode = {this.props.changeAppMode} /><br /><br /><br /><br />
 				<SearchBar search = {this.handleSearch}/><br /><br />
 				<ResultTable data = {this.state.data}/>
 			</div>
 		);
 	}
 });
-
-ReactDOM.render(<Search />, document.getElementById('component'));
+//main component for the timeline
+var MainApp = React.createClass ({
+	getInitialState: function () {
+		return {
+			currentMode: 'search',
+			jobId: null
+		};
+	},
+	changeAppMode: function(newMode, jobId) {
+		this.setState ({currentMode: newMode});
+		if(jobId !== undefined) {
+			this.setState ({jobId: jobId});
+		}
+	},
+	render: function () {
+		var modeComponent = 
+		<Search changeAppMode={this.changeAppMode}/>;
+		switch(this.state.currentMode) {
+			case 'search':
+				break;
+			case 'jobPosting':
+				modeComponent = <PostJobComponent changeAppMode={this.changeAppMode}/>;
+				break;
+			default:
+				break;
+		}
+		return modeComponent;
+	}
+});
+ReactDOM.render(<MainApp />, document.getElementById('component'));

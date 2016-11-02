@@ -9,13 +9,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
-    <title>Welcome to Janta</title>
+  <title>Welcome to Janta</title>
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="<?php print base_url();?>assets/node_modules/bootstrap/dist/css/pe-icon-7-stroke.css" rel="stylesheet" />
     <link href="<?php print base_url();?>assets/node_modules/bootstrap/dist/css/helper.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap/dist/css/bootstrap.css">
-    <!-- Bootstrap Material Design -->
+  <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap/dist/css/bootstrap.css">
+  <!-- Bootstrap Material Design -->
   <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap-material-design/dist/css/bootstrap-material-design.css">
   <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css">
   <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap-material-design/dist/css/ripples.min.css">
@@ -36,7 +36,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <!--<link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/font-awesome/css/font-awesome.min.css">-->
-    <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap/dist/css/custom.css">
+  <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap/dist/css/custom.css">
 
 </head>
 <body>
@@ -111,7 +111,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <a href="#"><span class="pe-7s-home pe-lg" aria-hidden="true"></span> Home</a>
                 </li>
                  <li>
-                    <a href="timeline/profile/"><span class="pe-7s-id pe-lg" aria-hidden="true"></span> My Profile</a>
+                    <a href="#"><span class="pe-7s-id pe-lg" aria-hidden="true"></span> My Profile</a>
                 </li> 
                 <li>
                     <a href="#"><span class="pe-7s-wallet pe-lg" aria-hidden="true"></span> Wallet</a>
@@ -150,15 +150,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="<?php print base_url(); ?>assets/node_modules/react-dom/dist/react-dom.js" type="text/javascript" charset="utf-8" ></script>
    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>-->
     <script src="<?php print base_url(); ?>assets/js/babel-core.js" type="text/javascript" charset="utf-8" ></script>
-    <script src="<?php print base_url(); ?>assets/js/search.js" type="text/babel" charset="utf-8" ></script>
+    <script src="<?php print base_url(); ?>assets/js/profile.js" type="text/babel" charset="utf-8" ></script>
         <script type="text/javascript">
-        $(document).ready(function(){
+      $(document).ready(function(){
 
         $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
-            $.material.init();
+        $.material.init();
             $.material.radio();
             $.material.checkbox();
     //for datepicker
@@ -167,7 +167,7 @@ $('#startDate').bootstrapMaterialDatePicker({ weekStart : 0 }).on('change', func
 {
 $('#endDate').bootstrapMaterialDatePicker('setMinDate', date);
 });
-        });
+      });
     </script>
 </body>
 </html>
