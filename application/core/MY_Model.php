@@ -23,16 +23,16 @@ class MY_Model extends CI_Model{
 
 		return $$query->result();
 	}
-	public function update( $primary_key, $unique_field, $data )
+	public function update( $field_name, $login_id, $data )
 	{
 
-		//primary_key   => This represents the field in the database which is going to be searched
-		//unique_field  => this is a value from the user which needs to be searched in the specified field e.g. email or id
+		//field_name   => This represents the field in the database which is going to be searched
+		//login_id  => this is a value from the user which needs to be searched in the specified field e.g. email or id
 
-		$this->db->where($primary_key, $unique_field);
+		$this->db->where($field_name, $login_id);
 		return ( ($this->db->update($this::DB_TABLE, $new_data) === True ) ) ? true : false;
 	}
-	public function insert( $data, $primary_key = "", $unique_field = "" )
+	public function insert( $data, $field_name = "", $login_id = "" )
 	{
 		if ($this->check( $data ) == false )
 		{
@@ -41,7 +41,7 @@ class MY_Model extends CI_Model{
 		}
 		else
 		{
-			return $this->update( $primary_key, $unique_field, $data );
+			return $this->update( $field_name, $login_id, $data );
 		}
 	}
 	public function load_user_data( $user_unique_id )

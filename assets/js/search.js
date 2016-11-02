@@ -153,8 +153,7 @@ var TopActionComponent = React.createClass ({
 	render: function () {
 		return (
 			<div className="col-md-1 col-md-offset-11">
-			<a href="#"
-				onClick = {() => this.props.changeAppMode ('jobPosting')}
+			<a onClick = {() => this.props.changeAppMode ('jobPosting')}
 				className = 'btn btn-raised btn-lg btn-info' > Post Job
 			</a>
 			</div>	
@@ -186,10 +185,10 @@ var TableCell = React.createClass({
 	render: function() {
 		return (
 					<tr>
-						<td>{this.props.first_name}</td>
-						<td>{this.props.last_name}</td>
-						<td>{this.props.gender}</td>
-						<td>{this.props.location}</td>
+						<td className="mdl-data-table__cell--non-numeric">{this.props.first_name}</td>
+						<td className="mdl-data-table__cell--non-numeric">{this.props.last_name}</td>
+						<td className="mdl-data-table__cell--non-numeric">{this.props.gender}</td>
+						<td className="mdl-data-table__cell--non-numeric">{this.props.location}</td>
 						<td>Rating</td>
 						<td>Profile</td>
 						<td>Contact</td>
@@ -208,13 +207,13 @@ var ResultTable = React.createClass({
 				<table className = "mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
 						<thead>
 							<tr>
-								<td>First Name</td>
-								<td>Last Name</td>
-								<td>Gender</td>
-								<td>Location</td>
-								<td>Rating</td>
-								<td>Profile</td>
-								<td>Contact</td>
+								<th className="mdl-data-table__cell--non-numeric">First Name</th>
+								<th className="mdl-data-table__cell--non-numeric">Last Name</th>
+								<th className="mdl-data-table__cell--non-numeric">Gender</th>
+								<th className="mdl-data-table__cell--non-numeric">Location</th>
+								<th>Rating</th>
+								<th>Profile</th>
+								<th>Contact</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -260,8 +259,10 @@ var Search = React.createClass({
 			data: 'search_term='+$n,
 		})
 		.done(function( res ) {
+			( !res.hasOwnProperty('message') ) ? self.setState({ data: res }) : '';
+
+			// This part will enable me to return an error pane in stead of the results table.
 			
-			self.setState({ data: res });
 		})
 	},
 	render: function() {

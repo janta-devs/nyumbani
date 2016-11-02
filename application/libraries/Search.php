@@ -10,6 +10,7 @@ class Search {
 	public $location_result = [];
 	public $unified_search_terms = [];
 	public $db_results = [];
+	public $term = "";
 
 	public $model;
 
@@ -28,14 +29,14 @@ class Search {
 
 	public function get_terms( $term = "" )
 	{
-		$sanitized_data = strip_tags( $term );
+		$this->term = strip_tags( $term );
 
 		/*
 		*	@param search_term/statement
 		*	@purpose the set of functions belong traverses through the string and picks up select key terms 
 		* 	this ensures that only the relevant information is matched and searched
 		*/
-		if( isset( $sanitized_data) && !empty( $sanitized_data ) )
+		if( isset( $this->term) && !empty( $this->term ) )
 		{
 			foreach( $this->db_results['profession'] as $key => $value )
 			{
@@ -43,7 +44,7 @@ class Search {
 				* Leave the "@" delimeters in the REGEX,otherwise it 
 				* throws some undefined errors of 'unknown mofifier "c"'
 				*/
-				if (preg_match("@".$value."@i", $sanitized_data))
+				if (preg_match("@".$value."@i", $this->term))
 				{
 					/*
 					* @preg_match searches for the key term within the string recieved from the client
@@ -61,7 +62,7 @@ class Search {
 
 			foreach ($this->db_results['location'] as $key => $value) 
 			{
-				if (preg_match("@".$value."@i", $sanitized_data))
+				if (preg_match("@".$value."@i", $this->term))
 				{
 					if( !in_array($value, $this->location_result))
 					{
@@ -107,15 +108,24 @@ class Search {
 		
 		$search_terms = [];
 
-		foreach ($this->unified_search_terms as $k => $v)
+		if( count( $this->unified_search_terms ) != 0 && !empty( $this->unified_search_terms ))
 		{
-			foreach ($v as $key => $value) 
+			foreach ($this->unified_search_terms as $k => $v)
 			{
-				$search_terms[$k] = $value;
+				foreach ($v as $key => $value) 
+				{
+					$search_terms[$k] = $value;
+				}
 			}
+			$query = $this->model->search( $search_terms );
+
+			return json_encode( $query->result() );
 		}
-		$query = $this->model->search( $search_terms );
-		return json_encode( $query->result() );
+		else
+		{
+			return json_encode( ['message' => 'There are no results for the term '.$this->term.''] );
+		}
+
 	}
 
 }
