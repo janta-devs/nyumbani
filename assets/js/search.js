@@ -1,17 +1,23 @@
 //post job component starts here
 var dataCollection = {};
-
+var BackComponent = React.createClass({
+	render: function() {
+		return (
+		<div>
+		   	<a onClick={() => this.props.changeAppMode('search')}
+				className='btn btn-raised btn-info margin-bottom-1em' ref = "back">
+				Back to Search
+			</a>
+		</div>
+		);
+	}
+});
 var PostJobComponent = React.createClass ({
 	getInitialState: function () {
 		return { finalData: [] };
 	},
 	componentDidMount: function () {
-		// this.serverRequest = $.get("/nyumbani/index.php/timeline/readAllProfessions", function (profession) {
-		// 	this.setState ({
-		// 		profession: JSON.parse(profession)
-		// 	});
-		// }.bind(this));
-		// $('.page-header h1').text('Post A Job');
+
 	},
 	componentWillUnMount: function () {
 		this.serverRequest.abort();
@@ -80,11 +86,7 @@ var PostJobComponent = React.createClass ({
 				</div>
 				: null
 			}
-			<a href='#'
-			onClick={() => this.props.changeAppMode('search')}
-			className='btn btn-raised btn-info margin-bottom-1em'>
-			Back to Search
-			</a>
+			<BackComponent changeAppMode = {this.props.changeAppMode}/>
 			<form onSubmit={this.onSave} method="post" encType = "multipart/form-data" >
 				<div className="col-md-6">
 					<div className="col-md-12">
@@ -290,6 +292,7 @@ var MainApp = React.createClass ({
 		}
 	},
 	render: function () {
+		console.log( this.refs );
 		var modeComponent = 
 		<Search changeAppMode={this.changeAppMode}/>;
 		switch(this.state.currentMode) {
