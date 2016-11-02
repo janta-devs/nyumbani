@@ -126,7 +126,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div id="page-content-wrapper">
           <div class="container-fluid">
             <div class="row">
-              <div class="col-lg-10 col-xs-offset-1" style="margin-top: 60px;">
+              <div class="col-lg-10 col-xs-offset-1" style="margin-top: 40px;">
                 <br>
                   <div id = "component"></div>
               </div>
