@@ -52,13 +52,10 @@ var PostJobComponent = React.createClass ({
 			$( el ).val( res['order_attachment_path']);
 			dataCollection['order_attachment_path'] = res['path'];
 		});
-
-
 	},
 	onSave: function ( e ) {
 		e.preventDefault();
 		e.stopPropagation();
-
 		$.ajax({
 			url: '/nyumbani/index.php/timeline/create_order',
 			type: 'POST',
@@ -268,11 +265,12 @@ var Search = React.createClass({
 		})
 	},
 	render: function() {
+		var checker = ( this.state.data.length != 0 ) ? <ResultTable data = {this.state.data}/> : ''; // checks if the array is empty
 		return (
 			<div>
             	<TopActionComponent changeAppMode = {this.props.changeAppMode} /><br /><br /><br /><br />
 				<SearchBar search = {this.handleSearch}/><br /><br />
-				<ResultTable data = {this.state.data}/>
+				{checker}
 			</div>
 		);
 	}
@@ -292,7 +290,6 @@ var MainApp = React.createClass ({
 		}
 	},
 	render: function () {
-		console.log( this.refs );
 		var modeComponent = 
 		<Search changeAppMode={this.changeAppMode}/>;
 		switch(this.state.currentMode) {
