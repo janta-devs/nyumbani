@@ -32,7 +32,7 @@ class MY_Model extends CI_Model{
 		$this->db->where($primary_key, $unique_field);
 		return ( ($this->db->update($this::DB_TABLE, $new_data) === True ) ) ? true : false;
 	}
-	public function insert( $data )
+	public function insert( $data, $primary_key = "", $unique_field = "" )
 	{
 		if ($this->check( $data ) == false )
 		{

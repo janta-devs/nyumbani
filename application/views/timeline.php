@@ -19,6 +19,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap-material-design/dist/css/bootstrap-material-design.css">
   <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css">
   <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap-material-design/dist/css/ripples.min.css">
+  <link rel="stylesheet" type="text/css" href="<?php print base_url(); ?>assets/node_modules/material-design-lite/material.min.css">
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="<?php print base_url();?>assets/node_modules/bootstrap/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
@@ -37,7 +38,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <![endif]-->
     <!--<link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/font-awesome/css/font-awesome.min.css">-->
     <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap/dist/css/custom.css">
-
+    <style>
+        .mdl-data-table{
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -143,6 +148,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="<?php print base_url();?>assets/node_modules/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
     <script src="<?php print base_url(); ?>assets/node_modules/react/dist/react.js" type="text/javascript" charset="utf-8"></script>
     <script src="<?php print base_url(); ?>assets/node_modules/react-dom/dist/react-dom.js" type="text/javascript" charset="utf-8" ></script>
+    <script src="<?php print base_url(); ?>assets/node_modules/material-design-lite/material.min.js" type="text/javascript" charset="utf-8" async defer></script>
    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>-->
     <script src="<?php print base_url(); ?>assets/js/babel-core.js" type="text/javascript" charset="utf-8" ></script>
     <script src="<?php print base_url(); ?>assets/js/search.js" type="text/babel" charset="utf-8" ></script>

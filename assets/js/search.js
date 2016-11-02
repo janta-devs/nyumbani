@@ -1,78 +1,72 @@
 //post job component starts here
+var dataCollection = {};
+var BackComponent = React.createClass({
+	render: function() {
+		return (
+		<div>
+		   	<a onClick={() => this.props.changeAppMode('search')}
+				className='btn btn-raised btn-info margin-bottom-1em' ref = "back">
+				Back to Search
+			</a>
+		</div>
+		);
+	}
+});
 var PostJobComponent = React.createClass ({
 	getInitialState: function () {
-		return {
-			profession: [],
-			selectedProfessionId: -1,
-			title: '',
-			description: '',
-			start: '',
-			end: '',
-			budget: '',
-			successPost: null
-		};
+		return { finalData: [] };
 	},
 	componentDidMount: function () {
-		this.serverRequest = $.get("/nyumbani/index.php/timeline/readAllProfessions", function (profession) {
-			this.setState ({
-				profession: JSON.parse(profession)
-			});
-		}.bind(this));
-		$('.page-header h1').text('Post A Job');
+
 	},
 	componentWillUnMount: function () {
 		this.serverRequest.abort();
 	},
-	onProfessionChange: function ( e ) {
-		this.setState ({selectedProfessionId: e.target.value});
+	getValue: function( e ){
+		e.preventDefault();
+		e.stopPropagation();
+		dataCollection[e.target.name] = e.target.value;
 	},
-	onTitleChange: function ( e ) {
-		this.setState ({title: e.target.value});
-	},
-	onDescriptionChange: function ( e ) {
-		this.setState ({
-			description: e.target.value
+	_uploadFile: function( e ){
+		e.preventDefault();
+		e.stopPropagation();
+
+		var file = e.target.files, form = new FormData(), node = e.target;
+
+		$.each(file, function(index, val) {
+			form.append(index, val);
 		});
+		this._sendAttachments( form, node );		
 	},
-	onStartChange: function ( e ) {
-		this.setState ({
-			start: e.target.value
-		});
-	},
-	onEndChange: function ( e ) {
-		this.setState ({end: e.target.value});
-	},
-	onBudgetChnage: function ( e ) {
-		this.setState ({
-			budget: e.target.value
+	_sendAttachments: function( file, el ){
+		$.ajax({
+			url: '/nyumbani/index.php/timeline/uploadAttachment',
+			type: 'POST',
+			dataType: 'json',
+			cache: false, 
+			contentType: false, 
+			processData: false,
+			data: file,
+		})
+		.done(function( res ) {
+			$( el ).val( res['order_attachment_path']);
+			dataCollection['order_attachment_path'] = res['path'];
 		});
 	},
 	onSave: function ( e ) {
-		$.post("/nyumbani/index.php/timeline/createJob", {
-			profession_id: this.state.selectedProfessionId,
-			title: this.state.title,
-			description: this.state.description,
-			start: this.state.start,
-			end: this.state.end,
-			budget: this.state.budget
-		},
-		function (res) {
-			this.setState ({successPost: res});
-			this.setState ({title: ""});
-			this.setState ({description: ""});
-			this.setState ({start: ""});
-			this.setState ({end: ""});
-			this.setState ({budget: ""});
-			this.setState ({selectedProfessionId: -1});
-		}.bind(this));
-		e.preventDefault ();
+		e.preventDefault();
+		e.stopPropagation();
+		$.ajax({
+			url: '/nyumbani/index.php/timeline/create_order',
+			type: 'POST',
+			dataType: 'json',
+			data: dataCollection,
+		})
+		.done(function( res ) {
+			console.log( res );
+		});
 	},
 	render: function () {
-		var professionOptions = this.state.profession.map ( function ( profession ) {
-			return (
-				<option key={profession.id} value={profession.id} > {profession.title} </option>
-			);
-		});
 		return (
 			<div>
 			{
@@ -89,57 +83,53 @@ var PostJobComponent = React.createClass ({
 				</div>
 				: null
 			}
-			<a href='#'
-			onClick={() => this.props.changeAppMode('search')}
-			className='btn btn-raised btn-info margin-bottom-1em'>
-			Back to Search
-			</a>
-			<form onSubmit={this.onSave}>
+			<BackComponent changeAppMode = {this.props.changeAppMode}/>
+			<form onSubmit={this.onSave} method="post" encType = "multipart/form-data" >
 				<div className="col-md-6">
 					<div className="col-md-12">
 						<div className="form-group label-floating">
 		                        <label className="control-label" htmlFor="profession">I am Looking For</label>
-		                        <input type="text" id="profession" name="profession" className="form-control" value={this.state.profession_id} />
+		                        <input type="text" id="profession" name="profession" className="form-control" onBlur = {this.getValue} />
 						</div>
 					</div>
 					<div className="col-md-6">
 						<div className="form-group label-floating">
 		                        <label className="control-label" htmlFor="job_title">Job Title</label>
-		                        <input type="text" id="job_title" name="job_title" className="form-control" value={this.state.title} />
+		                        <input type="text" id="job_title" name="job_title" className="form-control" onBlur = {this.getValue} />
 						</div>
 					</div>
 					<div className="col-md-6">
 						<div className="form-group label-floating">
 		                        <label className="control-label" htmlFor="location">Location</label>
-		                        <input type="text" id="location" name="location" className="form-control" value={this.state.location} />
+		                        <input type="text" id="location" name="location" className="form-control" onBlur = {this.getValue} />
 						</div>
 					</div>	
 					<div className="col-md-6">
 						<div className="form-group label-floating">
 		                        <label className="control-label" htmlFor="startDate">Start Date</label>
-		                        <input type="date" id="startDate" name="start" className="form-control" value={this.state.start} data-dtp="" />
+		                        <input type="date" id="startDate" name="start" className="form-control"  data-dtp="" onBlur = {this.getValue} />
 						</div>
 					</div>
 					<div className="col-md-6">
 						<div className="form-group label-floating">
 		                        <label className="control-label" htmlFor="endDate">End Date</label>
-		                        <input type="date" id="endDate" name="end" className="form-control" value={this.state.end} />
+		                        <input type="date" id="endDate" name="end" className="form-control"  onBlur = {this.getValue} />
 						</div>
 					</div>
 					<div className="col-md-12">
 						<div className="form-group label-floating">
 		                        <label className="control-label" htmlFor="budget">Budget/Remuneration</label>
-		                        <input type="text" id="budget" name="budget" className="form-control" value={this.state.budget} />
+		                        <input type="text" id="budget" name="budget" className="form-control"  onBlur = {this.getValue}/>
 						</div>
 					</div>
 					</div>
 					<div className="col-md-6">
 						<div className="form-group label-floating">
 						    <label htmlFor="t1" className="control-label">Job description goes here</label>
-						    <textarea id="t1" className="form-control" rows="5"></textarea>
+						    <textarea name = "description" id="t1" className="form-control" rows="5" onBlur = {this.getValue} ></textarea>
 						</div>
 						<div className="form-group">
-						<input type="file" id="attach-file" multiple="" />
+						<input type="file" id="attach-file" multiple="" onChange = {this._uploadFile}/>
 	    				<div className="input-group">
 						    <input type="text" readOnly="" className="form-control" placeholder="Attach files" />
 							    <span className="input-group-btn input-group-sm">
@@ -199,10 +189,10 @@ var TableCell = React.createClass({
 						<td>{this.props.first_name}</td>
 						<td>{this.props.last_name}</td>
 						<td>{this.props.gender}</td>
-						<td>{this.props.email}</td>
 						<td>{this.props.location}</td>
-						<td>{this.props.ip_address}</td>
-						<td>{this.props.profession}</td>
+						<td>Rating</td>
+						<td>Profile</td>
+						<td>Contact</td>
 					</tr>
 		);
 	}
@@ -215,16 +205,16 @@ var ResultTable = React.createClass({
 		email = {x.email} location = {x.location} ip_address = {x.ip_address.toString()} profession = {x.profession}/>);
 
 		return (
-				<table className = "table table-striped table-hover">
+				<table className = "mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
 						<thead>
 							<tr>
 								<td>First Name</td>
 								<td>Last Name</td>
 								<td>Gender</td>
-								<td>Email</td>
 								<td>Location</td>
-								<td>IP Address</td>
-								<td>Profession</td>
+								<td>Rating</td>
+								<td>Profile</td>
+								<td>Contact</td>
 							</tr>
 						</thead>
 						<tbody>
@@ -275,11 +265,12 @@ var Search = React.createClass({
 		})
 	},
 	render: function() {
+		var checker = ( this.state.data.length != 0 ) ? <ResultTable data = {this.state.data}/> : ''; // checks if the array is empty
 		return (
 			<div>
             	<TopActionComponent changeAppMode = {this.props.changeAppMode} /><br /><br /><br /><br />
 				<SearchBar search = {this.handleSearch}/><br /><br />
-				<ResultTable data = {this.state.data}/>
+				{checker}
 			</div>
 		);
 	}
