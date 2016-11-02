@@ -55,7 +55,6 @@ class Timeline extends CI_Controller {
 
 		$data['login_id'] = 2;
 		$data = $this->security->xss_clean($data);
-				
 		
 		$insert_id = $job->insert( $data );
 
