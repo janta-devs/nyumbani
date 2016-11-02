@@ -103,7 +103,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </a>
                 </li>-->
                 <li class="active">
-                    <a href="#"><span class="pe-7s-home pe-lg" aria-hidden="true"></span> Home</a>
+                    <a href="<?php echo site_url();?>"><span class="pe-7s-home pe-lg" aria-hidden="true"></span> Home</a>
                 </li>
                  <li>
                     <a href="<?php echo site_url();?>/timeline/profile/"><span class="pe-7s-id pe-lg" aria-hidden="true"></span> My Profile</a>

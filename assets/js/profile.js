@@ -88,8 +88,7 @@ var UserProfileComponent = React.createClass ({
 				</div>
 				: null
 			}
-			<a href='#'
-			onClick={() => this.props.changeAppMode('search')}
+			<a href='/nyumbani/index.php/timeline/'
 			className='btn btn-raised btn-info margin-bottom-1em'>
 			Back to Search
 			</a>
