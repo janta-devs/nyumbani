@@ -47,5 +47,22 @@ class Timeline extends CI_Controller {
 	public function profile (){
 		$this->load->view('profile');
 	}
+	public function create_order()
+	{
+		$data = $this->input->post();
+		$this->load->model('Job_Model');
+		$job = new Job_Model();
+
+		$data['login_id'] = 2;
+		$data = $this->security->xss_clean($data);
+				
+		
+		$insert_id = $job->insert( $data );
+
+	}
+	public function uploadAttachment(){
+		$this->load->helper('upload_helper');
+		@$path = upload_file();
+	}
 }
 
