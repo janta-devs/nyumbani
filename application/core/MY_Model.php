@@ -44,9 +44,9 @@ class MY_Model extends CI_Model{
 			return $this->update( $field_name, $login_id, $data );
 		}
 	}
-	public function load_user_data( $user_unique_id )
+	public function load_user_data( $user_unique_id_array )
 	{
-		$query = $this->db->get_where($this::TABLE, $user_unique_id);
+		$query = $this->db->get_where($this::TABLE, $user_unique_id_array );
 		return $query->row();
 	}
 	public function delete( $user_id )

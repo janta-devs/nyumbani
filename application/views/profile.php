@@ -37,7 +37,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <![endif]-->
     <!--<link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/font-awesome/css/font-awesome.min.css">-->
   <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap/dist/css/custom.css">
-
+  <style type="text/css" media="screen">
+/*    body{
+      overflow-x: hidden;
+      overflow-y: hidden;
+    }*/
+  </style>
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">

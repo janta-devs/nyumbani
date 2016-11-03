@@ -127,6 +127,9 @@ class Search {
 		}
 
 	}
+	public function auto_suggest( $term ){
+		// create an autosuggesting system that will be checking the first 2 letters of the search term and tried to find a match
+	}
 
 }
 

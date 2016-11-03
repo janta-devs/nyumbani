@@ -207,13 +207,13 @@ var ResultTable = React.createClass({
 				<table className = "mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
 						<thead>
 							<tr>
-								<th className="mdl-data-table__cell--non-numeric">First Name</th>
-								<th className="mdl-data-table__cell--non-numeric">Last Name</th>
-								<th className="mdl-data-table__cell--non-numeric">Gender</th>
-								<th className="mdl-data-table__cell--non-numeric">Location</th>
-								<th>Rating</th>
-								<th>Profile</th>
-								<th>Contact</th>
+								<th className="mdl-data-table__cell--non-numeric">FIRST NAME</th>
+								<th className="mdl-data-table__cell--non-numeric">LAST NAME</th>
+								<th className="mdl-data-table__cell--non-numeric">GENDER</th>
+								<th className="mdl-data-table__cell--non-numeric">LOCATION</th>
+								<th>RATING</th>
+								<th>PROFILE</th>
+								<th>CONTACT</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -259,10 +259,10 @@ var Search = React.createClass({
 			data: 'search_term='+$n,
 		})
 		.done(function( res ) {
-			( !res.hasOwnProperty('message') ) ? self.setState({ data: res }) : '';
+			( !res.hasOwnProperty('message') ) ? self.setState({ data: res }) : console.log( res['message'] );
 
 			// This part will enable me to return an error pane in stead of the results table.
-			
+
 		})
 	},
 	render: function() {
