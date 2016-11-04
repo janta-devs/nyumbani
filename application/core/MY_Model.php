@@ -21,7 +21,7 @@ class MY_Model extends CI_Model{
 			$query = $this->db->get( $this::TABLE );
 		}
 
-		return $$query->result();
+		return $query->result();
 	}
 	public function update( $field_name, $login_id, $data )
 	{

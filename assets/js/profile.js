@@ -481,7 +481,7 @@ var ProfileComponent = React.createClass ({
 		$.ajax({
 			url: '/nyumbani/index.php/profile/'+method,
 			type: 'POST',
-			// dataType: 'json',
+			dataType: 'json',
 			data: data,
 		})
 		.done(function( res ) {
