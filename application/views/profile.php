@@ -86,7 +86,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               </ul>
                         </li>
                         <li>
-                            <a href="#"><span class="pe-7s-power pe-va pe-2x" aria-hidden="true"></span>
+                            <a href="<?php echo site_url();?>/home/logout"><span class="pe-7s-power pe-va pe-2x" aria-hidden="true"></span>
                                
                             </a>
                         </li>
@@ -132,6 +132,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <div class="container-fluid">
             <div class="row">
               <div class="col-lg-10 col-xs-offset-1" style="margin-top: 40px;">
+              
+<?php
+            $arr = $this->session->flashdata(); 
+            if(!empty($arr['flash_message'])){
+                $html = '<div class="bg-warning container flash-message">';
+                $html .= $arr['flash_message']; 
+                $html .= '</div>';
+                echo $html;
+            }
+        ?>
                 <br>
                   <div id = "component"></div>
               </div>

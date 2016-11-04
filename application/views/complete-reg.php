@@ -9,17 +9,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
-    <title>Welcome to Janta</title>
+  <title>Welcome to Janta</title>
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="<?php print base_url();?>assets/node_modules/bootstrap/dist/css/pe-icon-7-stroke.css" rel="stylesheet" />
     <link href="<?php print base_url();?>assets/node_modules/bootstrap/dist/css/helper.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap/dist/css/bootstrap.css">
-    <!-- Bootstrap Material Design -->
+  <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap/dist/css/bootstrap.css">
+  <!-- Bootstrap Material Design -->
   <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap-material-design/dist/css/bootstrap-material-design.css">
   <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css">
   <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap-material-design/dist/css/ripples.min.css">
-  <link rel="stylesheet" type="text/css" href="<?php print base_url(); ?>assets/node_modules/material-design-lite/material.min.css">
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="<?php print base_url();?>assets/node_modules/bootstrap/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
@@ -37,12 +36,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <!--<link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/font-awesome/css/font-awesome.min.css">-->
-    <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap/dist/css/custom.css">
-    <style>
-        .mdl-data-table{
-            width: 100%;
-        }
-    </style>
+  <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap/dist/css/custom.css">
+  <style type="text/css" media="screen">
+/*    body{
+      overflow-x: hidden;
+      overflow-y: hidden;
+    }*/
+  </style>
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -86,7 +86,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               </ul>
                         </li>
                         <li>
-                            <a href="<?php echo site_url();?>/home/logout"><span class="pe-7s-power pe-va pe-2x" aria-hidden="true"></span>
+                            <a href="#"><span class="pe-7s-power pe-va pe-2x" aria-hidden="true"></span>
                                
                             </a>
                         </li>
@@ -108,10 +108,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </a>
                 </li>-->
                 <li class="active">
-                    <a href="<?php echo site_url();?>"><span class="pe-7s-home pe-lg" aria-hidden="true"></span> Home</a>
+                    <a href="#"><span class="pe-7s-home pe-lg" aria-hidden="true"></span> Home</a>
                 </li>
                  <li>
-                    <a href="<?php echo site_url();?>/timeline/profile/"><span class="pe-7s-id pe-lg" aria-hidden="true"></span> My Profile</a>
+                    <a href="#"><span class="pe-7s-id pe-lg" aria-hidden="true"></span> My Profile</a>
                 </li> 
                 <li>
                     <a href="#"><span class="pe-7s-wallet pe-lg" aria-hidden="true"></span> Wallet</a>
@@ -134,6 +134,43 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <div class="col-lg-10 col-xs-offset-1" style="margin-top: 40px;">
                 <br>
                   <div id = "component"></div>
+                    <div id="user_choice1">
+                      <div class="col-md-4 col-md-offset-4" style="background-color: #ffffff;">
+                          <div class="well well-sm" style="text-align: center;">
+                        <h2 style="text-align: center;;">You Are Almost Done!</h2>
+                        Welcome <span><?php echo $fname. ' ' .$lname; ?></span><!--<span><?php echo $email; ?></span>-->. Your username is <span><?php echo $email;?></span>
+                          <p style="text-align: center;"><small >
+                            Please chose a role to complete your signup and begin using the site.</small>
+                          </p>
+                            <div id="choice">
+                                <?php echo form_open(site_url().'/Home/complete/token/'.$token, array('novalidate'=>'novalidate','enctype'=>'multipart/form-data','accept-charset'=>'utf-8'));
+                                ?>
+                                  <div class="form-group">
+                                    <div class="radio">
+                                        <label>
+                                      <input name="role" type="radio" id="employee" value="employee">
+                                      Job Seeker
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                      <input name="role" type="radio" id="employer" value="employer">
+                                      Employer
+                                        </label>
+                                    </div>
+                                    <span class="text-danger"><?php echo form_error('role'); ?></span>
+                                    <?php echo form_hidden('login_id', $login_id);?> 
+                                  </div>
+                                  <div class="form-group">
+                                    <button type="submit" value="Complete" class="btn btn-raised btn-lg btn-warning btn-block">
+                                      Complete
+                                    </button>
+                                  </div>
+                                <?php echo form_close(); ?>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
               </div>
             </div>
           </div>
@@ -148,18 +185,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="<?php print base_url();?>assets/node_modules/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
     <script src="<?php print base_url(); ?>assets/node_modules/react/dist/react.js" type="text/javascript" charset="utf-8"></script>
     <script src="<?php print base_url(); ?>assets/node_modules/react-dom/dist/react-dom.js" type="text/javascript" charset="utf-8" ></script>
-    <script src="<?php print base_url(); ?>assets/node_modules/material-design-lite/material.min.js" type="text/javascript" charset="utf-8" async defer></script>
    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>-->
     <script src="<?php print base_url(); ?>assets/js/babel-core.js" type="text/javascript" charset="utf-8" ></script>
-    <script src="<?php print base_url(); ?>assets/js/search.js" type="text/babel" charset="utf-8" ></script>
+    <!--<script src="<?php print base_url(); ?>assets/js/profile.js" type="text/babel" charset="utf-8" ></script>-->
         <script type="text/javascript">
-        $(document).ready(function(){
+      $(document).ready(function(){
 
         $("#menu-toggle").click(function(e) {
         e.preventDefault();
+        e.stopPropagation ();
         $("#wrapper").toggleClass("toggled");
     });
-            $.material.init();
+        $.material.init();
             $.material.radio();
             $.material.checkbox();
     //for datepicker
@@ -168,7 +205,7 @@ $('#startDate').bootstrapMaterialDatePicker({ weekStart : 0 }).on('change', func
 {
 $('#endDate').bootstrapMaterialDatePicker('setMinDate', date);
 });
-        });
+      });
     </script>
 </body>
 </html>

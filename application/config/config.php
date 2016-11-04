@@ -516,4 +516,5 @@ $config['rewrite_short_tags'] = FALSE;
 $config['proxy_ips'] = '';
 $config['roles'] = array('employer', 'employee');
 $config['status'] = array('pending', 'approved');
+$config['default_role'] = 'employer';
 

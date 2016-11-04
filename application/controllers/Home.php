@@ -17,8 +17,12 @@ class Home extends CI_Controller{
 			redirect(site_url().'/home/login');
 		}	
 		/*homepage*/
-		$data = $this->session->userdata;
-		$this->load->view('employer/user_home', $data);
+		$data = $this->session->userdata;	
+		if(($this->session->userdata['role']) != $this->config->item('default_role')){
+			$this->load->view('profile', $data);
+		} else {
+			$this->load->view('timeline', $data);
+		}
 	}
 	public function completeReg(){
 		$this->load->view('home');
@@ -123,39 +127,32 @@ class Home extends CI_Controller{
 			'fname' => $user_info->fname,
 			'lname' => $user_info->lname,
 			'phone' => $user_info->phone,
+			'role' => $user_info->role,
 			'email'=>$user_info->email,
 			'login_id'=>$user_info->login_id,
 			'token'=>$this->base64url_encode($token)
 			);
-		$this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
-		$this->form_validation->set_rules('passconf', 'Confirm Password', 'required|matches[password]');
-
+		$this->form_validation->set_rules('role', 'Role', 'required');
 		if($this->form_validation->run() == FALSE){
-			$this->load->view('employer/registration', $data);
+			$this->load->view('complete-reg', $data);
 		} else {
-			$this->load->library('password');
 			$post = $this->input->post(NULL, TRUE);
 
 			$cleanPost = $this->security->xss_clean($post);
-
-			$hashed = $this->password->create_hash($cleanPost['password']);
-			$cleanPost['password'] = $hashed;
-			unset($cleanPost['passconf']);
 			$userInfo = $this->login->updateUserInfo($cleanPost);
-			//$this->login->insertEmployer($cleanPost);
 
 			if(!$userInfo){
 				$this->session->set_flashdata('flash messgae', 'There was a problem updating your record');
 				redirect(site_url(). '/home/login');
 			}
 
-			unset($userInfo->password);
+			//unset($userInfo->role);
 
 			foreach($userInfo as $key=>$val){
 				$this->session->set_userdata($key, $val);
 			}
 
-			//print_r( $this->session->userdata() );
+			print_r( $this->session->userdata() );
 			redirect(site_url(). '/home/');
 		}
 	}

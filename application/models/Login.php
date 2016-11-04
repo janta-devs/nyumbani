@@ -115,7 +115,6 @@ class Login extends CI_Model {
 	public function updateUserInfo($post)
 	{
         $data = array(
-               'password' => $post['password'],
                'role' => $post['role'],
                'last_login' => date('Y-m-d h:i:s A'), 
                'status' => $this->status[1]
@@ -135,21 +134,21 @@ class Login extends CI_Model {
 	}
 	public function checkLogin($login)
 	{
-		$this->load->library('password');
-		$this->db->select('*');
-		$this->db->where('email', $post['email']);
-		$this->db->where('phone', $post['phone']);
-		$query = $this->db->get('user_login');
-		$userInfo = $query->row();
-
-		if(!$this->password->valiadate_password($post['password'], $userInfo->password)){
-			error_log('Unsuccessful login attempt('.$post['email'].' || '.$post['phone'].')');
-			return false;
-		}
-		$this->updateLoginTime($userInfo->login_id);
-
-		unset($userInfo->password);
-		return $userInfo;
+        $this->load->library('password');       
+        $this->db->select('*');
+        $this->db->where('email', $post['email']);
+        $query = $this->db->get('user_login');
+        $userInfo = $query->row();
+        
+        if(!$this->password->validate_password($post['password'], $userInfo->password)){
+            error_log('Unsuccessful login attempt('.$post['email'].')');
+            return false; 
+        }
+        
+        $this->updateLoginTime($userInfo->login_id);
+        
+        unset($userInfo->password);
+        return $userInfo; 
 	}
 	public function updateLoginTime($login_id)
 	{
