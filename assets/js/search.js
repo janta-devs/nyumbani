@@ -1,5 +1,56 @@
 //post job component starts here
 var dataCollection = {};
+var NoResultCell = React.createClass({
+	render: function() {
+		return (
+					<tr>
+						<td className="mdl-data-table__cell--non-numeric"></td>
+						<td className="mdl-data-table__cell--non-numeric"></td>
+						<td className="mdl-data-table__cell--non-numeric">{this.props.result}</td>
+						<td className="mdl-data-table__cell--non-numeric"></td>
+						<td className="mdl-data-table__cell--non-numeric"></td>
+						<td></td>
+						<td></td>
+					</tr>
+		);
+	}
+});
+var NoSearchResult = React.createClass({
+	render: function() {
+		var popu = this.props.data.message.map( (x,y) => <NoResultCell key = {y} result = {x["suggestion_"+y]} /> );
+		return (
+			<div>
+					<table className = "mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+						<thead>
+							<tr>
+								<th className="mdl-data-table__cell--non-numeric"></th>
+								<th className="mdl-data-table__cell--non-numeric"></th>
+								<th className="mdl-data-table__cell--non-numeric"></th>
+								<th className="mdl-data-table__cell--non-numeric">No results, did you mean?</th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+						{popu}
+						</tbody>
+						<tfoot>
+								<tr>
+									<td>_</td>
+									<td>_</td>
+									<td>_</td>
+									<td>&copy; 2016</td>
+									<td>_</td>
+									<td>_</td>
+									<td>_</td>
+								</tr>
+						</tfoot>
+					</table>
+			</div>
+		)
+	}
+});
 var BackComponent = React.createClass({
 	render: function() {
 		return (
@@ -259,14 +310,12 @@ var Search = React.createClass({
 			data: 'search_term='+$n,
 		})
 		.done(function( res ) {
-			( !res.hasOwnProperty('message') ) ? self.setState({ data: res }) : console.log( res['message'] );
-
-			// This part will enable me to return an error pane in stead of the results table.
-
+			( !res.hasOwnProperty('message') ) ? self.setState({ data: res }) : self.setState({data: res});
 		})
 	},
 	render: function() {
-		var checker = ( this.state.data.length != 0 ) ? <ResultTable data = {this.state.data}/> : ''; // checks if the array is empty
+		var checker = ( this.state.data.length != 0 && !this.state.data.hasOwnProperty('message')) ? 
+		<ResultTable data = {this.state.data}/> : (this.state.data.length != 0 ) ? <NoSearchResult data = {this.state.data}/> : ""; // checks if the array is empty
 		return (
 			<div>
             	<TopActionComponent changeAppMode = {this.props.changeAppMode} /><br /><br /><br /><br />

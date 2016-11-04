@@ -26,7 +26,7 @@ class Search {
 
 		$this->DBdata( $prof, $loc );
 	}
-
+	//	Getting the terms typed in the client 
 	public function get_terms( $term = "" )
 	{
 		$this->term = strip_tags( $term );
@@ -84,6 +84,8 @@ class Search {
 		}
 	}
 
+	// refactoring the data fetched from the database 
+
 	public function DBdata($profession, $location)
 
 	{
@@ -93,14 +95,23 @@ class Search {
 		*/
 		foreach ( $profession->result() as $row ) {
 			$v = explode(' ', (string)trim($row->profession) );
-			$this->db_results['profession'][] = $v[0];
+			if( strlen($v[0]) > 3 )
+			{
+				$this->db_results['profession'][] = $v[0];
+			}
 		}
 		foreach ( $location->result() as $row ) {
 			$v = explode(' ', (string)trim($row->location) );
-			$this->db_results['location'][] = $v[0];
+			if( strlen($v[0]) > 3 )
+			{
+				$this->db_results['location'][] = $v[0];
+			}
 		}
 		return ( $this->db_results );
 	}
+
+	//creating an array that can be sent to the database for the result search
+
 	public function refactor()
 	{
 		// refactoring the information gotten from the search into searcheable SQL queries
@@ -123,15 +134,47 @@ class Search {
 		}
 		else
 		{
-			return json_encode( ['message' => 'There are no results for the term '.$this->term.''] );
+			//return json_encode( ['message' => 'There are no results for the term '.$this->term.''] );
+			return $this->auto_suggest( $this->term );
 		}
 
 	}
-	public function auto_suggest( $term ){
+
+	//provides suggestions of the most likely terms the client might have wanted to search for instead
+
+	public function auto_suggest( $term )
+	{
 		// create an autosuggesting system that will be checking the first 2 letters of the search term and tried to find a match
+
+		$merged_data = array_merge($this->db_results['profession'], $this->db_results['location'] );
+		$suggestions = [];
+		$client_suggestions = [];
+		$main_array = [];
+		
+		//removing the last 2 characters from the search term
+
+			foreach( $merged_data as $key => $value )
+			{
+
+				$v = substr( $value , 0 , -3 );
+				/*
+				* Leave the "@" delimeters in the REGEX,otherwise it 
+				* throws some undefined errors of 'unknown mofifier "c"'
+				*/
+				if (preg_match("@".$v."@i", $term))
+				{
+					$suggestions[] = $value;
+				}
+			}
+
+			$suggestions = array_keys( array_count_values( $suggestions ) );
+
+			for ($i=0; $i < 3; $i++) 
+			{ 
+				$main_array[] = ["suggestion_{$i}" => $suggestions[$i]];
+			}
+			return ( json_encode( (object)['message' => $main_array] ) );
 	}
 
 }
-
-
 ?>
