@@ -2,6 +2,7 @@ var dataCollection_basic = {};
 var dataCollection_education = {};
 var dataCollection_skill = {};
 var x = [[1],]; 		//an array of objects that would be used for maping to create dynamc fields
+var y = [[1],]
 
 var FieldSkill = React.createClass({
 	render: function() {
@@ -84,12 +85,12 @@ var DynamicFieldsSkills = React.createClass({
 	_getAction: function( event ){
 		event.preventDefault();
 		this.setState({ count: this.state.count += 1});
-		x.push( this.state.count );
-		this.setState({fields: x });
+		y.push( this.state.count );
+		this.setState({fields: y });
 	},
 	render: function(){
 
-		var populate = x.map( x => <FieldSkill key = {x} unique = {x} getValue = {this.props.getValue}/> );
+		var populate = y.map( y => <FieldSkill key = {y} unique = {y} getValue = {this.props.getValue}/> );
 		return (
 			<div>
 				{populate}
@@ -201,7 +202,13 @@ var BasicDetailsComponent = React.createClass({
 		e.preventDefault();
 		e.stopPropagation();
 
-		this.props.populateProfile( dataCollection_basic );
+		delete dataCollection_basic['phone'];
+		delete dataCollection_basic['email'];
+		delete dataCollection_basic['firstname'];
+		delete dataCollection_basic['lastname'];
+
+		var method = "sendBasicInformation";
+		this.props.populateProfile(method, dataCollection_basic );
 	},
 	render: function () {
 		return (
@@ -303,8 +310,9 @@ var EducationBackgroundComponent = React.createClass({
 	onSave: function( e ){
 		e.preventDefault();
 		e.stopPropagation();
+		var method = "sendEducationInformation";
+		this.props.populateProfile(method, dataCollection_education );
 
-		this.props.populateProfile( dataCollection_education );
 	},
 	_uploadFile: function( e ){
 		e.preventDefault();
@@ -369,14 +377,14 @@ var EducationBackgroundComponent = React.createClass({
 								<div className="col-md-4">
 									<div className="form-group label-floating">
 					                        <label className="control-label" htmlFor="grade">KCSE Grade</label>
-					                        <input type="text" id="grade" name="secondary_grade" className="form-control form-control-sm" onBlur = {this.getValue}/>
+					                        <input type="text" id="grade" name="kcse_grade" className="form-control form-control-sm" onBlur = {this.getValue}/>
 									</div>
 								</div>
 								<div className="col-md-4">
 									<div className="form-group">
 									<input type="file" id="primary_cert" multiple="" name = "secondary_certificate" onChange = {this._uploadFile}/>
 				    				<div className="input-group">
-					                        <input type="text" readOnly="" id="secondary_cert" name="secondary_cert" className="form-control form-control-sm" placeholder="Attach certificate" />
+					                        <input type="text" readOnly="" id="secondary_cert" name="secondary_certificate" className="form-control form-control-sm" placeholder="Attach certificate" />
 					                        <span className="input-group-btn input-group-sm">
 										      <button type="button" className="btn btn-fab">
 										        <i className="pe-7s-paperclip pe-va pe-lg"></i>
@@ -401,7 +409,7 @@ var EducationBackgroundComponent = React.createClass({
 									<div className="form-group">
 									<input type="file" id="university_certificate" multiple="" name = "university_certificate" onChange = {this._uploadFile}/>
 				    				<div className="input-group">
-					                        <input type="text" readOnly="" id="uni_cert" name="uni_cert" className="form-control form-control-sm" placeholder="Attach Degree/Diploma" />
+					                        <input type="text" readOnly="" id="uni_cert" name="university_certificate" className="form-control form-control-sm" placeholder="Attach Degree/Diploma" />
 					                        <span className="input-group-btn input-group-sm">
 										      <button type="button" className="btn btn-fab">
 										        <i className="pe-7s-paperclip pe-va pe-lg"></i>
@@ -436,8 +444,8 @@ var SkillsComponent = React.createClass({
 	onSave: function( e ){
 		e.preventDefault();
 		e.stopPropagation();
-
-		this.props.populateProfile( dataCollection_skill );
+		var method = "sendSkillInformation";
+		this.props.populateProfile( method, dataCollection_skill );
 	},
 	render: function () {
 		return (
@@ -468,8 +476,18 @@ var ProfileComponent = React.createClass ({
 	componentWillUpdate: function () {
 
 	},
-	populateProfile: function( data ){
-		console.log( data );
+	populateProfile: function(method, data ){
+
+		$.ajax({
+			url: '/nyumbani/index.php/profile/'+method,
+			type: 'POST',
+			dataType: 'json',
+			data: data,
+		})
+		.done(function( res ) {
+			console.log( res );
+		});
+		
 	},
 	render: function () {
 		return (
