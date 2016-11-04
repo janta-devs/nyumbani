@@ -2,6 +2,7 @@ var dataCollection_basic = {};
 var dataCollection_education = {};
 var dataCollection_skill = {};
 var x = [[1],]; 		//an array of objects that would be used for maping to create dynamc fields
+var y = [[1],]
 
 var FieldSkill = React.createClass({
 	render: function() {
@@ -84,12 +85,12 @@ var DynamicFieldsSkills = React.createClass({
 	_getAction: function( event ){
 		event.preventDefault();
 		this.setState({ count: this.state.count += 1});
-		x.push( this.state.count );
-		this.setState({fields: x });
+		y.push( this.state.count );
+		this.setState({fields: y });
 	},
 	render: function(){
 
-		var populate = x.map( x => <FieldSkill key = {x} unique = {x} getValue = {this.props.getValue}/> );
+		var populate = y.map( y => <FieldSkill key = {y} unique = {y} getValue = {this.props.getValue}/> );
 		return (
 			<div>
 				{populate}
