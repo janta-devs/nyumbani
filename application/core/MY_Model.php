@@ -30,7 +30,7 @@ class MY_Model extends CI_Model{
 		//login_id  => this is a value from the user which needs to be searched in the specified field e.g. email or id
 
 		$this->db->where($field_name, $login_id);
-		return ( ($this->db->update($this::DB_TABLE, $new_data) === True ) ) ? true : false;
+		return ( ($this->db->update($this::TABLE, $data) === True ) ) ? true : false;
 	}
 	public function insert( $data, $field_name = "", $login_id = "" )
 	{
