@@ -132,7 +132,7 @@ class Login extends CI_Model {
         return $user_info; 
 
 	}
-	public function checkLogin($login)
+	public function checkLogin($post)
 	{
         $this->load->library('password');       
         $this->db->select('*');

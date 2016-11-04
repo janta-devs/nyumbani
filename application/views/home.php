@@ -52,15 +52,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
         <div id="navbar" class="navbar-collapse collapse">
         <?php echo form_open(site_url()."/home/login", array('class' => 'navbar-form navbar-right'));?>
-          <!--<form class="navbar-form navbar-right" action="<?php echo site_url();?>/home/login">-->
             <div class="form-group label-floating" >
-				<label class="control-label" for="email">Email or Mobile</label><br>
-              <input type="text" id="email" name="email" class="form-control"><br>
+				<label class="control-label" for="email">Email</label><br>
+              <input type="text" id="email" name="email" class="form-control" value="<?php echo set_value('email');?>"><br>
               <a href="<?php echo site_url();?>/home/forgot" style="color: #9cb4d8;"><small>Forgot your login?Reset</small></a>
             </div>
             <div class="form-group label-floating">
             	<label class="control-label" for="password">Password</label><br>
-              <input type="password" name="password" class="form-control"><br>
+              <input type="password" name="password" class="form-control" value="<?php echo set_value('password');?>"><br>
               <a href="<?php echo site_url();?>/home/forgot" style="color: #9cb4d8;"><small>Not registered? Sign up</small></a>
             </div>
             <div class="form-group">
