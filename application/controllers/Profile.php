@@ -10,16 +10,6 @@ class Profile extends CI_Controller{
 
 		print json_encode( $data );
 	}
-	public function getdata()
-	{
-
-		
-		$this->load->library('Search');
-		$s = new Search();
-		$s->auto_suggest('i am looking for a engin');
-
-
-	}
 	public function getUploads(){
 		$this->load->helper('upload_helper');
 		@$path = upload_file();
@@ -121,8 +111,8 @@ class Profile extends CI_Controller{
 
 		$new_array = [];
 		for ($k=0; $k < count( $skill ); $k++) { 
-			if( $skill[$k] != " " && !empty( $skill[$k])){
-				$new_array[][$skill[$k]] = $mode[$k];
+			if( $skill[ $k ] != " " && !empty( $skill[ $k ] ) ){
+				$new_array[ ][ $skill[ $k ] ] = $mode[ $k ];
 			}
 		}
 

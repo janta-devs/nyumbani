@@ -241,18 +241,24 @@ var TableCell = React.createClass({
 						<td className="mdl-data-table__cell--non-numeric">{this.props.gender}</td>
 						<td className="mdl-data-table__cell--non-numeric">{this.props.location}</td>
 						<td>
-						<a href='#'
+						<span className="input-group-btn">
+						<button
 							onClick={() => this.props.changeAppMode('readOne', this.props.id)}
-							className = 'btn btn-info btn-raised'>View Profile
-						</a>
-						<a href='#'
+							className = 'btn btn-fab'><i className="pe-7s-id pe-va pe-lg"></i>
+						</button>
+						</span>
+						<span className="input-group-btn">
+						<button
 							onClick={() => this.props.changeAppMode('message', this.props.id)}
-							className = 'btn btn-info btn-raised'>Message
-						</a>
-						<a href='#'
+							className = 'btn btn-fab'><i className="pe-7s-comment pe-va pe-lg"></i>
+						</button>
+						</span>
+						<span className="input-group-btn">
+						<button 
 							onClick={() => this.props.changeAppMode('interest', this.props.id)}
-							className = 'btn btn-info btn-raised'>Show Interest
-						</a>
+							className = 'btn btn-fab'><i className="pe-7s-like2 pe-va pe-lg"></i>
+						</button>
+						</span>
 						</td>
 					</tr>
 		);
@@ -273,9 +279,8 @@ var ResultTable = React.createClass({
 								<th className="mdl-data-table__cell--non-numeric">LAST NAME</th>
 								<th className="mdl-data-table__cell--non-numeric">GENDER</th>
 								<th className="mdl-data-table__cell--non-numeric">LOCATION</th>
-								<th>RATING</th>
-								<th>PROFILE</th>
-								<th>CONTACT</th>
+								<th className="mdl-data-table__cell--non-numeric">ACTIONS</th>
+							
 							</tr>
 						</thead>
 						<tbody>
@@ -287,8 +292,6 @@ var ResultTable = React.createClass({
 									<td>_</td>
 									<td>_</td>
 									<td>&copy; 2016</td>
-									<td>_</td>
-									<td>_</td>
 									<td>_</td>
 								</tr>
 						</tfoot>
