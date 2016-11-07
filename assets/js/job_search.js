@@ -304,7 +304,7 @@ var Search = React.createClass({
 
 		var self = this;
 		$.ajax({
-			url: '/nyumbani/index.php/Timeline/get',
+			url: '/nyumbani/index.php/Timeline/get_jobs',
 			type: 'POST',
 			dataType: 'json',
 			data: 'search_term='+$n,

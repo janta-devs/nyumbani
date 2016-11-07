@@ -1,13 +1,14 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+//defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-class Search {
+class Search_jobs {
 
 	//Defined global variables
 
 	public $professions_result = [];
 	public $location_result = [];
+	public $job_title_result = [];
 	public $unified_search_terms = [];
 	public $db_results = [];
 	public $term = "";
@@ -18,13 +19,14 @@ class Search {
 	{
 
 		$CI =& get_instance();
-		$CI->load->model('Jobseeker');
-		$this->model = new Jobseeker();
+		$CI->load->model('Job_model');
+		$this->model = new Job_model();
 
 		$prof = $this->model->getData('profession');
 		$loc = $this->model->getData('location');
+		$job_title = $this->model->getData('job_title');
 
-		$this->DBdata( $prof, $loc );
+		$this->DBdata( $prof, $loc, $job_title );
 	}
 	//	Getting the terms typed in the client 
 	public function get_terms( $term = "" )
@@ -62,19 +64,35 @@ class Search {
 
 			foreach ($this->db_results['location'] as $key => $value) 
 			{
-				if (preg_match("@".preg_quote($value)."@i", $this->term))
+				if( preg_match("@".preg_quote($value)."@i", $this->term) )
 				{
-					if( !in_array($value, $this->location_result))
+					if( !in_array( $value, $this->location_result) )
 					{
 						$this->location_result[] = $value;
 					}
-					if( count( $this->location_result != 0 ) ){
+					if( count( $this->location_result != 0 ) )
+					{
 						$this->unified_search_terms['location'] = $this->location_result;
 					}
 				}
 			}
 
-			$res = $this->refactor();
+			foreach ($this->db_results['job_title'] as $key => $value) 
+			{
+				if(preg_match("@".preg_quote($value)."@i", $this->term))
+				{
+					if( !in_array($value, $this->job_title_result))
+					{
+						$this->job_title_result[] = $value;
+					}
+					if( count( $this->location_result != 0 ) ){
+						$this->unified_search_terms['job_title'] = $this->job_title_result;
+					}
+				}
+			}
+
+
+			$res = $this->refactor( $this->unified_search_terms );
 
 			return $res;
 		}
@@ -86,42 +104,53 @@ class Search {
 
 	// refactoring the data fetched from the database 
 
-	public function DBdata($profession, $location)
+	public function DBdata($profession, $location, $job_title)
 
 	{
 		/*
 		*Preg_Match only allows the search of one phrase at a time
 		*as such, I have to trim the professional titles from long sentences to only the first word in the sentence
 		*/
-		foreach ( $profession->result() as $row ) {
+		foreach ( $profession->result() as $row ) 
+		{
 			$v = explode(' ', (string)trim($row->profession) );
 			if( strlen($v[0]) > 3 )
 			{
-				$this->db_results['profession'][] = $v[0];
+				$this->db_results['profession'][] = (string)$v[0];
 			}
 		}
-		foreach ( $location->result() as $row ) {
+		foreach ( $location->result() as $row ) 
+		{
 			$v = explode(' ', (string)trim($row->location) );
 			if( strlen($v[0]) > 3 )
 			{
-				$this->db_results['location'][] = $v[0];
+				$this->db_results['location'][] = (string)$v[0];
 			}
 		}
+		foreach ( $job_title->result() as $row ) 
+		{
+			$v = explode(' ', (string)trim($row->job_title) );
+			if( strlen($v[0]) > 3 )
+			{
+				$this->db_results['job_title'][] = (string)$v[0];
+			}
+		}
+
 		return ( $this->db_results );
 	}
 
 	//creating an array that can be sent to the database for the result search
 
-	public function refactor()
+	public function refactor( $data )
 	{
 		// refactoring the information gotten from the search into searcheable SQL queries
 		// e.g. SELECT * FROM `SOME_TABLE.FIELD` WHERE `profession` LIKE %{$this->unified_search_terns["profession"]}% etc
 		
 		$search_terms = [];
 
-		if( count( $this->unified_search_terms ) != 0 && !empty( $this->unified_search_terms ))
+		if( count( $data ) != 0 && !empty( $data ))
 		{
-			foreach ($this->unified_search_terms as $k => $v)
+			foreach ($data as $k => $v)
 			{
 				foreach ($v as $key => $value) 
 				{
@@ -130,7 +159,9 @@ class Search {
 			}
 			$query = $this->model->search( $search_terms );
 
-			return json_encode( $query->result() );
+			print_r( $query->result() );
+
+			// return json_encode( $query->result() );
 		}
 		else
 		{
@@ -146,7 +177,7 @@ class Search {
 	{
 		// create an autosuggesting system that will be checking the first 2 letters of the search term and tried to find a match
 
-		$merged_data = array_merge($this->db_results['profession'], $this->db_results['location'] );
+		$merged_data = array_merge_recursive($this->db_results['profession'], $this->db_results['location'] , $this->db_results['job_title']);
 		$suggestions = [];
 		$client_suggestions = [];
 		$main_array = [];

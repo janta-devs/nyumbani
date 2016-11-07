@@ -33,6 +33,23 @@ class Timeline extends CI_Controller {
 			print( $results );
 		}
 	}
+	public function get_jobs(){
+		//loading the search library and instantiating the class
+		$this->load->library('Search_jobs');
+		$search = new Search_jobs();
+
+		//getting data from the user's form
+
+		$data  = $this->input->post();
+
+		if( isset( $data ) && !empty( $data ) && count( $data ) != 0 )
+		{
+			//calling the get_terms method to thus do the search and return a json object with results either affirmative or contrary
+			
+			$results = $search->get_terms( $data['search_term'] );
+			print( $results );
+		}
+	}
 	public function profile (){
 		$this->load->view('profile');
 	}
