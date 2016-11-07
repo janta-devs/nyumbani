@@ -114,9 +114,14 @@ class Search_jobs {
 		foreach ( $profession->result() as $row ) 
 		{
 			$v = explode(' ', (string)trim($row->profession) );
+
 			if( strlen($v[0]) > 3 )
 			{
 				$this->db_results['profession'][] = (string)$v[0];
+			}
+			else if( count($v) > 1 && strlen($v[1]) > 3 )
+			{
+				$this->db_results['profession'][] = (string)$v[1];
 			}
 		}
 		foreach ( $location->result() as $row ) 
@@ -126,6 +131,10 @@ class Search_jobs {
 			{
 				$this->db_results['location'][] = (string)$v[0];
 			}
+			else if( count($v) > 1 && strlen($v[1]) > 3 )
+			{
+				$this->db_results['location'][] = (string)$v[1];
+			}
 		}
 		foreach ( $job_title->result() as $row ) 
 		{
@@ -133,6 +142,10 @@ class Search_jobs {
 			if( strlen($v[0]) > 3 )
 			{
 				$this->db_results['job_title'][] = (string)$v[0];
+			}
+			else if( count($v) > 1 && strlen($v[1]) > 3 )
+			{
+				$this->db_results['job_title'][] = (string)$v[1];
 			}
 		}
 
@@ -159,9 +172,7 @@ class Search_jobs {
 			}
 			$query = $this->model->search( $search_terms );
 
-			print_r( $query->result() );
-
-			// return json_encode( $query->result() );
+			return json_encode( $query->result() );
 		}
 		else
 		{
@@ -192,7 +203,7 @@ class Search_jobs {
 				* Leave the "@" delimeters in the REGEX,otherwise it 
 				* throws some undefined errors of 'unknown mofifier "c"'
 				*/
-				if (preg_match("@".$v."@i", $term))
+				if (preg_match("@".preg_quote($v)."@i", $term))
 				{
 					$suggestions[] = $value;
 				}

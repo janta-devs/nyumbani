@@ -236,13 +236,13 @@ var TableCell = React.createClass({
 	render: function() {
 		return (
 					<tr>
-						<td className="mdl-data-table__cell--non-numeric">{this.props.first_name}</td>
-						<td className="mdl-data-table__cell--non-numeric">{this.props.last_name}</td>
-						<td className="mdl-data-table__cell--non-numeric">{this.props.gender}</td>
+						<td className="mdl-data-table__cell--non-numeric"><a href = {this.props.client_id}>{this.props.client_id}</a></td>
+						<td className="mdl-data-table__cell--non-numeric">{this.props.job_title}</td>
+						<td>{this.props.description.substring(0, 30)}</td>
 						<td className="mdl-data-table__cell--non-numeric">{this.props.location}</td>
-						<td>Rating</td>
-						<td>Profile</td>
-						<td>Contact</td>
+						<td className="mdl-data-table__cell--non-numeric">{this.props.budget}</td>
+						<td className="mdl-data-table__cell--non-numeric"><a href = {this.props.attachments}>Attachment</a></td>
+						<td className="mdl-data-table__cell--non-numeric">{this.props.profession}</td>
 					</tr>
 		);
 	}
@@ -251,20 +251,20 @@ var TableCell = React.createClass({
 var ResultTable = React.createClass({
 	render: function() {
 		var populate = this.props.data.map( x => 
-		<TableCell key = { x.id.toString() } first_name = {x.first_name} last_name = {x.last_name} gender = {x.gender} 
-		email = {x.email} location = {x.location} ip_address = {x.ip_address.toString()} profession = {x.profession}/>);
+		<TableCell key = { x.order_id } client_id = {x.login_id} job_title = {x.job_title} description = {x.description} 
+		location = {x.location} budget = {x.budget} profession = {x.profession} attachments = {x.order_attachment_path}/>);
 
 		return (
 				<table className = "mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
 						<thead>
 							<tr>
-								<th className="mdl-data-table__cell--non-numeric">FIRST NAME</th>
-								<th className="mdl-data-table__cell--non-numeric">LAST NAME</th>
-								<th className="mdl-data-table__cell--non-numeric">GENDER</th>
+								<th className="mdl-data-table__cell--non-numeric">CLIENT ID</th>
+								<th className="mdl-data-table__cell--non-numeric">JOB TITLE</th>
+								<th className="mdl-data-table__cell--non-numeric">DESCRIPTION</th>
 								<th className="mdl-data-table__cell--non-numeric">LOCATION</th>
-								<th>RATING</th>
-								<th>PROFILE</th>
-								<th>CONTACT</th>
+								<th className="mdl-data-table__cell--non-numeric">PRICE</th>
+								<th className="mdl-data-table__cell--non-numeric">ATTACHMENT(S)</th>
+								<th className="mdl-data-table__cell--non-numeric">PROFESSION</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -272,13 +272,13 @@ var ResultTable = React.createClass({
 						</tbody>
 						<tfoot>
 								<tr>
-									<td>_</td>
-									<td>_</td>
-									<td>_</td>
-									<td>&copy; 2016</td>
-									<td>_</td>
-									<td>_</td>
-									<td>_</td>
+									<td className="mdl-data-table__cell--non-numeric">_</td>
+									<td className="mdl-data-table__cell--non-numeric">_</td>
+									<td className="mdl-data-table__cell--non-numeric">_</td>
+									<td className="mdl-data-table__cell--non-numeric">&copy; 2016</td>
+									<td className="mdl-data-table__cell--non-numeric">_</td>
+									<td className="mdl-data-table__cell--non-numeric">_</td>
+									<td className="mdl-data-table__cell--non-numeric">_</td>
 								</tr>
 						</tfoot>
 					</table>
@@ -310,6 +310,7 @@ var Search = React.createClass({
 			data: 'search_term='+$n,
 		})
 		.done(function( res ) {
+			console.log( res );
 			( !res.hasOwnProperty('message') ) ? self.setState({ data: res }) : self.setState({data: res});
 		})
 	},

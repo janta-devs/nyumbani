@@ -161,7 +161,7 @@ class Search {
 				* Leave the "@" delimeters in the REGEX,otherwise it 
 				* throws some undefined errors of 'unknown mofifier "c"'
 				*/
-				if (preg_match("@".$v."@i", $term))
+				if (preg_match("@".preg_quote($v)."@i", $term))
 				{
 					$suggestions[] = $value;
 				}

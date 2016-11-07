@@ -150,8 +150,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="<?php print base_url(); ?>assets/node_modules/react-dom/dist/react-dom.js" type="text/javascript" charset="utf-8" ></script>
     <script src="<?php print base_url(); ?>assets/node_modules/material-design-lite/material.min.js" type="text/javascript" charset="utf-8" async defer></script>
    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>-->
-    <script src="<?php print base_url(); ?>assets/js/babel-core.js" type="text/javascript" charset="utf-8" ></script>
-    <script src="<?php print base_url(); ?>assets/js/job_search.js" type="text/babel" charset="utf-8" ></script>
+    <script src="<?php print base_url(); ?>assets/js/babel-core.js" type="text/javascript"></script>
+    <script src="<?php print base_url(); ?>assets/js/job_search.js" type="text/babel"></script>
         <script type="text/javascript">
         $(document).ready(function(){
 
