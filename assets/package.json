@@ -1,13 +1,13 @@
 {
-  "name": "assets",
+  "name": "nyumbani",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is the nyumbani automated recruitment agency",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "watchify main.jsx -v -t [ babelify --presets [ react ] ] -o main/main.js --minified"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Janta-Devs",
+  "license": "MIT",
   "dependencies": {
     "babel": "^6.5.2",
     "bootstrap": "^3.3.7",
@@ -15,5 +15,19 @@
     "material-design-lite": "^1.2.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2"
-  }
+  },
+  "devDependencies": {
+    "babel-core": "^6.18.2",
+    "babel-preset-react": "^6.16.0",
+    "babelify": "^7.3.0",
+    "watchify": "^3.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/janta-devs/nyumbani.git"
+  },
+  "bugs": {
+    "url": "https://github.com/janta-devs/nyumbani/issues"
+  },
+  "homepage": "https://github.com/janta-devs/nyumbani#readme"
 }
