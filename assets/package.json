@@ -4,7 +4,7 @@
   "description": "This is the nyumbani automated recruitment agency",
   "main": "index.js",
   "scripts": {
-    "start": "watchify main.jsx -v -t [ babelify --presets [ react ] ] -o main/main.js --minified"
+    "start": "watchify profileComponents/main.jsx -v -t [ babelify --presets [ react ] ] -o main/profile.js --minified"
   },
   "author": "Janta-Devs",
   "license": "MIT",
