@@ -1,5 +1,7 @@
 //post job component starts here
+
 var dataCollection = {};
+
 var NoResultCell = React.createClass({
 	render: function() {
 		return (
@@ -15,6 +17,7 @@ var NoResultCell = React.createClass({
 		);
 	}
 });
+
 var NoSearchResult = React.createClass({
 	render: function() {
 		var popu = this.props.data.message.map( (x,y) => <NoResultCell key = {y} result = {x["suggestion_"+y]} /> );
@@ -355,4 +358,5 @@ var MainApp = React.createClass ({
 		return modeComponent;
 	}
 });
+
 ReactDOM.render(<MainApp />, document.getElementById('component'));

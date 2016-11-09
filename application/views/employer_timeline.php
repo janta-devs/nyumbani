@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="<?php print base_url();?>assets/node_modules/bootstrap/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
-    <!-- Custom styles for this template --
+    <!-- Custom styles for this template 
     <link href="jumbotron.css" rel="stylesheet">-->
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
