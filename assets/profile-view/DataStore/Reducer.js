@@ -7,7 +7,9 @@ let Reducer  = function( state, action ){
 						firstname: action.firstname,
 						lastname: action.lastname,
 						id: action.id,
-						profile_picture: action.profile_picture
+						profile_picture: action.profile_picture,
+						employer: action.employer,
+						verified: action.verified
 					}, ...state.userInfo]
 				});
 		default:

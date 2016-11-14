@@ -1,23 +1,32 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
+import $ from 'jquery';
 
 import Main from './components/Main';
 import configureStore from './DataStore/Store';
 
-let initialState = {
-	userInfo: [{
 
-	}]
-}
+var initialState = {};
 
-let store = configureStore( initialState );
+let $callBack = $.ajax({
+	url: '../../index.php/profile/getProfileData',
+	type: 'POST',
+	dataType: 'json'
+})
+.done(function( res ) 
+{
+	initialState['userInfo'] = [res];
+
+	let store = configureStore( initialState );
+	render(
+		<Provider store = {store}> 
+			<Main />
+		</Provider>, 
+		document.getElementById('component')
+	);
+
+});
 
 
 
-render(
-	<Provider store = {store}> 
-		<Main />
-	</Provider>, 
-	document.getElementById('component')
-);

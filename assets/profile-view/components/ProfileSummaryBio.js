@@ -2,26 +2,27 @@ import React, { Component } from 'react';
 
 class ProfileSummaryBio extends Component{
     render() {
+
     return (
               <div className="column d-2-3 m-3-4 s-1-1 xs-1-1">
                 <div className="summary-left">
                   <aside className="details-photo">
                     <div className="image-box">
-                      <img src="libs/images/dante.jpg" alt="Profile Picture" className="large-image" />
-                      <img className="advisor-icon" src="libs/images/verified.svg" alt="Janta Advisor" />
+                      <img src={this.props.userInfo.primary_certificate} alt="Profile Picture" className="large-image" />
+                      <img className="advisor-icon" src={(this.props.userInfo.verification === "1") ? "/nyumbani/photo_assets/verified.svg" : "/nyumbani/photo_assets/unverified.png"}alt="Janta Advisor" />
                     </div>
                   </aside>
                   <section className="details-content">
                     <div className="summary-nested">
                       <h1>
-                        Dan Ochieng
+                        {this.props.userInfo.fname} {this.props.userInfo.lname}
                       </h1>
                       <ul className="bare-list bio-nested">
                         <li>
-                          Front-End Developer
+                          {this.props.userInfo.profession}
                         </li>
                         <li>
-                        Thimrock Ventures                      
+                          Past Jobs                     
                         </li>
               
                       </ul>
