@@ -30,6 +30,7 @@ var ProfileSummaryBio = React.createClass ({
       );
   }
 });
+
 var ProfileSummaryStats = React.createClass ({
   render: function () {
     return (
