@@ -76,9 +76,9 @@ var ProfileSummaryActions = React.createClass ({
   }
 });
 var ProfileSummary = React.createClass ({
-	render: function () {
-		return (
-        			  <div className="headline">
+  render: function () {
+    return (
+                <div className="headline">
                   <div className="with-container">
                     <div className="card-details" id="profile-details">
                       <section className="bio">
@@ -95,8 +95,8 @@ var ProfileSummary = React.createClass ({
                     </div>
                   </div>
                 </div>
-			);
-	}
+      );
+  }
 });
 var ProfileInterests = React.createClass ({
   render: function () {
@@ -227,6 +227,142 @@ var ProfileInterestedIn = React.createClass ({
     );
   }
 });
+var ContactDetails = React.createClass ({
+  render: function () {
+    return (
+          <div className="card" id="profile-employment">
+            <header className="employment-header">
+              <h2>
+                Contact Details
+              </h2>
+            </header>
+            <section className="employment-content">
+              <div className="timeline-record-list ">
+                <div className="record-row">
+                  <div className="timeline-record-right">
+                    <p className="timeline-record-title">0728623213</p>
+                  </div>
+                  <div className="timeline-record-left">
+                    <p className="timeline-record-date">
+                        <span className="block">Mobile Number
+                        </span>
+                        <span className="block"></span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="timeline-record-list ">
+                <div className="record-row">
+                  <div className="timeline-record-right">
+                    <p className="timeline-record-title">ochiodhis@gmail.com</p>
+                  </div>
+                  <div className="timeline-record-left">
+                    <p className="timeline-record-date">
+                        <span className="block">Email Address
+                        </span>
+                        <span className="block"></span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="timeline-record-list ">
+                <div className="record-row">
+                  <div className="timeline-record-right">
+                    <p className="timeline-record-title">P O Box 57161</p>
+                    <p className="timeline-record-place">0020 - Nairobi</p>
+                  </div>
+                  <div className="timeline-record-left">
+                    <p className="timeline-record-date">
+                        <span className="block">Address
+                        </span>
+                        <span className="block"></span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+    );
+  }
+});
+
+var BasicDetails = React.createClass ({
+  render: function () {
+    return (
+          <div className="card" id="profile-employment">
+            <header className="employment-header">
+              <h2>
+                Basic Details
+              </h2>
+            </header>
+            <section className="employment-content">
+              <div className="timeline-record-list ">
+                <div className="record-row">
+                  <div className="timeline-record-right">
+                    <p className="timeline-record-title">Male</p>
+                  </div>
+                  <div className="timeline-record-left">
+                    <p className="timeline-record-date">
+                        <span className="block">Gender
+                        </span>
+                        <span className="block"></span>
+                    </p>
+                  </div>
+                </div>
+  
+              </div>
+
+              <div className="timeline-record-list ">
+                <div className="record-row">
+                  <div className="timeline-record-right">
+                    <p className="timeline-record-title">Nairobi</p>
+                    <p className="timeline-record-place">Umoja</p>
+                  </div>
+                  <div className="timeline-record-left">
+                    <p className="timeline-record-date">
+                        <span className="block">City/Town
+                        </span>
+                        <span className="block"></span>
+                    </p>
+                  </div>
+                </div>
+  
+              </div>
+
+
+              <div className="timeline-record-list ">
+                <div className="record-row">
+                  <div className="timeline-record-right">
+                    <p className="timeline-record-title">June 1987</p>
+                  </div>
+                  <div className="timeline-record-left">
+                    <p className="timeline-record-date">
+                        <span className="block">Date of Birth
+                        </span>
+                        <span className="block"></span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="timeline-record-list ">
+                <div className="record-row">
+                  <div className="timeline-record-right">
+                    <p className="timeline-record-title">Single</p>
+                  </div>
+                  <div className="timeline-record-left">
+                    <p className="timeline-record-date">
+                        <span className="block">Marital Status
+                        </span>
+                        <span className="block"></span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+    );
+  }
+ }); 
 var ProfessionalExperience = React.createClass ({
   render: function () {
     return (
@@ -319,6 +455,8 @@ var ProfileData =  React.createClass ({
                         <ProfileInterestedIn />
                       </div>
                       <div className="column d-2-3 m-7-12 s-1-1 xs-1-1">
+                        <BasicDetails />
+                        <ContactDetails />
                         <Skills />
                         <ProfessionalExperience />
                         <EducationBackground />
@@ -330,4 +468,4 @@ var ProfileData =  React.createClass ({
   }
 });
 ReactDOM.render (<ProfileData />, document.getElementById('content')
-	);
+  );
