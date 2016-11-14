@@ -19,4 +19,6 @@ class ProfileInterestedEmployers extends Component{
               </div>
     );
   }
-};
+}
+
+export default ProfileInterestedEmployers;
