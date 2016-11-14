@@ -12,7 +12,7 @@ class InterestedEmployersList extends Component {
                <ul> 
                 <li>
                   <a href="#" title="Hellen Achieng">
-                    <img src="libs/images/anony.jpg" alt="Hellen Achieng" />
+                    <img src="/nyumbani/photo_assets/anony.jpg" alt="Hellen Achieng" />
                   </a>
                   <p>
                     <a href="#" title="Hellen Achieng">Hellen Achieng</a>
@@ -24,7 +24,7 @@ class InterestedEmployersList extends Component {
                 </li>
                 <li>
                   <a href="#" title="Hellen Achieng">
-                    <img src="libs/images/anony.jpg" alt="Hellen Achieng" />
+                    <img src="/nyumbani/photo_assets/anony.jpg" alt="Hellen Achieng" />
                   </a>
                   <p>
                     <a href="#" title="Hellen Achieng">Hellen Achieng</a>
@@ -36,7 +36,7 @@ class InterestedEmployersList extends Component {
                 </li>
                 <li>
                   <a href="#" title="Hellen Achieng">
-                    <img src="libs/images/anony.jpg" alt="Hellen Achieng" />
+                    <img src="/nyumbani/photo_assets/anony.jpg" alt="Hellen Achieng" />
                   </a>
                   <p>
                     <a href="#" title="Hellen Achieng">Hellen Achieng</a>

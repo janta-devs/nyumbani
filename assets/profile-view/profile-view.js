@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import $ from 'jquery';
 
 import Main from './components/Main';
-import configureStore from './DataStore/Store';
+import configureStore from '../DataStore/Store';
 
 
 var initialState = {};

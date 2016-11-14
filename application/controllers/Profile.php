@@ -5,8 +5,8 @@ class Profile extends CI_Controller{
 	{
 		$this->load->model('User_login');
 		$user = new User_login();
-
-		$data = $user->load_user_data( ['login_id' => 2] );
+		$data = $this->session->userdata();
+		$data = $user->load_user_data( ['login_id' => $data['login_id']] );
 
 		print json_encode( $data );
 	}
@@ -18,11 +18,12 @@ class Profile extends CI_Controller{
 		$this->load->model('Basic_information');
 		$basic = new Basic_information();
 
+		$data = $this->session->userdata();
 
-		$data = $this->input->post();
-		$data['login_id'] = $login_id;
+		$dataArr = $this->input->post();
+		$dataArr['login_id'] = $data['login_id'];
 
-		$insert_id = $basic->insert( $data );
+		$insert_id = $basic->insert( $dataArr );
 
 		print json_encode(['insert_id' => $insert_id]);
 
@@ -81,8 +82,12 @@ class Profile extends CI_Controller{
 		print json_encode(['update_status' => true]) : print json_encode(['update_status' => false]);
 
 	}
-	public function getProfileData( $login_id = 2)
+	public function getProfileData( )
 	{
+		$data = $this->session->userdata();
+		$login_id = $data['login_id'];
+
+
 		$this->load->model('Basic_information');
 		$basic = new Basic_information();
 
@@ -100,12 +105,7 @@ class Profile extends CI_Controller{
 		$education_data = (array)$education->load_user_data( ['login_id'=> $login_id] );
 		unset($education_data['id']);
 
-		$past_job = explode(',', $education_data['past_job']);
-
-		$count = count( $past_job );
-		unset( $past_job[$count - 1 ]);
-
-		$education_data['past_job'] = $past_job;
+		$education_data['past_jobs'] = $this->StringToArray($education_data['past_job'], ['job','duration','title']);
 
 		$skills = explode('=', $education_data['skills']);
 		
@@ -131,6 +131,49 @@ class Profile extends CI_Controller{
 
 		print json_encode( (object)$UserInfo );
 
+	}
+
+	public function StringToArray( $string, $params ){
+		$arr = explode('=', $string);
+
+		if( count( $arr ) < 3 ){
+			for ($i=0; $i < count($arr); $i++) 
+			{ 
+				if( $i == 0 || $i%2 == 0)
+					$valOne = explode(',', $arr[$i] );
+				else
+					$valTwo = explode(',', $arr[$i] );
+			}
+
+			for ($k=0; $k < count( $job ); $k++) { 
+				if( $valOne[$k] != " " && !empty( $valOne[$k] )){
+					$new_arr[] = array_merge_recursive( [$params[1]=> $job[$k]], [$params[2]=> $duration[$k]] );
+				}
+			}
+		}
+		else
+		{
+
+			$valThree = explode(',', $arr[2]);
+			unset($arr[2]);
+
+			for ($i=0; $i < count($arr); $i++) 
+			{ 
+				if( $i == 0 || $i%2 == 0)
+					$valOne = explode(',', $arr[$i] );
+				else
+					$valTwo = explode(',', $arr[$i] );
+			}
+
+			for ($k=0; $k < count( $valOne ); $k++) 
+			{ 
+				if( $valOne[$k] != " " && !empty( $valOne[$k] ))
+				{
+					$new_arr[] = array_merge_recursive([$params[0]=>$valOne[$k]],[$params[1]=>$valTwo[$k]],[$params[2]=>$valThree[$k]]);
+				}
+			}
+			return $new_arr;		
+		}
 	}
 }
 ?>

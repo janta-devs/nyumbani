@@ -33504,7 +33504,6 @@
 	  _createClass(Main, [{
 	    key: 'render',
 	    value: function render() {
-	      console.log(this.props.userInfo[0]);
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -33528,8 +33527,8 @@
 	              _react2.default.createElement(_BasicDetails2.default, { userInfo: this.props.userInfo[0] }),
 	              _react2.default.createElement(_ContactDetails2.default, { userInfo: this.props.userInfo[0] }),
 	              _react2.default.createElement(_Skills2.default, null),
-	              _react2.default.createElement(_ProfessionalExperience2.default, null),
-	              _react2.default.createElement(_EducationBackground2.default, null)
+	              _react2.default.createElement(_ProfessionalExperience2.default, { userInfo: this.props.userInfo[0] }),
+	              _react2.default.createElement(_EducationBackground2.default, { userInfo: this.props.userInfo[0] })
 	            )
 	          )
 	        )
@@ -34142,7 +34141,7 @@
 	          _react2.default.createElement(
 	            'a',
 	            { href: '#', title: 'Hellen Achieng' },
-	            _react2.default.createElement('img', { src: 'libs/images/anony.jpg', alt: 'Hellen Achieng' })
+	            _react2.default.createElement('img', { src: '/nyumbani/photo_assets/anony.jpg', alt: 'Hellen Achieng' })
 	          ),
 	          _react2.default.createElement(
 	            'p',
@@ -34179,7 +34178,7 @@
 	          _react2.default.createElement(
 	            'a',
 	            { href: '#', title: 'Hellen Achieng' },
-	            _react2.default.createElement('img', { src: 'libs/images/anony.jpg', alt: 'Hellen Achieng' })
+	            _react2.default.createElement('img', { src: '/nyumbani/photo_assets/anony.jpg', alt: 'Hellen Achieng' })
 	          ),
 	          _react2.default.createElement(
 	            'p',
@@ -34216,7 +34215,7 @@
 	          _react2.default.createElement(
 	            'a',
 	            { href: '#', title: 'Hellen Achieng' },
-	            _react2.default.createElement('img', { src: 'libs/images/anony.jpg', alt: 'Hellen Achieng' })
+	            _react2.default.createElement('img', { src: '/nyumbani/photo_assets/anony.jpg', alt: 'Hellen Achieng' })
 	          ),
 	          _react2.default.createElement(
 	            'p',
@@ -34378,6 +34377,42 @@
 	  _createClass(ProfessionalExperience, [{
 	    key: "render",
 	    value: function render() {
+
+	      var Jobs = this.props.userInfo.past_jobs.map(function (x, y) {
+	        return _react2.default.createElement(
+	          "div",
+	          { className: "record-row", key: y },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "timeline-record-right" },
+	            _react2.default.createElement(
+	              "p",
+	              { className: "timeline-record-title" },
+	              x.title
+	            ),
+	            _react2.default.createElement(
+	              "p",
+	              { className: "timeline-record-place" },
+	              x.job
+	            )
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "timeline-record-left" },
+	            _react2.default.createElement(
+	              "p",
+	              { className: "timeline-record-date" },
+	              _react2.default.createElement(
+	                "span",
+	                { className: "block" },
+	                x.duration
+	              ),
+	              _react2.default.createElement("span", { className: "block" })
+	            )
+	          )
+	        );
+	      });
+
 	      return _react2.default.createElement(
 	        "div",
 	        { className: "card", id: "profile-employment" },
@@ -34396,38 +34431,7 @@
 	          _react2.default.createElement(
 	            "div",
 	            { className: "timeline-record-list " },
-	            _react2.default.createElement(
-	              "div",
-	              { className: "record-row" },
-	              _react2.default.createElement(
-	                "div",
-	                { className: "timeline-record-right" },
-	                _react2.default.createElement(
-	                  "p",
-	                  { className: "timeline-record-title" },
-	                  "Professor"
-	                ),
-	                _react2.default.createElement(
-	                  "p",
-	                  { className: "timeline-record-place" },
-	                  "University of Pittsburgh"
-	                )
-	              ),
-	              _react2.default.createElement(
-	                "div",
-	                { className: "timeline-record-left" },
-	                _react2.default.createElement(
-	                  "p",
-	                  { className: "timeline-record-date" },
-	                  _react2.default.createElement(
-	                    "span",
-	                    { className: "block" },
-	                    "August 2000 - Present"
-	                  ),
-	                  _react2.default.createElement("span", { className: "block" })
-	                )
-	              )
-	            )
+	            Jobs
 	          )
 	        )
 	      );

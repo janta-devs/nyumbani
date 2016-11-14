@@ -15,7 +15,6 @@ import { connect } from 'react-redux';
 
 class Main extends Component{
   render() {
-    console.log( this.props.userInfo[0] );
     return (
                 <div>
                   <ProfileSummary userInfo = {this.props.userInfo[0]}/>
@@ -31,8 +30,8 @@ class Main extends Component{
                         <BasicDetails userInfo = {this.props.userInfo[0]}/>
                         <ContactDetails userInfo = {this.props.userInfo[0]}/>
                         <Skills />
-                        <ProfessionalExperience />
-                        <EducationBackground />
+                        <ProfessionalExperience userInfo = {this.props.userInfo[0]}/>
+                        <EducationBackground userInfo={this.props.userInfo[0]}/>
 
                       </div>
                     </div>
