@@ -45,7 +45,36 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+              <span class="mdl-layout-title">
+            <div class="logo-home" ></div></span>
+              <!-- Add spacer, to align navigation to the right -->
+              <div class="mdl-layout-spacer"></div>
+              <!-- Navigation. We hide it in small screens. -->
+              <nav class="mdl-navigation mdl-layout--large-screen-only">
+                <a class="mdl-navigation__link" href="">Notifications <i class="material-icons">notifications</i></a>
+                <a class="mdl-navigation__link" href="">Messages <i class="material-icons">message</i></a>
+                <!--<a class="mdl-navigation__link" href=""><i class="material-icons">thumb_up</i> 
+                </a>-->
+                <a class="mdl-navigation__link" href="<?php echo site_url();?>/home/logout">Logout <i class="material-icons">power_settings_new</i>
+                </a>
+              </nav>
+            </div>
+        </header>
+      <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Title</span>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="">Link</a>
+          <a class="mdl-navigation__link" href="">Link</a>
+          <a class="mdl-navigation__link" href="">Link</a>
+          <a class="mdl-navigation__link" href="">Link</a>
+        </nav>
+      </div>
+      </div>
+   <!-- <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -57,7 +86,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
             <a class="brand-home-nav" href="#menu-toggle" id="menu-toggle"><span aria-hidden="true"><i class="pe-7s-menu pe-4x pe-va"></i></span></a>
           <div class="logo-home" ></div>
-          <!--<a class="navbar-brand" href="#">Project name</a>-->
+          <!--<a class="navbar-brand" href="#">Project name</a>-
         </div>
         <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right" style="display: inline; vertical-align: center;">
@@ -93,7 +122,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </ul>
         </div><!--/.navbar-collapse -->
       </div>
-    </nav>
+    </nav>-->
     <div id="wrapper" class="toggled">
       <div class="container-fluid">
         <!--Sidebar begins here-->
