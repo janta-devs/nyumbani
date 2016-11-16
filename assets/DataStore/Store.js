@@ -11,6 +11,6 @@ import Reducer from './Reducer';
  )(createStore)
 
 
-export default function configureStore( initialState = {userInfo: []}){
-	return createStore( Reducer, initialState)
+export default function configureStore( initialState = {}, search_results = []){
+	return finalCreateStore( Reducer, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 }

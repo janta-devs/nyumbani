@@ -69,13 +69,23 @@
 
 	var _MainApp2 = _interopRequireDefault(_MainApp);
 
-	var _Store = __webpack_require__(214);
+	var _Store = __webpack_require__(215);
 
 	var _Store2 = _interopRequireDefault(_Store);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	(0, _reactDom.render)(_react2.default.createElement(_MainApp2.default, null), document.getElementById('component'));
+	var InitialState = {
+		search_results: []
+	};
+
+	var store = (0, _Store2.default)(InitialState);
+
+	(0, _reactDom.render)(_react2.default.createElement(
+		_reactRedux.Provider,
+		{ store: store },
+		_react2.default.createElement(_MainApp2.default, null)
+	), document.getElementById('component'));
 
 /***/ },
 /* 2 */
@@ -33439,6 +33449,14 @@
 
 	var _PostJobComponent2 = _interopRequireDefault(_PostJobComponent);
 
+	var _reactRedux = __webpack_require__(173);
+
+	var _redux = __webpack_require__(180);
+
+	var _Actions = __webpack_require__(214);
+
+	var _Actions2 = _interopRequireDefault(_Actions);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -33474,7 +33492,11 @@
 			key: 'render',
 			value: function render() {
 
-				var modeComponent = _react2.default.createElement(_Search2.default, { changeAppMode: this.changeAppMode.bind(this) });
+				var modeComponent = _react2.default.createElement(_Search2.default, {
+					changeAppMode: this.changeAppMode.bind(this),
+					searchAction: this.props.Actions.search,
+					data: this.props.search_results
+				});
 
 				switch (this.state.currentMode) {
 					case 'search':
@@ -33492,7 +33514,19 @@
 		return MainApp;
 	}(_react.Component);
 
-	exports.default = MainApp;
+	function mapStateToProps(state) {
+		// passes the state object to the APP component 
+		return state; //taking the entire state
+	}
+
+	function mapDispatchToProps(dispatch) {
+		//this function makes it that we do not have to call the dispatch method each time
+		return {
+			Actions: (0, _redux.bindActionCreators)(_Actions2.default, dispatch)
+		};
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MainApp);
 
 /***/ },
 /* 205 */
@@ -33538,6 +33572,9 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	//importing 
+
+
 	var Search = function (_Component) {
 		_inherits(Search, _Component);
 
@@ -33581,7 +33618,7 @@
 		}, {
 			key: 'render',
 			value: function render() {
-				var checker = this.state.data.length != 0 && !this.state.data.hasOwnProperty('message') ? _react2.default.createElement(_ResultTable2.default, { data: this.state.data }) : this.state.data.length != 0 ? _react2.default.createElement(_NoSearchResult2.default, { data: this.state.data }) : ""; // checks if the array is empty
+				var checker = this.props.data.length !== 0 && !this.props.data.hasOwnProperty('message') ? _react2.default.createElement(_ResultTable2.default, { data: this.props.data }) : this.props.data.length !== 0 ? _react2.default.createElement(_NoSearchResult2.default, { data: this.props.data }) : ""; // checks if the array is empty
 				return _react2.default.createElement(
 					'div',
 					null,
@@ -33590,7 +33627,7 @@
 					_react2.default.createElement('br', null),
 					_react2.default.createElement('br', null),
 					_react2.default.createElement('br', null),
-					_react2.default.createElement(_SearchBar2.default, { search: this.handleSearch.bind(this) }),
+					_react2.default.createElement(_SearchBar2.default, { search: this.handleSearch.bind(this), searchAction: this.props.searchAction }),
 					_react2.default.createElement('br', null),
 					_react2.default.createElement('br', null),
 					checker
@@ -33671,6 +33708,8 @@
 		value: true
 	});
 
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(2);
@@ -33701,10 +33740,10 @@
 		_createClass(ResultTable, [{
 			key: 'render',
 			value: function render() {
-				var populate = this.props.data.map(function (x) {
+				var populate = _typeof(this.props.data) === "object" && this.props.data.length > 0 ? this.props.data.map(function (x) {
 					return _react2.default.createElement(_TableCell2.default, { key: x.id.toString(), first_name: x.first_name, last_name: x.last_name, gender: x.gender,
 						email: x.email, location: x.location, ip_address: x.ip_address.toString(), profession: x.profession });
-				});
+				}) : console.log(_typeof(this.props.data));
 
 				return _react2.default.createElement(
 					'table',
@@ -33928,6 +33967,8 @@
 
 	//there are props to be added
 
+	//onClick = {this.props.search}
+
 	var SearchBar = function (_Component) {
 		_inherits(SearchBar, _Component);
 
@@ -33938,6 +33979,13 @@
 		}
 
 		_createClass(SearchBar, [{
+			key: "handleClickAction",
+			value: function handleClickAction(e) {
+				e.preventDefault();
+				e.stopPropagation();
+				this.props.searchAction(this.refs.search.value);
+			}
+		}, {
 			key: "render",
 			value: function render() {
 				return _react2.default.createElement(
@@ -33949,12 +33997,12 @@
 						_react2.default.createElement(
 							"div",
 							{ className: "input-group" },
+							_react2.default.createElement("input", { className: "form-control input-lg", type: "text", id: "sample1", name: "search_term", value: this.props.search_term, ref: "search" }),
 							_react2.default.createElement(
 								"label",
 								{ className: "control-label", htmlFor: "smaple1" },
 								"Search here"
 							),
-							_react2.default.createElement("input", { className: "form-control input-lg", type: "text", id: "sample1", name: "search_term", value: this.props.search_term }),
 							_react2.default.createElement(
 								"p",
 								{ className: "help-block" },
@@ -33965,7 +34013,7 @@
 								{ className: "input-group-btn" },
 								_react2.default.createElement(
 									"button",
-									{ className: "btn btn-fab", onClick: this.props.search },
+									{ className: "btn btn-fab", onClick: this.handleClickAction.bind(this) },
 									_react2.default.createElement("i", { className: "pe-7s-search pe-va pe-lg" })
 								)
 							)
@@ -34196,6 +34244,8 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var dataCollection = {};
 
 	var PostJobComponent = function (_Component) {
 		_inherits(PostJobComponent, _Component);
@@ -34498,21 +34548,67 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _jquery = __webpack_require__(203);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Actions = {
+		setState: function setState(information) {
+			return {
+				type: 'SET_STATE',
+				data: information
+			};
+		},
+		getData: function getData(userData) {
+			return {
+				type: 'GET_USER_DATA',
+				data: userData
+			};
+		},
+		search: function search(term) {
+			return function (dispatch) {
+				var self = dispatch;
+				_jquery2.default.ajax({
+					url: '/nyumbani/index.php/Timeline/get',
+					type: 'POST',
+					dataType: 'json',
+					data: 'search_term=' + term
+				}).done(function (res) {
+					self(Actions.setState(res));
+				});
+			};
+		}
+	};
+
+	exports.default = Actions;
+
+/***/ },
+/* 215 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	exports.default = configureStore;
 
 	var _redux = __webpack_require__(180);
 
-	var _Reducer = __webpack_require__(215);
+	var _Reducer = __webpack_require__(216);
 
 	var _Reducer2 = _interopRequireDefault(_Reducer);
 
-	var _reduxLogger = __webpack_require__(216);
+	var _reduxLogger = __webpack_require__(217);
 
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 
-	var _reduxThunk = __webpack_require__(222);
+	var _reduxThunk = __webpack_require__(223);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
@@ -34523,14 +34619,15 @@
 	var finalCreateStore = (0, _redux.compose)((0, _redux.applyMiddleware)((0, _reduxLogger2.default)(), _reduxThunk2.default))(_redux.createStore);
 
 	function configureStore() {
-	  var initialState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { userInfo: [] };
+	  var initialState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+	  var search_results = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
 
-	  return (0, _redux.createStore)(_Reducer2.default, initialState);
+	  return finalCreateStore(_Reducer2.default, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 	}
 
 /***/ },
-/* 215 */
-/***/ function(module, exports) {
+/* 216 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -34538,9 +34635,20 @@
 		value: true
 	});
 
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+	var _jquery = __webpack_require__(203);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-	var Reducer = function Reducer(state, action) {
+	var Reducer = function Reducer() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "search_results";
+		var action = arguments[1];
+
 		switch (action.type) {
 			case 'GET_USER_DATA':
 				return Object.assign({}, state, {
@@ -34553,6 +34661,17 @@
 						verified: action.verified
 					}].concat(_toConsumableArray(state.userInfo))
 				});
+			case 'SEARCH':
+				return state;
+			case 'SET_STATE':
+				if (_typeof(state.search_results) === 'object' && state.search_results.length > 0) {
+					state.search_results = [];
+				}
+				var dataArray = _jquery2.default.makeArray(action.data);
+				var search_results = dataArray.map(function (userData) {
+					return Object.assign({}, state.search_results, userData);
+				});
+				return { search_results: search_results };
 			default:
 				return state;
 		}
@@ -34561,7 +34680,7 @@
 	exports.default = Reducer;
 
 /***/ },
-/* 216 */
+/* 217 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34572,11 +34691,11 @@
 	  value: true
 	});
 
-	var _core = __webpack_require__(217);
+	var _core = __webpack_require__(218);
 
-	var _helpers = __webpack_require__(218);
+	var _helpers = __webpack_require__(219);
 
-	var _defaults = __webpack_require__(221);
+	var _defaults = __webpack_require__(222);
 
 	var _defaults2 = _interopRequireDefault(_defaults);
 
@@ -34679,7 +34798,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 217 */
+/* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34689,9 +34808,9 @@
 	});
 	exports.printBuffer = printBuffer;
 
-	var _helpers = __webpack_require__(218);
+	var _helpers = __webpack_require__(219);
 
-	var _diff = __webpack_require__(219);
+	var _diff = __webpack_require__(220);
 
 	var _diff2 = _interopRequireDefault(_diff);
 
@@ -34820,7 +34939,7 @@
 	}
 
 /***/ },
-/* 218 */
+/* 219 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -34844,7 +34963,7 @@
 	var timer = exports.timer = typeof performance !== "undefined" && performance !== null && typeof performance.now === "function" ? performance : Date;
 
 /***/ },
-/* 219 */
+/* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34854,7 +34973,7 @@
 	});
 	exports.default = diffLogger;
 
-	var _deepDiff = __webpack_require__(220);
+	var _deepDiff = __webpack_require__(221);
 
 	var _deepDiff2 = _interopRequireDefault(_deepDiff);
 
@@ -34940,7 +35059,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 220 */
+/* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(global) {/*!
@@ -35369,7 +35488,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 221 */
+/* 222 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -35420,7 +35539,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 222 */
+/* 223 */
 /***/ function(module, exports) {
 
 	'use strict';

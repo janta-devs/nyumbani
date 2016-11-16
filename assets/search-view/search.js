@@ -10,5 +10,14 @@ import MainApp from './components/MainApp';
 import configureStore from '../DataStore/Store';
 
 
+let InitialState = {
+	search_results: []
+};
 
-render(<MainApp />, document.getElementById('component'));
+let store = configureStore( InitialState );
+
+render(
+	<Provider store={store}>
+		<MainApp />
+	</Provider>, 
+	document.getElementById('component'));

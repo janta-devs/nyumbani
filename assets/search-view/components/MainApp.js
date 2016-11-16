@@ -3,6 +3,11 @@ import React, { Component } from 'react';
 import Search from './Search';
 import PostJobComponent from './PostJobComponent';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import Actions from '../../DataStore/Actions';
+
+
 
 class MainApp extends Component
 {
@@ -24,7 +29,11 @@ class MainApp extends Component
 	}
 	render(){
 
-		var modeComponent = <Search changeAppMode={this.changeAppMode.bind(this)}/>;
+		var modeComponent = <Search 
+		changeAppMode={this.changeAppMode.bind(this)} 
+		searchAction = {this.props.Actions.search}
+		data = {this.props.search_results}
+		/>;
 
 		switch(this.state.currentMode) 
 		{
@@ -41,4 +50,14 @@ class MainApp extends Component
 
 }
 
-export default MainApp;
+function mapStateToProps( state ){	// passes the state object to the APP component 
+	return state;	//taking the entire state
+}
+
+function mapDispatchToProps(dispatch){ //this function makes it that we do not have to call the dispatch method each time
+	return{
+		Actions: bindActionCreators( Actions, dispatch )
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainApp);

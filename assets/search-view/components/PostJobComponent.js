@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import BackComponent from './BackComponent';
 
+var dataCollection = {};
+
 import $ from 'jquery';
 
 

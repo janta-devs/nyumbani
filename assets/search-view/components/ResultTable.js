@@ -4,9 +4,9 @@ import TableCell from './TableCell';
 
 class ResultTable extends Component{
 	render() {
-		var populate = this.props.data.map( x => 
+		var populate = (typeof(this.props.data) === "object"  &&  this.props.data.length > 0 ) ? this.props.data.map( x => 
 		<TableCell key = { x.id.toString() } first_name = {x.first_name} last_name = {x.last_name} gender = {x.gender} 
-		email = {x.email} location = {x.location} ip_address = {x.ip_address.toString()} profession = {x.profession}/>);
+		email = {x.email} location = {x.location} ip_address = {x.ip_address.toString()} profession = {x.profession}/>) : console.log( typeof(this.props.data) );
 
 		return (
 				<table className = "mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
@@ -17,7 +17,6 @@ class ResultTable extends Component{
 								<th className="mdl-data-table__cell--non-numeric">GENDER</th>
 								<th className="mdl-data-table__cell--non-numeric">LOCATION</th>
 								<th className="mdl-data-table__cell--non-numeric">ACTIONS</th>
-							
 							</tr>
 						</thead>
 						<tbody>

@@ -7,6 +7,10 @@ import NoSearchResult from './NoSearchResult';
 
 import $ from 'jquery';
 
+//importing 
+
+
+
 class Search extends Component{
 
 	constructor( context, props ){
@@ -41,12 +45,12 @@ class Search extends Component{
 		})
 	}
 	render() {
-		var checker = ( this.state.data.length != 0 && !this.state.data.hasOwnProperty('message')) ? 
-		<ResultTable data = {this.state.data}/> : (this.state.data.length != 0 ) ? <NoSearchResult data = {this.state.data}/> : ""; // checks if the array is empty
+		var checker = ( this.props.data.length !== 0 && !this.props.data.hasOwnProperty('message') ) ? 
+		<ResultTable data = {this.props.data}/> : (this.props.data.length !== 0 ) ? <NoSearchResult data = {this.props.data}/> : ""; // checks if the array is empty
 		return (
 			<div>
             	<TopActionComponent changeAppMode = {this.props.changeAppMode.bind(this)} /><br /><br /><br /><br />
-				<SearchBar search = {this.handleSearch.bind(this)}/><br /><br />
+				<SearchBar search = {this.handleSearch.bind(this)} searchAction = {this.props.searchAction}/><br /><br />
 				{checker}
 			</div>
 		);
