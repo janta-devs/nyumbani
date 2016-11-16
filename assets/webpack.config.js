@@ -1,3 +1,4 @@
+var webpack = require("webpack");
 module.exports = {
 	entry:['./profile-view/profile-view.js'],
 	output:{
@@ -16,5 +17,18 @@ module.exports = {
 				}
 			}
 		]
-	}
+	},
+	
+	 // plugins: [
+	 //    new webpack.optimize.UglifyJsPlugin({
+	 //      compress: {
+	 //        warnings: false
+	 //      },
+	 //      output: {
+	 //        comments: false,
+	 //        semicolons: true
+	 //      },
+	 //      sourceMap: true
+	 //    })
+	 //  ]
 }
