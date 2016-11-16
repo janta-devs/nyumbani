@@ -33526,6 +33526,10 @@
 
 	var _NoSearchResult2 = _interopRequireDefault(_NoSearchResult);
 
+	var _jquery = __webpack_require__(203);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -33562,10 +33566,10 @@
 				e.stopPropagation();
 
 				var n = e.target,
-				    $n = $(n).parent().parent().parent().parent().find('input[type="text"]').val();
+				    $n = (0, _jquery2.default)(n).parent().parent().parent().parent().find('input[type="text"]').val();
 
 				var self = this;
-				$.ajax({
+				_jquery2.default.ajax({
 					url: '/nyumbani/index.php/Timeline/get',
 					type: 'POST',
 					dataType: 'json',
@@ -33581,12 +33585,12 @@
 				return _react2.default.createElement(
 					'div',
 					null,
-					_react2.default.createElement(_TopActionComponent2.default, { changeAppMode: this.props.changeAppMode }),
+					_react2.default.createElement(_TopActionComponent2.default, { changeAppMode: this.props.changeAppMode.bind(this) }),
 					_react2.default.createElement('br', null),
 					_react2.default.createElement('br', null),
 					_react2.default.createElement('br', null),
 					_react2.default.createElement('br', null),
-					_react2.default.createElement(_SearchBar2.default, { search: this.handleSearch }),
+					_react2.default.createElement(_SearchBar2.default, { search: this.handleSearch.bind(this) }),
 					_react2.default.createElement('br', null),
 					_react2.default.createElement('br', null),
 					checker
