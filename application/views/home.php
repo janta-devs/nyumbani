@@ -8,14 +8,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="<?php print base_url(); ?>photo_assets/justia.ico">>
+    <link rel="icon" href="<?php print base_url(); ?>photo_assets/justia.ico">
 	<title>Welcome to Janta</title>
   	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
   	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	<link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap/dist/css/bootstrap.css">
+	<!-- <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap/dist/css/bootstrap.css"> -->
 	<!-- Bootstrap Material Design -->
-  <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap-material-design/dist/css/bootstrap-material-design.css">
-  <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap-material-design/dist/css/ripples.min.css">
+  <!-- <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap-material-design/dist/css/bootstrap-material-design.css"> -->
+  <!-- <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap-material-design/dist/css/ripples.min.css"> -->
+  <link rel="stylesheet" type="text/css" href="<?php print base_url(); ?>assets/node_modules/material-design-lite/material.min.css">
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="<?php print base_url();?>assets/node_modules/bootstrap/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
@@ -34,149 +35,164 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <![endif]-->
   	<!--<link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/font-awesome/css/font-awesome.min.css">-->
 	<link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap/dist/css/custom.css">
-
 </head>
 <body>
-
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <div class="logo-home" ></div>
-          <!--<a class="navbar-brand" href="#">Project name</a>-->
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-        <?php echo form_open(site_url()."/home/login", array('class' => 'navbar-form navbar-right'));?>
-            <div class="form-group label-floating" >
-				<label class="control-label" for="email">Email</label><br>
-              <input type="text" id="email" name="email" class="form-control" value="<?php echo set_value('email');?>"><br>
-              <a href="<?php echo site_url();?>/home/forgot" style="color: #9cb4d8;"><small>Forgot your login?Reset</small></a>
-            </div>
-            <div class="form-group label-floating">
-            	<label class="control-label" for="password">Password</label><br>
-              <input type="password" name="password" class="form-control" value="<?php echo set_value('password');?>"><br>
-              <a href="<?php echo site_url();?>/home/forgot" style="color: #9cb4d8;"><small>Not registered? Sign up</small></a>
-            </div>
-            <div class="form-group">
-            <button type="submit" class="btn btn-raised btn-warning" style="margin-bottom: 10px;">Sign in</button><br>
-            <p></p>
-            </div>
-          </form>
-        </div><!--/.navbar-collapse -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+              <span class="mdl-layout-title">
+                <div class="logo-home" ></div>
+              </span>
+              <!-- Add spacer, to align navigation to the right -->
+              <div class="mdl-layout-spacer"></div>
+              <!-- Navigation. We hide it in small screens. -->
+              <nav class="mdl-navigation mdl-layout--large-screen-only">
+                <table>
+                  <?php echo form_open(site_url()."/home/login", array('class' => 'navbar-form navbar-right'));?>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 200px; padding-right: 5px; font-size: 8px;" >
+                              <input type="text" id="email" name="email" class="mdl-textfield__input" value="<?php echo set_value('email');?>">
+                              <label class="mdl-textfield__label" for="email">Email</label>
+                          </div>
+                        </td>
+                        <td>  
+                          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 200px; padding-right: 5px; font-size: 8px;">
+                              <input type="password" name="password" class="mdl-textfield__input" value="<?php echo set_value('password');?>">
+                              <label class="mdl-textfield__label" for="password">Password</label>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="mdl-textfield mdl-js-textfield" style="width: 120px; padding-top: 50px; padding-right: 0px;">
+                              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Sign In <i class="material-icons">lock_open</i>
+                              </button>
+                          </div>
+                        </td> 
+                      </tr>
+                      <!-- <tr>
+                        <td>
+                          <a href="<?php echo site_url();?>/home/forgot" style="color: #9cb4d8;"><small>Forgot your login?Reset</small></a>
+                        </td>
+                        <td>
+                          <a href="<?php echo site_url();?>/home/forgot" style="color: #9cb4d8;"><small>Not registered? Sign up</small></a>
+                        </td> -->
+                      </tr>
+                    </tbody>
+                  </form>
+                </table>
+              </div>
+            </nav>
+          </div>
+        </header>
       </div>
-    </nav>
-    <div class="container">
-<div class="row" >
-</div>
-    	<div class="row">
-  			<div class="col-md-5" style="margin-top: 100px;" >
-              <div class="col-md-6 col-md-offset-3" style="margin-top: 0;" >
+      <main class="mdl-layout__content">
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--6-col" style="margin-top: 50px;">
                 <?php //echo $this->session->flashdata('verify_msg'); ?>
                 <?php
-            $arr = $this->session->flashdata(); 
-            if(!empty($arr['flash_message'])){
-                $html = '<div class="bg-warning container flash-message">';
-                $html .= $arr['flash_message']; 
-                $html .= '</div>';
-                echo $html;
-            }
-        ?>
-              </div>
-    			<h1>Sign Up!</h1>
-        			<p class='jumbotron-text'>Join the #1 global workplace.
-        			</p>
+                    $arr = $this->session->flashdata(); 
+                    if(!empty($arr['flash_message'])){
+                        $html = '<div class="bg-warning container flash-message">';
+                        $html .= $arr['flash_message']; 
+                        $html .= '</div>';
+                        echo $html;
+                    }
+                ?>
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col" >
+                <h1 style="padding: 0px; margin-bottom: -10px;">Sign Up!</h1><span style="margin-left: 25px;"><small>Join the #1 global workplace.</small></span>
                 <?php 
-    $fattr = array('class' => 'sign-up', 'name' => 'registrationForm','data-toggle' => 'validator');
-    echo form_open('home/register', $fattr); ?>
-                    <div class="col-md-6">
-                        <div class="form-group label-floating">
-                        <label class="control-label" for="fname">First Name</label>
-                        <input type="text" id="fname" name="fname" class="form-control" data-error="First Name is required" value="<?php set_value('fname');?>" required>
+                    $fattr = array('class' => 'sign-up', 'name' => 'registrationForm','data-toggle' => 'validator');
+                    echo form_open('home/register', $fattr);
+                ?>
+            </div>
+            <div class="mdl-cell mdl-cell--6-col">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input type="text" id="fname" name="fname" class="mdl-textfield__input" data-error="First Name is required" value="<?php set_value('fname');?>" >
+                        <label class="mdl-textfield__label" for="fname">First Name</label>
                         <span class="text-danger"><?php echo form_error('fname'); ?></span>
                         </div>
-                    </div>
-        				<div class="col-md-6">
-        					<div class="form-group label-floating">
-        					<label class="control-label" for="lname">Last Name</label>
-        					<input class="form-control" type="text" name="lname" id="lname" value="<?php set_value('lname');?>" required>
+            </div>
+            <div class="mdl-cell mdl-cell--6-col">
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" name="lname" id="lname" value="<?php set_value('lname');?>" >
+                  <label class="mdl-textfield__label" for="lname">Last Name</label>
                   <span class="text-danger"><?php echo form_error('lname'); ?></span>
-      						</div>
-      					</div>
-        				<div class="col-md-6">
-        					<div class="form-group label-floating">
-        					<label class="control-label" for="email_add" >Email Address</label>
-        					<input class="form-control" name="email_add" type="text" id="email_add" value="<?php set_value('email_add');?>" required >
+                  </div>
+            </div>
+            <div class="mdl-cell mdl-cell--6-col">
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" name="email_add" type="text" id="email_add" value="<?php set_value('email_add');?>" >
+                  <label class="mdl-textfield__label" for="email_add" >Email Address</label>
                   <span class="text-danger"><?php echo form_error('email_add'); ?></span>
-      						</div>
-      					</div>
-        				<div class="col-md-6">
-        					<div class="form-group label-floating">
-        					<label class="control-label" for="conf_email">Confirm Email</label>
-        					<input class="form-control" name="conf_email" type="text" value="<?php set_value('conf_email');?>" id="conf_email">
+                  </div>
+            </div>
+            <div class="mdl-cell mdl-cell--6-col">
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" name="conf_email" type="text" value="<?php set_value('conf_email');?>" id="conf_email">
+                  <label class="mdl-textfield__label" for="conf_email">Confirm Email</label>
                   <span class="text-danger"><?php echo form_error('conf_email'); ?></span>
-      						</div>
-      					</div>
-                <div class="col-md-6">
-                  <div class="form-group label-floating">
-                  <label class="control-label" for="password">Password</label>
-                  <input class="form-control" name="pwd" type="password" value="<?php set_value('pwd');?>" id="password">
+                  </div>
+            </div>
+            <div class="mdl-cell mdl-cell--6-col">
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" name="pwd" type="password" value="<?php set_value('pwd');?>" id="password">
+                  <label class="mdl-textfield__label" for="password">Password</label>
                   <span class="text-danger"><?php echo form_error('pwd'); ?></span>
                   </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group label-floating">
-                  <label class="control-label" for="conf_password">Confirm Password</label>
-                  <input class="form-control" name="conf_pwd" type="password" value="<?php set_value('conf_pwd');?>" id="conf_password">
+            </div>
+            <div class="mdl-cell mdl-cell--6-col">
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" name="conf_pwd" type="password" value="<?php set_value('conf_pwd');?>" id="conf_password">
+                  <label class="mdl-textfield__label" for="conf_password">Confirm Password</label>
                   <span class="text-danger"><?php echo form_error('conf_pwd'); ?></span>
                   </div>
+            </div>
+            <div class="mdl-cell mdl-cell--6-col">
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input type="text" id="phone" value="<?php set_value('phone');?>" name="phone" class="mdl-textfield__input">
+                  <label class="mdl-textfield__label" for="phone">Mobile Number</label>
+                  <span class="text-danger"><?php echo form_error('phone'); ?>
+                  </span>
                 </div>
-                        <div class="col-md-6">
-				            <div class="form-group label-floating">
-                                <label class="control-label" for="phone">Mobile Number</label>
-						      <input type="text" id="phone" value="<?php set_value('phone');?>" name="phone" class="form-control">
-                  <span class="text-danger"><?php echo form_error('phone'); ?></span>
-						    </div>
-                        </div>
-                        <div class="col-md-6">
+            </div>
+            <div class="mdl-cell mdl-cell--6-col">
                             <div class="form-group">
                                 <div class="radio">
-                                    <label>
-                                  <input name="gender" type="radio" id="male" value="male">
+                                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="male">
+                                  <input name="gender" type="radio" id="male" value="male" class="mdl-radio__button">
                                         Male
                                     </label>
                                 </div>
                                 <div class="radio">
-                                    <label>
-                                        <input type="radio" name="gender" id="female" value="female">
+                                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect">
+                                        <input type="radio" name="gender" id="female" value="female" class="mdl-radio__button">
                                         Female
                                     </label>
                                 </div>
                             </div>
-                            <span class="text-danger"><?php echo form_error('gender'); ?></span>    
-                        </div>
-                    <div class="col-md-12">
-						    <div class="form-group">
-                                <button class="btn btn-raised btn-lg btn-warning btn-block" type="submit" value="Sign Up">Sign Up</button>
-						    </div>
-                    </div>
-    <?php echo form_close(); ?>
-        <?php echo $this->session->flashdata('msg'); ?>
-        	</div>
-    		<div class="col-md-3 col-md-offset-1" style="margin-top: 100px; overflow: none;">
-      			<div class="form-group">
-      				<img src="<?php print base_url();?>assets/node_modules/bootstrap/dist/images/sl1.jpg">
-      			</div>
-    		</div>
-        </div>
+                            <span class="text-danger"><?php echo form_error('gender'); ?></span> 
+            </div>
+              <div class="mdl-cell mdl-cell--12-col">
+                <div class="form-group">
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" type="submit" value="Sign Up" style="width: 300px; float: right; ">Sign Up</button>
+                </div>
+              </div>
+            <?php echo form_close(); ?>
+            <?php echo $this->session->flashdata('msg'); ?>
     </div>
+          </div><div class="mdl-cell mdl-cell--6-col" style="margin-top: 100px; overflow: none;">
+                <div class="form-group">
+                  <img src="<?php print base_url();?>assets/node_modules/bootstrap/dist/images/sl1.jpg">
+                </div>
+              </div>
+      </main>
     <script src="<?php print base_url();?>assets/node_modules/jquery/dist/jquery.min.js"></script>
     <script src="<?php print base_url();?>assets/node_modules/bootstrap-material-design/dist/js/ripples.min.js"></script>
-    <script src="<?php print base_url();?>assets/node_modules/bootstrap-material-design/dist/js/material.js"></script>
+   <!-- <script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script> -->
+    <script src="<?php print base_url();?>assets/node_modules/material-design-lite/material.min.js"></script>
     <script type="text/javascript">
     	$(document).ready(function(){
         /*$('.sign-up').formValidation({

@@ -16,10 +16,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link href="<?php print base_url();?>assets/node_modules/bootstrap/dist/css/helper.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap/dist/css/bootstrap.css">
     <!-- Bootstrap Material Design -->
-  <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap-material-design/dist/css/bootstrap-material-design.css">
-  <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css">
-  <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap-material-design/dist/css/ripples.min.css">
-  <link rel="stylesheet" type="text/css" href="<?php print base_url(); ?>assets/node_modules/material-design-lite/material.min.css">
+    <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap-material-design/dist/css/bootstrap-material-design.css">
+    <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css">
+    <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap-material-design/dist/css/ripples.min.css">
+    <link rel="stylesheet" type="text/css" href="<?php print base_url(); ?>assets/node_modules/material-design-lite/material.min.css">
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="<?php print base_url();?>assets/node_modules/bootstrap/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
@@ -45,88 +45,60 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-
-            <a class="brand-home-nav" href="#menu-toggle" id="menu-toggle"><span aria-hidden="true"><i class="pe-7s-menu pe-4x pe-va"></i></span></a>
-          <div class="logo-home" ></div>
-          <!--<a class="navbar-brand" href="#">Project name</a>-->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+              <span class="mdl-layout-title">
+            <div class="logo-home" ></div></span>
+              <!-- Add spacer, to align navigation to the right -->
+              <div class="mdl-layout-spacer"></div><div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
+                  mdl-textfield--floating-label mdl-textfield--align-right">
+        <label class="mdl-button mdl-js-button mdl-button--icon" for="fixed-header-drawer-exp">
+          <i class="material-icons">search</i>
+        </label>
+        <div class="mdl-textfield__expandable-holder">
+          <input class="mdl-textfield__input" type="text" name="sample" id="fixed-header-drawer-exp">
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right" style="display: inline; vertical-align: center;">
-                        <li>
-                            <a href="#"><span class="pe-7s-bell pe-va pe-2x" aria-hidden="true"></span> </a>
-                        </li>
-                        <li>
-                            <a href="#"><span class="pe-7s-comment pe-va pe-2x" aria-hidden="true"></span></a>
-                        </li>
-                        <li>
-                            <a href="#"><span class="pe-7s-like2 pe-va pe-2x" aria-hidden="true"></span> </a>
-                        </li>
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle avatar_width" data-toggle="dropdown"><span class="avatar-holder">
-                                    <img src = "<?php print base_url();?>assets/node_modules/bootstrap/dist/images/anony.jpg"></span>
-                                    <b class="caret"></b>
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                              </ul>
-                        </li>
-                        <li>
-                            <a href="<?php echo site_url();?>/home/logout"><span class="pe-7s-power pe-va pe-2x" aria-hidden="true"></span>
-                               
-                            </a>
-                        </li>
-                    </ul>
-        </div><!--/.navbar-collapse -->
       </div>
-    </nav>
-    <div id="wrapper" class="toggled">
-      <div class="container-fluid">
-        <!--Sidebar begins here-->
-        <div id="sidebar-wrapper" style="margin-top: 40px;">
-          <ul class="sidebar-nav">
-            <li class="sidebar-brand">
-              <br>
-            </li>
-                <!--<li class="sidebar-brand">
-                    <a href="#" class="navbar-brand">
-                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Profile
-                    </a>
-                </li>-->
-                <li class="active">
-                    <a href="<?php echo site_url();?>"><span class="pe-7s-home pe-lg" aria-hidden="true"></span> Home</a>
-                </li>
-                 <li>
-                    <a href="<?php echo site_url();?>/timeline/profile/"><span class="pe-7s-id pe-lg" aria-hidden="true"></span> My Profile</a>
-                </li> 
-                <li>
-                    <a href="#"><span class="pe-7s-wallet pe-lg" aria-hidden="true"></span> Wallet</a>
-                </li>
-                <li>
-                    <a href="#"><span class="pe-7s-config pe-lg" aria-hidden="true"></span> Settings</a>
-                </li>
-                <li>
-                    <a href="#"><span class="pe-7s-bell pe-lg" aria-hidden="true"></span> Notifications</a>
-                </li>
-                <li>
-                    <a href="#"><span class="pe-7s-power pe-lg" aria-hidden="true"></span> Logout</a>
-                </li>
-          </ul>
-        </div><!--end of sidebar-wrapper-->
+              <!-- Navigation. We hide it in small screens. -->
+              <nav class="mdl-navigation mdl-layout--large-screen-only">
+                <a class="mdl-navigation__link" href="">Notifications <i class="material-icons">notifications</i></a>
+                <a class="mdl-navigation__link" href="">Messages <i class="material-icons">message</i></a>
+                <!--<a class="mdl-navigation__link" href=""><i class="material-icons">thumb_up</i> 
+                </a>-->
+                <a class="mdl-navigation__link" href="<?php echo site_url();?>/home/logout">Logout <i class="material-icons">power_settings_new</i>
+                </a>
+              </nav>
+            </div>
+        </header>
+      <div class="mdl-layout__drawer md-48 mdl-color--blue-grey-900 mdl-color-text--blue-grey-50 ">
+        <header class="demo-drawer-header">
+          <img src="<?php print base_url();?>assets/node_modules/bootstrap/dist/images/anony.jpg" class="demo-avatar">
+          <div class="demo-avatar-dropdown">
+            <span>hello@example.com</span>
+            <div class="mdl-layout-spacer"></div>
+            <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+              <i class="material-icons" role="presentation">arrow_drop_down</i>
+              <span class="visuallyhidden">Accounts</span>
+            </button>
+            <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
+              <li class="mdl-menu__item">hello@example.com</li>
+              <li class="mdl-menu__item">info@example.com</li>
+              <li class="mdl-menu__item"><i class="material-icons">add</i>Add another account...</li>
+            </ul>
+          </div>   
+        </header>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="<?php echo site_url();?>"><i class="material-icons">home</i> Home</a>
+          <a class="mdl-navigation__link" href="<?php echo site_url();?>/timeline/profile/"><i class="material-icons">people</i> My Profile</a>
+          <a class="mdl-navigation__link" href="#"><i class="material-icons">account_balance_wallet</i> Wallet</a>
+          <a class="mdl-navigation__link" href="#"><i class="material-icons">settings</i> Settings</a>
+          <a class="mdl-navigation__link" href="#"><i class="material-icons">notifications</i> Notifications</a>
+          <a class="mdl-navigation__link" href="<?php echo site_url();?>/home/logout"><i class="material-icons">power_settings_new</i> Logout</a>
+        </nav>
+      </div>
+      </div>
         <!--page content starts here-->
         <div id="page-content-wrapper">
           <div class="container-fluid">
@@ -153,7 +125,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="<?php print base_url(); ?>assets/js/babel-core.js" type="text/javascript"></script>
 <!--     <script src="<?php print base_url(); ?>assets/js/job_search.js" type="text/babel"></script> -->
     <script src="<?php print base_url(); ?>assets/profile-view/dist/bundle.js"></script>
-        <script type="text/javascript">
+        <!-- <script type="text/javascript">
         $(document).ready(function(){
 
         $("#menu-toggle").click(function(e) {
@@ -173,6 +145,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     // });
 
 });
-    </script>
+    </script> -->
 </body>
 </html>
