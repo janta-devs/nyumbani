@@ -13,7 +13,7 @@ class ContactDetails extends Component{
               <div className="timeline-record-list ">
                 <div className="record-row">
                   <div className="timeline-record-right">
-                    <p className="timeline-record-title">{this.props.userInfo.phone}</p>
+                    <p className="timeline-record-title">0725869740</p>
                   </div>
                   <div className="timeline-record-left">
                     <p className="timeline-record-date">
@@ -27,7 +27,7 @@ class ContactDetails extends Component{
               <div className="timeline-record-list ">
                 <div className="record-row">
                   <div className="timeline-record-right">
-                    <p className="timeline-record-title">{this.props.userInfo.email}</p>
+                    <p className="timeline-record-title">theantonymars@gmail.com</p>
                   </div>
                   <div className="timeline-record-left">
                     <p className="timeline-record-date">

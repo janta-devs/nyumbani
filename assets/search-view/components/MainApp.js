@@ -33,6 +33,7 @@ class MainApp extends Component
 		changeAppMode={this.changeAppMode.bind(this)} 
 		searchAction = {this.props.Actions.search}
 		data = {this.props.search_results}
+		suggestions = {this.props.suggestions}
 		/>;
 
 		switch(this.state.currentMode) 

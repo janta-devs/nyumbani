@@ -8,9 +8,9 @@ class ProfileInterests  extends Component{
     const divStyleTwo = {
       height: 'auto',
     };
-    let interests = this.props.userInfo.skills.map( (x,y) => {
-        return <span key ={y}>{x.skill}</span>
-    });
+    // let interests = this.props.userInfo.skills.map( (x,y) => {
+    //     return <span key ={y}>{x.skill}</span>
+    // });
     return (
                 <div className="card" id="profile-interests">
                   <header className="interests-header">
@@ -22,7 +22,7 @@ class ProfileInterests  extends Component{
                     <div className="expandable-interests expandable-wrap expandable-with-buttons js-has-tags">
                       <div className="expandable-content" style={divStyleTwo}>
                         <span className="tag">
-                        {interests}
+                        Interests
                         </span>
                       </div>
                       <button className="js-expandable-link basic-link with-icon-before icon-navigatedown" data-expand="more" style={divStyleOne}><span>View more</span></button>

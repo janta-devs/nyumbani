@@ -10,28 +10,29 @@ import Skills from './Skills';
 import BasicDetails from './BasicDetails';
 import ContactDetails from './ContactDetails';
 
+import BackComponent from '../../search-view/components/BackComponent';
 
-import { connect } from 'react-redux';
 
 class Main extends Component{
   render() {
     return (
                 <div>
-                  <ProfileSummary userInfo = {this.props.userInfo[0]}/>
+                  <BackComponent />
+                  <ProfileSummary/>
                   <div className="with-container content">
                     <div className="row">
                       <div className="column d-1-3 m-5-12 s-1-1 xs-1-1">
-                        <ProfileInterests userInfo = {this.props.userInfo[0]}/>
+                        <ProfileInterests />
                         <ProfileInterestedEmployers />
                         <ProfileInterestedIn />
                       </div>
                       <div className="column d-2-3 m-7-12 s-1-1 xs-1-1">
                           
-                        <BasicDetails userInfo = {this.props.userInfo[0]}/>
-                        <ContactDetails userInfo = {this.props.userInfo[0]}/>
+                        <BasicDetails />
+                        <ContactDetails />
                         <Skills />
-                        <ProfessionalExperience userInfo = {this.props.userInfo[0]}/>
-                        <EducationBackground userInfo={this.props.userInfo[0]}/>
+                        <ProfessionalExperience/>
+                        <EducationBackground />
 
                       </div>
                     </div>
@@ -42,7 +43,4 @@ class Main extends Component{
 }
 
 
-function mapStateToProps( state ){
-  return state;
-}
-export default connect(mapStateToProps)(Main);
+export default Main;

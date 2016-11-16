@@ -10,8 +10,10 @@ import MainApp from './components/MainApp';
 import configureStore from '../DataStore/Store';
 
 
+
 let InitialState = {
-	search_results: []
+	search_results: [],
+	suggestions: []
 };
 
 let store = configureStore( InitialState );

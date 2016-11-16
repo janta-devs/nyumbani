@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import Reducer from './Reducer';
+import rootReducer from './Reducers/index';
 
  import logger from 'redux-logger';
  import thunk from 'redux-thunk';
@@ -11,6 +11,7 @@ import Reducer from './Reducer';
  )(createStore)
 
 
-export default function configureStore( initialState = {}, search_results = []){
-	return finalCreateStore( Reducer, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+export default function configureStore( initialState = {}, search_results = [], suggestions: [])
+{
+	return finalCreateStore( rootReducer, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 }

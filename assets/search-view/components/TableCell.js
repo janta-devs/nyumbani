@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
+import { render } from 'react-dom';
+
+import Main from '../../profile-view/components/Main';
 
 
 class TableCell extends Component{
+	HandleRawClick( e ){
+		e.preventDefault();
+		e.stopPropagation();
+		console.log( this.props );
+
+		render(<Main changeAppMode = {this.props.changeAppMode.bind(this)}/>, document.getElementById('component'));
+	}
 	render() {
 		return (
-					<tr>
+					<tr onClick ={this.HandleRawClick.bind(this)}>
 						<td className="mdl-data-table__cell--non-numeric">{this.props.first_name}</td>
 						<td className="mdl-data-table__cell--non-numeric">{this.props.last_name}</td>
 						<td className="mdl-data-table__cell--non-numeric">{this.props.gender}</td>

@@ -5,7 +5,7 @@ import NoResultCell from './NoResultCell';
 
 class NoSearchResult extends Component{
 	render(){
-		var popu = this.props.data.message.map( (x,y) => <NoResultCell key = {y} result = {x["suggestion_"+y]} /> );
+		var popu = this.props.data.map( (x,y) => <NoResultCell key = {y} result = {x["suggestion_"+y]} /> );
 		return (
 			<div>
 					<table className = "mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
