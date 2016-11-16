@@ -15,20 +15,21 @@ import { connect } from 'react-redux';
 
 class Main extends Component{
   render() {
+    console.log( this.props.userInfo[0] );
     return (
                 <div>
-                  <ProfileSummary />
+                  <ProfileSummary userInfo = {this.props.userInfo[0]}/>
                   <div className="with-container content">
                     <div className="row">
                       <div className="column d-1-3 m-5-12 s-1-1 xs-1-1">
-                        <ProfileInterests />
+                        <ProfileInterests userInfo = {this.props.userInfo[0]}/>
                         <ProfileInterestedEmployers />
                         <ProfileInterestedIn />
                       </div>
                       <div className="column d-2-3 m-7-12 s-1-1 xs-1-1">
                           
-                        <BasicDetails />
-                        <ContactDetails />
+                        <BasicDetails userInfo = {this.props.userInfo[0]}/>
+                        <ContactDetails userInfo = {this.props.userInfo[0]}/>
                         <Skills />
                         <ProfessionalExperience />
                         <EducationBackground />

@@ -16,9 +16,9 @@ class ProfileSummary extends Component{
                       <section className="bio">
                         <div className="summary card">
                           <div className="row">
-                              <ProfileSummaryBio />
+                              <ProfileSummaryBio userInfo = {this.props.userInfo}/>
                             <div className="column d-1-3 m-1-4 s-1-1 xs-1-1 stats-column">
-                              <ProfileSummaryStats />
+                              <ProfileSummaryStats userInfo = {this.props.userInfo}/>
                               <ProfileSummaryActions />
                             </div>
                           </div>

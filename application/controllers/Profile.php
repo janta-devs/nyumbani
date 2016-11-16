@@ -81,7 +81,7 @@ class Profile extends CI_Controller{
 		print json_encode(['update_status' => true]) : print json_encode(['update_status' => false]);
 
 	}
-	public function getProfileData( $login_id = 3)
+	public function getProfileData( $login_id = 2)
 	{
 		$this->load->model('Basic_information');
 		$basic = new Basic_information();
@@ -89,8 +89,16 @@ class Profile extends CI_Controller{
 		$this->load->model('Education_information');
 		$education = new Education_information();
 
+		$this->load->model('User_login');
+		$user = new User_login();
+
+
+		$user_login_data = (array)$user->load_user_data(['login_id'=> $login_id]);
+		unset($user_login_data['id']);
 		$basic_data = (array)$basic->load_user_data(['login_id'=> $login_id]);
+		unset($basic_data['id']);
 		$education_data = (array)$education->load_user_data( ['login_id'=> $login_id] );
+		unset($education_data['id']);
 
 		$past_job = explode(',', $education_data['past_job']);
 
@@ -112,14 +120,17 @@ class Profile extends CI_Controller{
 		$new_array = [];
 		for ($k=0; $k < count( $skill ); $k++) { 
 			if( $skill[ $k ] != " " && !empty( $skill[ $k ] ) ){
-				$new_array[ ][ $skill[ $k ] ] = $mode[ $k ];
+				$new_array[ ][ 'skill' ] = $skill[ $k ];
 			}
 		}
 
 		$education_data['skills'] = $new_array;
 
+		$UserInfo = array_merge_recursive($education_data, $basic_data, $user_login_data);
+		$UserInfo['login_id'] = $UserInfo['login_id'][0]; 
 
-		print json_encode( (object)$education_data );
+		print json_encode( (object)$UserInfo );
+
 	}
 }
 ?>
