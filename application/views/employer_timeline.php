@@ -124,7 +124,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script> -->
     <script src="<?php print base_url(); ?>assets/js/babel-core.js" type="text/javascript"></script>
 <!--     <script src="<?php print base_url(); ?>assets/js/job_search.js" type="text/babel"></script> -->
-    <script src="<?php print base_url(); ?>assets/profile-view/dist/bundle.js"></script>
+    <script src="<?php print base_url(); ?>assets/search-view/dist/bundle.js"></script>
         <!-- <script type="text/javascript">
         $(document).ready(function(){
 

@@ -12,28 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<title>Welcome to Janta</title>
   	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
   	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	<!-- <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap/dist/css/bootstrap.css"> -->
-	<!-- Bootstrap Material Design -->
-  <!-- <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap-material-design/dist/css/bootstrap-material-design.css"> -->
-  <!-- <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap-material-design/dist/css/ripples.min.css"> -->
   <link rel="stylesheet" type="text/css" href="<?php print base_url(); ?>assets/node_modules/material-design-lite/material.min.css">
-
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="<?php print base_url();?>assets/node_modules/bootstrap/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-
-    <!-- Custom styles for this template --
-    <link href="jumbotron.css" rel="stylesheet">-->
-
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="<?php print base_url();?>assets/node_modules/bootstrap/assets/js/ie-emulation-modes-warning.js"></script>
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  	<!--<link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/font-awesome/css/font-awesome.min.css">-->
 	<link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap/dist/css/custom.css">
 </head>
 <body>
@@ -191,42 +170,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </main>
     <script src="<?php print base_url();?>assets/node_modules/jquery/dist/jquery.min.js"></script>
     <script src="<?php print base_url();?>assets/node_modules/bootstrap-material-design/dist/js/ripples.min.js"></script>
-   <!-- <script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script> -->
     <script src="<?php print base_url();?>assets/node_modules/material-design-lite/material.min.js"></script>
-    <script type="text/javascript">
-    	$(document).ready(function(){
-        /*$('.sign-up').formValidation({
-            framework: 'bootstrap',
-            excluded: ':disabled',
-            icon: {
-              valid: 'glyphicon glyphicon-ok',
-              invalid: 'glyphicon glyphicon-remove',
-              validating: 'glyphicon glyphicon-refresh'
-            },
-            fields: {
-              fname:{
-                validators: {
-                  notEmpty:{
-                    message: 'First Name is required'
-                  },
-                  stringLength: {
-                    min: 1,
-                    max: 30,
-                    message: 'First Name must be more than 1 and less than 30 characters long'
-                  },
-                  regexp: {
-                    regexp: /^[a-zA-Z0-9_]+$/,
-                    message: 'First Name can only consist of alphabets'
-                  }
-                }
-              }
-            }
-        });*/
-    		$.material.init();
-            $.material.radio();
-            $.material.checkbox();
-    	});
-    </script>
-    <script src="<?php print base_url();?>assets/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

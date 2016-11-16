@@ -1,4 +1,5 @@
-import React { Component } from 'react';
+import React, { Component } from 'react';
+import BackComponent from './BackComponent';
 
 import $ from 'jquery';
 
@@ -14,17 +15,17 @@ class PostJobComponent extends Component{
 
 	componentDidMount() {
 
-	},
+	}
 	componentWillUnMount() {
 		this.serverRequest.abort();
-	},
+	}
 	getValue( e ){
 
 		//create an action that will be collecting the information from the requsite fields
 		e.preventDefault();
 		e.stopPropagation();
 		dataCollection[e.target.name] = e.target.value;
-	},
+	}
 	_uploadFile( e ){
 		e.preventDefault();
 		e.stopPropagation();
@@ -35,7 +36,7 @@ class PostJobComponent extends Component{
 			form.append(index, val);
 		});
 		this._sendAttachments( form, node );		
-	},
+	}
 	_sendAttachments( file, el ){
 		$.ajax({
 			url: '/nyumbani/index.php/timeline/uploadAttachment',
@@ -50,7 +51,7 @@ class PostJobComponent extends Component{
 			$( el ).val( res['order_attachment_path']);
 			dataCollection['order_attachment_path'] = res['path'];
 		});
-	},
+	}
 	onSave( e ) {
 		e.preventDefault();
 		e.stopPropagation();
@@ -63,7 +64,7 @@ class PostJobComponent extends Component{
 		.done(function( res ) {
 			console.log( res );
 		});
-	},
+	}
 	render() {
 		return (
 			<div>
@@ -81,7 +82,7 @@ class PostJobComponent extends Component{
 				</div>
 				: null
 			}
-			<BackComponent changeAppMode = {this.props.changeAppMode}/>
+			<BackComponent changeAppMode = {this.props.changeAppMode.bind(this)}/>
 			<form onSubmit={this.onSave} method="post" encType = "multipart/form-data" >
 				<div className="col-md-6">
 					<div className="col-md-12">
