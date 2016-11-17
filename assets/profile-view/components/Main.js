@@ -21,7 +21,7 @@ class Main extends Component{
   render() {
     return (
                 <div>
-                  <BackComponent State = {this.props.State}/>
+                  <BackComponent State = {this.props.State}/>  <div>Employee ID: #{this.props.userInfo.id}</div
                   <ProfileSummary userInfo = {this.props.userInfo}/>
                   <div className="with-container content">
                     <div className="row">
