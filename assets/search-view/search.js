@@ -13,7 +13,8 @@ import configureStore from '../DataStore/Store';
 
 let InitialState = {
 	search_results: [],
-	suggestions: []
+	suggestions: [],
+	currentMode: 'search'
 };
 
 let store = configureStore( InitialState );

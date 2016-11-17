@@ -84,7 +84,7 @@ class PostJobComponent extends Component{
 				</div>
 				: null
 			}
-			<BackComponent changeAppMode = {this.props.changeAppMode.bind(this)}/>
+			<BackComponent State = {this.props.State}/>
 			<form onSubmit={this.onSave} method="post" encType = "multipart/form-data" >
 				<div className="col-md-6">
 					<div className="col-md-12">

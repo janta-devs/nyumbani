@@ -77,7 +77,8 @@
 
 	var InitialState = {
 		search_results: [],
-		suggestions: []
+		suggestions: [],
+		currentMode: 'search'
 	};
 
 	var store = (0, _Store2.default)(InitialState);
@@ -33482,29 +33483,28 @@
 		}
 
 		_createClass(MainApp, [{
+			key: 'componentWillUpdate',
+			value: function componentWillUpdate(nextProps, nextState) {}
+		}, {
 			key: 'changeAppMode',
-			value: function changeAppMode(newMode, jobId) {
-				this.setState({ currentMode: newMode });
-				if (jobId !== undefined) {
-					this.setState({ jobId: jobId });
-				}
+			value: function changeAppMode(newMode) {
+				this.props.Actions.changeAppMode();
 			}
 		}, {
 			key: 'render',
 			value: function render() {
-
 				var modeComponent = _react2.default.createElement(_Search2.default, {
-					changeAppMode: this.changeAppMode.bind(this),
+					State: this.props,
 					searchAction: this.props.Actions.search,
 					data: this.props.search_results,
 					suggestions: this.props.suggestions
 				});
 
-				switch (this.state.currentMode) {
+				switch (this.props.currentMode) {
 					case 'search':
 						break;
 					case 'jobPosting':
-						modeComponent = _react2.default.createElement(_PostJobComponent2.default, { changeAppMode: this.changeAppMode.bind(this) });
+						modeComponent = _react2.default.createElement(_PostJobComponent2.default, { State: this.props });
 						break;
 					default:
 						break;
@@ -33601,11 +33601,11 @@
 		}, {
 			key: 'render',
 			value: function render() {
-				var checker = this.props.data.length !== 0 && !this.props.data.hasOwnProperty('message') ? _react2.default.createElement(_ResultTable2.default, { data: this.props.data, changeAppMode: this.props.changeAppMode.bind(this) }) : this.props.suggestions.length !== 0 ? _react2.default.createElement(_NoSearchResult2.default, { data: this.props.suggestions }) : ""; // checks if the array is empty
+				var checker = this.props.data.length !== 0 && !this.props.data.hasOwnProperty('message') ? _react2.default.createElement(_ResultTable2.default, { data: this.props.data, State: this.props.State }) : this.props.suggestions.length !== 0 ? _react2.default.createElement(_NoSearchResult2.default, { data: this.props.suggestions, searchAction: this.props.searchAction }) : ""; // checks if the array is empty
 				return _react2.default.createElement(
 					'div',
 					null,
-					_react2.default.createElement(_TopActionComponent2.default, { changeAppMode: this.props.changeAppMode.bind(this) }),
+					_react2.default.createElement(_TopActionComponent2.default, { State: this.props.State }),
 					_react2.default.createElement('br', null),
 					_react2.default.createElement('br', null),
 					_react2.default.createElement('br', null),
@@ -33657,18 +33657,19 @@
 		}
 
 		_createClass(TopActionComponent, [{
+			key: 'handleAppModeChange',
+			value: function handleAppModeChange() {
+				this.props.State.Actions.changeAppMode('jobPosting');
+			}
+		}, {
 			key: 'render',
 			value: function render() {
-				var _this2 = this;
-
 				return _react2.default.createElement(
 					'div',
 					{ className: 'col-md-1 col-md-offset-11' },
 					_react2.default.createElement(
 						'a',
-						{ onClick: function onClick() {
-								return _this2.props.changeAppMode('jobPosting');
-							},
+						{ onClick: this.handleAppModeChange.bind(this),
 							className: 'btn btn-raised btn-lg btn-info' },
 						' Post Job'
 					)
@@ -33721,6 +33722,9 @@
 		}
 
 		_createClass(ResultTable, [{
+			key: 'componentWillUpdate',
+			value: function componentWillUpdate(nxtProp, nxtState) {}
+		}, {
 			key: 'render',
 			value: function render() {
 				var _this2 = this;
@@ -33728,7 +33732,7 @@
 				var populate = _typeof(this.props.data) === "object" && this.props.data.length > 0 ? this.props.data.map(function (x) {
 					return _react2.default.createElement(_TableCell2.default, { key: x.id, id: x.id, first_name: x.first_name, last_name: x.last_name, gender: x.gender,
 						email: x.email, location: x.location, ip_address: x.ip_address.toString(), profession: x.profession,
-						changeAppMode: _this2.props.changeAppMode.bind(_this2)
+						State: _this2.props.State
 					});
 				}) : console.log(_typeof(this.props.data));
 
@@ -33855,13 +33859,15 @@
 		}
 
 		_createClass(TableCell, [{
+			key: 'componentWillUpdate',
+			value: function componentWillUpdate(nxtProp, nxtState) {}
+		}, {
 			key: 'HandleRawClick',
 			value: function HandleRawClick(e) {
 				e.preventDefault();
 				e.stopPropagation();
 				console.log(this.props);
-
-				(0, _reactDom.render)(_react2.default.createElement(_Main2.default, { changeAppMode: this.props.changeAppMode.bind(this) }), document.getElementById('component'));
+				(0, _reactDom.render)(_react2.default.createElement(_Main2.default, { State: this.props.State, userInfo: this.props }), document.getElementById('component'));
 			}
 		}, {
 			key: 'render',
@@ -33959,6 +33965,8 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactDom = __webpack_require__(35);
+
 	var _ProfileSummary = __webpack_require__(210);
 
 	var _ProfileSummary2 = _interopRequireDefault(_ProfileSummary);
@@ -34017,13 +34025,16 @@
 	  }
 
 	  _createClass(Main, [{
+	    key: 'componentWillUpdate',
+	    value: function componentWillUpdate(nxtProps, nxtState) {}
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_BackComponent2.default, null),
-	        _react2.default.createElement(_ProfileSummary2.default, null),
+	        _react2.default.createElement(_BackComponent2.default, { State: this.props.State }),
+	        _react2.default.createElement(_ProfileSummary2.default, { userInfo: this.props.userInfo }),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'with-container content' },
@@ -34040,8 +34051,8 @@
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'column d-2-3 m-7-12 s-1-1 xs-1-1' },
-	              _react2.default.createElement(_BasicDetails2.default, null),
-	              _react2.default.createElement(_ContactDetails2.default, null),
+	              _react2.default.createElement(_BasicDetails2.default, { userInfo: this.props.userInfo }),
+	              _react2.default.createElement(_ContactDetails2.default, { userInfo: this.props.userInfo }),
 	              _react2.default.createElement(_Skills2.default, null),
 	              _react2.default.createElement(_ProfessionalExperience2.default, null),
 	              _react2.default.createElement(_EducationBackground2.default, null)
@@ -34198,7 +34209,7 @@
 	                _react2.default.createElement(
 	                  "data",
 	                  { className: "number", value: "4373" },
-	                  "4373"
+	                  this.props.userInfo.id
 	                ),
 	                _react2.default.createElement(
 	                  "p",
@@ -34385,7 +34396,9 @@
 	              _react2.default.createElement(
 	                "h1",
 	                null,
-	                "Antony Ngayo"
+	                this.props.userInfo.first_name,
+	                " ",
+	                this.props.userInfo.last_name
 	              ),
 	              _react2.default.createElement(
 	                "ul",
@@ -34393,7 +34406,7 @@
 	                _react2.default.createElement(
 	                  "li",
 	                  null,
-	                  "Programmer"
+	                  this.props.userInfo.profession
 	                ),
 	                _react2.default.createElement(
 	                  "li",
@@ -35143,7 +35156,7 @@
 	                _react2.default.createElement(
 	                  "p",
 	                  { className: "timeline-record-title" },
-	                  "Male"
+	                  this.props.userInfo.gender
 	                )
 	              ),
 	              _react2.default.createElement(
@@ -35174,12 +35187,12 @@
 	                _react2.default.createElement(
 	                  "p",
 	                  { className: "timeline-record-title" },
-	                  "Nairobi"
+	                  this.props.userInfo.location
 	                ),
 	                _react2.default.createElement(
 	                  "p",
 	                  { className: "timeline-record-place" },
-	                  "Bahati"
+	                  this.props.userInfo.location
 	                )
 	              ),
 	              _react2.default.createElement(
@@ -35364,7 +35377,7 @@
 	                _react2.default.createElement(
 	                  "p",
 	                  { className: "timeline-record-title" },
-	                  "theantonymars@gmail.com"
+	                  this.props.userInfo.email
 	                )
 	              ),
 	              _react2.default.createElement(
@@ -35463,19 +35476,20 @@
 		}
 
 		_createClass(BackComponent, [{
+			key: 'handleAppModeChange',
+			value: function handleAppModeChange() {
+				console.log(this.props);
+				this.props.State.Actions.changeAppMode('search');
+			}
+		}, {
 			key: 'render',
 			value: function render() {
-				var _this2 = this;
-
-				console.log(this.props);
 				return _react2.default.createElement(
 					'div',
 					null,
 					_react2.default.createElement(
 						'a',
-						{ onClick: function onClick() {
-								return _this2.props.changeAppMode('search');
-							},
+						{ onClick: this.handleAppModeChange.bind(this),
 							className: 'btn btn-raised btn-info margin-bottom-1em', ref: 'back' },
 						'Back to Search'
 					)
@@ -35533,13 +35547,11 @@
 				this.props.searchAction(this.refs.search.value);
 			}
 		}, {
-			key: "handleKeyPress",
-			value: function handleKeyPress(e) {
+			key: "submitHandler",
+			value: function submitHandler(e) {
 				e.preventDefault();
 				e.stopPropagation();
-				if (e.keyCode === 13) {
-					this.props.searchAction(this.refs.search.value);
-				}
+				this.props.searchAction(this.refs.search.value);
 			}
 		}, {
 			key: "render",
@@ -35549,7 +35561,7 @@
 					{ className: "form-group label-floating" },
 					_react2.default.createElement(
 						"form",
-						null,
+						{ onSubmit: this.submitHandler.bind(this) },
 						_react2.default.createElement(
 							"div",
 							{ className: "input-group" },
@@ -35625,8 +35637,10 @@
 		_createClass(NoSearchResult, [{
 			key: 'render',
 			value: function render() {
+				var _this2 = this;
+
 				var popu = this.props.data.map(function (x, y) {
-					return _react2.default.createElement(_NoResultCell2.default, { key: y, result: x["suggestion_" + y] });
+					return _react2.default.createElement(_NoResultCell2.default, { key: y, result: x["suggestion_" + y], searchAction: _this2.props.searchAction });
 				});
 				return _react2.default.createElement(
 					'div',
@@ -35715,7 +35729,7 @@
 /* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -35726,6 +35740,10 @@
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _jquery = __webpack_require__(203);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -35745,22 +35763,30 @@
 		}
 
 		_createClass(NoResultCell, [{
-			key: "render",
+			key: 'handleClick',
+			value: function handleClick(e) {
+				e.preventDefault();
+				e.stopPropagation();
+				var $value = (0, _jquery2.default)(this.refs.suggestion_term).attr('value');
+				this.props.searchAction($value);
+			}
+		}, {
+			key: 'render',
 			value: function render() {
 				return _react2.default.createElement(
-					"tr",
-					null,
-					_react2.default.createElement("td", { className: "mdl-data-table__cell--non-numeric" }),
-					_react2.default.createElement("td", { className: "mdl-data-table__cell--non-numeric" }),
+					'tr',
+					{ onClick: this.handleClick.bind(this), ref: 'suggestion_row' },
+					_react2.default.createElement('td', { className: 'mdl-data-table__cell--non-numeric' }),
+					_react2.default.createElement('td', { className: 'mdl-data-table__cell--non-numeric' }),
 					_react2.default.createElement(
-						"td",
-						{ className: "mdl-data-table__cell--non-numeric" },
+						'td',
+						{ className: 'mdl-data-table__cell--non-numeric', ref: 'suggestion_term', value: this.props.result },
 						this.props.result
 					),
-					_react2.default.createElement("td", { className: "mdl-data-table__cell--non-numeric" }),
-					_react2.default.createElement("td", { className: "mdl-data-table__cell--non-numeric" }),
-					_react2.default.createElement("td", null),
-					_react2.default.createElement("td", null)
+					_react2.default.createElement('td', { className: 'mdl-data-table__cell--non-numeric' }),
+					_react2.default.createElement('td', { className: 'mdl-data-table__cell--non-numeric' }),
+					_react2.default.createElement('td', null),
+					_react2.default.createElement('td', null)
 				);
 			}
 		}]);
@@ -35896,7 +35922,7 @@
 						{ className: 'alert alert-danger' },
 						'Sorry! Job posting failed. Please try again.'
 					) : null,
-					_react2.default.createElement(_BackComponent2.default, { changeAppMode: this.props.changeAppMode.bind(this) }),
+					_react2.default.createElement(_BackComponent2.default, { State: this.props.State }),
 					_react2.default.createElement(
 						'form',
 						{ onSubmit: this.onSave, method: 'post', encType: 'multipart/form-data' },
@@ -36105,6 +36131,12 @@
 					}
 				});
 			};
+		},
+		changeAppMode: function changeAppMode(newMode) {
+			return {
+				type: 'CHANGE_APP_MODE',
+				newMode: newMode
+			};
 		}
 	};
 
@@ -36127,11 +36159,11 @@
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _reduxLogger = __webpack_require__(233);
+	var _reduxLogger = __webpack_require__(234);
 
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 
-	var _reduxThunk = __webpack_require__(239);
+	var _reduxThunk = __webpack_require__(240);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
@@ -36144,7 +36176,8 @@
 	function configureStore() {
 	  var initialState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 	  var search_results = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
-	  var suggestions = arguments[2];
+	  var suggestions = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+	  var currentMode = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'search';
 
 	  return finalCreateStore(_index2.default, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 	}
@@ -36169,11 +36202,16 @@
 
 	var _suggestionReducer2 = _interopRequireDefault(_suggestionReducer);
 
+	var _ChangeAppModeReducer = __webpack_require__(233);
+
+	var _ChangeAppModeReducer2 = _interopRequireDefault(_ChangeAppModeReducer);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var rootReducer = (0, _redux.combineReducers)({
 		search_results: _searchReducer2.default,
-		suggestions: _suggestionReducer2.default
+		suggestions: _suggestionReducer2.default,
+		currentMode: _ChangeAppModeReducer2.default
 	});
 
 	exports.default = rootReducer;
@@ -36263,6 +36301,29 @@
 
 /***/ },
 /* 233 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	var ChangeAppModeReducer = function ChangeAppModeReducer() {
+		var currentMode = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'search';
+		var action = arguments[1];
+
+		switch (action.type) {
+			case 'CHANGE_APP_MODE':
+				return currentMode = action.newMode;
+			default:
+				return currentMode;
+		}
+	};
+
+	exports.default = ChangeAppModeReducer;
+
+/***/ },
+/* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36273,11 +36334,11 @@
 	  value: true
 	});
 
-	var _core = __webpack_require__(234);
+	var _core = __webpack_require__(235);
 
-	var _helpers = __webpack_require__(235);
+	var _helpers = __webpack_require__(236);
 
-	var _defaults = __webpack_require__(238);
+	var _defaults = __webpack_require__(239);
 
 	var _defaults2 = _interopRequireDefault(_defaults);
 
@@ -36380,7 +36441,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 234 */
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36390,9 +36451,9 @@
 	});
 	exports.printBuffer = printBuffer;
 
-	var _helpers = __webpack_require__(235);
+	var _helpers = __webpack_require__(236);
 
-	var _diff = __webpack_require__(236);
+	var _diff = __webpack_require__(237);
 
 	var _diff2 = _interopRequireDefault(_diff);
 
@@ -36521,7 +36582,7 @@
 	}
 
 /***/ },
-/* 235 */
+/* 236 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -36545,7 +36606,7 @@
 	var timer = exports.timer = typeof performance !== "undefined" && performance !== null && typeof performance.now === "function" ? performance : Date;
 
 /***/ },
-/* 236 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36555,7 +36616,7 @@
 	});
 	exports.default = diffLogger;
 
-	var _deepDiff = __webpack_require__(237);
+	var _deepDiff = __webpack_require__(238);
 
 	var _deepDiff2 = _interopRequireDefault(_deepDiff);
 
@@ -36641,7 +36702,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 237 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(global) {/*!
@@ -37070,7 +37131,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 238 */
+/* 239 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -37121,7 +37182,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 239 */
+/* 240 */
 /***/ function(module, exports) {
 
 	'use strict';

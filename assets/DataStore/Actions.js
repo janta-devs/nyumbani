@@ -56,6 +56,12 @@ let Actions =
 				}
 			})
 		}
+	},
+	changeAppMode: function( newMode ){
+		return{
+			type: 'CHANGE_APP_MODE',
+			newMode: newMode,
+		}
 	}
 }
 

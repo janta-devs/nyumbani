@@ -10,17 +10,15 @@ class SearchBar extends Component{
 		e.stopPropagation();
 		this.props.searchAction( this.refs.search.value );
 	}
-	handleKeyPress( e ){
+	submitHandler( e ){
 		e.preventDefault();
 		e.stopPropagation();
-		if( e.keyCode === 13 ){
-			this.props.searchAction( this.refs.search.value );
-		}
+		this.props.searchAction( this.refs.search.value );
 	}
 	render() {
 		return (
 			<div className="form-group label-floating">
-				<form>
+				<form onSubmit = {this.submitHandler.bind(this)}>
 					<div className="input-group">
 					    <input className="form-control input-lg" type="text" id="sample1" name = "search_term" value={this.props.search_term} ref = "search"
 						/>

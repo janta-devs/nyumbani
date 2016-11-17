@@ -15,7 +15,7 @@ class BasicDetails extends Component{
               <div className="timeline-record-list ">
                 <div className="record-row">
                   <div className="timeline-record-right">
-                    <p className="timeline-record-title">Male</p>
+                    <p className="timeline-record-title">{this.props.userInfo.gender}</p>
                   </div>
                   <div className="timeline-record-left">
                     <p className="timeline-record-date">
@@ -30,8 +30,8 @@ class BasicDetails extends Component{
               <div className="timeline-record-list ">
                 <div className="record-row">
                   <div className="timeline-record-right">
-                    <p className="timeline-record-title">Nairobi</p>
-                    <p className="timeline-record-place">Bahati</p>
+                    <p className="timeline-record-title">{this.props.userInfo.location}</p>
+                    <p className="timeline-record-place">{this.props.userInfo.location}</p>
                   </div>
                   <div className="timeline-record-left">
                     <p className="timeline-record-date">

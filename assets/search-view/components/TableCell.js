@@ -5,12 +5,14 @@ import Main from '../../profile-view/components/Main';
 
 
 class TableCell extends Component{
+	componentWillUpdate(nxtProp, nxtState){
+
+	}
 	HandleRawClick( e ){
 		e.preventDefault();
 		e.stopPropagation();
-		console.log( this.props );
-
-		render(<Main changeAppMode = {this.props.changeAppMode.bind(this)}/>, document.getElementById('component'));
+		console.log( this.props )
+		render(<Main State = {this.props.State} userInfo = {this.props}/>, document.getElementById('component'));
 	}
 	render() {
 		return (

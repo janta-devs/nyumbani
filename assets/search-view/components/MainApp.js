@@ -8,7 +8,6 @@ import { bindActionCreators } from 'redux';
 import Actions from '../../DataStore/Actions';
 
 
-
 class MainApp extends Component
 {
 
@@ -20,28 +19,26 @@ class MainApp extends Component
 			jobId: null
 		}
 	}
-	changeAppMode(newMode, jobId){
-		this.setState ({currentMode: newMode});
-		if(jobId !== undefined) 
-		{
-			this.setState ({jobId: jobId});
-		}
+	componentWillUpdate(nextProps, nextState){
+
+	}
+	changeAppMode(newMode){
+		this.props.Actions.changeAppMode();
 	}
 	render(){
-
 		var modeComponent = <Search 
-		changeAppMode={this.changeAppMode.bind(this)} 
+		State = {this.props} 
 		searchAction = {this.props.Actions.search}
 		data = {this.props.search_results}
 		suggestions = {this.props.suggestions}
 		/>;
 
-		switch(this.state.currentMode) 
+		switch(this.props.currentMode) 
 		{
 			case 'search':
 				break;
 			case 'jobPosting':
-				modeComponent = <PostJobComponent changeAppMode={this.changeAppMode.bind(this)}/>;
+				modeComponent = <PostJobComponent State = {this.props}/>;
 				break;
 			default:
 				break;
