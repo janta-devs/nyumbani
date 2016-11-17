@@ -11,7 +11,6 @@ class TableCell extends Component{
 	HandleRawClick( e ){
 		e.preventDefault();
 		e.stopPropagation();
-		console.log( this.props )
 		render(<Main State = {this.props.State} userInfo = {this.props}/>, document.getElementById('component'));
 	}
 	render() {

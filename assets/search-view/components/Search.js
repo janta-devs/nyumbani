@@ -32,7 +32,7 @@ class Search extends Component{
 		<ResultTable data = {this.props.data} State = {this.props.State} /> : (this.props.suggestions.length !== 0 ) ? <NoSearchResult data = {this.props.suggestions} searchAction = {this.props.searchAction}/> : ""; // checks if the array is empty
 		return (
 			<div>
-            	<TopActionComponent State = {this.props.State} /><br /><br /><br /><br />
+            	<TopActionComponent State = {this.props.State} AccountUser = {this.props.AccountUser}/><br /><br /><br /><br />
 				<SearchBar searchAction = {this.props.searchAction}/><br /><br />
 				{checker}
 			</div>

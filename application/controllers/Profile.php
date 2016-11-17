@@ -97,7 +97,6 @@ class Profile extends CI_Controller{
 		$this->load->model('User_login');
 		$user = new User_login();
 
-
 		$user_login_data = (array)$user->load_user_data(['login_id'=> $login_id]);
 		unset($user_login_data['id']);
 		$basic_data = (array)$basic->load_user_data(['login_id'=> $login_id]);

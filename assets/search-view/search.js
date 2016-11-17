@@ -14,7 +14,8 @@ import configureStore from '../DataStore/Store';
 let InitialState = {
 	search_results: [],
 	suggestions: [],
-	currentMode: 'search'
+	currentMode: 'search',
+	AccountUser: {}
 };
 
 let store = configureStore( InitialState );

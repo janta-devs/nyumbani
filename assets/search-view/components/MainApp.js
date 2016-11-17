@@ -13,11 +13,9 @@ class MainApp extends Component
 
 	constructor( context, props ){
 		super( context, props );
-
-		this.state = {
-			currentMode: 'search',
-			jobId: null
-		}
+	}
+	componentDidMount(){
+		this.props.Actions.pullAccountUserData();
 	}
 	componentWillUpdate(nextProps, nextState){
 

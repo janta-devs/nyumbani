@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 
 class BackComponent  extends Component{
 	handleAppModeChange(){
-		console.log( this.props );
 		this.props.State.Actions.changeAppMode('search');
 	}
 	render() {

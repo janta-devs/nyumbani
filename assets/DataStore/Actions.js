@@ -58,11 +58,37 @@ let Actions =
 		}
 	},
 	changeAppMode: function( newMode ){
+		//changing the AppMode (It is simpler using Actions as the data is always synchronized)
 		return{
 			type: 'CHANGE_APP_MODE',
 			newMode: newMode,
 		}
+	},
+	accountUserInformation: function( res ){
+		//setting up data of the person who has been logged into the system
+		return{
+			type: 'ACCOUNT_USER_INFORMATION',
+			data: res
+		}
+	},
+	pullAccountUserData: function(){
+		return(  dispatch ) =>{
+			var self = dispatch;
+
+			$.ajax({
+				url: '/nyumbani/index.php/profile/getProfileData',
+				type: 'POST',
+				dataType: 'json',
+			})
+			.done(function( res ) {
+				if( typeof(res) !== 'undefined' ){
+					self( Actions.accountUserInformation( res ))
+				}
+			});
+			
+		}
 	}
+
 }
 
 

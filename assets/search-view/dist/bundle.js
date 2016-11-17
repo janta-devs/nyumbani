@@ -78,7 +78,8 @@
 	var InitialState = {
 		search_results: [],
 		suggestions: [],
-		currentMode: 'search'
+		currentMode: 'search',
+		AccountUser: {}
 	};
 
 	var store = (0, _Store2.default)(InitialState);
@@ -33473,16 +33474,15 @@
 		function MainApp(context, props) {
 			_classCallCheck(this, MainApp);
 
-			var _this = _possibleConstructorReturn(this, (MainApp.__proto__ || Object.getPrototypeOf(MainApp)).call(this, context, props));
-
-			_this.state = {
-				currentMode: 'search',
-				jobId: null
-			};
-			return _this;
+			return _possibleConstructorReturn(this, (MainApp.__proto__ || Object.getPrototypeOf(MainApp)).call(this, context, props));
 		}
 
 		_createClass(MainApp, [{
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				this.props.Actions.pullAccountUserData();
+			}
+		}, {
 			key: 'componentWillUpdate',
 			value: function componentWillUpdate(nextProps, nextState) {}
 		}, {
@@ -33605,7 +33605,7 @@
 				return _react2.default.createElement(
 					'div',
 					null,
-					_react2.default.createElement(_TopActionComponent2.default, { State: this.props.State }),
+					_react2.default.createElement(_TopActionComponent2.default, { State: this.props.State, AccountUser: this.props.AccountUser }),
 					_react2.default.createElement('br', null),
 					_react2.default.createElement('br', null),
 					_react2.default.createElement('br', null),
@@ -33664,14 +33664,29 @@
 		}, {
 			key: 'render',
 			value: function render() {
+				var AccountUser = this.props.State.AccountUser[0];
+				if (typeof AccountUser !== 'undefined') {
+					var Firstname = AccountUser.fname;
+					var Secondname = AccountUser.lname;
+					var profession = AccountUser.profession;
+				}
 				return _react2.default.createElement(
 					'div',
-					{ className: 'col-md-1 col-md-offset-11' },
+					null,
+					'Welcome, ',
+					Firstname,
+					' ',
+					Secondname,
+					'!',
 					_react2.default.createElement(
-						'a',
-						{ onClick: this.handleAppModeChange.bind(this),
-							className: 'btn btn-raised btn-lg btn-info' },
-						' Post Job'
+						'div',
+						{ className: 'col-md-1 col-md-offset-11' },
+						_react2.default.createElement(
+							'a',
+							{ onClick: this.handleAppModeChange.bind(this),
+								className: 'btn btn-raised btn-lg btn-info' },
+							' Post Job'
+						)
 					)
 				);
 			}
@@ -33866,7 +33881,6 @@
 			value: function HandleRawClick(e) {
 				e.preventDefault();
 				e.stopPropagation();
-				console.log(this.props);
 				(0, _reactDom.render)(_react2.default.createElement(_Main2.default, { State: this.props.State, userInfo: this.props }), document.getElementById('component'));
 			}
 		}, {
@@ -34034,6 +34048,13 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(_BackComponent2.default, { State: this.props.State }),
+	        '  ',
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          'ID No ',
+	          this.props.userInfo.id
+	        ),
 	        _react2.default.createElement(_ProfileSummary2.default, { userInfo: this.props.userInfo }),
 	        _react2.default.createElement(
 	          'div',
@@ -34383,7 +34404,7 @@
 	            _react2.default.createElement(
 	              "div",
 	              { className: "image-box" },
-	              _react2.default.createElement("img", { src: "", alt: "Profile Picture", className: "large-image" }),
+	              _react2.default.createElement("img", { src: "/nyumbani/photo_assets/anony.jpg", alt: "Profile Picture", className: "large-image" }),
 	              _react2.default.createElement("img", { className: "advisor-icon", src:  true ? "/nyumbani/photo_assets/verified.svg" : "/nyumbani/photo_assets/unverified.png", alt: "Janta Advisor" })
 	            )
 	          ),
@@ -35478,7 +35499,6 @@
 		_createClass(BackComponent, [{
 			key: 'handleAppModeChange',
 			value: function handleAppModeChange() {
-				console.log(this.props);
 				this.props.State.Actions.changeAppMode('search');
 			}
 		}, {
@@ -36133,11 +36153,35 @@
 			};
 		},
 		changeAppMode: function changeAppMode(newMode) {
+			//changing the AppMode (It is simpler using Actions as the data is always synchronized)
 			return {
 				type: 'CHANGE_APP_MODE',
 				newMode: newMode
 			};
+		},
+		accountUserInformation: function accountUserInformation(res) {
+			//setting up data of the person who has been logged into the system
+			return {
+				type: 'ACCOUNT_USER_INFORMATION',
+				data: res
+			};
+		},
+		pullAccountUserData: function pullAccountUserData() {
+			return function (dispatch) {
+				var self = dispatch;
+
+				_jquery2.default.ajax({
+					url: '/nyumbani/index.php/profile/getProfileData',
+					type: 'POST',
+					dataType: 'json'
+				}).done(function (res) {
+					if (typeof res !== 'undefined') {
+						self(Actions.accountUserInformation(res));
+					}
+				});
+			};
 		}
+
 	};
 
 	exports.default = Actions;
@@ -36159,11 +36203,11 @@
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _reduxLogger = __webpack_require__(234);
+	var _reduxLogger = __webpack_require__(235);
 
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 
-	var _reduxThunk = __webpack_require__(240);
+	var _reduxThunk = __webpack_require__(241);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
@@ -36178,6 +36222,7 @@
 	  var search_results = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
 	  var suggestions = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
 	  var currentMode = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'search';
+	  var AccountUser = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : {};
 
 	  return finalCreateStore(_index2.default, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 	}
@@ -36206,12 +36251,17 @@
 
 	var _ChangeAppModeReducer2 = _interopRequireDefault(_ChangeAppModeReducer);
 
+	var _AccountUserReducer = __webpack_require__(234);
+
+	var _AccountUserReducer2 = _interopRequireDefault(_AccountUserReducer);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var rootReducer = (0, _redux.combineReducers)({
 		search_results: _searchReducer2.default,
 		suggestions: _suggestionReducer2.default,
-		currentMode: _ChangeAppModeReducer2.default
+		currentMode: _ChangeAppModeReducer2.default,
+		AccountUser: _AccountUserReducer2.default
 	});
 
 	exports.default = rootReducer;
@@ -36328,17 +36378,59 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+	var _jquery = __webpack_require__(203);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var AccountUserReducer = function AccountUserReducer() {
+		var AccountUser = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+		var action = arguments[1];
+
+		switch (action.type) {
+			case 'ACCOUNT_USER_INFORMATION':
+				if ((typeof AccountUser === 'undefined' ? 'undefined' : _typeof(AccountUser)) === 'object' && AccountUser.length > 0) {
+					AccountUser = {};
+				}
+				var dataArray = _jquery2.default.makeArray(action.data);
+				return dataArray.map(function (userData) {
+					return Object.assign({}, AccountUser, userData);
+				});
+			case 'RECOMMEND':
+				return;
+			case 'REQUEST_EMPLOYEE':
+				return;
+			default:
+				return AccountUser;
+		}
+	};
+
+	exports.default = AccountUserReducer;
+
+/***/ },
+/* 235 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 
-	var _core = __webpack_require__(235);
+	var _core = __webpack_require__(236);
 
-	var _helpers = __webpack_require__(236);
+	var _helpers = __webpack_require__(237);
 
-	var _defaults = __webpack_require__(239);
+	var _defaults = __webpack_require__(240);
 
 	var _defaults2 = _interopRequireDefault(_defaults);
 
@@ -36441,7 +36533,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 235 */
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36451,9 +36543,9 @@
 	});
 	exports.printBuffer = printBuffer;
 
-	var _helpers = __webpack_require__(236);
+	var _helpers = __webpack_require__(237);
 
-	var _diff = __webpack_require__(237);
+	var _diff = __webpack_require__(238);
 
 	var _diff2 = _interopRequireDefault(_diff);
 
@@ -36582,7 +36674,7 @@
 	}
 
 /***/ },
-/* 236 */
+/* 237 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -36606,7 +36698,7 @@
 	var timer = exports.timer = typeof performance !== "undefined" && performance !== null && typeof performance.now === "function" ? performance : Date;
 
 /***/ },
-/* 237 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36616,7 +36708,7 @@
 	});
 	exports.default = diffLogger;
 
-	var _deepDiff = __webpack_require__(238);
+	var _deepDiff = __webpack_require__(239);
 
 	var _deepDiff2 = _interopRequireDefault(_deepDiff);
 
@@ -36702,7 +36794,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 238 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(global) {/*!
@@ -37131,7 +37223,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 239 */
+/* 240 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -37182,7 +37274,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 240 */
+/* 241 */
 /***/ function(module, exports) {
 
 	'use strict';
