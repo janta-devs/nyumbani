@@ -6,22 +6,20 @@ import { Provider } from 'react-redux';
 
 import $ from 'jquery';
 
+import {Router, Route, IndexRoute } from 'react-router';
+
+
 import MainApp from './components/MainApp';
-import configureStore from '../DataStore/Store';
+import PostJobComponent from './components/PostJobComponent';
 
+import store, { history } from '../DataStore/Store';
 
-
-let InitialState = {
-	search_results: [],
-	suggestions: [],
-	currentMode: 'search',
-	AccountUser: {}
-};
-
-let store = configureStore( InitialState );
 
 render(
 	<Provider store={store}>
-		<MainApp />
+		<Router history={history}>
+			<Route path = {`/nyumbani/index.php/home`} component={MainApp}/>
+			<Route path = {`/nyumbani/index.php/home/PostJob`} component={PostJobComponent}/>
+		</Router>
 	</Provider>, 
 	document.getElementById('component'));

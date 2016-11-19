@@ -7,7 +7,7 @@ let suggestionReducer  = function( suggestions = [], action ){
 				suggestions = [];
 			}
 			let dataArray = $.makeArray( action.data.message );
-			return dataArray.map( (userData) =>{
+			return dataArray.map( (userData) => {
 				return Object.assign({}, suggestions, userData)
 			})
 		case 'CLEAR_STATE':

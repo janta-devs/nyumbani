@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { Link, Match } from 'react-router';
 
 import TopActionComponent from './TopActionComponent';
 import ResultTable from './ResultTable';
 import SearchBar from './SearchBar';
 import NoSearchResult from './NoSearchResult';
+
+import PostJobComponent from './PostJobComponent';
 
 import $ from 'jquery';
 
@@ -22,6 +25,8 @@ class Search extends Component{
 		}
 	}
 	componentWillMount(){
+
+		console.log( this.props )
 
 	}
 	componentWillUpdate(nxtProp, nxtState ){

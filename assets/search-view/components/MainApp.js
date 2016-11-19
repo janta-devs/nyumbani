@@ -8,42 +8,9 @@ import { bindActionCreators } from 'redux';
 import Actions from '../../DataStore/Actions';
 
 
-class MainApp extends Component
-{
-
-	constructor( context, props ){
-		super( context, props );
-	}
-	componentDidMount(){
-		this.props.Actions.pullAccountUserData();
-	}
-	componentWillUpdate(nextProps, nextState){
-
-	}
-	changeAppMode(newMode){
-		this.props.Actions.changeAppMode();
-	}
-	render(){
-		var modeComponent = <Search 
-		State = {this.props} 
-		searchAction = {this.props.Actions.search}
-		data = {this.props.search_results}
-		suggestions = {this.props.suggestions}
-		/>;
-
-		switch(this.props.currentMode) 
-		{
-			case 'search':
-				break;
-			case 'jobPosting':
-				modeComponent = <PostJobComponent State = {this.props}/>;
-				break;
-			default:
-				break;
-		}
-		return modeComponent;
-	}
-
+const MainApp  = (props) => {
+	return(<Search State = {props} searchAction = {props.Actions.search} data = {props.search_results}
+		suggestions = {props.suggestions}/>);
 }
 
 function mapStateToProps( state ){	// passes the state object to the APP component 
