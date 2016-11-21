@@ -75,6 +75,10 @@
 
 	var _PostJobComponent2 = _interopRequireDefault(_PostJobComponent);
 
+	var _Main = __webpack_require__(262);
+
+	var _Main2 = _interopRequireDefault(_Main);
+
 	var _Store = __webpack_require__(282);
 
 	var _Store2 = _interopRequireDefault(_Store);
@@ -88,7 +92,8 @@
 			_reactRouter.Router,
 			{ history: _Store.history },
 			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home', component: _MainApp2.default }),
-			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home/PostJob', component: _PostJobComponent2.default })
+			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home/PostJob', component: _PostJobComponent2.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home/Employee/:id', component: _Main2.default })
 		)
 	), document.getElementById('component'));
 
@@ -38343,8 +38348,7 @@
 		_createClass(Search, [{
 			key: 'componentWillMount',
 			value: function componentWillMount() {
-
-				console.log(this.props);
+				this.props.State.Actions.accountUserInformation();
 			}
 		}, {
 			key: 'componentWillUpdate',
@@ -38440,8 +38444,7 @@
 								_reactRouter.Link,
 								{ to: '/nyumbani/index.php/home/PostJob' },
 								'Post Job'
-							),
-							this.props.children
+							)
 						)
 					)
 				);
@@ -38462,8 +38465,6 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -38500,12 +38501,12 @@
 			value: function render() {
 				var _this2 = this;
 
-				var populate = _typeof(this.props.data) === "object" && this.props.data.length > 0 ? this.props.data.map(function (x) {
+				var populate = this.props.data.map(function (x) {
 					return _react2.default.createElement(_TableCell2.default, { key: x.id, id: x.id, first_name: x.first_name, last_name: x.last_name, gender: x.gender,
 						email: x.email, location: x.location, ip_address: x.ip_address.toString(), profession: x.profession,
 						State: _this2.props.State
 					});
-				}) : console.log(_typeof(this.props.data));
+				});
 
 				return _react2.default.createElement(
 					'table',
@@ -38612,6 +38613,8 @@
 
 	var _Main2 = _interopRequireDefault(_Main);
 
+	var _reactRouter = __webpack_require__(204);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -38637,7 +38640,9 @@
 			value: function HandleRawClick(e) {
 				e.preventDefault();
 				e.stopPropagation();
-				(0, _reactDom.render)(_react2.default.createElement(_Main2.default, { State: this.props.State, userInfo: this.props }), document.getElementById('component'));
+				//render(<Main State = {this.props.State} userInfo = {this.props}/>, document.getElementById('component'));
+				//return <Link to={`/nyumbani/index.php/home/Employee`}/>
+				//window.location.href = "/nyumbani/index.php/home/Employee";
 			}
 		}, {
 			key: 'render',
@@ -38674,13 +38679,13 @@
 							'span',
 							{ className: 'input-group-btn' },
 							_react2.default.createElement(
-								'button',
-								{
-									onClick: function onClick() {
-										return _this2.props.changeAppMode('readOne', _this2.props.id);
-									},
-									className: 'btn btn-fab' },
-								_react2.default.createElement('i', { className: 'pe-7s-id pe-va pe-lg' })
+								_reactRouter.Link,
+								{ to: '/nyumbani/index.php/home/Employee/' + this.props.id },
+								_react2.default.createElement(
+									'button',
+									{ className: 'btn btn-fab' },
+									_react2.default.createElement('i', { className: 'pe-7s-id pe-va pe-lg' })
+								)
 							)
 						),
 						_react2.default.createElement(
@@ -38800,18 +38805,12 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      console.log(this.props.params);
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_BackComponent2.default, { State: this.props.State }),
-	        '  ',
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          'ID No ',
-	          this.props.userInfo.id
-	        ),
-	        _react2.default.createElement(_ProfileSummary2.default, { userInfo: this.props.userInfo }),
+	        _react2.default.createElement(_BackComponent2.default, null),
+	        _react2.default.createElement(_ProfileSummary2.default, null),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'with-container content' },
@@ -38828,8 +38827,8 @@
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'column d-2-3 m-7-12 s-1-1 xs-1-1' },
-	              _react2.default.createElement(_BasicDetails2.default, { userInfo: this.props.userInfo }),
-	              _react2.default.createElement(_ContactDetails2.default, { userInfo: this.props.userInfo }),
+	              _react2.default.createElement(_BasicDetails2.default, { userInfo: true }),
+	              _react2.default.createElement(_ContactDetails2.default, { userInfo: true }),
 	              _react2.default.createElement(_Skills2.default, null),
 	              _react2.default.createElement(_ProfessionalExperience2.default, null),
 	              _react2.default.createElement(_EducationBackground2.default, null)
@@ -38986,7 +38985,7 @@
 	                _react2.default.createElement(
 	                  "data",
 	                  { className: "number", value: "4373" },
-	                  this.props.userInfo.id
+	                  "4373"
 	                ),
 	                _react2.default.createElement(
 	                  "p",
@@ -39173,18 +39172,12 @@
 	              _react2.default.createElement(
 	                "h1",
 	                null,
-	                this.props.userInfo.first_name,
-	                " ",
-	                this.props.userInfo.last_name
+	                "Antony Ngayo"
 	              ),
 	              _react2.default.createElement(
 	                "ul",
 	                { className: "bare-list bio-nested" },
-	                _react2.default.createElement(
-	                  "li",
-	                  null,
-	                  this.props.userInfo.profession
-	                ),
+	                _react2.default.createElement("li", null),
 	                _react2.default.createElement(
 	                  "li",
 	                  null,
@@ -39933,7 +39926,7 @@
 	                _react2.default.createElement(
 	                  "p",
 	                  { className: "timeline-record-title" },
-	                  this.props.userInfo.gender
+	                  "Male"
 	                )
 	              ),
 	              _react2.default.createElement(
@@ -39964,12 +39957,12 @@
 	                _react2.default.createElement(
 	                  "p",
 	                  { className: "timeline-record-title" },
-	                  this.props.userInfo.location
+	                  "Nairobi"
 	                ),
 	                _react2.default.createElement(
 	                  "p",
 	                  { className: "timeline-record-place" },
-	                  this.props.userInfo.location
+	                  "Bahati"
 	                )
 	              ),
 	              _react2.default.createElement(
@@ -40925,7 +40918,6 @@
 		pullAccountUserData: function pullAccountUserData() {
 			return function (dispatch) {
 				var self = dispatch;
-
 				_jquery2.default.ajax({
 					url: '/nyumbani/index.php/profile/getProfileData',
 					type: 'POST',

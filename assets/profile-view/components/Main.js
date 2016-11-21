@@ -19,10 +19,11 @@ class Main extends Component{
 
   }
   render() {
+    console.log( this.props.params )
     return (
                 <div>
-                  <BackComponent State = {this.props.State}/>  <div>ID No {this.props.userInfo.id}</div>
-                  <ProfileSummary userInfo = {this.props.userInfo}/>
+                  <BackComponent />
+                  <ProfileSummary/>
                   <div className="with-container content">
                     <div className="row">
                       <div className="column d-1-3 m-5-12 s-1-1 xs-1-1">
@@ -32,8 +33,8 @@ class Main extends Component{
                       </div>
                       <div className="column d-2-3 m-7-12 s-1-1 xs-1-1">
                           
-                        <BasicDetails userInfo = {this.props.userInfo}/>
-                        <ContactDetails userInfo = {this.props.userInfo}/>
+                        <BasicDetails userInfo />
+                        <ContactDetails userInfo/>
                         <Skills />
                         <ProfessionalExperience/>
                         <EducationBackground />

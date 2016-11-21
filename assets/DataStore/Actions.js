@@ -74,7 +74,6 @@ let Actions =
 	pullAccountUserData: function(){
 		return(  dispatch ) =>{
 			var self = dispatch;
-
 			$.ajax({
 				url: '/nyumbani/index.php/profile/getProfileData',
 				type: 'POST',

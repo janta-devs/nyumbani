@@ -18,7 +18,6 @@ class TopActionComponent extends Component{
 			<div className="col-md-1 col-md-offset-11">
 			<li className = 'btn btn-raised btn-lg btn-info'>
 				<Link to={`/nyumbani/index.php/home/PostJob`}>Post Job</Link>
-				{this.props.children}
 			</li>
 			</div>	
 			</div>
