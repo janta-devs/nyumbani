@@ -25,7 +25,7 @@ class Search extends Component{
 		}
 	}
 	componentWillMount(){
-		this.props.State.Actions.accountUserInformation();
+		this.props.State.Actions.pullAccountUserData();
 	}
 	componentWillUpdate(nxtProp, nxtState ){
 		

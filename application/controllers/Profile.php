@@ -97,12 +97,17 @@ class Profile extends CI_Controller{
 		$this->load->model('User_login');
 		$user = new User_login();
 
+		$this->load->model('Recommendations');
+		$recommendation = new Recommendations();
+
 		$user_login_data = (array)$user->load_user_data(['login_id'=> $login_id]);
 		unset($user_login_data['id']);
 		$basic_data = (array)$basic->load_user_data(['login_id'=> $login_id]);
 		unset($basic_data['id']);
 		$education_data = (array)$education->load_user_data( ['login_id'=> $login_id] );
 		unset($education_data['id']);
+		$recomm = (Array)$recommendation->getRecommendations( $login_id )[0];
+		unset($recomm['employee_login_id']);
 
 		$education_data['past_jobs'] = $this->StringToArray($education_data['past_job'], ['job','duration','title']);
 
@@ -125,10 +130,10 @@ class Profile extends CI_Controller{
 
 		$education_data['skills'] = $new_array;
 
-		$UserInfo = array_merge_recursive($education_data, $basic_data, $user_login_data);
+		$UserInfo = array_merge_recursive($education_data, $basic_data, $user_login_data, $recomm);
 		$UserInfo['login_id'] = $UserInfo['login_id'][0]; 
 
-		print json_encode( (object)$UserInfo );
+		print_r( (object)$UserInfo );
 
 	}
 
@@ -173,6 +178,14 @@ class Profile extends CI_Controller{
 			}
 			return $new_arr;		
 		}
+	}
+	public function getRecommendations(){
+		$this->load->model('Recommendations');
+		$recommendation = new Recommendations();
+
+		$res = $recommendation->getRecommendations();
+
+		print ( $res );
 	}
 }
 ?>

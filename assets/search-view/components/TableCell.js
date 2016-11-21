@@ -17,8 +17,8 @@ class TableCell extends Component{
 					<td>
 					<span className="input-group-btn">
 					<Link to={`/nyumbani/index.php/home/Employee/${this.props.id}`}>
-					<button	className = 'btn btn-fab'><i className="pe-7s-id pe-va pe-lg"></i>
-					</button>
+						<button	className = 'btn btn-fab'><i className="pe-7s-id pe-va pe-lg"></i>
+						</button>
 					</Link>
 					</span>
 					<span className="input-group-btn">

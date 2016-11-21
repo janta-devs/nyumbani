@@ -13,11 +13,11 @@ const MainApp  = (props) => {
 		suggestions = {props.suggestions}/>);
 }
 
-function mapStateToProps( state ){	// passes the state object to the APP component 
-	return state;	//taking the entire state
+function mapStateToProps( state ){				// passes the state object to the APP component 
+	return state;								//taking the entire state
 }
 
-function mapDispatchToProps(dispatch){ //this function makes it that we do not have to call the dispatch method each time
+function mapDispatchToProps(dispatch){ 			//this function makes it that we do not have to call the dispatch method each time
 	return{
 		Actions: bindActionCreators( Actions, dispatch )
 	}

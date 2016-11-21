@@ -9,6 +9,7 @@ import ProfileSummaryBio from './ProfileSummaryBio';
 
 class ProfileSummary extends Component{
 	render(){
+
 		return (
         		<div className="headline">
                   <div className="with-container">
@@ -16,10 +17,10 @@ class ProfileSummary extends Component{
                       <section className="bio">
                         <div className="summary card">
                           <div className="row">
-                              <ProfileSummaryBio userInfo = {this.props.userInfo}/>
+                              <ProfileSummaryBio data = {this.props.data[0]}/>
                             <div className="column d-1-3 m-1-4 s-1-1 xs-1-1 stats-column">
-                              <ProfileSummaryStats userInfo = {this.props.userInfo}/>
-                              <ProfileSummaryActions />
+                              <ProfileSummaryStats data = {this.props.data[0]}/>
+                              <ProfileSummaryActions data = {this.props.data[0]}/>
                             </div>
                           </div>
                         </div>

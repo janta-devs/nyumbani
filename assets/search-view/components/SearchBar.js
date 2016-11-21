@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 
-//there are props to be added
-
-//onClick = {this.props.search}
-
 class SearchBar extends Component{
 	handleClickAction( e ){
 		e.preventDefault();
@@ -20,7 +16,7 @@ class SearchBar extends Component{
 			<div className="form-group label-floating">
 				<form onSubmit = {this.submitHandler.bind(this)}>
 					<div className="input-group">
-					    <input className="form-control input-lg" type="text" id="sample1" name = "search_term" value={this.props.search_term} ref = "search"
+					    <input className="form-control input-lg" type="text" id="search_term" name = "search_term" value={this.props.search_term} ref = "search"
 						/>
 					   	<label className="control-label" htmlFor="smaple1">Search here</label>
 					    <p className="help-block">Enter a search term to find professionals near you.</p>

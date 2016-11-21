@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router';
 
 class BackComponent  extends Component{
-	handleAppModeChange(){
-		this.props.State.Actions.changeAppMode('search');
-	}
 	render() {
 		return (
 		<div>
-		   	<a onClick={this.handleAppModeChange.bind(this)}
+		   	<Link to={`/nyumbani/index.php/home`}
 				className='btn btn-raised btn-info margin-bottom-1em' ref = "back">
 				Back to Search
-			</a>
+			</Link>
 		</div>
 		);
 	}
