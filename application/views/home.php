@@ -14,6 +14,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" type="text/css" href="<?php print base_url(); ?>assets/node_modules/material-design-lite/material.min.css">
 	<link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap/dist/css/custom.css">
+  <style type="text/css">
+    html, body {
+      background: #ffffff;
+    }
+  </style>
 </head>
 <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">

@@ -38366,25 +38366,29 @@
 			value: function render() {
 				var checker = this.props.data.length !== 0 && !this.props.data.hasOwnProperty('message') ? _react2.default.createElement(_ResultTable2.default, { data: this.props.data, State: this.props.State }) : this.props.suggestions.length !== 0 ? _react2.default.createElement(_NoSearchResult2.default, { data: this.props.suggestions, searchAction: this.props.searchAction }) : ""; // checks if the array is empty
 				return _react2.default.createElement(
-					'section',
-					{ className: 'content with-container' },
+					'div',
+					{ className: 'mdl-cell mdl-cell--12-col' },
 					_react2.default.createElement(
-						'div',
-						{ id: 'new-items' },
+						'section',
+						{ className: 'content with-container' },
+						_react2.default.createElement(_TopActionComponent2.default, { State: this.props.State, AccountUser: this.props.AccountUser }),
+						_react2.default.createElement('br', null)
+					),
+					_react2.default.createElement(
+						'section',
+						{ className: 'content with-container' },
 						_react2.default.createElement(
 							'div',
-							{ className: 'row' },
-							_react2.default.createElement(_TopActionComponent2.default, { State: this.props.State, AccountUser: this.props.AccountUser }),
-							_react2.default.createElement('br', null),
-							_react2.default.createElement('br', null),
-							_react2.default.createElement('br', null),
-							_react2.default.createElement('br', null),
-							_react2.default.createElement(_SuggestedEmployees2.default, null),
-							_react2.default.createElement(_SearchBar2.default, { searchAction: this.props.searchAction }),
-							_react2.default.createElement('br', null),
-							_react2.default.createElement('br', null),
-							checker,
-							_react2.default.createElement(_StatusUpdate2.default, null)
+							{ id: 'new-items' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'row' },
+								_react2.default.createElement(_SuggestedEmployees2.default, null),
+								_react2.default.createElement(_SearchBar2.default, { searchAction: this.props.searchAction }),
+								_react2.default.createElement('br', null),
+								_react2.default.createElement('br', null),
+								checker
+							)
 						)
 					)
 				);
@@ -38444,24 +38448,31 @@
 					var Secondname = AccountUser.lname;
 					var profession = AccountUser.profession;
 				}
+				var floatStlye = {
+					float: 'right'
+				};
 				return _react2.default.createElement(
 					'div',
 					null,
-					'Welcome, ',
-					Firstname,
-					' ',
-					Secondname,
-					'!',
 					_react2.default.createElement(
 						'div',
-						{ className: 'col-md-1 col-md-offset-11' },
+						{ className: 'mdl-cell mdl-cell--12-col' },
+						'Welcome, ',
+						Firstname,
+						' ',
+						Secondname,
+						'!',
 						_react2.default.createElement(
-							'li',
-							{ className: 'btn btn-raised btn-lg btn-info' },
+							'div',
+							{ style: floatStlye },
 							_react2.default.createElement(
-								_reactRouter.Link,
-								{ to: '/nyumbani/index.php/home/PostJob' },
-								'Post Job'
+								'button',
+								{ className: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored' },
+								_react2.default.createElement(
+									_reactRouter.Link,
+									{ to: '/nyumbani/index.php/home/PostJob' },
+									'Post Job'
+								)
 							)
 						)
 					)
@@ -38490,9 +38501,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRouter = __webpack_require__(204);
+
 	var _jquery = __webpack_require__(203);
 
 	var _jquery2 = _interopRequireDefault(_jquery);
+
+	var _TopActionComponent = __webpack_require__(259);
+
+	var _TopActionComponent2 = _interopRequireDefault(_TopActionComponent);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -40713,26 +40730,21 @@
 						{ onSubmit: this.submitHandler.bind(this) },
 						_react2.default.createElement(
 							"div",
-							{ className: "input-group" },
-							_react2.default.createElement("input", { className: "form-control input-lg", type: "text", id: "sample1", name: "search_term", value: this.props.search_term, ref: "search"
+							{ className: "mdl-textfield mdl-js-textfield mdl-textfield--floating-label" },
+							_react2.default.createElement("input", { className: "mdl-textfield__input", type: "text", id: "sample1", name: "search_term", value: this.props.search_term, ref: "search"
 							}),
 							_react2.default.createElement(
 								"label",
-								{ className: "control-label", htmlFor: "smaple1" },
+								{ className: "mdl-textfield__label", htmlFor: "smaple1" },
 								"Search here"
 							),
 							_react2.default.createElement(
-								"p",
-								{ className: "help-block" },
-								"Enter a search term to find professionals near you."
-							),
-							_react2.default.createElement(
-								"span",
-								{ className: "input-group-btn" },
+								"button",
+								{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored", onClick: this.handleClickAction.bind(this) },
 								_react2.default.createElement(
-									"button",
-									{ className: "btn btn-fab", onClick: this.handleClickAction.bind(this) },
-									_react2.default.createElement("i", { className: "pe-7s-search pe-va pe-lg" })
+									"i",
+									{ className: "material-icons" },
+									"search"
 								)
 							)
 						)

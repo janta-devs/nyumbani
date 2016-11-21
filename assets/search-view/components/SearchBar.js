@@ -19,14 +19,12 @@ class SearchBar extends Component{
 		return (
 			<div className="form-group label-floating">
 				<form onSubmit = {this.submitHandler.bind(this)}>
-					<div className="input-group">
-					    <input className="form-control input-lg" type="text" id="sample1" name = "search_term" value={this.props.search_term} ref = "search"
+					<div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					    <input className="mdl-textfield__input" type="text" id="sample1" name = "search_term" value={this.props.search_term} ref = "search"
 						/>
-					   	<label className="control-label" htmlFor="smaple1">Search here</label>
-					    <p className="help-block">Enter a search term to find professionals near you.</p>
-					    <span className="input-group-btn">
-					    <button className = "btn btn-fab" onClick = {this.handleClickAction.bind(this)}><i className="pe-7s-search pe-va pe-lg"></i></button>
-					    </span>
+					   	<label className="mdl-textfield__label" htmlFor="smaple1">Search here</label>
+					    <button className = "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onClick = {this.handleClickAction.bind(this)}><i className="material-icons">search</i></button>
+					   
 					</div>
 				</form>
 

@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import { Link, Match } from 'react-router';
+
 import $ from 'jquery';
+import TopActionComponent from './TopActionComponent';
+
 
 class SuggestedEmployees extends Component{
 
@@ -16,7 +20,7 @@ class SuggestedEmployees extends Component{
       textTransform: 'unset',
     };
 		return (
-				<div>
+				<div>	
 					<div className=" column l-1-4 float-right">
 						<div className="primary promo card l-block">
 							<span className="beta"></span>

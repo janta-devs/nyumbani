@@ -12,14 +12,19 @@ class TopActionComponent extends Component{
 			var Secondname = AccountUser.lname;
 			var profession = AccountUser.profession;
 		} 
+		const floatStlye = {
+			float: 'right',
+		};
 		return (
 			<div>
-			Welcome, {Firstname} {Secondname}!
-			<div className="col-md-1 col-md-offset-11">
-			<li className = 'btn btn-raised btn-lg btn-info'>
-				<Link to={`/nyumbani/index.php/home/PostJob`}>Post Job</Link>
-			</li>
-			</div>	
+				<div className="mdl-cell mdl-cell--12-col">
+				Welcome, {Firstname} {Secondname}!
+				<div style={floatStlye} >
+					<button className = 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored'>
+						<Link to={`/nyumbani/index.php/home/PostJob`}>Post Job</Link>
+					</button>
+				</div>	
+				</div>
 			</div>
 		);
 	}
