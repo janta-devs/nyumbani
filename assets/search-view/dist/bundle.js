@@ -71,15 +71,15 @@
 
 	var _MainApp2 = _interopRequireDefault(_MainApp);
 
-	var _PostJobComponent = __webpack_require__(280);
+	var _PostJobComponent = __webpack_require__(282);
 
 	var _PostJobComponent2 = _interopRequireDefault(_PostJobComponent);
 
-	var _Main = __webpack_require__(262);
+	var _Main = __webpack_require__(264);
 
 	var _Main2 = _interopRequireDefault(_Main);
 
-	var _Store = __webpack_require__(282);
+	var _Store = __webpack_require__(284);
 
 	var _Store2 = _interopRequireDefault(_Store);
 
@@ -38244,7 +38244,7 @@
 
 	var _Search2 = _interopRequireDefault(_Search);
 
-	var _PostJobComponent = __webpack_require__(280);
+	var _PostJobComponent = __webpack_require__(282);
 
 	var _PostJobComponent2 = _interopRequireDefault(_PostJobComponent);
 
@@ -38252,7 +38252,7 @@
 
 	var _redux = __webpack_require__(180);
 
-	var _Actions = __webpack_require__(281);
+	var _Actions = __webpack_require__(283);
 
 	var _Actions2 = _interopRequireDefault(_Actions);
 
@@ -38299,19 +38299,27 @@
 
 	var _TopActionComponent2 = _interopRequireDefault(_TopActionComponent);
 
-	var _ResultTable = __webpack_require__(260);
+	var _SuggestedEmployees = __webpack_require__(260);
+
+	var _SuggestedEmployees2 = _interopRequireDefault(_SuggestedEmployees);
+
+	var _StatusUpdate = __webpack_require__(261);
+
+	var _StatusUpdate2 = _interopRequireDefault(_StatusUpdate);
+
+	var _ResultTable = __webpack_require__(262);
 
 	var _ResultTable2 = _interopRequireDefault(_ResultTable);
 
-	var _SearchBar = __webpack_require__(277);
+	var _SearchBar = __webpack_require__(279);
 
 	var _SearchBar2 = _interopRequireDefault(_SearchBar);
 
-	var _NoSearchResult = __webpack_require__(278);
+	var _NoSearchResult = __webpack_require__(280);
 
 	var _NoSearchResult2 = _interopRequireDefault(_NoSearchResult);
 
-	var _PostJobComponent = __webpack_require__(280);
+	var _PostJobComponent = __webpack_require__(282);
 
 	var _PostJobComponent2 = _interopRequireDefault(_PostJobComponent);
 
@@ -38358,17 +38366,27 @@
 			value: function render() {
 				var checker = this.props.data.length !== 0 && !this.props.data.hasOwnProperty('message') ? _react2.default.createElement(_ResultTable2.default, { data: this.props.data, State: this.props.State }) : this.props.suggestions.length !== 0 ? _react2.default.createElement(_NoSearchResult2.default, { data: this.props.suggestions, searchAction: this.props.searchAction }) : ""; // checks if the array is empty
 				return _react2.default.createElement(
-					'div',
-					null,
-					_react2.default.createElement(_TopActionComponent2.default, { State: this.props.State, AccountUser: this.props.AccountUser }),
-					_react2.default.createElement('br', null),
-					_react2.default.createElement('br', null),
-					_react2.default.createElement('br', null),
-					_react2.default.createElement('br', null),
-					_react2.default.createElement(_SearchBar2.default, { searchAction: this.props.searchAction }),
-					_react2.default.createElement('br', null),
-					_react2.default.createElement('br', null),
-					checker
+					'section',
+					{ className: 'content with-container' },
+					_react2.default.createElement(
+						'div',
+						{ id: 'new-items' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'row' },
+							_react2.default.createElement(_TopActionComponent2.default, { State: this.props.State, AccountUser: this.props.AccountUser }),
+							_react2.default.createElement('br', null),
+							_react2.default.createElement('br', null),
+							_react2.default.createElement('br', null),
+							_react2.default.createElement('br', null),
+							_react2.default.createElement(_SuggestedEmployees2.default, null),
+							_react2.default.createElement(_SearchBar2.default, { searchAction: this.props.searchAction }),
+							_react2.default.createElement('br', null),
+							_react2.default.createElement('br', null),
+							checker,
+							_react2.default.createElement(_StatusUpdate2.default, null)
+						)
+					)
 				);
 			}
 		}]);
@@ -38472,7 +38490,378 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _TableCell = __webpack_require__(261);
+	var _jquery = __webpack_require__(203);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var SuggestedEmployees = function (_Component) {
+		_inherits(SuggestedEmployees, _Component);
+
+		function SuggestedEmployees(context, props) {
+			_classCallCheck(this, SuggestedEmployees);
+
+			return _possibleConstructorReturn(this, (SuggestedEmployees.__proto__ || Object.getPrototypeOf(SuggestedEmployees)).call(this, context, props));
+		}
+
+		_createClass(SuggestedEmployees, [{
+			key: 'componentDidMount',
+			value: function componentDidMount() {}
+		}, {
+			key: 'render',
+			value: function render() {
+				var styleIEButton = {
+					lineHeight: '10px',
+					padding: '1px 1px 1px 1px',
+					textTransform: 'unset'
+				};
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'div',
+						{ className: ' column l-1-4 float-right' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'primary promo card l-block' },
+							_react2.default.createElement('span', { className: 'beta' }),
+							_react2.default.createElement(
+								'h4',
+								null,
+								_react2.default.createElement(
+									'a',
+									{ href: '#', className: 'js-widget' },
+									'Get Android App'
+								)
+							),
+							_react2.default.createElement(
+								'p',
+								null,
+								'Take the next step in your career. Amazing jobs for all levels and disciplines!'
+							),
+							_react2.default.createElement(
+								'a',
+								{ href: '#', className: 'button-secondary button-fluid text-center js-widget' },
+								'Download from Play Store'
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'primary promo card l-block' },
+							_react2.default.createElement('span', { className: 'beta' }),
+							_react2.default.createElement(
+								'h4',
+								null,
+								_react2.default.createElement(
+									'a',
+									{ href: '#', className: 'js-widget' },
+									'Get iOS App'
+								)
+							),
+							_react2.default.createElement(
+								'p',
+								null,
+								'Take the next step in your career. Amazing jobs for all levels and disciplines!'
+							),
+							_react2.default.createElement(
+								'a',
+								{ href: '#', className: 'button-secondary button-fluid text-center js-widget' },
+								'Download from Apple Store'
+							)
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'column l-3-4 recommendations' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'news card people-recommendation' },
+							_react2.default.createElement(
+								'footer',
+								null,
+								_react2.default.createElement(
+									'div',
+									{ className: 'media' },
+									_react2.default.createElement(
+										'div',
+										{ className: 'media-left' },
+										_react2.default.createElement('img', { className: 'media-object', src: '/nyumbani/photo_assets/people_48px.svg', alt: 'Janta Employees suggestions' })
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'media-body with-button-inline' },
+										'Employees suggested for you'
+									)
+								)
+							),
+							_react2.default.createElement(
+								'section',
+								{ className: 'js-profiles-list' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'profiles media-list' },
+									_react2.default.createElement(
+										'div',
+										{ className: 'media' },
+										_react2.default.createElement(
+											'div',
+											{ className: 'media-left' },
+											_react2.default.createElement(
+												'a',
+												{ href: '#', title: 'Mike Njuguna' },
+												_react2.default.createElement('img', { src: '/nyumbani/photo_assets/anony.jpg', alt: 'Mike Njuguna' })
+											)
+										),
+										_react2.default.createElement(
+											'div',
+											{ className: 'media-body' },
+											_react2.default.createElement(
+												'div',
+												{ className: 'user-meta' },
+												_react2.default.createElement(
+													'a',
+													{ href: '#', className: 'basic-link', title: 'Mike Njuguna' },
+													'Lawrence Nderu'
+												),
+												_react2.default.createElement(
+													'span',
+													{ className: 'institution' },
+													'Jomo Kenyatta University of Agriculture and Technology'
+												),
+												_react2.default.createElement(
+													'span',
+													{ className: 'relationship' },
+													'Highly recommended in Computer Science'
+												)
+											)
+										),
+										_react2.default.createElement(
+											'button',
+											{ type: 'button', style: styleIEButton, className: 'basic-link mdl-button mdl-js-button mdl-js-ripple-effect' },
+											'View Profile ',
+											_react2.default.createElement(
+												'span',
+												null,
+												_react2.default.createElement(
+													'i',
+													{ className: 'material-icons' },
+													'exit_to_app'
+												)
+											)
+										)
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'media' },
+										_react2.default.createElement(
+											'div',
+											{ className: 'media-left' },
+											_react2.default.createElement(
+												'a',
+												{ href: '#', title: 'Mike Njuguna' },
+												_react2.default.createElement('img', { src: '/nyumbani/photo_assets/anony.jpg', alt: 'Mike Njuguna' })
+											)
+										),
+										_react2.default.createElement(
+											'div',
+											{ className: 'media-body' },
+											_react2.default.createElement(
+												'div',
+												{ className: 'user-meta' },
+												_react2.default.createElement(
+													'a',
+													{ href: '#', className: 'basic-link', title: 'Mike Njuguan', 'data-engagement': 'profile_name_0' },
+													'Lawrence Nderu'
+												),
+												_react2.default.createElement(
+													'span',
+													{ className: 'institution' },
+													'Jomo Kenyatta University of Agriculture and Technology'
+												),
+												_react2.default.createElement(
+													'span',
+													{ className: 'relationship' },
+													'Highly recommended in Computer Science'
+												)
+											)
+										),
+										_react2.default.createElement(
+											'button',
+											{ type: 'button', style: styleIEButton, className: 'basic-link mdl-button mdl-js-button mdl-js-ripple-effect' },
+											'View Profile ',
+											_react2.default.createElement(
+												'span',
+												null,
+												_react2.default.createElement(
+													'i',
+													{ className: 'material-icons' },
+													'exit_to_app'
+												)
+											)
+										)
+									)
+								)
+							),
+							_react2.default.createElement(
+								'section',
+								{ className: 'community' },
+								_react2.default.createElement('hr', null),
+								_react2.default.createElement(
+									'div',
+									{ className: 'text-center see-more' },
+									_react2.default.createElement(
+										'button',
+										{ className: 'basic-link js-see-more-suggestions', 'data-state': 'unclicked', 'data-engagement': 'see_more' },
+										_react2.default.createElement(
+											'span',
+											null,
+											'Load more suggestions'
+										)
+									)
+								)
+							)
+						)
+					)
+				);
+			}
+		}]);
+
+		return SuggestedEmployees;
+	}(_react.Component);
+
+	exports.default = SuggestedEmployees;
+
+/***/ },
+/* 261 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _TopActionComponent = __webpack_require__(259);
+
+	var _TopActionComponent2 = _interopRequireDefault(_TopActionComponent);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var StatusUpdate = function (_Component) {
+	  _inherits(StatusUpdate, _Component);
+
+	  function StatusUpdate(context, props) {
+	    _classCallCheck(this, StatusUpdate);
+
+	    return _possibleConstructorReturn(this, (StatusUpdate.__proto__ || Object.getPrototypeOf(StatusUpdate)).call(this, context, props));
+	  }
+
+	  _createClass(StatusUpdate, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {}
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var styleTxtArea = {
+	        height: '60px'
+	      };
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'column l-3-4 post-a-status' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'status card' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'actions-holder' },
+	            _react2.default.createElement(_TopActionComponent2.default, null)
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'image-holder float-left' },
+	            _react2.default.createElement('img', { className: 'small-image', src: '/nyumbani/photo_assets/anony.jpg' })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'textarea-holder' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'textarea-wrap js-animated-labels' },
+	              _react2.default.createElement('textarea', { className: 'js-textarea', id: 'new-status', maxLength: '500', placeholder: 'Post something', 'data-pattern': '', style: styleTxtArea }),
+	              _react2.default.createElement(
+	                'label',
+	                { className: 'hidden' },
+	                'Post something'
+	              )
+	            ),
+	            _react2.default.createElement('div', { 'data-for': 'new-status', className: 'error-message', 'data-error-invalid': 'Message is required.', 'data-error-empty': 'Message is required.' }),
+	            _react2.default.createElement('div', { className: 'attachment-holder' })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'float-right' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'dropdown-select js-dropdown-selectable', 'data-size': 's' },
+	              _react2.default.createElement(
+	                'a',
+	                { 'data-value': 'public', className: 'single' },
+	                'Interests'
+	              ),
+	              _react2.default.createElement('ul', null)
+	            ),
+	            _react2.default.createElement(
+	              'button',
+	              { className: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored' },
+	              'Post'
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return StatusUpdate;
+	}(_react.Component);
+
+	exports.default = StatusUpdate;
+
+/***/ },
+/* 262 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _TableCell = __webpack_require__(263);
 
 	var _TableCell2 = _interopRequireDefault(_TableCell);
 
@@ -38592,7 +38981,7 @@
 	exports.default = ResultTable;
 
 /***/ },
-/* 261 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38609,7 +38998,7 @@
 
 	var _reactDom = __webpack_require__(35);
 
-	var _Main = __webpack_require__(262);
+	var _Main = __webpack_require__(264);
 
 	var _Main2 = _interopRequireDefault(_Main);
 
@@ -38636,22 +39025,13 @@
 			key: 'componentWillUpdate',
 			value: function componentWillUpdate(nxtProp, nxtState) {}
 		}, {
-			key: 'HandleRawClick',
-			value: function HandleRawClick(e) {
-				e.preventDefault();
-				e.stopPropagation();
-				//render(<Main State = {this.props.State} userInfo = {this.props}/>, document.getElementById('component'));
-				//return <Link to={`/nyumbani/index.php/home/Employee`}/>
-				//window.location.href = "/nyumbani/index.php/home/Employee";
-			}
-		}, {
 			key: 'render',
 			value: function render() {
 				var _this2 = this;
 
 				return _react2.default.createElement(
 					'tr',
-					{ onClick: this.HandleRawClick.bind(this) },
+					null,
 					_react2.default.createElement(
 						'td',
 						{ className: 'mdl-data-table__cell--non-numeric' },
@@ -38725,7 +39105,7 @@
 	exports.default = TableCell;
 
 /***/ },
-/* 262 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38742,43 +39122,43 @@
 
 	var _reactDom = __webpack_require__(35);
 
-	var _ProfileSummary = __webpack_require__(263);
+	var _ProfileSummary = __webpack_require__(265);
 
 	var _ProfileSummary2 = _interopRequireDefault(_ProfileSummary);
 
-	var _ProfileInterests = __webpack_require__(267);
+	var _ProfileInterests = __webpack_require__(269);
 
 	var _ProfileInterests2 = _interopRequireDefault(_ProfileInterests);
 
-	var _ProfileInterestedEmployers = __webpack_require__(268);
+	var _ProfileInterestedEmployers = __webpack_require__(270);
 
 	var _ProfileInterestedEmployers2 = _interopRequireDefault(_ProfileInterestedEmployers);
 
-	var _ProfileInterestedIn = __webpack_require__(270);
+	var _ProfileInterestedIn = __webpack_require__(272);
 
 	var _ProfileInterestedIn2 = _interopRequireDefault(_ProfileInterestedIn);
 
-	var _ProfessionalExperience = __webpack_require__(271);
+	var _ProfessionalExperience = __webpack_require__(273);
 
 	var _ProfessionalExperience2 = _interopRequireDefault(_ProfessionalExperience);
 
-	var _EducationBackground = __webpack_require__(272);
+	var _EducationBackground = __webpack_require__(274);
 
 	var _EducationBackground2 = _interopRequireDefault(_EducationBackground);
 
-	var _Skills = __webpack_require__(273);
+	var _Skills = __webpack_require__(275);
 
 	var _Skills2 = _interopRequireDefault(_Skills);
 
-	var _BasicDetails = __webpack_require__(274);
+	var _BasicDetails = __webpack_require__(276);
 
 	var _BasicDetails2 = _interopRequireDefault(_BasicDetails);
 
-	var _ContactDetails = __webpack_require__(275);
+	var _ContactDetails = __webpack_require__(277);
 
 	var _ContactDetails2 = _interopRequireDefault(_ContactDetails);
 
-	var _BackComponent = __webpack_require__(276);
+	var _BackComponent = __webpack_require__(278);
 
 	var _BackComponent2 = _interopRequireDefault(_BackComponent);
 
@@ -38845,7 +39225,7 @@
 	exports.default = Main;
 
 /***/ },
-/* 263 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38860,15 +39240,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ProfileSummaryStats = __webpack_require__(264);
+	var _ProfileSummaryStats = __webpack_require__(266);
 
 	var _ProfileSummaryStats2 = _interopRequireDefault(_ProfileSummaryStats);
 
-	var _ProfileSummaryActions = __webpack_require__(265);
+	var _ProfileSummaryActions = __webpack_require__(267);
 
 	var _ProfileSummaryActions2 = _interopRequireDefault(_ProfileSummaryActions);
 
-	var _ProfileSummaryBio = __webpack_require__(266);
+	var _ProfileSummaryBio = __webpack_require__(268);
 
 	var _ProfileSummaryBio2 = _interopRequireDefault(_ProfileSummaryBio);
 
@@ -38932,7 +39312,7 @@
 	exports.default = ProfileSummary;
 
 /***/ },
-/* 264 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -39020,7 +39400,7 @@
 	exports.default = ProfileSummaryStats;
 
 /***/ },
-/* 265 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -39111,7 +39491,7 @@
 	exports.default = ProfileSummaryActions;
 
 /***/ },
-/* 266 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -39197,7 +39577,7 @@
 	exports.default = ProfileSummaryBio;
 
 /***/ },
-/* 267 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39298,7 +39678,7 @@
 	exports.default = ProfileInterests;
 
 /***/ },
-/* 268 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39313,7 +39693,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _InterestedEmployersList = __webpack_require__(269);
+	var _InterestedEmployersList = __webpack_require__(271);
 
 	var _InterestedEmployersList2 = _interopRequireDefault(_InterestedEmployersList);
 
@@ -39382,7 +39762,7 @@
 	exports.default = ProfileInterestedEmployers;
 
 /***/ },
-/* 269 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39548,7 +39928,7 @@
 	exports.default = InterestedEmployersList;
 
 /***/ },
-/* 270 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39563,7 +39943,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _InterestedEmployersList = __webpack_require__(269);
+	var _InterestedEmployersList = __webpack_require__(271);
 
 	var _InterestedEmployersList2 = _interopRequireDefault(_InterestedEmployersList);
 
@@ -39632,7 +40012,7 @@
 	exports.default = ProfileInterestedIn;
 
 /***/ },
-/* 271 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -39718,7 +40098,7 @@
 	exports.default = ProfessionalExperience;
 
 /***/ },
-/* 272 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -39819,7 +40199,7 @@
 	exports.default = EducationBackground;
 
 /***/ },
-/* 273 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39864,7 +40244,7 @@
 	exports.default = Skills;
 
 /***/ },
-/* 274 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -40054,7 +40434,7 @@
 	exports.default = BasicDetails;
 
 /***/ },
-/* 275 */
+/* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -40213,7 +40593,7 @@
 	exports.default = ContactDetails;
 
 /***/ },
-/* 276 */
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40272,7 +40652,7 @@
 	exports.default = BackComponent;
 
 /***/ },
-/* 277 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -40367,7 +40747,7 @@
 	exports.default = SearchBar;
 
 /***/ },
-/* 278 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40382,7 +40762,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _NoResultCell = __webpack_require__(279);
+	var _NoResultCell = __webpack_require__(281);
 
 	var _NoResultCell2 = _interopRequireDefault(_NoResultCell);
 
@@ -40495,7 +40875,7 @@
 	exports.default = NoSearchResult;
 
 /***/ },
-/* 279 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40566,7 +40946,7 @@
 	exports.default = NoResultCell;
 
 /***/ },
-/* 280 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40581,7 +40961,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _BackComponent = __webpack_require__(276);
+	var _BackComponent = __webpack_require__(278);
 
 	var _BackComponent2 = _interopRequireDefault(_BackComponent);
 
@@ -40836,7 +41216,7 @@
 	exports.default = PostJobComponent;
 
 /***/ },
-/* 281 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40935,7 +41315,7 @@
 	exports.default = Actions;
 
 /***/ },
-/* 282 */
+/* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40947,19 +41327,19 @@
 
 	var _redux = __webpack_require__(180);
 
-	var _index = __webpack_require__(283);
+	var _index = __webpack_require__(285);
 
 	var _index2 = _interopRequireDefault(_index);
 
 	var _reactRouter = __webpack_require__(204);
 
-	var _reactRouterRedux = __webpack_require__(284);
+	var _reactRouterRedux = __webpack_require__(286);
 
-	var _reduxLogger = __webpack_require__(293);
+	var _reduxLogger = __webpack_require__(295);
 
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 
-	var _reduxThunk = __webpack_require__(299);
+	var _reduxThunk = __webpack_require__(301);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
@@ -40983,7 +41363,7 @@
 	exports.default = store;
 
 /***/ },
-/* 283 */
+/* 285 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40994,21 +41374,21 @@
 
 	var _redux = __webpack_require__(180);
 
-	var _reactRouterRedux = __webpack_require__(284);
+	var _reactRouterRedux = __webpack_require__(286);
 
-	var _searchReducer = __webpack_require__(289);
+	var _searchReducer = __webpack_require__(291);
 
 	var _searchReducer2 = _interopRequireDefault(_searchReducer);
 
-	var _suggestionReducer = __webpack_require__(290);
+	var _suggestionReducer = __webpack_require__(292);
 
 	var _suggestionReducer2 = _interopRequireDefault(_suggestionReducer);
 
-	var _ChangeAppModeReducer = __webpack_require__(291);
+	var _ChangeAppModeReducer = __webpack_require__(293);
 
 	var _ChangeAppModeReducer2 = _interopRequireDefault(_ChangeAppModeReducer);
 
-	var _AccountUserReducer = __webpack_require__(292);
+	var _AccountUserReducer = __webpack_require__(294);
 
 	var _AccountUserReducer2 = _interopRequireDefault(_AccountUserReducer);
 
@@ -41032,7 +41412,7 @@
 	exports.default = rootReducer;
 
 /***/ },
-/* 284 */
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41042,7 +41422,7 @@
 	});
 	exports.routerMiddleware = exports.routerActions = exports.goForward = exports.goBack = exports.go = exports.replace = exports.push = exports.CALL_HISTORY_METHOD = exports.routerReducer = exports.LOCATION_CHANGE = exports.syncHistoryWithStore = undefined;
 
-	var _reducer = __webpack_require__(285);
+	var _reducer = __webpack_require__(287);
 
 	Object.defineProperty(exports, 'LOCATION_CHANGE', {
 	  enumerable: true,
@@ -41057,7 +41437,7 @@
 	  }
 	});
 
-	var _actions = __webpack_require__(286);
+	var _actions = __webpack_require__(288);
 
 	Object.defineProperty(exports, 'CALL_HISTORY_METHOD', {
 	  enumerable: true,
@@ -41102,11 +41482,11 @@
 	  }
 	});
 
-	var _sync = __webpack_require__(287);
+	var _sync = __webpack_require__(289);
 
 	var _sync2 = _interopRequireDefault(_sync);
 
-	var _middleware = __webpack_require__(288);
+	var _middleware = __webpack_require__(290);
 
 	var _middleware2 = _interopRequireDefault(_middleware);
 
@@ -41116,7 +41496,7 @@
 	exports.routerMiddleware = _middleware2['default'];
 
 /***/ },
-/* 285 */
+/* 287 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -41159,7 +41539,7 @@
 	}
 
 /***/ },
-/* 286 */
+/* 288 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -41201,7 +41581,7 @@
 	var routerActions = exports.routerActions = { push: push, replace: replace, go: go, goBack: goBack, goForward: goForward };
 
 /***/ },
-/* 287 */
+/* 289 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41214,7 +41594,7 @@
 
 	exports['default'] = syncHistoryWithStore;
 
-	var _reducer = __webpack_require__(285);
+	var _reducer = __webpack_require__(287);
 
 	var defaultSelectLocationState = function defaultSelectLocationState(state) {
 	  return state.routing;
@@ -41359,7 +41739,7 @@
 	}
 
 /***/ },
-/* 288 */
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41369,7 +41749,7 @@
 	});
 	exports['default'] = routerMiddleware;
 
-	var _actions = __webpack_require__(286);
+	var _actions = __webpack_require__(288);
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -41397,7 +41777,7 @@
 	}
 
 /***/ },
-/* 289 */
+/* 291 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41440,7 +41820,7 @@
 	exports.default = searchReducer;
 
 /***/ },
-/* 290 */
+/* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41480,7 +41860,7 @@
 	exports.default = suggestionReducer;
 
 /***/ },
-/* 291 */
+/* 293 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -41503,7 +41883,7 @@
 	exports.default = ChangeAppModeReducer;
 
 /***/ },
-/* 292 */
+/* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41545,7 +41925,7 @@
 	exports.default = AccountUserReducer;
 
 /***/ },
-/* 293 */
+/* 295 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41556,11 +41936,11 @@
 	  value: true
 	});
 
-	var _core = __webpack_require__(294);
+	var _core = __webpack_require__(296);
 
-	var _helpers = __webpack_require__(295);
+	var _helpers = __webpack_require__(297);
 
-	var _defaults = __webpack_require__(298);
+	var _defaults = __webpack_require__(300);
 
 	var _defaults2 = _interopRequireDefault(_defaults);
 
@@ -41663,7 +42043,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 294 */
+/* 296 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41673,9 +42053,9 @@
 	});
 	exports.printBuffer = printBuffer;
 
-	var _helpers = __webpack_require__(295);
+	var _helpers = __webpack_require__(297);
 
-	var _diff = __webpack_require__(296);
+	var _diff = __webpack_require__(298);
 
 	var _diff2 = _interopRequireDefault(_diff);
 
@@ -41804,7 +42184,7 @@
 	}
 
 /***/ },
-/* 295 */
+/* 297 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -41828,7 +42208,7 @@
 	var timer = exports.timer = typeof performance !== "undefined" && performance !== null && typeof performance.now === "function" ? performance : Date;
 
 /***/ },
-/* 296 */
+/* 298 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41838,7 +42218,7 @@
 	});
 	exports.default = diffLogger;
 
-	var _deepDiff = __webpack_require__(297);
+	var _deepDiff = __webpack_require__(299);
 
 	var _deepDiff2 = _interopRequireDefault(_deepDiff);
 
@@ -41924,7 +42304,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 297 */
+/* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(global) {/*!
@@ -42353,7 +42733,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 298 */
+/* 300 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -42404,7 +42784,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 299 */
+/* 301 */
 /***/ function(module, exports) {
 
 	'use strict';

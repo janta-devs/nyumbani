@@ -38,22 +38,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </style>
 </head>
 <body>
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header" id="nav-bar">
         <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
                 <!-- Title -->
               <span class="mdl-layout-title">
             <div class="logo-home" ></div></span>
               <!-- Add spacer, to align navigation to the right -->
-              <div class="mdl-layout-spacer"></div><div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
+              <div class="mdl-layout-spacer"></div>
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
                   mdl-textfield--floating-label mdl-textfield--align-right">
-        <label class="mdl-button mdl-js-button mdl-button--icon" for="fixed-header-drawer-exp">
-          <i class="material-icons">search</i>
-        </label>
-        <div class="mdl-textfield__expandable-holder">
-          <input class="mdl-textfield__input" type="text" name="sample" id="fixed-header-drawer-exp">
-        </div>
-      </div>
+                <label class="mdl-button mdl-js-button mdl-button--icon" for="fixed-header-drawer-exp">
+                  <i class="material-icons">search</i>
+                </label>
+                <div class="mdl-textfield__expandable-holder">
+                  <input class="mdl-textfield__input" type="text" name="sample" id="fixed-header-drawer-exp">
+                </div>
+              </div>
               <!-- Navigation. We hide it in small screens. -->
               <nav class="mdl-navigation mdl-layout--large-screen-only">
                 <a class="mdl-navigation__link" href="">Notifications <i class="material-icons">notifications</i></a>
