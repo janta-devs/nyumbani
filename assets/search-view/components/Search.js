@@ -44,8 +44,10 @@ class Search extends Component{
 						<div id="new-items">
 							<div className="row">
 								<SuggestedEmployees />
-								<SearchBar searchAction = {this.props.searchAction}/><br /><br />
-								{checker}
+								<div className="column l-3-4 recommendations">
+									<SearchBar searchAction = {this.props.searchAction}/><br /><br />
+									{checker}
+								</div>
 							</div>
 						</div>	
 					</section>

@@ -38384,10 +38384,14 @@
 								'div',
 								{ className: 'row' },
 								_react2.default.createElement(_SuggestedEmployees2.default, null),
-								_react2.default.createElement(_SearchBar2.default, { searchAction: this.props.searchAction }),
-								_react2.default.createElement('br', null),
-								_react2.default.createElement('br', null),
-								checker
+								_react2.default.createElement(
+									'div',
+									{ className: 'column l-3-4 recommendations' },
+									_react2.default.createElement(_SearchBar2.default, { searchAction: this.props.searchAction }),
+									_react2.default.createElement('br', null),
+									_react2.default.createElement('br', null),
+									checker
+								)
 							)
 						)
 					)
@@ -40672,7 +40676,7 @@
 /* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -40706,45 +40710,72 @@
 		}
 
 		_createClass(SearchBar, [{
-			key: "handleClickAction",
+			key: 'handleClickAction',
 			value: function handleClickAction(e) {
 				e.preventDefault();
 				e.stopPropagation();
 				this.props.searchAction(this.refs.search.value);
 			}
 		}, {
-			key: "submitHandler",
+			key: 'submitHandler',
 			value: function submitHandler(e) {
 				e.preventDefault();
 				e.stopPropagation();
 				this.props.searchAction(this.refs.search.value);
 			}
 		}, {
-			key: "render",
+			key: 'render',
 			value: function render() {
+				var inputWidth = {
+					width: '100%'
+				};
+				var tdWidth = {
+					width: '800px'
+				};
 				return _react2.default.createElement(
-					"div",
-					{ className: "form-group label-floating" },
+					'div',
+					{ className: 'form-group label-floating' },
 					_react2.default.createElement(
-						"form",
+						'form',
 						{ onSubmit: this.submitHandler.bind(this) },
 						_react2.default.createElement(
-							"div",
-							{ className: "mdl-textfield mdl-js-textfield mdl-textfield--floating-label" },
-							_react2.default.createElement("input", { className: "mdl-textfield__input", type: "text", id: "sample1", name: "search_term", value: this.props.search_term, ref: "search"
-							}),
+							'table',
+							{ style: inputWidth },
 							_react2.default.createElement(
-								"label",
-								{ className: "mdl-textfield__label", htmlFor: "smaple1" },
-								"Search here"
-							),
-							_react2.default.createElement(
-								"button",
-								{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored", onClick: this.handleClickAction.bind(this) },
+								'tbody',
+								null,
 								_react2.default.createElement(
-									"i",
-									{ className: "material-icons" },
-									"search"
+									'tr',
+									null,
+									_react2.default.createElement(
+										'td',
+										{ style: tdWidth },
+										_react2.default.createElement(
+											'div',
+											{ className: 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label', style: inputWidth },
+											_react2.default.createElement('input', { className: 'mdl-textfield__input', type: 'text', id: 'sample1', name: 'search_term', value: this.props.search_term, ref: 'search'
+											}),
+											_react2.default.createElement(
+												'label',
+												{ className: 'mdl-textfield__label', htmlFor: 'smaple1' },
+												'OR Search here for more employees'
+											)
+										)
+									),
+									_react2.default.createElement(
+										'td',
+										null,
+										_react2.default.createElement(
+											'button',
+											{ className: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored',
+												onClick: this.handleClickAction.bind(this) },
+											_react2.default.createElement(
+												'i',
+												{ className: 'material-icons' },
+												'search'
+											)
+										)
+									)
 								)
 							)
 						)

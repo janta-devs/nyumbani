@@ -23,6 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <script src="<?php print base_url();?>assets/node_modules/bootstrap/assets/js/ie-emulation-modes-warning.js"></script>
     <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap/dist/css/custom.css">
+    <script src="<?php print base_url(); ?>assets/node_modules/material-design-lite/material.min.js" type="text/javascript" charset="utf-8" async defer></script>
     <style>
         .mdl-data-table{
             width: 100%;
@@ -43,8 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </div>
     </main>
   </div><!--container ends here-->
-    <script src="<?php print base_url();?>assets/node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="<?php print base_url(); ?>assets/node_modules/material-design-lite/material.min.js" type="text/javascript" charset="utf-8" async defer></script><!-- 
+    <script src="<?php print base_url();?>assets/node_modules/jquery/dist/jquery.min.js"></script><!-- 
     <script src="<?php print base_url();?>assets/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="<?php print base_url();?>assets/node_modules/bootstrap-material-design/dist/js/ripples.min.js"></script>
     <script src="<?php print base_url();?>assets/node_modules/bootstrap-material-design/dist/js/material.js"></script> -->
