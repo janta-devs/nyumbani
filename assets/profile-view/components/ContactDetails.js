@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 class ContactDetails extends Component{
   render() {
+     var userInfo = this.props.data.EmployeeData;
     return (
           <div className="card" id="profile-employment">
             <header className="employment-header">
@@ -13,7 +14,7 @@ class ContactDetails extends Component{
               <div className="timeline-record-list ">
                 <div className="record-row">
                   <div className="timeline-record-right">
-                    <p className="timeline-record-title">0725869740</p>
+                    <p className="timeline-record-title">{userInfo.phone}</p>
                   </div>
                   <div className="timeline-record-left">
                     <p className="timeline-record-date">
@@ -27,7 +28,7 @@ class ContactDetails extends Component{
               <div className="timeline-record-list ">
                 <div className="record-row">
                   <div className="timeline-record-right">
-                    <p className="timeline-record-title">theantonymars@gmail.com</p>
+                    <p className="timeline-record-title">{userInfo.email}</p>
                   </div>
                   <div className="timeline-record-left">
                     <p className="timeline-record-date">

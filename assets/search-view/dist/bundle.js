@@ -92,6 +92,7 @@
 			_reactRouter.Router,
 			{ history: _Store.history },
 			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home', component: _MainApp2.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home/', component: _MainApp2.default }),
 			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home/PostJob', component: _PostJobComponent2.default }),
 			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home/Employee/:id', component: _Main2.default })
 		)
@@ -38451,10 +38452,10 @@
 			key: 'render',
 			value: function render() {
 
-				// if(this.props.State.AccountUser.hasOwnProperty('login_id')){
-				// 	var firstname = this.props.State.AccountUser.fname;
-				// 	var lastname = this.props.State.AccountUser.lname;
-				// }
+				if (this.props.State.AccountUser.hasOwnProperty('login_id')) {
+					var firstname = this.props.State.AccountUser.fname;
+					var lastname = this.props.State.AccountUser.lname;
+				}
 				var floatStlye = {
 					float: 'right'
 				};
@@ -38464,7 +38465,11 @@
 					_react2.default.createElement(
 						'div',
 						{ className: 'mdl-cell mdl-cell--12-col' },
-						'Welcome!',
+						'Welcome ',
+						firstname,
+						' ',
+						lastname,
+						'!',
 						_react2.default.createElement(
 							'div',
 							{ style: floatStlye },
@@ -38928,17 +38933,17 @@
 							_react2.default.createElement(
 								'th',
 								{ className: 'mdl-data-table__cell--non-numeric' },
-								'IDENTIFICATION No.'
-							),
-							_react2.default.createElement(
-								'th',
-								{ className: 'mdl-data-table__cell--non-numeric' },
 								'PROFESSION'
 							),
 							_react2.default.createElement(
 								'th',
 								{ className: 'mdl-data-table__cell--non-numeric' },
 								'CITY'
+							),
+							_react2.default.createElement(
+								'th',
+								{ className: 'mdl-data-table__cell--non-numeric' },
+								'RATING'
 							),
 							_react2.default.createElement(
 								'th',
@@ -39036,8 +39041,10 @@
 		}
 
 		_createClass(TableCell, [{
-			key: 'componentWillUpdate',
-			value: function componentWillUpdate(nxtProp, nxtState) {}
+			key: 'componentDidMount',
+			value: function componentDidMount(nxtProp, nxtState) {
+				this.props.State.Actions.pullEmployeeData(this.props.id);
+			}
 		}, {
 			key: 'render',
 			value: function render() {
@@ -39054,17 +39061,17 @@
 					_react2.default.createElement(
 						'td',
 						{ className: 'mdl-data-table__cell--non-numeric' },
-						this.props.id_pass
-					),
-					_react2.default.createElement(
-						'td',
-						{ className: 'mdl-data-table__cell--non-numeric' },
 						this.props.profession
 					),
 					_react2.default.createElement(
 						'td',
 						{ className: 'mdl-data-table__cell--non-numeric' },
 						this.props.city
+					),
+					_react2.default.createElement(
+						'td',
+						{ className: 'mdl-data-table__cell--non-numeric' },
+						this.props.id_pass
 					),
 					_react2.default.createElement(
 						'td',
@@ -39203,36 +39210,19 @@
 	    var _this = _possibleConstructorReturn(this, (MainComponent.__proto__ || Object.getPrototypeOf(MainComponent)).call(this, context, props));
 
 	    _this.state = {
-	      ComponentState: {}
+	      data: _this.props.store.getState()
 	    };
 	    return _this;
 	  }
 
 	  _createClass(MainComponent, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      var selected_employee = this.props.routing.routeParams;
-	      this.props.store.dispatch(this.props.Actions.pullEmployeeData(selected_employee.id));
-	    }
-	  }, {
-	    key: 'componentWillUpdate',
-	    value: function componentWillUpdate(nextProps, nextState) {
-	      var stateNow = nextProps.store.getState();
-
-	      console.log(stateNow);
-	      // this.setState({ComponentState: stateNow });
-
-
-	      // console.log( this.state );
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
 	        null,
 	        _react2.default.createElement(_BackComponent2.default, null),
-	        _react2.default.createElement(_ProfileSummary2.default, { data: this.state.ComponentState }),
+	        _react2.default.createElement(_ProfileSummary2.default, { data: this.state.data }),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'with-container content' },
@@ -39242,7 +39232,7 @@
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'column d-1-3 m-5-12 s-1-1 xs-1-1' },
-	              _react2.default.createElement(_ProfileInterests2.default, null),
+	              _react2.default.createElement(_ProfileInterests2.default, { data: this.state.data }),
 	              _react2.default.createElement(_ProfileInterestedEmployers2.default, null),
 	              _react2.default.createElement(_ProfileInterestedIn2.default, null)
 	            ),
@@ -39250,10 +39240,10 @@
 	              'div',
 	              { className: 'column d-2-3 m-7-12 s-1-1 xs-1-1' },
 	              _react2.default.createElement(_BasicDetails2.default, null),
-	              _react2.default.createElement(_ContactDetails2.default, null),
+	              _react2.default.createElement(_ContactDetails2.default, { data: this.state.data }),
 	              _react2.default.createElement(_Skills2.default, null),
-	              _react2.default.createElement(_ProfessionalExperience2.default, null),
-	              _react2.default.createElement(_EducationBackground2.default, null)
+	              _react2.default.createElement(_ProfessionalExperience2.default, { data: this.state.data }),
+	              _react2.default.createElement(_EducationBackground2.default, { data: this.state.data })
 	            )
 	          )
 	        )
@@ -39876,6 +39866,7 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
+
 	var EmployeeReducer = function EmployeeReducer() {
 		var EmployeeData = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 		var action = arguments[1];
@@ -39885,8 +39876,8 @@
 				return Object.assign({}, EmployeeData, action.data);
 			case 'RECOMMEND':
 				return;
-			case 'REQUEST_EMPLOYEE':
-				return;
+			case 'CLEAR_STATE':
+				return EmployeeData = {};
 			default:
 				return EmployeeData;
 		}
@@ -40907,6 +40898,7 @@
 					dataType: 'json',
 					data: { 'id': id }
 				}).done(function (response) {
+
 					self(Actions.populateEmployeeData(response));
 				});
 			};
@@ -40964,9 +40956,7 @@
 	  _createClass(ProfileSummary, [{
 	    key: 'render',
 	    value: function render() {
-	      //if(this.props.data.hasOwnProperty('fname')){
-	      console.log(this.props.data);
-	      // }
+	      var userInfo = this.props.data.EmployeeData;
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'headline' },
@@ -40985,12 +40975,12 @@
 	                _react2.default.createElement(
 	                  'div',
 	                  { className: 'row' },
-	                  _react2.default.createElement(_ProfileSummaryBio2.default, null),
+	                  _react2.default.createElement(_ProfileSummaryBio2.default, { userInfo: userInfo }),
 	                  _react2.default.createElement(
 	                    'div',
 	                    { className: 'column d-1-3 m-1-4 s-1-1 xs-1-1 stats-column' },
-	                    _react2.default.createElement(_ProfileSummaryStats2.default, null),
-	                    _react2.default.createElement(_ProfileSummaryActions2.default, null)
+	                    _react2.default.createElement(_ProfileSummaryStats2.default, { userInfo: userInfo }),
+	                    _react2.default.createElement(_ProfileSummaryActions2.default, { userInfo: true })
 	                  )
 	                )
 	              )
@@ -41060,7 +41050,7 @@
 	                _react2.default.createElement(
 	                  "data",
 	                  { className: "number", value: "4373" },
-	                  "4373"
+	                  this.props.userInfo.recommendations
 	                ),
 	                _react2.default.createElement(
 	                  "p",
@@ -41242,8 +41232,8 @@
 	            _react2.default.createElement(
 	              "div",
 	              { className: "image-box" },
-	              _react2.default.createElement("img", { src: "/nyumbani/photo_assets/anony.jpg", alt: "Profile Picture", className: "large-image" }),
-	              _react2.default.createElement("img", { className: "advisor-icon", src:  true ? "/nyumbani/photo_assets/verified.svg" : "/nyumbani/photo_assets/unverified.png", alt: "Janta Advisor" })
+	              _react2.default.createElement("img", { src: this.props.userInfo.profile_photo, alt: "Profile Picture", className: "large-image" }),
+	              _react2.default.createElement("img", { className: "advisor-icon", src: this.props.userInfo.verification === 1 ? "/nyumbani/photo_assets/verified.svg" : "/nyumbani/photo_assets/unverified.png", alt: "Janta Advisor" })
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -41255,7 +41245,9 @@
 	              _react2.default.createElement(
 	                "h1",
 	                null,
-	                "Antony Ngayo"
+	                this.props.userInfo.fname,
+	                " ",
+	                this.props.userInfo.lname
 	              ),
 	              _react2.default.createElement(
 	                "ul",
@@ -41264,7 +41256,7 @@
 	                _react2.default.createElement(
 	                  "li",
 	                  null,
-	                  "job}"
+	                  this.props.userInfo.profession
 	                )
 	              )
 	            )
@@ -41321,9 +41313,15 @@
 	      var divStyleTwo = {
 	        height: 'auto'
 	      };
-	      // let interests = this.props.userInfo.skills.map( (x,y) => {
-	      //     return <span key ={y}>{x.skill}</span>
-	      // });
+	      var userInfo = this.props.data.EmployeeData;
+
+	      var Interests = userInfo.skills.map(function (x, y) {
+	        return _react2.default.createElement(
+	          'span',
+	          { key: y },
+	          x.skill
+	        );
+	      });
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'card', id: 'profile-interests' },
@@ -41348,7 +41346,7 @@
 	              _react2.default.createElement(
 	                'span',
 	                { className: 'tag' },
-	                'Interests'
+	                Interests
 	              )
 	            ),
 	            _react2.default.createElement(
@@ -41751,24 +41749,42 @@
 	    key: "render",
 	    value: function render() {
 
-	      // let Jobs = this.props.userInfo.past_jobs.map( (x,y) => {
-	      //   return(
-	      //           <div className="record-row" key={y}>             
-	      //               <div className="timeline-record-right">
-	      //                 <p className="timeline-record-title">{x.title}</p>
-	      //                 <p className="timeline-record-place">{x.job}</p>
-	      //               </div>
-	      //               <div className="timeline-record-left">
-	      //                 <p className="timeline-record-date">
-	      //                     <span className="block">
-	      //                        {x.duration}
-	      //                     </span>
-	      //                     <span className="block"></span>
-	      //                 </p>
-	      //               </div>
-	      //             </div>
-	      //   )
-	      // });
+	      var userInfo = this.props.data.EmployeeData;
+
+	      var Jobs = userInfo.past_job.map(function (x, y) {
+	        return _react2.default.createElement(
+	          "div",
+	          { className: "record-row", key: y },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "timeline-record-right" },
+	            _react2.default.createElement(
+	              "p",
+	              { className: "timeline-record-title" },
+	              x.title
+	            ),
+	            _react2.default.createElement(
+	              "p",
+	              { className: "timeline-record-place" },
+	              x.job
+	            )
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "timeline-record-left" },
+	            _react2.default.createElement(
+	              "p",
+	              { className: "timeline-record-date" },
+	              _react2.default.createElement(
+	                "span",
+	                { className: "block" },
+	                x.duration
+	              ),
+	              _react2.default.createElement("span", { className: "block" })
+	            )
+	          )
+	        );
+	      });
 
 	      return _react2.default.createElement(
 	        "div",
@@ -41788,7 +41804,7 @@
 	          _react2.default.createElement(
 	            "div",
 	            { className: "timeline-record-list " },
-	            "Jobs"
+	            Jobs
 	          )
 	        )
 	      );
@@ -41807,7 +41823,7 @@
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -41825,78 +41841,163 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var EducationBackground = function (_Component) {
-	  _inherits(EducationBackground, _Component);
+	    _inherits(EducationBackground, _Component);
 
-	  function EducationBackground() {
-	    _classCallCheck(this, EducationBackground);
+	    function EducationBackground() {
+	        _classCallCheck(this, EducationBackground);
 
-	    return _possibleConstructorReturn(this, (EducationBackground.__proto__ || Object.getPrototypeOf(EducationBackground)).apply(this, arguments));
-	  }
+	        return _possibleConstructorReturn(this, (EducationBackground.__proto__ || Object.getPrototypeOf(EducationBackground)).apply(this, arguments));
+	    }
 
-	  _createClass(EducationBackground, [{
-	    key: "render",
-	    value: function render() {
-	      return _react2.default.createElement(
-	        "div",
-	        { className: "card", id: "profile-education" },
-	        _react2.default.createElement(
-	          "header",
-	          { className: "education-header" },
-	          _react2.default.createElement(
-	            "h2",
-	            null,
-	            "Education history"
-	          )
-	        ),
-	        _react2.default.createElement(
-	          "section",
-	          { className: "education-content" },
-	          _react2.default.createElement(
-	            "div",
-	            { className: "timeline-record-list" },
-	            _react2.default.createElement(
-	              "div",
-	              { className: "record-row" },
-	              _react2.default.createElement(
+	    _createClass(EducationBackground, [{
+	        key: "render",
+	        value: function render() {
+	            var userInfo = this.props.data.EmployeeData;
+	            return _react2.default.createElement(
 	                "div",
-	                { className: "timeline-record-right" },
+	                { className: "card", id: "profile-education" },
 	                _react2.default.createElement(
-	                  "p",
-	                  { className: "timeline-record-title" },
-	                  "Kenyatta University/Faculty of Computational Mathematics and Cybernetics"
+	                    "header",
+	                    { className: "education-header" },
+	                    _react2.default.createElement(
+	                        "h2",
+	                        null,
+	                        "Education history"
+	                    )
 	                ),
 	                _react2.default.createElement(
-	                  "p",
-	                  { className: "timeline-record-place" },
-	                  "PhD"
+	                    "section",
+	                    { className: "education-content" },
+	                    _react2.default.createElement(
+	                        "div",
+	                        { className: "timeline-record-list" },
+	                        _react2.default.createElement(
+	                            "div",
+	                            { className: "record-row" },
+	                            _react2.default.createElement(
+	                                "div",
+	                                { className: "timeline-record-right" },
+	                                _react2.default.createElement(
+	                                    "p",
+	                                    { className: "timeline-record-title" },
+	                                    userInfo.university_history.institution
+	                                ),
+	                                _react2.default.createElement(
+	                                    "p",
+	                                    { className: "timeline-record-place" },
+	                                    userInfo.university_history.grade
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                "div",
+	                                { className: "timeline-record-left" },
+	                                _react2.default.createElement(
+	                                    "p",
+	                                    { className: "timeline-record-date" },
+	                                    _react2.default.createElement(
+	                                        "span",
+	                                        { className: "block" },
+	                                        "September 1983 - February 1988"
+	                                    ),
+	                                    _react2.default.createElement(
+	                                        "span",
+	                                        { className: "block" },
+	                                        _react2.default.createElement(
+	                                            "a",
+	                                            { href: userInfo.university_history.certificate_link },
+	                                            "Certificate Link"
+	                                        )
+	                                    )
+	                                )
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            "div",
+	                            { className: "record-row" },
+	                            _react2.default.createElement(
+	                                "div",
+	                                { className: "timeline-record-right" },
+	                                _react2.default.createElement(
+	                                    "p",
+	                                    { className: "timeline-record-title" },
+	                                    userInfo.secondary_history.institution
+	                                ),
+	                                _react2.default.createElement(
+	                                    "p",
+	                                    { className: "timeline-record-place" },
+	                                    userInfo.secondary_history.grade
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                "div",
+	                                { className: "timeline-record-left" },
+	                                _react2.default.createElement(
+	                                    "p",
+	                                    { className: "timeline-record-date" },
+	                                    _react2.default.createElement(
+	                                        "span",
+	                                        { className: "block" },
+	                                        "September 1983 - February 1988"
+	                                    ),
+	                                    _react2.default.createElement(
+	                                        "span",
+	                                        { className: "block" },
+	                                        _react2.default.createElement(
+	                                            "a",
+	                                            { href: userInfo.secondary_history.certificate_link },
+	                                            "Certificate Link"
+	                                        )
+	                                    )
+	                                )
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            "div",
+	                            { className: "record-row" },
+	                            _react2.default.createElement(
+	                                "div",
+	                                { className: "timeline-record-right" },
+	                                _react2.default.createElement(
+	                                    "p",
+	                                    { className: "timeline-record-title" },
+	                                    userInfo.primary_history.institution
+	                                ),
+	                                _react2.default.createElement(
+	                                    "p",
+	                                    { className: "timeline-record-place" },
+	                                    userInfo.primary_history.grade
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                "div",
+	                                { className: "timeline-record-left" },
+	                                _react2.default.createElement(
+	                                    "p",
+	                                    { className: "timeline-record-date" },
+	                                    _react2.default.createElement(
+	                                        "span",
+	                                        { className: "block" },
+	                                        "September 1983 - February 1988"
+	                                    ),
+	                                    _react2.default.createElement(
+	                                        "span",
+	                                        { className: "block" },
+	                                        _react2.default.createElement(
+	                                            "a",
+	                                            { href: userInfo.primary_history.certificate_link },
+	                                            "Certificate Link"
+	                                        )
+	                                    )
+	                                )
+	                            )
+	                        )
+	                    )
 	                )
-	              ),
-	              _react2.default.createElement(
-	                "div",
-	                { className: "timeline-record-left" },
-	                _react2.default.createElement(
-	                  "p",
-	                  { className: "timeline-record-date" },
-	                  _react2.default.createElement(
-	                    "span",
-	                    { className: "block" },
-	                    "September 1983 - February 1988"
-	                  ),
-	                  _react2.default.createElement(
-	                    "span",
-	                    { className: "block" },
-	                    " (4 years) "
-	                  )
-	                )
-	              )
-	            )
-	          )
-	        )
-	      );
-	    }
-	  }]);
+	            );
+	        }
+	    }]);
 
-	  return EducationBackground;
+	    return EducationBackground;
 	}(_react.Component);
 
 	exports.default = EducationBackground;
@@ -42172,6 +42273,7 @@
 	  _createClass(ContactDetails, [{
 	    key: "render",
 	    value: function render() {
+	      var userInfo = this.props.data.EmployeeData;
 	      return _react2.default.createElement(
 	        "div",
 	        { className: "card", id: "profile-employment" },
@@ -42199,7 +42301,7 @@
 	                _react2.default.createElement(
 	                  "p",
 	                  { className: "timeline-record-title" },
-	                  "0725869740"
+	                  userInfo.phone
 	                )
 	              ),
 	              _react2.default.createElement(
@@ -42230,7 +42332,7 @@
 	                _react2.default.createElement(
 	                  "p",
 	                  { className: "timeline-record-title" },
-	                  "theantonymars@gmail.com"
+	                  userInfo.email
 	                )
 	              ),
 	              _react2.default.createElement(
@@ -42339,7 +42441,7 @@
 					_react2.default.createElement(
 						_reactRouter.Link,
 						{ to: '/nyumbani/index.php/home',
-							className: 'btn btn-raised btn-info margin-bottom-1em', ref: 'back' },
+							className: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent', ref: 'back' },
 						'Back to Search'
 					)
 				);

@@ -6,7 +6,7 @@ class BackComponent  extends Component{
 		return (
 		<div>
 		   	<Link to={`/nyumbani/index.php/home`}
-				className='btn btn-raised btn-info margin-bottom-1em' ref = "back">
+				className = 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent' ref = "back">
 				Back to Search
 			</Link>
 		</div>

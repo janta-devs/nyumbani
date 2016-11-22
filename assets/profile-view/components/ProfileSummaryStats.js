@@ -8,7 +8,7 @@ class ProfileSummaryStats extends Component{
                     <section className="statistics-content">
                       <ul className="stat-group clearfix">
                         <li className="stat-box with-tooltip stat-readers" tabIndex="0">
-                            <data className="number" value="4373">4373</data>
+                            <data className="number" value="4373">{this.props.userInfo.recommendations}</data>
                             <p className="caption" data-toggle="popover" data-trigger="hover" data-content="Number of recommendations on Janta" data-placement="left">Recommendations</p>
                         </li>
                         <li className="stat-box with-tooltip stat-publications" id="interests" tabIndex="0">
