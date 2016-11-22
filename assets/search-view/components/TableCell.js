@@ -8,33 +8,33 @@ class TableCell extends Component{
 		this.props.State.Actions.pullEmployeeData(this.props.id);
 	}
 	render() {
+    const styleIEButton = {
+      lineHeight: '10px',
+      padding: '1px 1px 1px 1px',
+      textTransform: 'unset',
+    };
 		return (
+			<tbody>
 				<tr>
-					<td className="mdl-data-table__cell--non-numeric">{this.props.surname}</td>
-					<td className="mdl-data-table__cell--non-numeric">{this.props.profession}</td>
-					<td className="mdl-data-table__cell--non-numeric">{this.props.city}</td>
-					<td className="mdl-data-table__cell--non-numeric">{this.props.id_pass}</td>
+					<td>{this.props.surname}</td>
+					<td>{this.props.profession}</td>
+					<td>{this.props.city}</td>
+					<td>{this.props.id_pass}</td>
 					<td>
-					<span className="input-group-btn">
 					<Link to={`/nyumbani/index.php/home/Employee/${this.props.id}`}>
-						<button	className = 'btn btn-fab'><i className="pe-7s-id pe-va pe-lg"></i>
+						<button style={styleIEButton}	className = 'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored'>View Profile <i className="material-icons">account_box</i>
 						</button>
 					</Link>
-					</span>
-					<span className="input-group-btn">
-					<button
-						onClick={() => this.props.changeAppMode('message', this.props.id)}
-						className = 'btn btn-fab'><i className="pe-7s-comment pe-va pe-lg"></i>
-					</button>
-					</span>
-					<span className="input-group-btn">
-					<button 
-						onClick={() => this.props.changeAppMode('interest', this.props.id)}
-						className = 'btn btn-fab'><i className="pe-7s-like2 pe-va pe-lg"></i>
-					</button>
-					</span>
 					</td>
 				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</tbody>
 		);
 	}
 }

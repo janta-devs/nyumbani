@@ -13,19 +13,25 @@ class ResultTable extends Component{
 		profession = {x.profession} State = {this.props.State} />);
 
 		return (
-				<table className = "mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+			<div className="table-responsive-vertical shadow-z-1">
+				<table className = "table table-hover table-mc-light-blue ">
 						<thead>
 							<tr>
-								<th className="mdl-data-table__cell--non-numeric">SURNAME</th>
-								<th className="mdl-data-table__cell--non-numeric">PROFESSION</th>
-								<th className="mdl-data-table__cell--non-numeric">CITY</th>
-								<th className="mdl-data-table__cell--non-numeric">RATING</th>
-								<th className="mdl-data-table__cell--non-numeric">ACTIONS</th>
+								<th>SURNAME</th>
+								<th>PROFESSION</th>
+								<th>CITY</th>
+								<th className="mdl-data-table__header--sorted-ascending">RATING</th>
+								<th>ACTIONS</th>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>					
 							</tr>
 						</thead>
-						<tbody>
 							{populate}
-						</tbody>
 						<tfoot>
 								<tr>
 									<td>_</td>
@@ -35,7 +41,8 @@ class ResultTable extends Component{
 									<td>_</td>
 								</tr>
 						</tfoot>
-					</table>
+				</table>
+			</div>		
 		);
 	}
 }

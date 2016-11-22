@@ -38389,8 +38389,6 @@
 									'div',
 									{ className: 'column l-3-4 recommendations' },
 									_react2.default.createElement(_SearchBar2.default, { searchAction: this.props.searchAction }),
-									_react2.default.createElement('br', null),
-									_react2.default.createElement('br', null),
 									checker
 								)
 							)
@@ -38673,7 +38671,7 @@
 												_react2.default.createElement(
 													'i',
 													{ className: 'material-icons' },
-													'exit_to_app'
+													'account_box'
 												)
 											)
 										)
@@ -38723,7 +38721,7 @@
 												_react2.default.createElement(
 													'i',
 													{ className: 'material-icons' },
-													'exit_to_app'
+													'account_box'
 												)
 											)
 										)
@@ -38917,76 +38915,85 @@
 				});
 
 				return _react2.default.createElement(
-					'table',
-					{ className: 'mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp' },
+					'div',
+					{ className: 'table-responsive-vertical shadow-z-1' },
 					_react2.default.createElement(
-						'thead',
-						null,
+						'table',
+						{ className: 'table table-hover table-mc-light-blue ' },
 						_react2.default.createElement(
-							'tr',
+							'thead',
 							null,
 							_react2.default.createElement(
-								'th',
-								{ className: 'mdl-data-table__cell--non-numeric' },
-								'SURNAME'
+								'tr',
+								null,
+								_react2.default.createElement(
+									'th',
+									null,
+									'SURNAME'
+								),
+								_react2.default.createElement(
+									'th',
+									null,
+									'PROFESSION'
+								),
+								_react2.default.createElement(
+									'th',
+									null,
+									'CITY'
+								),
+								_react2.default.createElement(
+									'th',
+									{ className: 'mdl-data-table__header--sorted-ascending' },
+									'RATING'
+								),
+								_react2.default.createElement(
+									'th',
+									null,
+									'ACTIONS'
+								)
 							),
 							_react2.default.createElement(
-								'th',
-								{ className: 'mdl-data-table__cell--non-numeric' },
-								'PROFESSION'
-							),
-							_react2.default.createElement(
-								'th',
-								{ className: 'mdl-data-table__cell--non-numeric' },
-								'CITY'
-							),
-							_react2.default.createElement(
-								'th',
-								{ className: 'mdl-data-table__cell--non-numeric' },
-								'RATING'
-							),
-							_react2.default.createElement(
-								'th',
-								{ className: 'mdl-data-table__cell--non-numeric' },
-								'ACTIONS'
+								'tr',
+								null,
+								_react2.default.createElement('td', null),
+								_react2.default.createElement('td', null),
+								_react2.default.createElement('td', null),
+								_react2.default.createElement('td', null),
+								_react2.default.createElement('td', null)
 							)
-						)
-					),
-					_react2.default.createElement(
-						'tbody',
-						null,
-						populate
-					),
-					_react2.default.createElement(
-						'tfoot',
-						null,
+						),
+						populate,
 						_react2.default.createElement(
-							'tr',
+							'tfoot',
 							null,
 							_react2.default.createElement(
-								'td',
+								'tr',
 								null,
-								'_'
-							),
-							_react2.default.createElement(
-								'td',
-								null,
-								'_'
-							),
-							_react2.default.createElement(
-								'td',
-								null,
-								'_'
-							),
-							_react2.default.createElement(
-								'td',
-								null,
-								'\xA9 2016'
-							),
-							_react2.default.createElement(
-								'td',
-								null,
-								'_'
+								_react2.default.createElement(
+									'td',
+									null,
+									'_'
+								),
+								_react2.default.createElement(
+									'td',
+									null,
+									'_'
+								),
+								_react2.default.createElement(
+									'td',
+									null,
+									'_'
+								),
+								_react2.default.createElement(
+									'td',
+									null,
+									'\xA9 2016'
+								),
+								_react2.default.createElement(
+									'td',
+									null,
+									'_'
+								)
 							)
 						)
 					)
@@ -39048,73 +39055,64 @@
 		}, {
 			key: 'render',
 			value: function render() {
-				var _this2 = this;
-
+				var styleIEButton = {
+					lineHeight: '10px',
+					padding: '1px 1px 1px 1px',
+					textTransform: 'unset'
+				};
 				return _react2.default.createElement(
-					'tr',
+					'tbody',
 					null,
 					_react2.default.createElement(
-						'td',
-						{ className: 'mdl-data-table__cell--non-numeric' },
-						this.props.surname
-					),
-					_react2.default.createElement(
-						'td',
-						{ className: 'mdl-data-table__cell--non-numeric' },
-						this.props.profession
-					),
-					_react2.default.createElement(
-						'td',
-						{ className: 'mdl-data-table__cell--non-numeric' },
-						this.props.city
-					),
-					_react2.default.createElement(
-						'td',
-						{ className: 'mdl-data-table__cell--non-numeric' },
-						this.props.id_pass
-					),
-					_react2.default.createElement(
-						'td',
+						'tr',
 						null,
 						_react2.default.createElement(
-							'span',
-							{ className: 'input-group-btn' },
+							'td',
+							null,
+							this.props.surname
+						),
+						_react2.default.createElement(
+							'td',
+							null,
+							this.props.profession
+						),
+						_react2.default.createElement(
+							'td',
+							null,
+							this.props.city
+						),
+						_react2.default.createElement(
+							'td',
+							null,
+							this.props.id_pass
+						),
+						_react2.default.createElement(
+							'td',
+							null,
 							_react2.default.createElement(
 								_reactRouter.Link,
 								{ to: '/nyumbani/index.php/home/Employee/' + this.props.id },
 								_react2.default.createElement(
 									'button',
-									{ className: 'btn btn-fab' },
-									_react2.default.createElement('i', { className: 'pe-7s-id pe-va pe-lg' })
+									{ style: styleIEButton, className: 'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored' },
+									'View Profile ',
+									_react2.default.createElement(
+										'i',
+										{ className: 'material-icons' },
+										'account_box'
+									)
 								)
 							)
-						),
-						_react2.default.createElement(
-							'span',
-							{ className: 'input-group-btn' },
-							_react2.default.createElement(
-								'button',
-								{
-									onClick: function onClick() {
-										return _this2.props.changeAppMode('message', _this2.props.id);
-									},
-									className: 'btn btn-fab' },
-								_react2.default.createElement('i', { className: 'pe-7s-comment pe-va pe-lg' })
-							)
-						),
-						_react2.default.createElement(
-							'span',
-							{ className: 'input-group-btn' },
-							_react2.default.createElement(
-								'button',
-								{
-									onClick: function onClick() {
-										return _this2.props.changeAppMode('interest', _this2.props.id);
-									},
-									className: 'btn btn-fab' },
-								_react2.default.createElement('i', { className: 'pe-7s-like2 pe-va pe-lg' })
-							)
 						)
+					),
+					_react2.default.createElement(
+						'tr',
+						null,
+						_react2.default.createElement('td', null),
+						_react2.default.createElement('td', null),
+						_react2.default.createElement('td', null),
+						_react2.default.createElement('td', null),
+						_react2.default.createElement('td', null)
 					)
 				);
 			}
@@ -42437,7 +42435,7 @@
 			value: function render() {
 				return _react2.default.createElement(
 					'div',
-					null,
+					{ className: 'mdl-cell mdl-cell--12-col' },
 					_react2.default.createElement(
 						_reactRouter.Link,
 						{ to: '/nyumbani/index.php/home',
