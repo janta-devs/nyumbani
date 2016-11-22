@@ -17,9 +17,9 @@ class ResultTable extends Component{
 						<thead>
 							<tr>
 								<th className="mdl-data-table__cell--non-numeric">SURNAME</th>
-								<th className="mdl-data-table__cell--non-numeric">IDENTIFICATION No.</th>
 								<th className="mdl-data-table__cell--non-numeric">PROFESSION</th>
 								<th className="mdl-data-table__cell--non-numeric">CITY</th>
+								<th className="mdl-data-table__cell--non-numeric">RATING</th>
 								<th className="mdl-data-table__cell--non-numeric">ACTIONS</th>
 							</tr>
 						</thead>

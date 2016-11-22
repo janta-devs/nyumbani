@@ -11,8 +11,8 @@ class TableCell extends Component{
 		return (
 				<tr>
 					<td className="mdl-data-table__cell--non-numeric">{this.props.surname}</td>
-					<td className="mdl-data-table__cell--non-numeric">{this.props.id_pass}</td>
 					<td className="mdl-data-table__cell--non-numeric">{this.props.profession}</td>
+					<td className="mdl-data-table__cell--non-numeric">{this.props.id_pass}</td>
 					<td className="mdl-data-table__cell--non-numeric">{this.props.city}</td>
 					<td>
 					<span className="input-group-btn">

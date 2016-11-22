@@ -31,4 +31,13 @@ module.exports = {
 	 //      sourceMap: true
 	 //    })
 	 //  ]
+
+// module.exports = {
+// 	entry:['./navbar/navbar.js'],
+// 	output:{
+// 		path:'./navbar/dist',
+// 		filename:'navbar-bundle.js',
+// 		publicPath:'/'
+// 	},
+
 }
