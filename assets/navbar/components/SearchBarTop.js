@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-
+import Material from 'material-design-lite';
 
 
 class SearchBarTop extends Component {
+    componentDidMount() {
+        componentHandler.upgradeDom();
+    }
 	render () {
 		return (
             <div className="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
@@ -15,5 +18,8 @@ class SearchBarTop extends Component {
             </div>
         );
 	}
+    componentDidUpdate() {
+        componentHandler.upgradeDom();
+    }
 }
 export default SearchBarTop;

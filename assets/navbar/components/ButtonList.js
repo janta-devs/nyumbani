@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
+import Material from 'material-design-lite';
 
 
 class ButtonList extends Component {
+    componentDidMount() {
+        componentHandler.upgradeDom();
+    }
 	render () {
 		return (
 			<ul className="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" 
@@ -34,5 +38,8 @@ class ButtonList extends Component {
 			</ul>
 			);
 	}
+    componentDidUpdate() {
+        componentHandler.upgradeDom();
+    }
 }
 export default ButtonList;

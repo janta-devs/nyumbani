@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import ButtonList from './ButtonList';
+import Material from 'material-design-lite';
 
 
 
 class RightNav extends Component {
+    componentDidMount() {
+        componentHandler.upgradeDom();
+    }
 	render () {
 		return (
-            <nav className="mdl-navigation mdl-layout--large-screen-only">
+            <nav className="mdl-navigation">
             	<a className="mdl-navigation__link" href="">
             		Notifications <i className="material-icons">notifications</i>
             	</a>
@@ -47,5 +51,8 @@ class RightNav extends Component {
             </nav>
         );
 	}
+    componentDidUpdate() {
+        componentHandler.upgradeDom();
+    }
 }
 export default RightNav;
