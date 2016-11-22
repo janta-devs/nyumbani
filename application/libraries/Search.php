@@ -7,7 +7,7 @@ class Search {
 	//Defined global variables
 
 	public $professions_result = [];
-	public $location_result = [];
+	public $city_result = [];
 	public $unified_search_terms = [];
 	public $db_results = [];
 	public $term = "";
@@ -22,7 +22,7 @@ class Search {
 		$this->model = new Jobseeker();
 
 		$prof = $this->model->getData('profession');
-		$loc = $this->model->getData('location');
+		$loc = $this->model->getData('city');
 
 		$this->DBdata( $prof, $loc );
 	}
@@ -60,16 +60,16 @@ class Search {
 				}
 			}
 
-			foreach ($this->db_results['location'] as $key => $value) 
+			foreach ($this->db_results['city'] as $key => $value) 
 			{
 				if (preg_match("@".preg_quote($value)."@i", $this->term))
 				{
-					if( !in_array($value, $this->location_result))
+					if( !in_array($value, $this->city_result))
 					{
-						$this->location_result[] = $value;
+						$this->city_result[] = $value;
 					}
-					if( count( $this->location_result != 0 ) ){
-						$this->unified_search_terms['location'] = $this->location_result;
+					if( count( $this->city_result != 0 ) ){
+						$this->unified_search_terms['city'] = $this->city_result;
 					}
 				}
 			}
@@ -86,7 +86,7 @@ class Search {
 
 	// refactoring the data fetched from the database 
 
-	public function DBdata($profession, $location)
+	public function DBdata($profession, $city)
 
 	{
 		/*
@@ -100,11 +100,11 @@ class Search {
 				$this->db_results['profession'][] = $v[0];
 			}
 		}
-		foreach ( $location->result() as $row ) {
-			$v = explode(' ', (string)trim($row->location) );
+		foreach ( $city->result() as $row ) {
+			$v = explode(' ', (string)trim($row->city) );
 			if( strlen($v[0]) > 3 )
 			{
-				$this->db_results['location'][] = $v[0];
+				$this->db_results['city'][] = $v[0];
 			}
 		}
 		return ( $this->db_results );
@@ -146,7 +146,7 @@ class Search {
 	{
 		// create an autosuggesting system that will be checking the first 2 letters of the search term and tried to find a match
 
-		$merged_data = array_merge($this->db_results['profession'], $this->db_results['location'] );
+		$merged_data = array_merge($this->db_results['profession'], $this->db_results['city'] );
 		$suggestions = [];
 		$client_suggestions = [];
 		$main_array = [];

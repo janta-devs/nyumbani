@@ -15,14 +15,14 @@ class ProfileSummaryBio extends Component{
                   <section className="details-content">
                     <div className="summary-nested">
                       <h1>
-                      {this.props.data.first_name} {this.props.data.last_name}
+                        Antony Ngayo
                       </h1>
                       <ul className="bare-list bio-nested">
                         <li>
                          
                         </li>
                         <li>
-                           {this.props.data.profession}                    
+                           job}                    
                         </li>
               
                       </ul>

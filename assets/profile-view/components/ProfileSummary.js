@@ -9,7 +9,9 @@ import ProfileSummaryBio from './ProfileSummaryBio';
 
 class ProfileSummary extends Component{
 	render(){
-
+    //if(this.props.data.hasOwnProperty('fname')){
+      console.log( this.props.data );
+   // }
 		return (
         		<div className="headline">
                   <div className="with-container">
@@ -17,10 +19,10 @@ class ProfileSummary extends Component{
                       <section className="bio">
                         <div className="summary card">
                           <div className="row">
-                              <ProfileSummaryBio data = {this.props.data[0]}/>
+                              <ProfileSummaryBio />
                             <div className="column d-1-3 m-1-4 s-1-1 xs-1-1 stats-column">
-                              <ProfileSummaryStats data = {this.props.data[0]}/>
-                              <ProfileSummaryActions data = {this.props.data[0]}/>
+                              <ProfileSummaryStats/>
+                              <ProfileSummaryActions/>
                             </div>
                           </div>
                         </div>

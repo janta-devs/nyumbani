@@ -29,27 +29,31 @@ class Profile extends CI_Controller{
 
 	}
 	public function sendEducationInformation( $login_id = 3){
+		/*
+		* It has to be changed to properly format the data in the new database design
+		*
+		*/
 
-		$this->load->model('Education_information');
-		$education = new Education_information();
+		// $this->load->model('Education_information');
+		// $education = new Education_information();
 
-		$data = $this->input->post();
-		$data['login_id'] = $login_id;
+		// $data = $this->input->post();
+		// $data['login_id'] = $login_id;
 
-		$past_job = "";
-		foreach ($data as $key => $value) {
-			if( preg_match('/past_job/i', $key))
-			{
-				$past_job.=$value . ', ';
-				unset($data[$key]);
-			}
-		}
+		// $past_job = "";
+		// foreach ($data as $key => $value) {
+		// 	if( preg_match('/past_job/i', $key))
+		// 	{
+		// 		$past_job.=$value . ', ';
+		// 		unset($data[$key]);
+		// 	}
+		// }
 
-		$data['past_job'] = $past_job;
+		// $data['past_job'] = $past_job;
 
-		$insert_id = $education->insert( $data );
+		// $insert_id = $education->insert( $data );
 
-		print json_encode(['insert_id' => $insert_id]);
+		// print json_encode(['insert_id' => $insert_id]);
 
 	}
 	public function sendSkillInformation($login_id = 3)
@@ -84,56 +88,68 @@ class Profile extends CI_Controller{
 	}
 	public function getProfileData( )
 	{
-		$data = $this->session->userdata();
-		$login_id = $data['login_id'];
+		$data['id'] = 2;
+		if( isset( $data ) && !empty($data))
+		{
 
+			$login_id = $data['id'];
+			$this->load->model('Basic_information');
+			$basic = new Basic_information();
 
-		$this->load->model('Basic_information');
-		$basic = new Basic_information();
+			$this->load->model('Education_information');
+			$education = new Education_information();
 
-		$this->load->model('Education_information');
-		$education = new Education_information();
+			$this->load->model('User_login');
+			$user = new User_login();
 
-		$this->load->model('User_login');
-		$user = new User_login();
+			$this->load->model('Recommendations');
+			$recommendation = new Recommendations();
 
-		$this->load->model('Recommendations');
-		$recommendation = new Recommendations();
+			$user_login_data = (array)$user->load_user_data(['login_id'=> $login_id]);
+			unset($user_login_data['id']);
+			$basic_data = (array)$basic->load_user_data(['login_id'=> $login_id]);
+			unset($basic_data['id']);
+			$education_data = (array)$education->load_user_data( ['login_id'=> $login_id] );
+			unset($education_data['id']);
+			$recomm = (Array)$recommendation->getRecommendations( $login_id )[0];
+			unset($recomm['employee_login_id']);
 
-		$user_login_data = (array)$user->load_user_data(['login_id'=> $login_id]);
-		unset($user_login_data['id']);
-		$basic_data = (array)$basic->load_user_data(['login_id'=> $login_id]);
-		unset($basic_data['id']);
-		$education_data = (array)$education->load_user_data( ['login_id'=> $login_id] );
-		unset($education_data['id']);
-		$recomm = (Array)$recommendation->getRecommendations( $login_id )[0];
-		unset($recomm['employee_login_id']);
+			$past_job = $this->job_refactor( $education_data['past_job']);
+			$education_data['past_job'] = $past_job;
 
-		$education_data['past_jobs'] = $this->StringToArray($education_data['past_job'], ['job','duration','title']);
+			$primary_history = $this->school_history_refactor($education_data['primary_history']);
+			$education_data['primary_history'] = $primary_history;
+			
+			$secondary_history = $this->school_history_refactor($education_data['secondary_history']);
+			$education_data['secondary_history'] = $secondary_history;
 
-		$skills = explode('=', $education_data['skills']);
-		
-		for ($i=0; $i < count($skills); $i++) 
-		{ 
-			if( $i == 0 || $i%2 == 0)
-				$skill = explode(',', $skills[$i] );
-			else
-				$mode = explode(',', $skills[$i] );
-		}
+			$university_history = $this->school_history_refactor($education_data['university_history']);
+			$education_data['university_history'] = $university_history;
 
-		$new_array = [];
-		for ($k=0; $k < count( $skill ); $k++) { 
-			if( $skill[ $k ] != " " && !empty( $skill[ $k ] ) ){
-				$new_array[ ][ 'skill' ] = $skill[ $k ];
+			$skills = explode('=', $education_data['skills']);
+			
+			for ($i=0; $i < count($skills); $i++) 
+			{ 
+				if( $i == 0 || $i%2 == 0)
+					$skill = explode(',', $skills[$i] );
+				else
+					$mode = explode(',', $skills[$i] );
 			}
+
+			$new_array = [];
+			for ($k=0; $k < count( $skill ); $k++) { 
+				if( $skill[ $k ] != " " && !empty( $skill[ $k ] ) ){
+					$new_array[ ][ 'skill' ] = $skill[ $k ];
+				}
+			}
+
+			$education_data['skills'] = $new_array;
+
+			$UserInfo = array_merge_recursive($education_data, $basic_data, $user_login_data, $recomm);
+			$UserInfo['login_id'] = $UserInfo['login_id'][0]; 
+			print json_encode( (object)$UserInfo );
 		}
-
-		$education_data['skills'] = $new_array;
-
-		$UserInfo = array_merge_recursive($education_data, $basic_data, $user_login_data, $recomm);
-		$UserInfo['login_id'] = $UserInfo['login_id'][0]; 
-
-		print_r( (object)$UserInfo );
+		
 
 	}
 
@@ -178,6 +194,31 @@ class Profile extends CI_Controller{
 			}
 			return $new_arr;		
 		}
+	}
+	public function job_refactor( $jobs ){
+		$variables = explode('=', $jobs);
+		$job = explode(',',$variables[0]);
+		$duration = explode(',',$variables[1]);
+		$title = explode(',',$variables[2]);
+
+		for ($i=0; $i < count($job); $i++) { 
+			if( !empty($job[$i]) && $job[$i] != " " ){
+				$new_array[] = array_merge_recursive(['job'=>$job[$i]],['duration'=>$duration[$i]],['title'=>$title[$i]]);
+			}
+		}
+
+		return $new_array;
+	}
+	public function school_history_refactor( $history ){
+		$variables = explode(',', $history);
+
+		for ($i=0; $i < count($variables) ; $i++) { 
+			if( !empty($variables[$i]) && $variables[$i] != " "){
+				$new_array = array_merge_recursive(['institution'=>$variables[0]],['grade'=>$variables[1]],['certificate_link'=>$variables[2]]);
+			}
+		}
+
+		return $new_array;
 	}
 	public function getRecommendations(){
 		$this->load->model('Recommendations');

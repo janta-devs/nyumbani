@@ -27,7 +27,7 @@ class ContactDetails extends Component{
               <div className="timeline-record-list ">
                 <div className="record-row">
                   <div className="timeline-record-right">
-                    <p className="timeline-record-title">{this.props.data[0].email}</p>
+                    <p className="timeline-record-title">theantonymars@gmail.com</p>
                   </div>
                   <div className="timeline-record-left">
                     <p className="timeline-record-date">

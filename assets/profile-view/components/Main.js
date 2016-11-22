@@ -17,25 +17,31 @@ import ContactDetails from './ContactDetails';
 import BackComponent from '../../search-view/components/BackComponent';
 
 class MainComponent  extends Component{
+    constructor( context, props ){
+      super( context, props );
+
+      this.state = {
+        ComponentState: {}
+      }
+    }
+    componentDidMount(){
+      const selected_employee = this.props.routing.routeParams;
+      this.props.store.dispatch(this.props.Actions.pullEmployeeData( selected_employee.id ));
+    }
+    componentWillUpdate(nextProps, nextState){
+      let stateNow = nextProps.store.getState();
+
+      console.log( stateNow )
+      // this.setState({ComponentState: stateNow });
+
+
+      // console.log( this.state );
+    }
     render(){
-
-      //I am using this in the meantime to ensure that data is flowing
-      //I will eventually figure out how to connect the state and actions together 
-      //just like in the MainApp js file using the connect function from redux
-      
-        var state  = this.props.store.getState();
-        const SearchResults = state.search_results;
-
-       const selected_employee = this.props.routing.routeParams;
-
-       var data = SearchResults.filter( (userInfo) =>{
-          return( userInfo.id === selected_employee.id );
-       });
-
-     return(
-          <div>
+        return(
+            <div>
               <BackComponent />
-              <ProfileSummary data = {data}/>
+              <ProfileSummary data = {this.state.ComponentState}/>
               <div className="with-container content">
                 <div className="row">
                   <div className="column d-1-3 m-5-12 s-1-1 xs-1-1">
@@ -46,7 +52,7 @@ class MainComponent  extends Component{
                   <div className="column d-2-3 m-7-12 s-1-1 xs-1-1">
                       
                     <BasicDetails/>
-                    <ContactDetails data = {data}/>
+                    <ContactDetails/>
                     <Skills />
                     <ProfessionalExperience/>
                     <EducationBackground/>
@@ -54,7 +60,7 @@ class MainComponent  extends Component{
                 </div>
               </div>
             </div>
-        )
+        );  
     }
 }
 

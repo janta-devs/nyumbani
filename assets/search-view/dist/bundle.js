@@ -71,7 +71,7 @@
 
 	var _MainApp2 = _interopRequireDefault(_MainApp);
 
-	var _PostJobComponent = __webpack_require__(298);
+	var _PostJobComponent = __webpack_require__(299);
 
 	var _PostJobComponent2 = _interopRequireDefault(_PostJobComponent);
 
@@ -38244,7 +38244,7 @@
 
 	var _Search2 = _interopRequireDefault(_Search);
 
-	var _PostJobComponent = __webpack_require__(298);
+	var _PostJobComponent = __webpack_require__(299);
 
 	var _PostJobComponent2 = _interopRequireDefault(_PostJobComponent);
 
@@ -38252,7 +38252,7 @@
 
 	var _redux = __webpack_require__(180);
 
-	var _Actions = __webpack_require__(280);
+	var _Actions = __webpack_require__(281);
 
 	var _Actions2 = _interopRequireDefault(_Actions);
 
@@ -38303,15 +38303,15 @@
 
 	var _ResultTable2 = _interopRequireDefault(_ResultTable);
 
-	var _SearchBar = __webpack_require__(295);
+	var _SearchBar = __webpack_require__(296);
 
 	var _SearchBar2 = _interopRequireDefault(_SearchBar);
 
-	var _NoSearchResult = __webpack_require__(296);
+	var _NoSearchResult = __webpack_require__(297);
 
 	var _NoSearchResult2 = _interopRequireDefault(_NoSearchResult);
 
-	var _PostJobComponent = __webpack_require__(298);
+	var _PostJobComponent = __webpack_require__(299);
 
 	var _PostJobComponent2 = _interopRequireDefault(_PostJobComponent);
 
@@ -38496,10 +38496,8 @@
 				var _this2 = this;
 
 				var populate = this.props.data.map(function (x) {
-					return _react2.default.createElement(_TableCell2.default, { key: x.id, id: x.id, first_name: x.first_name, last_name: x.last_name, gender: x.gender,
-						email: x.email, location: x.location, ip_address: x.ip_address.toString(), profession: x.profession,
-						State: _this2.props.State
-					});
+					return _react2.default.createElement(_TableCell2.default, { key: x.login_id, id: x.login_id, surname: x.surname, id_pass: x.id_pass, city: x.city,
+						profession: x.profession, State: _this2.props.State });
 				});
 
 				return _react2.default.createElement(
@@ -38514,22 +38512,22 @@
 							_react2.default.createElement(
 								'th',
 								{ className: 'mdl-data-table__cell--non-numeric' },
-								'FIRST NAME'
+								'SURNAME'
 							),
 							_react2.default.createElement(
 								'th',
 								{ className: 'mdl-data-table__cell--non-numeric' },
-								'LAST NAME'
+								'IDENTIFICATION No.'
 							),
 							_react2.default.createElement(
 								'th',
 								{ className: 'mdl-data-table__cell--non-numeric' },
-								'GENDER'
+								'PROFESSION'
 							),
 							_react2.default.createElement(
 								'th',
 								{ className: 'mdl-data-table__cell--non-numeric' },
-								'LOCATION'
+								'CITY'
 							),
 							_react2.default.createElement(
 								'th',
@@ -38640,22 +38638,22 @@
 					_react2.default.createElement(
 						'td',
 						{ className: 'mdl-data-table__cell--non-numeric' },
-						this.props.first_name
+						this.props.surname
 					),
 					_react2.default.createElement(
 						'td',
 						{ className: 'mdl-data-table__cell--non-numeric' },
-						this.props.last_name
+						this.props.id_pass
 					),
 					_react2.default.createElement(
 						'td',
 						{ className: 'mdl-data-table__cell--non-numeric' },
-						this.props.gender
+						this.props.profession
 					),
 					_react2.default.createElement(
 						'td',
 						{ className: 'mdl-data-table__cell--non-numeric' },
-						this.props.location
+						this.props.city
 					),
 					_react2.default.createElement(
 						'td',
@@ -38733,47 +38731,47 @@
 
 	var _Store2 = _interopRequireDefault(_Store);
 
-	var _Actions = __webpack_require__(280);
+	var _Actions = __webpack_require__(281);
 
 	var _Actions2 = _interopRequireDefault(_Actions);
 
-	var _ProfileSummary = __webpack_require__(281);
+	var _ProfileSummary = __webpack_require__(282);
 
 	var _ProfileSummary2 = _interopRequireDefault(_ProfileSummary);
 
-	var _ProfileInterests = __webpack_require__(285);
+	var _ProfileInterests = __webpack_require__(286);
 
 	var _ProfileInterests2 = _interopRequireDefault(_ProfileInterests);
 
-	var _ProfileInterestedEmployers = __webpack_require__(286);
+	var _ProfileInterestedEmployers = __webpack_require__(287);
 
 	var _ProfileInterestedEmployers2 = _interopRequireDefault(_ProfileInterestedEmployers);
 
-	var _ProfileInterestedIn = __webpack_require__(288);
+	var _ProfileInterestedIn = __webpack_require__(289);
 
 	var _ProfileInterestedIn2 = _interopRequireDefault(_ProfileInterestedIn);
 
-	var _ProfessionalExperience = __webpack_require__(289);
+	var _ProfessionalExperience = __webpack_require__(290);
 
 	var _ProfessionalExperience2 = _interopRequireDefault(_ProfessionalExperience);
 
-	var _EducationBackground = __webpack_require__(290);
+	var _EducationBackground = __webpack_require__(291);
 
 	var _EducationBackground2 = _interopRequireDefault(_EducationBackground);
 
-	var _Skills = __webpack_require__(291);
+	var _Skills = __webpack_require__(292);
 
 	var _Skills2 = _interopRequireDefault(_Skills);
 
-	var _BasicDetails = __webpack_require__(292);
+	var _BasicDetails = __webpack_require__(293);
 
 	var _BasicDetails2 = _interopRequireDefault(_BasicDetails);
 
-	var _ContactDetails = __webpack_require__(293);
+	var _ContactDetails = __webpack_require__(294);
 
 	var _ContactDetails2 = _interopRequireDefault(_ContactDetails);
 
-	var _BackComponent = __webpack_require__(294);
+	var _BackComponent = __webpack_require__(295);
 
 	var _BackComponent2 = _interopRequireDefault(_BackComponent);
 
@@ -38788,34 +38786,42 @@
 	var MainComponent = function (_Component) {
 	  _inherits(MainComponent, _Component);
 
-	  function MainComponent() {
+	  function MainComponent(context, props) {
 	    _classCallCheck(this, MainComponent);
 
-	    return _possibleConstructorReturn(this, (MainComponent.__proto__ || Object.getPrototypeOf(MainComponent)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (MainComponent.__proto__ || Object.getPrototypeOf(MainComponent)).call(this, context, props));
+
+	    _this.state = {
+	      ComponentState: {}
+	    };
+	    return _this;
 	  }
 
 	  _createClass(MainComponent, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var selected_employee = this.props.routing.routeParams;
+	      this.props.store.dispatch(this.props.Actions.pullEmployeeData(selected_employee.id));
+	    }
+	  }, {
+	    key: 'componentWillUpdate',
+	    value: function componentWillUpdate(nextProps, nextState) {
+	      var stateNow = nextProps.store.getState();
+
+	      console.log(stateNow);
+	      // this.setState({ComponentState: stateNow });
+
+
+	      // console.log( this.state );
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
-
-	      //I am using this in the meantime to ensure that data is flowing
-	      //I will eventually figure out how to connect the state and actions together 
-	      //just like in the MainApp js file using the connect function from redux
-
-	      var state = this.props.store.getState();
-	      var SearchResults = state.search_results;
-
-	      var selected_employee = this.props.routing.routeParams;
-
-	      var data = SearchResults.filter(function (userInfo) {
-	        return userInfo.id === selected_employee.id;
-	      });
-
 	      return _react2.default.createElement(
 	        'div',
 	        null,
 	        _react2.default.createElement(_BackComponent2.default, null),
-	        _react2.default.createElement(_ProfileSummary2.default, { data: data }),
+	        _react2.default.createElement(_ProfileSummary2.default, { data: this.state.ComponentState }),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'with-container content' },
@@ -38833,7 +38839,7 @@
 	              'div',
 	              { className: 'column d-2-3 m-7-12 s-1-1 xs-1-1' },
 	              _react2.default.createElement(_BasicDetails2.default, null),
-	              _react2.default.createElement(_ContactDetails2.default, { data: data }),
+	              _react2.default.createElement(_ContactDetails2.default, null),
 	              _react2.default.createElement(_Skills2.default, null),
 	              _react2.default.createElement(_ProfessionalExperience2.default, null),
 	              _react2.default.createElement(_EducationBackground2.default, null)
@@ -38898,11 +38904,11 @@
 
 	var _reactRouterRedux = __webpack_require__(265);
 
-	var _reduxLogger = __webpack_require__(273);
+	var _reduxLogger = __webpack_require__(274);
 
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 
-	var _reduxThunk = __webpack_require__(279);
+	var _reduxThunk = __webpack_require__(280);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
@@ -38951,22 +38957,27 @@
 
 	var _AccountUserReducer2 = _interopRequireDefault(_AccountUserReducer);
 
+	var _EmployeeReducer = __webpack_require__(273);
+
+	var _EmployeeReducer2 = _interopRequireDefault(_EmployeeReducer);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	//combining the various Reducers into one single reducer file 
 	//the store only accepts only one reducer file, in this case{ it is the index.js reducer file}
 
-	//importing the reducer custom made to handle browser history, it will be tracked by the store 
+	//importing the varous reducer files that are responsible 
+	//for protecting the individual pieces of state in their custody
+
 	var rootReducer = (0, _redux.combineReducers)({
 		search_results: _searchReducer2.default,
 		suggestions: _suggestionReducer2.default,
 		AccountUser: _AccountUserReducer2.default,
-		routing: _reactRouterRedux.routerReducer
+		routing: _reactRouterRedux.routerReducer,
+		EmployeeData: _EmployeeReducer2.default
 	});
 
-	//importing the varous reducer files that are responsible 
-	//for protecting the individual pieces of state in their custody
-
+	//importing the reducer custom made to handle browser history, it will be tracked by the store 
 	exports.default = rootReducer;
 
 /***/ },
@@ -39447,6 +39458,33 @@
 
 /***/ },
 /* 273 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	var EmployeeReducer = function EmployeeReducer() {
+		var EmployeeData = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+		var action = arguments[1];
+
+		switch (action.type) {
+			case 'POPULATE_EMPLOYEE_DATA':
+				return Object.assign({}, EmployeeData, action.data);
+			case 'RECOMMEND':
+				return;
+			case 'REQUEST_EMPLOYEE':
+				return;
+			default:
+				return EmployeeData;
+		}
+	};
+
+	exports.default = EmployeeReducer;
+
+/***/ },
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39457,11 +39495,11 @@
 	  value: true
 	});
 
-	var _core = __webpack_require__(274);
+	var _core = __webpack_require__(275);
 
-	var _helpers = __webpack_require__(275);
+	var _helpers = __webpack_require__(276);
 
-	var _defaults = __webpack_require__(278);
+	var _defaults = __webpack_require__(279);
 
 	var _defaults2 = _interopRequireDefault(_defaults);
 
@@ -39564,7 +39602,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 274 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39574,9 +39612,9 @@
 	});
 	exports.printBuffer = printBuffer;
 
-	var _helpers = __webpack_require__(275);
+	var _helpers = __webpack_require__(276);
 
-	var _diff = __webpack_require__(276);
+	var _diff = __webpack_require__(277);
 
 	var _diff2 = _interopRequireDefault(_diff);
 
@@ -39705,7 +39743,7 @@
 	}
 
 /***/ },
-/* 275 */
+/* 276 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -39729,7 +39767,7 @@
 	var timer = exports.timer = typeof performance !== "undefined" && performance !== null && typeof performance.now === "function" ? performance : Date;
 
 /***/ },
-/* 276 */
+/* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39739,7 +39777,7 @@
 	});
 	exports.default = diffLogger;
 
-	var _deepDiff = __webpack_require__(277);
+	var _deepDiff = __webpack_require__(278);
 
 	var _deepDiff2 = _interopRequireDefault(_deepDiff);
 
@@ -39825,7 +39863,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 277 */
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(global) {/*!
@@ -40254,7 +40292,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 278 */
+/* 279 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -40305,7 +40343,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 279 */
+/* 280 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -40333,7 +40371,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 280 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40423,6 +40461,44 @@
 					self(Actions.accountUserInformation(res));
 				});
 			};
+		},
+		IncrementRecommendation: function IncrementRecommendation(id) {
+			return {
+				type: 'RECOMMEND',
+				data: id
+			};
+		},
+		AddUserRecommendation: function AddUserRecommendation(id) {
+			return function (dispatch) {
+				var self = dispatch;
+				_jquery2.default.ajax({
+					url: 'http://localhost/nyumbani/index.php/profile/getRecommendations',
+					type: 'POST',
+					dataType: 'json',
+					data: id
+				}).done(function (response) {
+					self(Actions.IncrementRecommendation(response));
+				});
+			};
+		},
+		populateEmployeeData: function populateEmployeeData(data) {
+			return {
+				type: 'POPULATE_EMPLOYEE_DATA',
+				data: data
+			};
+		},
+		pullEmployeeData: function pullEmployeeData(id) {
+			return function (dispatch) {
+				var self = dispatch;
+				_jquery2.default.ajax({
+					url: '/nyumbani/index.php/profile/getProfileData',
+					type: 'POST',
+					dataType: 'json',
+					data: { 'id': id }
+				}).done(function (response) {
+					self(Actions.populateEmployeeData(response));
+				});
+			};
 		}
 
 	};
@@ -40430,7 +40506,7 @@
 	exports.default = Actions;
 
 /***/ },
-/* 281 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40445,15 +40521,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ProfileSummaryStats = __webpack_require__(282);
+	var _ProfileSummaryStats = __webpack_require__(283);
 
 	var _ProfileSummaryStats2 = _interopRequireDefault(_ProfileSummaryStats);
 
-	var _ProfileSummaryActions = __webpack_require__(283);
+	var _ProfileSummaryActions = __webpack_require__(284);
 
 	var _ProfileSummaryActions2 = _interopRequireDefault(_ProfileSummaryActions);
 
-	var _ProfileSummaryBio = __webpack_require__(284);
+	var _ProfileSummaryBio = __webpack_require__(285);
 
 	var _ProfileSummaryBio2 = _interopRequireDefault(_ProfileSummaryBio);
 
@@ -40477,7 +40553,9 @@
 	  _createClass(ProfileSummary, [{
 	    key: 'render',
 	    value: function render() {
-
+	      //if(this.props.data.hasOwnProperty('fname')){
+	      console.log(this.props.data);
+	      // }
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'headline' },
@@ -40496,12 +40574,12 @@
 	                _react2.default.createElement(
 	                  'div',
 	                  { className: 'row' },
-	                  _react2.default.createElement(_ProfileSummaryBio2.default, { data: this.props.data[0] }),
+	                  _react2.default.createElement(_ProfileSummaryBio2.default, null),
 	                  _react2.default.createElement(
 	                    'div',
 	                    { className: 'column d-1-3 m-1-4 s-1-1 xs-1-1 stats-column' },
-	                    _react2.default.createElement(_ProfileSummaryStats2.default, { data: this.props.data[0] }),
-	                    _react2.default.createElement(_ProfileSummaryActions2.default, { data: this.props.data[0] })
+	                    _react2.default.createElement(_ProfileSummaryStats2.default, null),
+	                    _react2.default.createElement(_ProfileSummaryActions2.default, null)
 	                  )
 	                )
 	              )
@@ -40518,7 +40596,7 @@
 	exports.default = ProfileSummary;
 
 /***/ },
-/* 282 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -40571,7 +40649,7 @@
 	                _react2.default.createElement(
 	                  "data",
 	                  { className: "number", value: "4373" },
-	                  this.props.data.id
+	                  "4373"
 	                ),
 	                _react2.default.createElement(
 	                  "p",
@@ -40606,7 +40684,7 @@
 	exports.default = ProfileSummaryStats;
 
 /***/ },
-/* 283 */
+/* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40705,7 +40783,7 @@
 	exports.default = ProfileSummaryActions;
 
 /***/ },
-/* 284 */
+/* 285 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -40766,9 +40844,7 @@
 	              _react2.default.createElement(
 	                "h1",
 	                null,
-	                this.props.data.first_name,
-	                " ",
-	                this.props.data.last_name
+	                "Antony Ngayo"
 	              ),
 	              _react2.default.createElement(
 	                "ul",
@@ -40777,7 +40853,7 @@
 	                _react2.default.createElement(
 	                  "li",
 	                  null,
-	                  this.props.data.profession
+	                  "job}"
 	                )
 	              )
 	            )
@@ -40793,7 +40869,7 @@
 	exports.default = ProfileSummaryBio;
 
 /***/ },
-/* 285 */
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40894,7 +40970,7 @@
 	exports.default = ProfileInterests;
 
 /***/ },
-/* 286 */
+/* 287 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40909,7 +40985,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _InterestedEmployersList = __webpack_require__(287);
+	var _InterestedEmployersList = __webpack_require__(288);
 
 	var _InterestedEmployersList2 = _interopRequireDefault(_InterestedEmployersList);
 
@@ -40978,7 +41054,7 @@
 	exports.default = ProfileInterestedEmployers;
 
 /***/ },
-/* 287 */
+/* 288 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41144,7 +41220,7 @@
 	exports.default = InterestedEmployersList;
 
 /***/ },
-/* 288 */
+/* 289 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41159,7 +41235,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _InterestedEmployersList = __webpack_require__(287);
+	var _InterestedEmployersList = __webpack_require__(288);
 
 	var _InterestedEmployersList2 = _interopRequireDefault(_InterestedEmployersList);
 
@@ -41228,7 +41304,7 @@
 	exports.default = ProfileInterestedIn;
 
 /***/ },
-/* 289 */
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -41314,7 +41390,7 @@
 	exports.default = ProfessionalExperience;
 
 /***/ },
-/* 290 */
+/* 291 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -41415,7 +41491,7 @@
 	exports.default = EducationBackground;
 
 /***/ },
-/* 291 */
+/* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41460,7 +41536,7 @@
 	exports.default = Skills;
 
 /***/ },
-/* 292 */
+/* 293 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -41650,7 +41726,7 @@
 	exports.default = BasicDetails;
 
 /***/ },
-/* 293 */
+/* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -41743,7 +41819,7 @@
 	                _react2.default.createElement(
 	                  "p",
 	                  { className: "timeline-record-title" },
-	                  this.props.data[0].email
+	                  "theantonymars@gmail.com"
 	                )
 	              ),
 	              _react2.default.createElement(
@@ -41809,7 +41885,7 @@
 	exports.default = ContactDetails;
 
 /***/ },
-/* 294 */
+/* 295 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41865,7 +41941,7 @@
 	exports.default = BackComponent;
 
 /***/ },
-/* 295 */
+/* 296 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -41956,7 +42032,7 @@
 	exports.default = SearchBar;
 
 /***/ },
-/* 296 */
+/* 297 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41971,7 +42047,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _NoResultCell = __webpack_require__(297);
+	var _NoResultCell = __webpack_require__(298);
 
 	var _NoResultCell2 = _interopRequireDefault(_NoResultCell);
 
@@ -42084,7 +42160,7 @@
 	exports.default = NoSearchResult;
 
 /***/ },
-/* 297 */
+/* 298 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42155,7 +42231,7 @@
 	exports.default = NoResultCell;
 
 /***/ },
-/* 298 */
+/* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42170,7 +42246,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _BackComponent = __webpack_require__(294);
+	var _BackComponent = __webpack_require__(295);
 
 	var _BackComponent2 = _interopRequireDefault(_BackComponent);
 

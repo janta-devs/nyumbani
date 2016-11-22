@@ -3,7 +3,7 @@
 class Jobseeker extends MY_Model
 {
 
-	const TABLE = "MOCK_DATA";
+	const TABLE = "basic_information";
 }
 
 ?>
