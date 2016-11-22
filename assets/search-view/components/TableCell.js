@@ -10,15 +10,15 @@ class TableCell extends Component{
 	render() {
 		return (
 				<tr>
-					<td className="mdl-data-table__cell--non-numeric">{this.props.first_name}</td>
-					<td className="mdl-data-table__cell--non-numeric">{this.props.last_name}</td>
-					<td className="mdl-data-table__cell--non-numeric">{this.props.gender}</td>
-					<td className="mdl-data-table__cell--non-numeric">{this.props.location}</td>
+					<td className="mdl-data-table__cell--non-numeric">{this.props.surname}</td>
+					<td className="mdl-data-table__cell--non-numeric">{this.props.profession}</td>
+					<td className="mdl-data-table__cell--non-numeric">{this.props.id_pass}</td>
+					<td className="mdl-data-table__cell--non-numeric">{this.props.city}</td>
 					<td>
 					<span className="input-group-btn">
 					<Link to={`/nyumbani/index.php/home/Employee/${this.props.id}`}>
-					<button	className = 'btn btn-fab'><i className="pe-7s-id pe-va pe-lg"></i>
-					</button>
+						<button	className = 'btn btn-fab'><i className="pe-7s-id pe-va pe-lg"></i>
+						</button>
 					</Link>
 					</span>
 					<span className="input-group-btn">

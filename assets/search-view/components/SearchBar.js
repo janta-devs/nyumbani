@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 
-//there are props to be added
-
-//onClick = {this.props.search}
-
 class SearchBar extends Component{
 	handleClickAction( e ){
 		e.preventDefault();
@@ -25,6 +21,7 @@ class SearchBar extends Component{
 		return (
 			<div className="form-group label-floating">
 				<form onSubmit = {this.submitHandler.bind(this)}>
+
 					<table  style={inputWidth} >
 						<tbody>
 								<tr>

@@ -65,6 +65,13 @@ class MY_Model extends CI_Model{
 		$query = $this->db->get( $this::TABLE );
 		return $query;
 	}
+	function getRecommendations($employee_login_id = 2){
+		$query = $this->db
+              ->select('employee_login_id, count(employee_login_id) AS recommendations')
+              ->group_by('employee_login_id')
+              ->get($this::TABLE, $employee_login_id);
+        return $query->result();
+	}
 }
 
 ?>

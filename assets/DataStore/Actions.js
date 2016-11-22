@@ -80,13 +80,52 @@ let Actions =
 				dataType: 'json',
 			})
 			.done(function( res ) {
-				if( typeof(res) !== 'undefined' ){
-					self( Actions.accountUserInformation( res ))
-				}
+				self( Actions.accountUserInformation( res ))
 			});
 			
 		}
+	},
+	IncrementRecommendation: function( id ){
+		return{
+			type: 'RECOMMEND',
+			data: id
+		}
+	},
+	AddUserRecommendation: function( id ){
+			return( dispatch ) => {
+				var self = dispatch;
+				$.ajax({
+				url: 'http://localhost/nyumbani/index.php/profile/getRecommendations',
+				type: 'POST',
+				dataType: 'json',
+				data: id,
+			})
+			.done(function( response ) {
+				self( Actions.IncrementRecommendation( response ))
+			});
+		}
+	},
+	populateEmployeeData: function( data ){
+		return{
+			type:'POPULATE_EMPLOYEE_DATA',
+			data: data
+		}
+	},
+	pullEmployeeData: function( id ){
+		return( dispatch ) => {
+			var self = dispatch;
+			$.ajax({
+				url: '/nyumbani/index.php/profile/getProfileData',
+				type: 'POST',
+				dataType: 'json',
+				data: {'id':id},
+			})
+			.done(function( response ) {
+				self( Actions.populateEmployeeData( response ))
+			});
+		}
 	}
+
 
 }
 

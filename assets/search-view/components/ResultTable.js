@@ -9,19 +9,17 @@ class ResultTable extends Component{
 	}
 	render() {
 		var populate = this.props.data.map( x => 
-		<TableCell key = { x.id } id = { x.id }first_name = {x.first_name} last_name = {x.last_name} gender = {x.gender} 
-		email = {x.email} location = {x.location} ip_address = {x.ip_address.toString()} profession = {x.profession}
-		State = {this.props.State} 
-		/>);
+		<TableCell key = { x.login_id } id = { x.login_id } surname = {x.surname} id_pass = {x.id_pass} city = {x.city} 
+		profession = {x.profession} State = {this.props.State} />);
 
 		return (
 				<table className = "mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
 						<thead>
 							<tr>
-								<th className="mdl-data-table__cell--non-numeric">FIRST NAME</th>
-								<th className="mdl-data-table__cell--non-numeric">LAST NAME</th>
-								<th className="mdl-data-table__cell--non-numeric">GENDER</th>
-								<th className="mdl-data-table__cell--non-numeric">LOCATION</th>
+								<th className="mdl-data-table__cell--non-numeric">SURNAME</th>
+								<th className="mdl-data-table__cell--non-numeric">PROFESSION</th>
+								<th className="mdl-data-table__cell--non-numeric">CITY</th>
+								<th className="mdl-data-table__cell--non-numeric">RATING</th>
 								<th className="mdl-data-table__cell--non-numeric">ACTIONS</th>
 							</tr>
 						</thead>

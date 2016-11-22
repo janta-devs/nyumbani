@@ -25,6 +25,7 @@ class Timeline extends CI_Controller {
 
 		$data  = $this->input->post();
 
+
 		if( isset( $data ) && !empty( $data ) && count( $data ) != 0 )
 		{
 			//calling the get_terms method to thus do the search and return a json object with results either affirmative or contrary
@@ -41,11 +42,11 @@ class Timeline extends CI_Controller {
 		//getting data from the user's form
 
 		$data  = $this->input->post();
+		
 
 		if( isset( $data ) && !empty( $data ) && count( $data ) != 0 )
 		{
 			//calling the get_terms method to thus do the search and return a json object with results either affirmative or contrary
-			
 			$results = $search->get_terms( $data['search_term'] );
 			print( $results );
 		}
@@ -55,17 +56,18 @@ class Timeline extends CI_Controller {
 	}
 	public function create_order()
 	{
-		$data = $this->input->post();
+		$logged_in_user = $this->session->userdata();
 		$this->load->model('Job_Model');
 		$job = new Job_Model();
 
-		$data['login_id'] = 2;
+		$data = $this->input->post();
+		$data['login_id'] = $logged_in_user['login_id'];
 		$data = $this->security->xss_clean($data);
-		
-		$insert_id = $job->insert( $data );
 
+		$insert_id = $job->insert( $data );
 	}
-	public function uploadAttachment(){
+	public function uploadAttachment()
+	{
 		$this->load->helper('upload_helper');
 		@$path = upload_file();
 	}

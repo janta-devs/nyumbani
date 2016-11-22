@@ -14,9 +14,8 @@ class PostJobComponent extends Component{
 			finalData: []
 		}
 	}
-
 	componentDidMount() {
-
+		console.log( this );
 	}
 	componentWillUnMount() {
 		this.serverRequest.abort();
@@ -28,7 +27,7 @@ class PostJobComponent extends Component{
 		e.stopPropagation();
 		dataCollection[e.target.name] = e.target.value;
 	}
-	_uploadFile( e ){
+	uploadFile( e ){
 		e.preventDefault();
 		e.stopPropagation();
 
@@ -37,9 +36,10 @@ class PostJobComponent extends Component{
 		$.each(file, function(index, val) {
 			form.append(index, val);
 		});
-		this._sendAttachments( form, node );		
+
+		this.sendAttachments( form, node );		
 	}
-	_sendAttachments( file, el ){
+	sendAttachments( file, el ){
 		$.ajax({
 			url: '/nyumbani/index.php/timeline/uploadAttachment',
 			type: 'POST',
@@ -90,47 +90,47 @@ class PostJobComponent extends Component{
 					<div className="col-md-12">
 						<div className="form-group label-floating">
 		                        <label className="control-label" htmlFor="profession">I am Looking For</label>
-		                        <input type="text" id="profession" name="profession" className="form-control" onBlur = {this.getValue} />
+		                        <input type="text" id="profession" name="profession" className="form-control" onBlur = {this.getValue.bind(this)} ref = "profession"/>
 						</div>
 					</div>
 					<div className="col-md-6">
 						<div className="form-group label-floating">
 		                        <label className="control-label" htmlFor="job_title">Job Title</label>
-		                        <input type="text" id="job_title" name="job_title" className="form-control" onBlur = {this.getValue} />
+		                        <input type="text" id="job_title" name="job_title" className="form-control" onBlur = {this.getValue.bind(this)} ref = "job_title"/>
 						</div>
 					</div>
 					<div className="col-md-6">
 						<div className="form-group label-floating">
 		                        <label className="control-label" htmlFor="location">Location</label>
-		                        <input type="text" id="location" name="location" className="form-control" onBlur = {this.getValue} />
+		                        <input type="text" id="location" name="location" className="form-control" onBlur = {this.getValue.bind(this)} ref = "location"/>
 						</div>
 					</div>	
 					<div className="col-md-6">
 						<div className="form-group label-floating">
 		                        <label className="control-label" htmlFor="startDate">Start Date</label>
-		                        <input type="date" id="startDate" name="start" className="form-control"  data-dtp="" onBlur = {this.getValue} />
+		                        <input type="date" id="startDate" name="start" className="form-control"  data-dtp="" onBlur = {this.getValue.bind(this)} ref = "startDate" />
 						</div>
 					</div>
 					<div className="col-md-6">
 						<div className="form-group label-floating">
 		                        <label className="control-label" htmlFor="endDate">End Date</label>
-		                        <input type="date" id="endDate" name="end" className="form-control"  onBlur = {this.getValue} />
+		                        <input type="date" id="endDate" name="end" className="form-control"  onBlur = {this.getValue.bind(this)} ref = "endDate"/>
 						</div>
 					</div>
 					<div className="col-md-12">
 						<div className="form-group label-floating">
 		                        <label className="control-label" htmlFor="budget">Budget/Remuneration</label>
-		                        <input type="text" id="budget" name="budget" className="form-control"  onBlur = {this.getValue}/>
+		                        <input type="text" id="budget" name="budget" className="form-control"  onBlur = {this.getValue.bind(this)} ref="budget"/>
 						</div>
 					</div>
 					</div>
 					<div className="col-md-6">
 						<div className="form-group label-floating">
 						    <label htmlFor="t1" className="control-label">Job description goes here</label>
-						    <textarea name = "description" id="t1" className="form-control" rows="5" onBlur = {this.getValue} ></textarea>
+						    <textarea name = "description" id="t1" className="form-control" rows="5" onBlur = {this.getValue.bind(this)} ref = "description"></textarea>
 						</div>
 						<div className="form-group">
-						<input type="file" id="attach-file" multiple="" onChange = {this._uploadFile}/>
+						<input type="file" id="attach-file" multiple="" onChange = {this.uploadFile.bind(this)}/>
 	    				<div className="input-group">
 						    <input type="text" readOnly="" className="form-control" placeholder="Attach files" />
 							    <span className="input-group-btn input-group-sm">
@@ -142,7 +142,7 @@ class PostJobComponent extends Component{
 						</div>
 					</div>
 				<div className="col-md-6">
-					<button className="btn btn-block btn-raised btn-info" onClick={this.onSave}>Submit</button>
+					<button className="btn btn-block btn-raised btn-info" onClick={this.onSave.bind(this)}>Submit</button>
 				</div>
 			</form>
 			</div>
