@@ -92,6 +92,7 @@
 			_reactRouter.Router,
 			{ history: _Store.history },
 			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home', component: _MainApp2.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home/', component: _MainApp2.default }),
 			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home/PostJob', component: _PostJobComponent2.default }),
 			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home/Employee/:id', component: _Main2.default })
 		)
@@ -38451,10 +38452,10 @@
 			key: 'render',
 			value: function render() {
 
-				// if(this.props.State.AccountUser.hasOwnProperty('login_id')){
-				// 	var firstname = this.props.State.AccountUser.fname;
-				// 	var lastname = this.props.State.AccountUser.lname;
-				// }
+				if (this.props.State.AccountUser.hasOwnProperty('login_id')) {
+					var firstname = this.props.State.AccountUser.fname;
+					var lastname = this.props.State.AccountUser.lname;
+				}
 				var floatStlye = {
 					float: 'right'
 				};
@@ -38464,7 +38465,11 @@
 					_react2.default.createElement(
 						'div',
 						{ className: 'mdl-cell mdl-cell--12-col' },
-						'Welcome!',
+						'Welcome ',
+						firstname,
+						' ',
+						lastname,
+						'!',
 						_react2.default.createElement(
 							'div',
 							{ style: floatStlye },
@@ -38928,17 +38933,17 @@
 							_react2.default.createElement(
 								'th',
 								{ className: 'mdl-data-table__cell--non-numeric' },
-								'IDENTIFICATION No.'
-							),
-							_react2.default.createElement(
-								'th',
-								{ className: 'mdl-data-table__cell--non-numeric' },
 								'PROFESSION'
 							),
 							_react2.default.createElement(
 								'th',
 								{ className: 'mdl-data-table__cell--non-numeric' },
 								'CITY'
+							),
+							_react2.default.createElement(
+								'th',
+								{ className: 'mdl-data-table__cell--non-numeric' },
+								'RATING'
 							),
 							_react2.default.createElement(
 								'th',
@@ -39054,17 +39059,17 @@
 					_react2.default.createElement(
 						'td',
 						{ className: 'mdl-data-table__cell--non-numeric' },
-						this.props.id_pass
-					),
-					_react2.default.createElement(
-						'td',
-						{ className: 'mdl-data-table__cell--non-numeric' },
 						this.props.profession
 					),
 					_react2.default.createElement(
 						'td',
 						{ className: 'mdl-data-table__cell--non-numeric' },
 						this.props.city
+					),
+					_react2.default.createElement(
+						'td',
+						{ className: 'mdl-data-table__cell--non-numeric' },
+						this.props.id_pass
 					),
 					_react2.default.createElement(
 						'td',
