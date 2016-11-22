@@ -1,11 +1,12 @@
+
 let EmployeeReducer  = function( EmployeeData = {}, action ){
 	switch( action.type ){
 		case 'POPULATE_EMPLOYEE_DATA':
 			return Object.assign({}, EmployeeData, action.data)
 		case 'RECOMMEND':
 			return
-		case 'REQUEST_EMPLOYEE':
-			return 
+		case 'CLEAR_STATE':
+			return EmployeeData = {}
 		default:
 			return EmployeeData;
 	}

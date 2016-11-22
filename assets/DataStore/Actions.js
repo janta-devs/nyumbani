@@ -121,6 +121,7 @@ let Actions =
 				data: {'id':id},
 			})
 			.done(function( response ) {
+				
 				self( Actions.populateEmployeeData( response ))
 			});
 		}

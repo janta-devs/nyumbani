@@ -8,21 +8,21 @@ class ProfileSummaryBio extends Component{
                 <div className="summary-left">
                   <aside className="details-photo">
                     <div className="image-box">
-                      <img src="/nyumbani/photo_assets/anony.jpg" alt="Profile Picture" className="large-image" />
-                      <img className="advisor-icon" src={(1 === 1) ? "/nyumbani/photo_assets/verified.svg" : "/nyumbani/photo_assets/unverified.png"}alt="Janta Advisor" />
+                      <img src={this.props.userInfo.profile_photo} alt="Profile Picture" className="large-image" />
+                      <img className="advisor-icon" src={(this.props.userInfo.verification === 1) ? "/nyumbani/photo_assets/verified.svg" : "/nyumbani/photo_assets/unverified.png"}alt="Janta Advisor" />
                     </div>
                   </aside>
                   <section className="details-content">
                     <div className="summary-nested">
                       <h1>
-                        Antony Ngayo
+                        {this.props.userInfo.fname} {this.props.userInfo.lname}
                       </h1>
                       <ul className="bare-list bio-nested">
                         <li>
                          
                         </li>
                         <li>
-                           job}                    
+                           {this.props.userInfo.profession}                   
                         </li>
               
                       </ul>

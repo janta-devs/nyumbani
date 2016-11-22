@@ -4,8 +4,8 @@ import { render } from 'react-dom';
 import Main from '../../profile-view/components/Main';
 import { Link, Router } from 'react-router';
 class TableCell extends Component{
-	componentWillUpdate(nxtProp, nxtState){
-
+	componentDidMount(nxtProp, nxtState){
+		this.props.State.Actions.pullEmployeeData(this.props.id);
 	}
 	render() {
 		return (

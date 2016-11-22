@@ -19,43 +19,29 @@ import BackComponent from '../../search-view/components/BackComponent';
 class MainComponent  extends Component{
     constructor( context, props ){
       super( context, props );
-
       this.state = {
-        ComponentState: {}
+        data: this.props.store.getState()
       }
-    }
-    componentDidMount(){
-      const selected_employee = this.props.routing.routeParams;
-      this.props.store.dispatch(this.props.Actions.pullEmployeeData( selected_employee.id ));
-    }
-    componentWillUpdate(nextProps, nextState){
-      let stateNow = nextProps.store.getState();
-
-      console.log( stateNow )
-      // this.setState({ComponentState: stateNow });
-
-
-      // console.log( this.state );
-    }
+     }
     render(){
         return(
             <div>
               <BackComponent />
-              <ProfileSummary data = {this.state.ComponentState}/>
+              <ProfileSummary data = {this.state.data}/>
               <div className="with-container content">
                 <div className="row">
                   <div className="column d-1-3 m-5-12 s-1-1 xs-1-1">
-                    <ProfileInterests />
+                    <ProfileInterests data = {this.state.data}/>
                     <ProfileInterestedEmployers/>
                     <ProfileInterestedIn />
                   </div>
                   <div className="column d-2-3 m-7-12 s-1-1 xs-1-1">
                       
                     <BasicDetails/>
-                    <ContactDetails/>
+                    <ContactDetails data = {this.state.data}/>
                     <Skills />
-                    <ProfessionalExperience/>
-                    <EducationBackground/>
+                    <ProfessionalExperience data = {this.state.data}/>
+                    <EducationBackground data = {this.state.data}/>
                   </div>
                 </div>
               </div>
