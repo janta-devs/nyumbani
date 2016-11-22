@@ -43,7 +43,9 @@ class Search extends Component{
 					<section className=	"content with-container" >
 						<div id="new-items">
 							<div className="row">
-								<SuggestedEmployees />
+							
+								<SuggestedEmployees State = {this.props.State}/>
+
 								<div className="column l-3-4 recommendations">
 									<SearchBar searchAction = {this.props.searchAction}/><br /><br />
 									{checker}
