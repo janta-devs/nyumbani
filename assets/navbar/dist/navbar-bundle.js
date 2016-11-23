@@ -39599,6 +39599,7 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
+
 	var EmployeeReducer = function EmployeeReducer() {
 		var EmployeeData = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 		var action = arguments[1];
@@ -39608,8 +39609,8 @@
 				return Object.assign({}, EmployeeData, action.data);
 			case 'RECOMMEND':
 				return;
-			case 'REQUEST_EMPLOYEE':
-				return;
+			case 'CLEAR_STATE':
+				return EmployeeData = {};
 			default:
 				return EmployeeData;
 		}

@@ -4,9 +4,13 @@ import TableCell from './TableCell';
 
 
 class ResultTable extends Component{
-	componentWillUpdate(nxtProp, nxtState){
-
-	}
+	// componentDidMount(){
+	// 	var data = [];
+	// 	var ids = this.props.data.map( x => {
+	// 		data.push(x.id)
+	// 	});
+	// 	this.props.State.Actions.pullEmployeeData( ids );
+	// }
 	render() {
 		var populate = this.props.data.map( x => 
 		<TableCell key = { x.login_id } id = { x.login_id } surname = {x.surname} id_pass = {x.id_pass} city = {x.city} 

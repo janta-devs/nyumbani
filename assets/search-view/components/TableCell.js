@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 
 import Main from '../../profile-view/components/Main';
+
 import { Link, Router } from 'react-router';
 class TableCell extends Component{
 	componentDidMount(nxtProp, nxtState){

@@ -1,9 +1,9 @@
 var webpack = require("webpack");
 module.exports = {
-	entry:['./navbar/navbar.js'],
+	entry:['./search-view/search.js'],
 	output:{
-		path:'./navbar/dist',
-		filename:'navbar-bundle.js',
+		path:'./search-view/dist',
+		filename:'bundle.js',
 		publicPath:'/'
 	},
 	module:{
@@ -33,13 +33,7 @@ module.exports = {
 	 //  ]
 
 
-// module.exports = {
-// 	entry:['./search-view/search.js'],
-// 	output:{
-// 		path:'./search-view/dist',
-// 		filename:'bundle.js',
-// 		publicPath:'/'
-// 	},
+
 
 
 

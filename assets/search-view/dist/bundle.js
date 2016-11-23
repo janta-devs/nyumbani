@@ -38384,7 +38384,7 @@
 							_react2.default.createElement(
 								'div',
 								{ className: 'row' },
-								_react2.default.createElement(_SuggestedEmployees2.default, null),
+								_react2.default.createElement(_SuggestedEmployees2.default, { State: this.props.State }),
 								_react2.default.createElement(
 									'div',
 									{ className: 'column l-3-4 recommendations' },
@@ -38904,10 +38904,15 @@
 		}
 
 		_createClass(ResultTable, [{
-			key: 'componentWillUpdate',
-			value: function componentWillUpdate(nxtProp, nxtState) {}
-		}, {
 			key: 'render',
+
+			// componentDidMount(){
+			// 	var data = [];
+			// 	var ids = this.props.data.map( x => {
+			// 		data.push(x.id)
+			// 	});
+			// 	this.props.State.Actions.pullEmployeeData( ids );
+			// }
 			value: function render() {
 				var _this2 = this;
 
@@ -39859,7 +39864,7 @@
 
 /***/ },
 /* 275 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -39867,8 +39872,14 @@
 		value: true
 	});
 
+	var _jquery = __webpack_require__(203);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	var EmployeeReducer = function EmployeeReducer() {
-		var EmployeeData = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+		var EmployeeData = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 		var action = arguments[1];
 
 		switch (action.type) {
@@ -39877,7 +39888,7 @@
 			case 'RECOMMEND':
 				return;
 			case 'CLEAR_STATE':
-				return EmployeeData = {};
+				return EmployeeData = [];
 			default:
 				return EmployeeData;
 		}
@@ -40856,11 +40867,11 @@
 			return function (dispatch) {
 				var self = dispatch;
 				_jquery2.default.ajax({
-					url: '/nyumbani/index.php/profile/getProfileData',
+					url: '/nyumbani/index.php/profile/getAccountUserData',
 					type: 'POST',
 					dataType: 'json'
-				}).done(function (res) {
-					self(Actions.accountUserInformation(res));
+				}).done(function (response) {
+					self(Actions.accountUserInformation(response));
 				});
 			};
 		},
@@ -40898,7 +40909,6 @@
 					dataType: 'json',
 					data: { 'id': id }
 				}).done(function (response) {
-
 					self(Actions.populateEmployeeData(response));
 				});
 			};

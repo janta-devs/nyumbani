@@ -75,12 +75,12 @@ let Actions =
 		return(  dispatch ) =>{
 			var self = dispatch;
 			$.ajax({
-				url: '/nyumbani/index.php/profile/getProfileData',
+				url: '/nyumbani/index.php/profile/getAccountUserData',
 				type: 'POST',
 				dataType: 'json',
 			})
-			.done(function( res ) {
-				self( Actions.accountUserInformation( res ))
+			.done(function( response ) {
+				self( Actions.accountUserInformation( response ))
 			});
 			
 		}
@@ -121,7 +121,6 @@ let Actions =
 				data: {'id':id},
 			})
 			.done(function( response ) {
-				
 				self( Actions.populateEmployeeData( response ))
 			});
 		}
