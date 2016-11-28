@@ -28,6 +28,7 @@ class Search extends Component{
 	}
 	componentWillMount(){
 		this.props.State.Actions.pullAccountUserData();
+		this.props.State.Actions.pullAllEmployees();
 	}
 	componentWillUpdate(nxtProp, nxtState ){
 		
@@ -47,7 +48,7 @@ class Search extends Component{
 								<SuggestedEmployees State = {this.props.State}/>
 
 								<div className="column l-3-4 recommendations">
-									<SearchBar searchAction = {this.props.searchAction}/><br /><br />
+									<SearchBar searchAction = {this.props.searchAction}/>
 									{checker}
 								</div>
 							</div>

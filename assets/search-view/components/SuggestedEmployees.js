@@ -75,7 +75,7 @@ class SuggestedEmployees extends Component{
 								            </div>
 								        </div>
 								        <button type="button" style={styleIEButton} className="basic-link mdl-button mdl-js-button mdl-js-ripple-effect">
-									        View Profile <span><i className="material-icons">exit_to_app</i></span>
+									        View Profile <span><i className="material-icons">account_box</i></span>
 								        </button>
 								    </div>
 								    <div className="media">
@@ -92,7 +92,7 @@ class SuggestedEmployees extends Component{
 								            </div>
 								        </div>
 								        <button type="button" style={styleIEButton} className="basic-link mdl-button mdl-js-button mdl-js-ripple-effect">
-									        View Profile <span><i className="material-icons">exit_to_app</i></span>
+									        View Profile <span><i className="material-icons">account_box</i></span>
 								        </button>
 								    </div>
 								</div>

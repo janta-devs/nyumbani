@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 
 class ProfessionalExperience extends Component{
   render() {
-
-    var userInfo = this.props.data.EmployeeData;
-
+    var userInfo = this.props.data;
     let Jobs = userInfo.past_job.map( (x,y) => {
       return(
               <div className="record-row" key={y}>             

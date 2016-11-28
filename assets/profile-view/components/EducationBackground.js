@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class EducationBackground extends Component{
   render() {
-    var userInfo = this.props.data.EmployeeData;
+    var userInfo = this.props.data;
     return (
           <div className="card" id="profile-education">
 

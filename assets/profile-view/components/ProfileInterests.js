@@ -8,7 +8,7 @@ class ProfileInterests  extends Component{
     const divStyleTwo = {
       height: 'auto',
     };
-    var userInfo = this.props.data.EmployeeData;
+    var userInfo = this.props.data;
 
     let Interests = userInfo.skills.map( (x,y) => {
         return <span key ={y}>{x.skill}</span>

@@ -195,24 +195,27 @@ class Profile extends CI_Controller{
 			$university_history = $this->school_history_refactor($education_data['university_history']);
 			$education_data['university_history'] = $university_history;
 
-			$skills = explode('=', $education_data['skills']);
+			$skills = $this->skillRefactor( $education_data['skills']);
+			$education_data['skills'] = $skills;
+
+			// $skills = explode('=', $education_data['skills']);
 			
-			for ($i=0; $i < count($skills); $i++) 
-			{ 
-				if( $i == 0 || $i%2 == 0)
-					$skill = explode(',', $skills[$i] );
-				else
-					$mode = explode(',', $skills[$i] );
-			}
+			// for ($i=0; $i < count($skills); $i++) 
+			// { 
+			// 	if( $i == 0 || $i%2 == 0)
+			// 		$skill = explode(',', $skills[$i] );
+			// 	else
+			// 		$mode = explode(',', $skills[$i] );
+			// }
 
-			$new_array = [];
-			for ($k=0; $k < count( $skill ); $k++) { 
-				if( $skill[ $k ] != " " && !empty( $skill[ $k ] ) ){
-					$new_array[ ][ 'skill' ] = $skill[ $k ];
-				}
-			}
+			// $new_array = [];
+			// for ($k=0; $k < count( $skill ); $k++) { 
+			// 	if( $skill[ $k ] != " " && !empty( $skill[ $k ] ) ){
+			// 		$new_array[ ][ 'skill' ] = $skill[ $k ];
+			// 	}
+			// }
 
-			$education_data['skills'] = $new_array;
+			
 
 			$UserInfo = array_merge_recursive($education_data, $basic_data, $user_login_data, $recomm);
 			$UserInfo['login_id'] = $UserInfo['login_id'][0]; 
@@ -289,13 +292,49 @@ class Profile extends CI_Controller{
 
 		return $new_array;
 	}
+	public function skillRefactor( $information ){
+		$skills = explode('=', $information );
+			
+			for ($i=0; $i < count($skills); $i++) 
+			{ 
+				if( $i == 0 || $i%2 == 0)
+					$skill = explode(',', $skills[$i] );
+				else
+					$mode = explode(',', $skills[$i] );
+			}
+
+			$new_array = [];
+			for ($k=0; $k < count( $skill ); $k++) { 
+				if( $skill[ $k ] != " " && !empty( $skill[ $k ] ) ){
+					$new_array[ ][ 'skill' ] = $skill[ $k ];
+				}
+			}
+		return( $new_array );
+	}
 	public function getRecommendations(){
 		$this->load->model('Recommendations');
 		$recommendation = new Recommendations();
-
-		$res = $recommendation->getRecommendations();
-
-		print ( $res );
+		return $res = $recommendation->getRecommendations();
 	}
+	public function localStoragedata(){
+		//Use the join table paradigm to collecct the information of the users
+		$this->load->model('GetEmployees');
+		$get = new GetEmployees();
+		$joinedInformation = $get->getJoinedTables();
+
+		// refactoring the data to make it consumable for the javascript files
+		
+		foreach ($joinedInformation as $row)
+		{
+			$row->past_job = $this->job_refactor( $row->past_job );
+			$row->primary_history = $this->school_history_refactor( $row->primary_history );
+			$row->secondary_history = $this->school_history_refactor( $row->secondary_history );
+			$row->university_history = $this->school_history_refactor( $row->university_history );
+			$row->skills = $this->skillRefactor( $row->skills );
+		}
+
+		print json_encode( $joinedInformation );
+	}
+
 }
 ?>

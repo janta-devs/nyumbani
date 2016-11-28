@@ -9,7 +9,7 @@ import ProfileSummaryBio from './ProfileSummaryBio';
 
 class ProfileSummary extends Component{
 	render(){
-    var userInfo = this.props.data.EmployeeData;
+    var userInfo = this.props.data;
 		return (
         		<div className="headline">
                   <div className="with-container">

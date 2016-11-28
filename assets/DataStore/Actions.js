@@ -124,6 +124,26 @@ let Actions =
 				self( Actions.populateEmployeeData( response ))
 			});
 		}
+	},
+	pullAllEmployees: function(){
+		return( dispatch ) => {
+			var self = dispatch;
+			$.ajax({
+				url: '/nyumbani/index.php/profile/localStoragedata',
+				type: 'POST',
+				dataType: 'json'
+			})
+			.done(function( response ){
+				var data = JSON.stringify( response )
+				try{
+					localStorage.setItem('employeesInformation', data )
+					return true;
+				}
+				catch( exception ){
+					return false;
+				}
+			});
+		}
 	}
 
 
