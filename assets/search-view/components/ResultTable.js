@@ -14,7 +14,7 @@ class ResultTable extends Component{
 	render() {
 		var populate = this.props.data.map( x => 
 		<TableCell key = { x.login_id } id = { x.login_id } surname = {x.surname} id_pass = {x.id_pass} city = {x.city} 
-		profession = {x.profession} State = {this.props.State} />);
+		profession = {x.profession} />);
 
 		return (
 			<div className="table-responsive-vertical shadow-z-1">

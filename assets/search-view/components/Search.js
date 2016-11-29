@@ -7,6 +7,7 @@ import StatusUpdate from './StatusUpdate';
 import ResultTable from './ResultTable';
 import SearchBar from './SearchBar';
 import NoSearchResult from './NoSearchResult';
+import Categories from './Categories';
 
 import PostJobComponent from './PostJobComponent';
 
@@ -44,13 +45,11 @@ class Search extends Component{
 					<section className=	"content with-container" >
 						<div id="new-items">
 							<div className="row">
-							
-								<SuggestedEmployees State = {this.props.State}/>
-
 								<div className="column l-3-4 recommendations">
 									<SearchBar searchAction = {this.props.searchAction}/>
 									{checker}
 								</div>
+								<Categories />								
 							</div>
 						</div>	
 					</section>

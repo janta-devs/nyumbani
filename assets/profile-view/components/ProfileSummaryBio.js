@@ -15,7 +15,7 @@ class ProfileSummaryBio extends Component{
                   <section className="details-content">
                     <div className="summary-nested">
                       <h1>
-                        {this.props.userInfo.fname} {this.props.userInfo.lname}
+                        {this.props.userInfo.surname}
                       </h1>
                       <ul className="bare-list bio-nested">
                         <li>

@@ -20,7 +20,7 @@ class ProfileSummary extends Component{
                               <ProfileSummaryBio userInfo = {userInfo}/>
                             <div className="column d-1-3 m-1-4 s-1-1 xs-1-1 stats-column">
                               <ProfileSummaryStats userInfo = {userInfo}/>
-                              <ProfileSummaryActions userInfo/>
+                              <ProfileSummaryActions/>
                             </div>
                           </div>
                         </div>

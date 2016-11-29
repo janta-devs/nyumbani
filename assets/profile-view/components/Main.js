@@ -65,7 +65,7 @@ class MainComponent  extends Component{
                   </div>
                   <div className="column d-2-3 m-7-12 s-1-1 xs-1-1">
                       
-                    <BasicDetails/>
+                    <BasicDetails data = {this.data[0]}/>
                     <ContactDetails data = {this.data[0]}/>
                     <Skills />
                     <ProfessionalExperience data = {this.data[0]}/>

@@ -154,7 +154,6 @@ let Actions =
 				dataType: 'json'
 			})
 			.done(function( response ){
-				console.log( response );
 				var data = JSON.stringify( response )
 				try{
 					localStorage.setItem('categories', data )

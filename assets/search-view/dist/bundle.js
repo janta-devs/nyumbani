@@ -71,13 +71,17 @@
 
 	var _MainApp2 = _interopRequireDefault(_MainApp);
 
-	var _PostJobComponent = __webpack_require__(301);
+	var _PostJobComponent = __webpack_require__(303);
 
 	var _PostJobComponent2 = _interopRequireDefault(_PostJobComponent);
 
 	var _Main = __webpack_require__(264);
 
 	var _Main2 = _interopRequireDefault(_Main);
+
+	var _CategoryEmployees = __webpack_require__(304);
+
+	var _CategoryEmployees2 = _interopRequireDefault(_CategoryEmployees);
 
 	var _Store = __webpack_require__(265);
 
@@ -94,7 +98,8 @@
 			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home', component: _MainApp2.default }),
 			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home/', component: _MainApp2.default }),
 			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home/PostJob', component: _PostJobComponent2.default }),
-			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home/Employee/:id', component: _Main2.default })
+			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home/Employee/:id', component: _Main2.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home/Category/:option', component: _CategoryEmployees2.default })
 		)
 	), document.getElementById('component'));
 
@@ -38245,7 +38250,7 @@
 
 	var _Search2 = _interopRequireDefault(_Search);
 
-	var _PostJobComponent = __webpack_require__(301);
+	var _PostJobComponent = __webpack_require__(303);
 
 	var _PostJobComponent2 = _interopRequireDefault(_PostJobComponent);
 
@@ -38321,7 +38326,11 @@
 
 	var _NoSearchResult2 = _interopRequireDefault(_NoSearchResult);
 
-	var _PostJobComponent = __webpack_require__(301);
+	var _Categories = __webpack_require__(301);
+
+	var _Categories2 = _interopRequireDefault(_Categories);
+
+	var _PostJobComponent = __webpack_require__(303);
 
 	var _PostJobComponent2 = _interopRequireDefault(_PostJobComponent);
 
@@ -38386,13 +38395,13 @@
 							_react2.default.createElement(
 								'div',
 								{ className: 'row' },
-								_react2.default.createElement(_SuggestedEmployees2.default, { State: this.props.State }),
 								_react2.default.createElement(
 									'div',
 									{ className: 'column l-3-4 recommendations' },
 									_react2.default.createElement(_SearchBar2.default, { searchAction: this.props.searchAction }),
 									checker
-								)
+								),
+								_react2.default.createElement(_Categories2.default, null)
 							)
 						)
 					)
@@ -38914,11 +38923,9 @@
 			// 	this.props.State.Actions.pullEmployeeData( ids );
 			// }
 			value: function render() {
-				var _this2 = this;
-
 				var populate = this.props.data.map(function (x) {
 					return _react2.default.createElement(_TableCell2.default, { key: x.login_id, id: x.login_id, surname: x.surname, id_pass: x.id_pass, city: x.city,
-						profession: x.profession, State: _this2.props.State });
+						profession: x.profession });
 				});
 
 				return _react2.default.createElement(
@@ -39269,7 +39276,7 @@
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'column d-2-3 m-7-12 s-1-1 xs-1-1' },
-	              _react2.default.createElement(_BasicDetails2.default, null),
+	              _react2.default.createElement(_BasicDetails2.default, { data: this.data[0] }),
 	              _react2.default.createElement(_ContactDetails2.default, { data: this.data[0] }),
 	              _react2.default.createElement(_Skills2.default, null),
 	              _react2.default.createElement(_ProfessionalExperience2.default, { data: this.data[0] }),
@@ -40964,7 +40971,6 @@
 					type: 'POST',
 					dataType: 'json'
 				}).done(function (response) {
-					console.log(response);
 					var data = JSON.stringify(response);
 					try {
 						localStorage.setItem('categories', data);
@@ -41052,7 +41058,7 @@
 	                    'div',
 	                    { className: 'column d-1-3 m-1-4 s-1-1 xs-1-1 stats-column' },
 	                    _react2.default.createElement(_ProfileSummaryStats2.default, { userInfo: userInfo }),
-	                    _react2.default.createElement(_ProfileSummaryActions2.default, { userInfo: true })
+	                    _react2.default.createElement(_ProfileSummaryActions2.default, null)
 	                  )
 	                )
 	              )
@@ -41317,9 +41323,7 @@
 	              _react2.default.createElement(
 	                "h1",
 	                null,
-	                this.props.userInfo.fname,
-	                " ",
-	                this.props.userInfo.lname
+	                this.props.userInfo.surname
 	              ),
 	              _react2.default.createElement(
 	                "ul",
@@ -42153,6 +42157,7 @@
 	  _createClass(BasicDetails, [{
 	    key: "render",
 	    value: function render() {
+	      var userInfo = this.props.data;
 	      return _react2.default.createElement(
 	        "div",
 	        { className: "card", id: "profile-employment" },
@@ -42211,12 +42216,12 @@
 	                _react2.default.createElement(
 	                  "p",
 	                  { className: "timeline-record-title" },
-	                  "Nairobi"
+	                  userInfo.city
 	                ),
 	                _react2.default.createElement(
 	                  "p",
 	                  { className: "timeline-record-place" },
-	                  "Bahati"
+	                  userInfo.city
 	                )
 	              ),
 	              _react2.default.createElement(
@@ -42247,7 +42252,7 @@
 	                _react2.default.createElement(
 	                  "p",
 	                  { className: "timeline-record-title" },
-	                  "27/04/1991"
+	                  userInfo.dob
 	                )
 	              ),
 	              _react2.default.createElement(
@@ -42259,7 +42264,7 @@
 	                  _react2.default.createElement(
 	                    "span",
 	                    { className: "block" },
-	                    "Date of Birth"
+	                    "Year of Birth"
 	                  ),
 	                  _react2.default.createElement("span", { className: "block" })
 	                )
@@ -42842,6 +42847,152 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Container = __webpack_require__(302);
+
+	var _Container2 = _interopRequireDefault(_Container);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Categories = function (_Component) {
+	  _inherits(Categories, _Component);
+
+	  function Categories(context, props) {
+	    _classCallCheck(this, Categories);
+
+	    var _this = _possibleConstructorReturn(this, (Categories.__proto__ || Object.getPrototypeOf(Categories)).call(this, context, props));
+
+	    _this.data = _this.getLocalStorage();
+	    return _this;
+	  }
+
+	  _createClass(Categories, [{
+	    key: 'getLocalStorage',
+	    value: function getLocalStorage() {
+	      try {
+	        var localstore = localStorage.getItem('categories');
+	        return JSON.parse(localstore);
+	      } catch (exception) {
+	        return false;
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var ElementStyle = {
+	        margin: 'auto',
+	        display: 'block'
+	      };
+
+	      var info = this.data.map(function (x, y) {
+	        return _react2.default.createElement(_Container2.default, { category: x, key: y, count: y });
+	      });
+	      return _react2.default.createElement(
+	        'div',
+	        { style: ElementStyle },
+	        'CATEGORIES:',
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement('br', null),
+	        info
+	      );
+	    }
+	  }]);
+
+	  return Categories;
+	}(_react.Component);
+
+	exports.default = Categories;
+
+/***/ },
+/* 302 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(204);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Container = function (_Component) {
+		_inherits(Container, _Component);
+
+		function Container() {
+			_classCallCheck(this, Container);
+
+			return _possibleConstructorReturn(this, (Container.__proto__ || Object.getPrototypeOf(Container)).apply(this, arguments));
+		}
+
+		_createClass(Container, [{
+			key: 'render',
+			value: function render() {
+				var _styleDIV;
+
+				var styleDIV = (_styleDIV = {
+					height: '150px',
+					width: '150px',
+					borderRadius: '10px',
+					lineHeight: '10px',
+					padding: '1px 1px 1px 1px',
+					backgroundColor: '#e8eaf6'
+				}, _defineProperty(_styleDIV, 'padding', '43px 5px 20px 14px'), _defineProperty(_styleDIV, 'border', '1px solid black'), _defineProperty(_styleDIV, 'textAlign', 'center'), _defineProperty(_styleDIV, 'float', 'left'), _defineProperty(_styleDIV, 'marginLeft', '5px'), _defineProperty(_styleDIV, 'marginBottom', '5px'), _defineProperty(_styleDIV, 'lineHeight', '200%'), _styleDIV);
+				return _react2.default.createElement(
+					'div',
+					{ style: styleDIV },
+					_react2.default.createElement(
+						_reactRouter.Link,
+						{ to: '/nyumbani/index.php/home/Category/' + this.props.category },
+						this.props.category
+					)
+				);
+			}
+		}]);
+
+		return Container;
+	}(_react.Component);
+
+	exports.default = Container;
+
+/***/ },
+/* 303 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
 
@@ -43107,6 +43258,84 @@
 	}(_react.Component);
 
 	exports.default = PostJobComponent;
+
+/***/ },
+/* 304 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _ResultTable = __webpack_require__(262);
+
+	var _ResultTable2 = _interopRequireDefault(_ResultTable);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var CategoryEmployees = function (_Component) {
+	  _inherits(CategoryEmployees, _Component);
+
+	  function CategoryEmployees(context, props) {
+	    _classCallCheck(this, CategoryEmployees);
+
+	    var _this = _possibleConstructorReturn(this, (CategoryEmployees.__proto__ || Object.getPrototypeOf(CategoryEmployees)).call(this, context, props));
+
+	    _this.getLocalStorage();
+	    _this.data = _this.getUserInformation();
+	    return _this;
+	  }
+
+	  _createClass(CategoryEmployees, [{
+	    key: 'getLocalStorage',
+	    value: function getLocalStorage() {
+	      try {
+	        var localstore = localStorage.getItem('employeesInformation');
+	        return JSON.parse(localstore);
+	      } catch (exception) {
+	        return false;
+	      }
+	    }
+	  }, {
+	    key: 'getUserInformation',
+	    value: function getUserInformation() {
+	      var employees = this.getLocalStorage();
+	      var option = this.props.params.option;
+
+	      var data = employees.filter(function (value, index) {
+	        return value.profession === option ? employees[index] : false;
+	      });
+	      return data;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(_ResultTable2.default, { data: this.data })
+	      );
+	    }
+	  }]);
+
+	  return CategoryEmployees;
+	}(_react.Component);
+
+	exports.default = CategoryEmployees;
 
 /***/ }
 /******/ ]);
