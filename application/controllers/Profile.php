@@ -198,25 +198,6 @@ class Profile extends CI_Controller{
 			$skills = $this->skillRefactor( $education_data['skills']);
 			$education_data['skills'] = $skills;
 
-			// $skills = explode('=', $education_data['skills']);
-			
-			// for ($i=0; $i < count($skills); $i++) 
-			// { 
-			// 	if( $i == 0 || $i%2 == 0)
-			// 		$skill = explode(',', $skills[$i] );
-			// 	else
-			// 		$mode = explode(',', $skills[$i] );
-			// }
-
-			// $new_array = [];
-			// for ($k=0; $k < count( $skill ); $k++) { 
-			// 	if( $skill[ $k ] != " " && !empty( $skill[ $k ] ) ){
-			// 		$new_array[ ][ 'skill' ] = $skill[ $k ];
-			// 	}
-			// }
-
-			
-
 			$UserInfo = array_merge_recursive($education_data, $basic_data, $user_login_data, $recomm);
 			$UserInfo['login_id'] = $UserInfo['login_id'][0]; 
 			print json_encode( (object)$UserInfo );

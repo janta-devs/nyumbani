@@ -38260,6 +38260,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var MainApp = function MainApp(props) {
+		props.Actions.pullCategories();
 		return _react2.default.createElement(_Search2.default, { State: props, searchAction: props.Actions.search, data: props.search_results,
 			suggestions: props.suggestions });
 	};
@@ -40948,6 +40949,25 @@
 					var data = JSON.stringify(response);
 					try {
 						localStorage.setItem('employeesInformation', data);
+						return true;
+					} catch (exception) {
+						return false;
+					}
+				});
+			};
+		},
+		pullCategories: function pullCategories() {
+			return function (dispatch) {
+				var self = dispatch;
+				_jquery2.default.ajax({
+					url: '/nyumbani/index.php/timeline/categories',
+					type: 'POST',
+					dataType: 'json'
+				}).done(function (response) {
+					console.log(response);
+					var data = JSON.stringify(response);
+					try {
+						localStorage.setItem('categories', data);
 						return true;
 					} catch (exception) {
 						return false;

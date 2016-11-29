@@ -118,6 +118,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         var logout = document.getElementById('logout');
         logout.addEventListener('click', function( event ){
             localStorage.removeItem('employeesInformation');
+            localStorage.removeItem('categories');
         })
     </script>
 </body>

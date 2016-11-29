@@ -71,5 +71,22 @@ class Timeline extends CI_Controller {
 		$this->load->helper('upload_helper');
 		@$path = upload_file();
 	}
+	public function categories(){
+		$this->load->model('Jobseeker');
+		$job = new Jobseeker();
+
+		$categories = $job->getData('profession')->result();
+
+		foreach ($categories as $row) {
+			$new_arr[] = $row->profession;
+		}
+
+		$new_arr = array_unique($new_arr);
+
+		foreach ($new_arr as $key => $value) {
+			$final_array[] = $value;
+		}
+		print json_encode( $final_array );
+	}
 }
 

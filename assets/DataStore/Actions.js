@@ -144,6 +144,27 @@ let Actions =
 				}
 			});
 		}
+	},
+	pullCategories: function(){
+		return( dispatch ) => {
+			var self = dispatch;
+			$.ajax({
+				url: '/nyumbani/index.php/timeline/categories',
+				type: 'POST',
+				dataType: 'json'
+			})
+			.done(function( response ){
+				console.log( response );
+				var data = JSON.stringify( response )
+				try{
+					localStorage.setItem('categories', data )
+					return true;
+				}
+				catch( exception ){
+					return false;
+				}
+			});
+		}
 	}
 
 
