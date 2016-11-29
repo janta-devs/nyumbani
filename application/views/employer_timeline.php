@@ -117,8 +117,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script>
         var logout = document.getElementById('logout');
         logout.addEventListener('click', function( event ){
-            localStorage.removeItem('employeesInformation');
-            localStorage.removeItem('categories');
+            localStorage.removeItem('JantaUniqueEmployeesInformation');
         })
     </script>
 </body>

@@ -12,7 +12,7 @@ class CategoryEmployees extends Component{
 	getLocalStorage(){
       try
       {
-        var localstore = localStorage.getItem('employeesInformation');
+        var localstore = localStorage.getItem('JantaUniqueEmployeesInformation');
         return JSON.parse(localstore);
       }
       catch(exception)

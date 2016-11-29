@@ -15,9 +15,10 @@ class Container extends Component{
 		    border:'1px solid black',
 		    textAlign: 'center',
 		    float: 'left',
-		    marginLeft: '5px',
-		    marginBottom: '5px',
-		    lineHeight: '200%'
+		    marginLeft: '10px',
+		    marginBottom: '10px',
+		    lineHeight: '200%',
+		    zIndex:'5'
 	    };
 		return(
 			<div style ={styleDIV}>

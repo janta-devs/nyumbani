@@ -136,7 +136,7 @@ let Actions =
 			.done(function( response ){
 				var data = JSON.stringify( response )
 				try{
-					localStorage.setItem('employeesInformation', data )
+					localStorage.setItem('JantaUniqueEmployeesInformation', data )
 					return true;
 				}
 				catch( exception ){
@@ -156,7 +156,7 @@ let Actions =
 			.done(function( response ){
 				var data = JSON.stringify( response )
 				try{
-					localStorage.setItem('categories', data )
+					localStorage.setItem('JantaUniqueCategories', data )
 					return true;
 				}
 				catch( exception ){

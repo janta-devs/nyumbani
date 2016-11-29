@@ -39234,7 +39234,7 @@
 	    key: 'getLocalStorage',
 	    value: function getLocalStorage() {
 	      try {
-	        var localstore = localStorage.getItem('employeesInformation');
+	        var localstore = localStorage.getItem('JantaUniqueEmployeesInformation');
 	        return JSON.parse(localstore);
 	      } catch (exception) {
 	        return false;
@@ -40955,7 +40955,7 @@
 				}).done(function (response) {
 					var data = JSON.stringify(response);
 					try {
-						localStorage.setItem('employeesInformation', data);
+						localStorage.setItem('JantaUniqueEmployeesInformation', data);
 						return true;
 					} catch (exception) {
 						return false;
@@ -40973,7 +40973,7 @@
 				}).done(function (response) {
 					var data = JSON.stringify(response);
 					try {
-						localStorage.setItem('categories', data);
+						localStorage.setItem('JantaUniqueCategories', data);
 						return true;
 					} catch (exception) {
 						return false;
@@ -42876,19 +42876,88 @@
 
 	    var _this = _possibleConstructorReturn(this, (Categories.__proto__ || Object.getPrototypeOf(Categories)).call(this, context, props));
 
-	    _this.data = _this.getLocalStorage();
+	    _this.info = _this.getLocalStorage();
+	    _this.pages = _this.createPagination();
+
+	    // this.data = this.info.splice(0,12);
+
+	    _this.state = {
+	      data: [],
+	      count: 0,
+	      maxLength: _this.pages.length
+	    };
+	    _this.data = _this.pages[_this.state.count];
+
 	    return _this;
 	  }
 
 	  _createClass(Categories, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.info = this.getLocalStorage();
+	      this.setState({ data: this.pages[this.state.count] });
+	    }
+	  }, {
+	    key: 'componentWillUpdate',
+	    value: function componentWillUpdate(nxtProp, nxtState) {
+	      console.log(nxtState);
+	      //this.setState({ data: this.pages[this.state.count] });
+	    }
+	  }, {
 	    key: 'getLocalStorage',
 	    value: function getLocalStorage() {
 	      try {
-	        var localstore = localStorage.getItem('categories');
+	        var localstore = localStorage.getItem('JantaUniqueCategories');
 	        return JSON.parse(localstore);
 	      } catch (exception) {
 	        return false;
 	      }
+	    }
+	  }, {
+	    key: 'createPagination',
+	    value: function createPagination() {
+
+	      var counter = Math.floor(this.info.length / 12);
+	      var NextNum = 12;
+	      var start = 0;
+	      var holder = [];
+
+	      for (var i = 0; i < counter; i++) {
+	        var num = 'arr' + (i + 1);
+
+	        if (i === 0) {
+	          num = this.info.splice(start, NextNum);
+	          NextNum + 12;
+	          start = NextNum + 1;
+	        } else {
+	          num = this.info.splice(start, NextNum);
+	          NextNum + 12;
+	          start = NextNum + 1;
+	        }
+	        holder.push(num);
+	      }
+	      holder.push(this.info);
+	      return holder;
+	    }
+	  }, {
+	    key: 'handleNextClick',
+	    value: function handleNextClick(e) {
+	      e.preventDefault();
+	      e.stopPropagation();
+	      var count = this.state.count + 1;
+	      count === this.state.maxLength ? count = 0 : count;
+	      this.setState({ count: count });
+	      this.setState({ data: this.pages[count] });
+	    }
+	  }, {
+	    key: 'handlePrevClick',
+	    value: function handlePrevClick(e) {
+	      e.preventDefault();
+	      e.stopPropagation();
+	      var count = this.state.count - 1;
+	      count === 0 ? count = this.state.maxLength : count;
+	      this.setState({ count: count });
+	      this.setState({ data: this.pages[count] });
 	    }
 	  }, {
 	    key: 'render',
@@ -42898,18 +42967,33 @@
 	        display: 'block'
 	      };
 
-	      var info = this.data.map(function (x, y) {
+	      var info = this.state.data.map(function (x, y) {
 	        return _react2.default.createElement(_Container2.default, { category: x, key: y, count: y });
 	      });
 	      return _react2.default.createElement(
 	        'div',
 	        { style: ElementStyle },
-	        'CATEGORIES:',
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'mdl-cell mdl-cell--12-col' },
+	          _react2.default.createElement(
+	            'button',
+	            { className: 'mdl-button--raised mdl-button--colored' },
+	            'EMPLOYEE CATEGORIES AVAILABLE'
+	          )
+	        ),
 	        _react2.default.createElement('br', null),
-	        _react2.default.createElement('br', null),
-	        _react2.default.createElement('br', null),
-	        _react2.default.createElement('br', null),
-	        info
+	        info,
+	        _react2.default.createElement(
+	          'button',
+	          { className: 'mdl-button--raised mdl-button--colored', onClick: this.handlePrevClick.bind(this) },
+	          'Prev'
+	        ),
+	        _react2.default.createElement(
+	          'button',
+	          { className: 'mdl-button--raised mdl-button--colored', onClick: this.handleNextClick.bind(this) },
+	          'Next'
+	        )
 	      );
 	    }
 	  }]);
@@ -42968,7 +43052,7 @@
 					lineHeight: '10px',
 					padding: '1px 1px 1px 1px',
 					backgroundColor: '#e8eaf6'
-				}, _defineProperty(_styleDIV, 'padding', '43px 5px 20px 14px'), _defineProperty(_styleDIV, 'border', '1px solid black'), _defineProperty(_styleDIV, 'textAlign', 'center'), _defineProperty(_styleDIV, 'float', 'left'), _defineProperty(_styleDIV, 'marginLeft', '5px'), _defineProperty(_styleDIV, 'marginBottom', '5px'), _defineProperty(_styleDIV, 'lineHeight', '200%'), _styleDIV);
+				}, _defineProperty(_styleDIV, 'padding', '43px 5px 20px 14px'), _defineProperty(_styleDIV, 'border', '1px solid black'), _defineProperty(_styleDIV, 'textAlign', 'center'), _defineProperty(_styleDIV, 'float', 'left'), _defineProperty(_styleDIV, 'marginLeft', '10px'), _defineProperty(_styleDIV, 'marginBottom', '10px'), _defineProperty(_styleDIV, 'lineHeight', '200%'), _defineProperty(_styleDIV, 'zIndex', '5'), _styleDIV);
 				return _react2.default.createElement(
 					'div',
 					{ style: styleDIV },
@@ -43304,7 +43388,7 @@
 	    key: 'getLocalStorage',
 	    value: function getLocalStorage() {
 	      try {
-	        var localstore = localStorage.getItem('employeesInformation');
+	        var localstore = localStorage.getItem('JantaUniqueEmployeesInformation');
 	        return JSON.parse(localstore);
 	      } catch (exception) {
 	        return false;
