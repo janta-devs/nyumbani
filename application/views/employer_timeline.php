@@ -86,7 +86,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </a>
                             </li>
                             <li class="mdl-menu__item">
-                                <a class="" href="/nyumbani/index.php/home/logout">
+                                <a class="" href="/nyumbani/index.php/home/logout" id = "logout">
                                     <i class="material-icons">power_settings_new</i> Logout 
                                 </a>
                             </li>
@@ -114,26 +114,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!--     <script src="<?php print base_url(); ?>assets/js/job_search.js" type="text/babel"></script> --><!-- 
     <script src="<?php print base_url(); ?>assets/navbar/dist/navbar-bundle.js"></script>  -->
     <script src="<?php print base_url(); ?>assets/search-view/dist/bundle.js"></script>
-        <!-- <script type="text/javascript">
-        $(document).ready(function(){
-
-        $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-            $.material.init();
-            $.material.radio();
-            $.material.checkbox();
-    //for datepicker
-    // $('#endDate').bootstrapMaterialDatePicker({ weekStart : 0 });
-    // $('#startDate').bootstrapMaterialDatePicker({ weekStart : 0 }).on('change', function(e, date)
-    // {
-    // $('#endDate').bootstrapMaterialDatePicker('setMinDate', date);
-
-
-    // });
-
-});
-    </script> -->
+    <script>
+        var logout = document.getElementById('logout');
+        logout.addEventListener('click', function( event ){
+            localStorage.removeItem('employeesInformation');
+        })
+    </script>
 </body>
 </html>
