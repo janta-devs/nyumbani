@@ -40,10 +40,10 @@ class Categories extends Component{
   createPagination(){
     //refreshes page if the data is not fully loaded
 
-    if( this.info === null || this.info === undefined ){
+    if( !this.info ){
         setTimeout(()=>{
             window.location.href = "";
-        },800);
+        },1000);
     }
     else
     {

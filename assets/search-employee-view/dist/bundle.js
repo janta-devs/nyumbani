@@ -42965,7 +42965,7 @@
 	    value: function createPagination() {
 	      //refreshes page if the data is not fully loaded
 
-	      if (this.info === null || this.info === undefined) {
+	      if (!this.info) {
 	        setTimeout(function () {
 	          window.location.href = "";
 	        }, 800);
