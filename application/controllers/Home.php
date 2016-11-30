@@ -19,7 +19,7 @@ class Home extends CI_Controller{
 		/*homepage*/
 		$data = $this->session->userdata;	
 		if(($this->session->userdata['role']) != $this->config->item('default_role')){
-			$this->load->view('employer_timeline', $data);
+			$this->load->view('employee_timeline', $data);
 		} else {
 			$this->load->view('timeline', $data);
 		}

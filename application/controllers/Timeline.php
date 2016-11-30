@@ -25,7 +25,6 @@ class Timeline extends CI_Controller {
 
 		$data  = $this->input->post();
 
-
 		if( isset( $data ) && !empty( $data ) && count( $data ) != 0 )
 		{
 			//calling the get_terms method to thus do the search and return a json object with results either affirmative or contrary
@@ -79,6 +78,22 @@ class Timeline extends CI_Controller {
 
 		foreach ($categories as $row) {
 			$new_arr[] = $row->profession;
+		}
+
+		$new_arr = array_unique($new_arr);
+
+		foreach ($new_arr as $key => $value) {
+			$final_array[] = $value;
+		}
+		print json_encode( $final_array );
+	}
+	public function getJobCategories(){
+		$this->load->model('Job_Model');
+		$jobs = new Job_Model();
+		$categories = $jobs->getData('job_title')->result();
+
+		foreach ($categories as $row) {
+			$new_arr[] = $row->job_title;
 		}
 
 		$new_arr = array_unique($new_arr);

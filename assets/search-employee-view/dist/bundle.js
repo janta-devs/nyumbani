@@ -79,7 +79,7 @@
 
 	var _Main2 = _interopRequireDefault(_Main);
 
-	var _CategoryEmployees = __webpack_require__(304);
+	var _CategoryEmployees = __webpack_require__(305);
 
 	var _CategoryEmployees2 = _interopRequireDefault(_CategoryEmployees);
 
@@ -89,6 +89,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	//<Route path = {`/nyumbani/index.php/home/Order/:option`} component={Main}/>
+
 	(0, _reactDom.render)(_react2.default.createElement(
 		_reactRedux.Provider,
 		{ store: _Store2.default },
@@ -97,9 +99,7 @@
 			{ history: _Store.history },
 			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home', component: _MainApp2.default }),
 			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home/', component: _MainApp2.default }),
-			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home/PostJob', component: _PostJobComponent2.default }),
-			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home/Employee/:id', component: _Main2.default }),
-			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home/Category/:option', component: _CategoryEmployees2.default })
+			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home/Order/:option', component: _CategoryEmployees2.default })
 		)
 	), document.getElementById('component'));
 
@@ -38265,8 +38265,8 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var MainApp = function MainApp(props) {
-		props.Actions.pullCategories();
-		return _react2.default.createElement(_Search2.default, { State: props, searchAction: props.Actions.search, data: props.search_results,
+		props.Actions.pullJobCategories();
+		return _react2.default.createElement(_Search2.default, { State: props, searchAction: props.Actions.searchJobs, data: props.search_results,
 			suggestions: props.suggestions });
 	};
 
@@ -38368,7 +38368,7 @@
 			key: 'componentWillMount',
 			value: function componentWillMount() {
 				this.props.State.Actions.pullAccountUserData();
-				this.props.State.Actions.pullAllEmployees();
+				this.props.State.Actions.pullJobs();
 			}
 		}, {
 			key: 'componentWillUpdate',
@@ -38478,16 +38478,7 @@
 						firstname,
 						' ',
 						lastname,
-						'!',
-						_react2.default.createElement(
-							'div',
-							{ style: floatStlye },
-							_react2.default.createElement(
-								_reactRouter.Link,
-								{ className: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored', to: '/nyumbani/index.php/home/PostJob' },
-								'Post Job'
-							)
-						)
+						'!'
 					)
 				);
 			}
@@ -38914,18 +38905,10 @@
 
 		_createClass(ResultTable, [{
 			key: 'render',
-
-			// componentDidMount(){
-			// 	var data = [];
-			// 	var ids = this.props.data.map( x => {
-			// 		data.push(x.id)
-			// 	});
-			// 	this.props.State.Actions.pullEmployeeData( ids );
-			// }
 			value: function render() {
 				var populate = this.props.data.map(function (x) {
-					return _react2.default.createElement(_TableCell2.default, { key: x.login_id, id: x.login_id, surname: x.surname, id_pass: x.id_pass, city: x.city,
-						profession: x.profession });
+					return _react2.default.createElement(_TableCell2.default, { key: x.order_id, order_id: x.order_id, employer: x.login_id, description: x.description, job_title: x.job_title, location: x.location,
+						profession: x.profession, budget: x.budget });
 				});
 
 				return _react2.default.createElement(
@@ -38943,22 +38926,27 @@
 								_react2.default.createElement(
 									'th',
 									null,
-									'SURNAME'
+									'ORDER NO.'
 								),
 								_react2.default.createElement(
 									'th',
 									null,
-									'PROFESSION'
+									'JOB TITLE'
 								),
 								_react2.default.createElement(
 									'th',
 									null,
-									'CITY'
+									'DESCRIPTION'
+								),
+								_react2.default.createElement(
+									'th',
+									null,
+									'LOCATION'
 								),
 								_react2.default.createElement(
 									'th',
 									{ className: 'mdl-data-table__header--sorted-ascending' },
-									'RATING'
+									'BUDGET'
 								),
 								_react2.default.createElement(
 									'th',
@@ -39078,29 +39066,34 @@
 						_react2.default.createElement(
 							'td',
 							null,
-							this.props.surname
+							this.props.order_id
 						),
 						_react2.default.createElement(
 							'td',
 							null,
-							this.props.profession
+							this.props.job_title
 						),
 						_react2.default.createElement(
 							'td',
 							null,
-							this.props.city
+							this.props.description
 						),
 						_react2.default.createElement(
 							'td',
 							null,
-							this.props.id_pass
+							this.props.location
+						),
+						_react2.default.createElement(
+							'td',
+							null,
+							this.props.budget
 						),
 						_react2.default.createElement(
 							'td',
 							null,
 							_react2.default.createElement(
 								_reactRouter.Link,
-								{ to: '/nyumbani/index.php/home/Employee/' + this.props.id },
+								{ to: '/nyumbani/index.php/home/Order/' + this.props.order_id },
 								_react2.default.createElement(
 									'button',
 									{ style: styleIEButton, className: 'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored' },
@@ -40857,6 +40850,29 @@
 				data: suggestions
 			};
 		},
+		searchJobs: function searchJobs(term) {
+
+			//collects the search term from the component
+			//it calls the clearstate method to clean the reducers
+			return function (dispatch) {
+
+				var self = dispatch;
+				_jquery2.default.ajax({
+					url: '/nyumbani/index.php/Timeline/get_jobs',
+					type: 'POST',
+					dataType: 'json',
+					data: 'search_term=' + term
+				}).done(function (res) {
+					if (res.hasOwnProperty('message') === true) {
+						self(Actions.clearState());
+						self(Actions.getSuggestions(res));
+					} else {
+						self(Actions.clearState());
+						self(Actions.setState(res));
+					}
+				});
+			};
+		},
 		search: function search(term) {
 
 			//collects the search term from the component
@@ -40973,6 +40989,42 @@
 					var data = JSON.stringify(response);
 					try {
 						localStorage.setItem('JantaUniqueCategories', data);
+						return true;
+					} catch (exception) {
+						return false;
+					}
+				});
+			};
+		},
+		pullJobs: function pullJobs() {
+			return function (dispatch) {
+				var self = dispatch;
+				_jquery2.default.ajax({
+					url: '/nyumbani/index.php/profile/getJobs',
+					type: 'POST',
+					dataType: 'json'
+				}).done(function (response) {
+					var data = JSON.stringify(response);
+					try {
+						localStorage.setItem('JantaUniqueJobs', data);
+						return true;
+					} catch (exception) {
+						return false;
+					}
+				});
+			};
+		},
+		pullJobCategories: function pullJobCategories() {
+			return function (dispatch) {
+				var self = dispatch;
+				_jquery2.default.ajax({
+					url: '/nyumbani/index.php/Timeline/getJobCategories',
+					type: 'POST',
+					dataType: 'json'
+				}).done(function (response) {
+					var data = JSON.stringify(response);
+					try {
+						localStorage.setItem('JantaJobCategories', data);
 						return true;
 					} catch (exception) {
 						return false;
@@ -42609,7 +42661,7 @@
 											_react2.default.createElement(
 												'label',
 												{ className: 'mdl-textfield__label', htmlFor: 'smaple1' },
-												'OR Search here for more employees'
+												'Search here for more jobs'
 											)
 										)
 									),
@@ -42877,13 +42929,13 @@
 
 	    _this.info = _this.getLocalStorage();
 	    _this.pages = _this.createPagination();
+
 	    _this.state = {
 	      data: [],
 	      count: 0,
 	      maxLength: _this.pages.length
 	    };
 	    _this.data = _this.pages[_this.state.count];
-
 	    return _this;
 	  }
 
@@ -42902,7 +42954,7 @@
 	    key: 'getLocalStorage',
 	    value: function getLocalStorage() {
 	      try {
-	        var localstore = localStorage.getItem('JantaUniqueCategories');
+	        var localstore = localStorage.getItem('JantaJobCategories');
 	        return JSON.parse(localstore);
 	      } catch (exception) {
 	        return false;
@@ -42911,18 +42963,19 @@
 	  }, {
 	    key: 'createPagination',
 	    value: function createPagination() {
+	      //refreshes page if the data is not fully loaded
 
-	      if (this.info === null) {
-	        window.location.href = "";
+	      if (this.info === null || this.info === undefined) {
+	        setTimeout(function () {
+	          window.location.href = "";
+	        }, 800);
 	      } else {
 	        var counter = Math.floor(this.info.length / 12);
 	        var NextNum = 12;
 	        var start = 0;
 	        var holder = [];
-
 	        for (var i = 0; i < counter; i++) {
 	          var num = 'arr' + (i + 1);
-
 	          if (i === 0) {
 	            num = this.info.splice(start, NextNum);
 	            NextNum + 12;
@@ -42978,7 +43031,7 @@
 	          _react2.default.createElement(
 	            'button',
 	            { className: 'mdl-button--raised mdl-button--colored' },
-	            'EMPLOYEE CATEGORIES AVAILABLE'
+	            'JOB CATEGORIES AVAILABLE'
 	          )
 	        ),
 	        _react2.default.createElement('br', null),
@@ -43057,7 +43110,7 @@
 					{ style: styleDIV },
 					_react2.default.createElement(
 						_reactRouter.Link,
-						{ to: '/nyumbani/index.php/home/Category/' + this.props.category },
+						{ to: '/nyumbani/index.php/home/Order/' + this.props.category.replace('/', '_') },
 						this.props.category
 					)
 				);
@@ -43085,7 +43138,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _BackComponent = __webpack_require__(297);
+	var _BackComponent = __webpack_require__(304);
 
 	var _BackComponent2 = _interopRequireDefault(_BackComponent);
 
@@ -43349,6 +43402,62 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(204);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var BackComponent = function (_Component) {
+		_inherits(BackComponent, _Component);
+
+		function BackComponent() {
+			_classCallCheck(this, BackComponent);
+
+			return _possibleConstructorReturn(this, (BackComponent.__proto__ || Object.getPrototypeOf(BackComponent)).apply(this, arguments));
+		}
+
+		_createClass(BackComponent, [{
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'div',
+					{ className: 'mdl-cell mdl-cell--12-col' },
+					_react2.default.createElement(
+						_reactRouter.Link,
+						{ to: '/nyumbani/index.php/home',
+							className: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent', ref: 'back' },
+						'Back to Search'
+					)
+				);
+			}
+		}]);
+
+		return BackComponent;
+	}(_react.Component);
+
+	exports.default = BackComponent;
+
+/***/ },
+/* 305 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 
@@ -43387,7 +43496,7 @@
 	    key: 'getLocalStorage',
 	    value: function getLocalStorage() {
 	      try {
-	        var localstore = localStorage.getItem('JantaUniqueEmployeesInformation');
+	        var localstore = localStorage.getItem('JantaUniqueJobs');
 	        return JSON.parse(localstore);
 	      } catch (exception) {
 	        return false;
@@ -43396,11 +43505,11 @@
 	  }, {
 	    key: 'getUserInformation',
 	    value: function getUserInformation() {
-	      var employees = this.getLocalStorage();
-	      var option = this.props.params.option;
-
-	      var data = employees.filter(function (value, index) {
-	        return value.profession === option ? employees[index] : false;
+	      var jobs = this.getLocalStorage();
+	      //the replace function has been put in place to handle employees who might have slashes as part of their title
+	      var option = this.props.params.option.replace('_', '/');
+	      var data = jobs.filter(function (value, index) {
+	        return value.job_title === option ? jobs[index] : false;
 	      });
 	      return data;
 	    }

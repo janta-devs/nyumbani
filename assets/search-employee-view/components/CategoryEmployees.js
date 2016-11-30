@@ -12,7 +12,7 @@ class CategoryEmployees extends Component{
 	getLocalStorage(){
       try
       {
-        var localstore = localStorage.getItem('JantaUniqueEmployeesInformation');
+        var localstore = localStorage.getItem('JantaUniqueJobs');
         return JSON.parse(localstore);
       }
       catch(exception)
@@ -21,11 +21,11 @@ class CategoryEmployees extends Component{
       }
     }
     getUserInformation(){
-      var employees = this.getLocalStorage();
+      var jobs = this.getLocalStorage();
       //the replace function has been put in place to handle employees who might have slashes as part of their title
-      var option = this.props.params.option.replace('_','/');
-      var data = employees.filter( (value, index) => {
-         return (value.profession === option ) ? employees[index] : false;
+      var option = this.props.params.option.replace('_','/');     
+      var data = jobs.filter( (value, index) => {
+         return (value.job_title === option ) ? jobs[index] : false;
       });
       return data;
     }

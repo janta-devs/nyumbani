@@ -30,6 +30,33 @@ let Actions =
 			data: suggestions
 		}
 	},
+	searchJobs: function( term )
+	{
+
+		//collects the search term from the component
+		//it calls the clearstate method to clean the reducers
+		return( dispatch ) => {
+			
+			var self = dispatch;
+			$.ajax({
+				url: '/nyumbani/index.php/Timeline/get_jobs',
+				type: 'POST',
+				dataType: 'json',
+				data: 'search_term='+term,
+			})
+			.done(function( res ) {
+				if( res.hasOwnProperty('message') === true ){
+					self( Actions.clearState() )
+					self( Actions.getSuggestions( res ))
+				}
+				else
+				{
+					self( Actions.clearState() )
+					self( Actions.setState( res ))
+				}
+			})
+		}
+	},
 	search: function( term )
 	{
 
@@ -157,6 +184,47 @@ let Actions =
 				var data = JSON.stringify( response )
 				try{
 					localStorage.setItem('JantaUniqueCategories', data )
+					return true;
+				}
+				catch( exception ){
+					return false;
+					
+				}
+			});
+		}
+	},
+	pullJobs: function(){
+		return( dispatch ) => {
+			var self = dispatch;
+			$.ajax({
+				url: '/nyumbani/index.php/profile/getJobs',
+				type: 'POST',
+				dataType: 'json'
+			})
+			.done(function( response ){
+				var data = JSON.stringify( response )
+				try{
+					localStorage.setItem('JantaUniqueJobs', data )
+					return true;
+				}
+				catch( exception ){
+					return false;
+				}
+			});
+		}
+	},
+	pullJobCategories: function(){
+		return( dispatch ) => {
+			var self = dispatch;
+			$.ajax({
+				url: '/nyumbani/index.php/Timeline/getJobCategories',
+				type: 'POST',
+				dataType: 'json'
+			})
+			.done(function( response ){
+				var data = JSON.stringify( response )
+				try{
+					localStorage.setItem('JantaJobCategories', data )
 					return true;
 				}
 				catch( exception ){

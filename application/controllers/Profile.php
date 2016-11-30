@@ -316,6 +316,12 @@ class Profile extends CI_Controller{
 
 		print json_encode( $joinedInformation );
 	}
+	public function getJobs(){
+		$this->load->model('Job_Model');
+		$jobs = new Job_Model();
+		$res = $jobs->get();
+		print json_encode( $res );
+	}
 
 }
 ?>

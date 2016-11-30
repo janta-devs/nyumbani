@@ -51,6 +51,7 @@ class MainComponent  extends Component{
       return data;
     }
     render(){
+      //I removed the contact component so as to ensure the employer cannot view the employee's contact information
         return(
             <div>
               <BackComponent />
@@ -65,7 +66,7 @@ class MainComponent  extends Component{
                   <div className="column d-2-3 m-7-12 s-1-1 xs-1-1">
                       
                     <BasicDetails data = {this.data[0]}/>
-                    <ContactDetails data = {this.data[0]}/>
+                    
                     <Skills />
                     <ProfessionalExperience data = {this.data[0]}/>
                     <EducationBackground data = {this.data[0]}/>

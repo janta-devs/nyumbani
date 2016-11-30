@@ -210,10 +210,23 @@ class Search_jobs {
 			}
 
 			$suggestions = array_keys( array_count_values( $suggestions ) );
-
-			for ($i=0; $i < 3; $i++) 
-			{ 
-				$main_array[] = ["suggestion_{$i}" => $suggestions[$i]];
+			if( count($suggestions ) == 1 )
+			{
+				$main_array[] = ["suggestion_0" => $suggestions[0]];
+			}
+			else if( count($suggestions ) == 2 && count($suggestions) != 1 )
+			{
+				for ($i=0; $i < 2; $i++) 
+				{ 
+					$main_array[] = ["suggestion_{$i}" => $suggestions[$i]];
+				}
+			}
+			else if ( count($suggestions ) > 2 )
+			{
+				for ($i=0; $i < 3; $i++) 
+				{ 
+					$main_array[] = ["suggestion_{$i}" => $suggestions[$i]];
+				}
 			}
 			return ( json_encode( (object)['message' => $main_array] ) );
 	}

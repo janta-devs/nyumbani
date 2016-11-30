@@ -11,16 +11,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link rel="icon" href="<?php print base_url(); ?>photo_assets/justia.ico">
     <title>Welcome to Janta</title>
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"><!-- 
-    <link href="<?php print base_url();?>assets/node_modules/bootstrap/dist/css/pe-icon-7-stroke.css" rel="stylesheet" />
-    <link href="<?php print base_url();?>assets/node_modules/bootstrap/dist/css/helper.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap/dist/css/bootstrap.css">
-    <!-- Bootstrap Material Design --><!-- 
-    <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap-material-design/dist/css/bootstrap-material-design.css">
-    <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css">
-    <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap-material-design/dist/css/ripples.min.css"> --> 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">> 
     <link rel="stylesheet" type="text/css" href="<?php print base_url(); ?>assets/node_modules/material-design-lite/material.min.css">
-
     <script src="<?php print base_url();?>assets/node_modules/bootstrap/assets/js/ie-emulation-modes-warning.js"></script>
     <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap/dist/css/custom.css">
     <script src="<?php print base_url();?>assets/node_modules/jquery/dist/jquery.min.js"></script>
@@ -101,12 +93,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div id="component" style="margin-top: 60px; width: 100%;"></div>
       </div>
     </main>
-  </div><!--container ends here--><!-- 
-    <script src="<?php print base_url();?>assets/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="<?php print base_url();?>assets/node_modules/bootstrap-material-design/dist/js/ripples.min.js"></script>
-    <script src="<?php print base_url();?>assets/node_modules/bootstrap-material-design/dist/js/material.js"></script> -->
-    <!-- <script src="<?php print base_url();?>assets/node_modules/momentjs/moment-with-locales.js"></script> -->
-    <!-- <script src="<?php print base_url();?>assets/node_modules/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script> -->
+  </div>
     <script src="<?php print base_url(); ?>assets/node_modules/react/dist/react.js" type="text/javascript" charset="utf-8"></script>
     <script src="<?php print base_url(); ?>assets/node_modules/react-dom/dist/react-dom.js" type="text/javascript" charset="utf-8" ></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script> -->
@@ -114,26 +101,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!--     <script src="<?php print base_url(); ?>assets/js/job_search.js" type="text/babel"></script> --><!-- 
     <script src="<?php print base_url(); ?>assets/navbar/dist/navbar-bundle.js"></script>  -->
     <script src="<?php print base_url(); ?>assets/search-view/dist/bundle.js"></script>
-        <!-- <script type="text/javascript">
-        $(document).ready(function(){
+        <script>
+        var logout = document.getElementById('logout');
+        logout.addEventListener('click', function( event ){
+            localStorage.removeItem('JantaUniqueEmployeesInformation');
+        })
+    </script>
 
-        $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-            $.material.init();
-            $.material.radio();
-            $.material.checkbox();
-    //for datepicker
-    // $('#endDate').bootstrapMaterialDatePicker({ weekStart : 0 });
-    // $('#startDate').bootstrapMaterialDatePicker({ weekStart : 0 }).on('change', function(e, date)
-    // {
-    // $('#endDate').bootstrapMaterialDatePicker('setMinDate', date);
-
-
-    // });
-
-});
-    </script> -->
 </body>
 </html>
