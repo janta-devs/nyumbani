@@ -39,6 +39,11 @@ class Categories extends Component{
   }
   createPagination(){
 
+    if( this.info === null ){
+      window.location.href = "";
+    }
+    else
+    {
     var counter = (Math.floor(this.info.length / 12))
     var NextNum = 12;
     var start = 0;
@@ -61,6 +66,8 @@ class Categories extends Component{
     }
     holder.push( this.info );
     return holder;
+    }
+    
   }
   handleNextClick( e ){
     e.preventDefault();

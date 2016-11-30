@@ -42912,27 +42912,31 @@
 	    key: 'createPagination',
 	    value: function createPagination() {
 
-	      var counter = Math.floor(this.info.length / 12);
-	      var NextNum = 12;
-	      var start = 0;
-	      var holder = [];
+	      if (this.info === null) {
+	        window.location.href = "";
+	      } else {
+	        var counter = Math.floor(this.info.length / 12);
+	        var NextNum = 12;
+	        var start = 0;
+	        var holder = [];
 
-	      for (var i = 0; i < counter; i++) {
-	        var num = 'arr' + (i + 1);
+	        for (var i = 0; i < counter; i++) {
+	          var num = 'arr' + (i + 1);
 
-	        if (i === 0) {
-	          num = this.info.splice(start, NextNum);
-	          NextNum + 12;
-	          start = NextNum + 1;
-	        } else {
-	          num = this.info.splice(start, NextNum);
-	          NextNum + 12;
-	          start = NextNum + 1;
+	          if (i === 0) {
+	            num = this.info.splice(start, NextNum);
+	            NextNum + 12;
+	            start = NextNum + 1;
+	          } else {
+	            num = this.info.splice(start, NextNum);
+	            NextNum + 12;
+	            start = NextNum + 1;
+	          }
+	          holder.push(num);
 	        }
-	        holder.push(num);
+	        holder.push(this.info);
+	        return holder;
 	      }
-	      holder.push(this.info);
-	      return holder;
 	    }
 	  }, {
 	    key: 'handleNextClick',
