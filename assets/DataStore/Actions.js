@@ -138,6 +138,24 @@ let Actions =
 			data: data
 		}
 	},
+	populateJobs: function( data ){
+		return{
+			type: 'POPULATE_JOBS',
+			data: data
+		}
+	},
+	populateJobCategories: function( data ){
+		return{
+			type: 'POPULATE_JOBS_CATEGORIES',
+			data: data
+		}
+	},
+	populateEmployeeCategories: function( data ){
+		return{
+			type: 'POPULATE_EMPLOYEE_CATEGORIES',
+			data: data
+		}
+	}
 	pullEmployeeData: function( id ){
 		return( dispatch ) => {
 			var self = dispatch;

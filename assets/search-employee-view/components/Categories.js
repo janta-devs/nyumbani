@@ -40,13 +40,13 @@ class Categories extends Component{
   createPagination(){
     //refreshes page if the data is not fully loaded
 
-    if( !this.info ){
-        setTimeout(()=>{
-            window.location.href = "";
-        },1000);
-    }
-    else
-    {
+    // if( !this.info ){
+    //     setTimeout(()=>{
+    //         window.location.href = "";
+    //     },1000);
+    // }
+    // else
+    // {
         var counter = (Math.floor(this.info.length / 12))
         var NextNum = 12;
         var start = 0;
@@ -70,7 +70,7 @@ class Categories extends Component{
         }
         holder.push( this.info );
         return holder;
-    }
+    //}
     
   }
   handleNextClick( e ){
