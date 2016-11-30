@@ -51,7 +51,6 @@ class MainComponent  extends Component{
       return data;
     }
     render(){
-      console.log( this.data );
         return(
             <div>
               <BackComponent />

@@ -10,9 +10,6 @@ class Categories extends Component{
 
     this.info = this.getLocalStorage();
     this.pages = this.createPagination();
-
-		// this.data = this.info.splice(0,12);
-
     this.state = {
       data: [],
       count: 0,
@@ -26,7 +23,6 @@ class Categories extends Component{
     this.setState({ data: this.pages[this.state.count] });
   }
   componentWillUpdate(nxtProp, nxtState ){
-    console.log( nxtState );
     //this.setState({ data: this.pages[this.state.count] });
   } 
   getLocalStorage()

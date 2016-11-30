@@ -39254,7 +39254,6 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      console.log(this.data);
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -42878,9 +42877,6 @@
 
 	    _this.info = _this.getLocalStorage();
 	    _this.pages = _this.createPagination();
-
-	    // this.data = this.info.splice(0,12);
-
 	    _this.state = {
 	      data: [],
 	      count: 0,
@@ -42900,7 +42896,6 @@
 	  }, {
 	    key: 'componentWillUpdate',
 	    value: function componentWillUpdate(nxtProp, nxtState) {
-	      console.log(nxtState);
 	      //this.setState({ data: this.pages[this.state.count] });
 	    }
 	  }, {
