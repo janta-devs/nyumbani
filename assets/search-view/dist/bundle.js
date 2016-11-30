@@ -40857,6 +40857,29 @@
 				data: suggestions
 			};
 		},
+		searchJobs: function searchJobs(term) {
+
+			//collects the search term from the component
+			//it calls the clearstate method to clean the reducers
+			return function (dispatch) {
+
+				var self = dispatch;
+				_jquery2.default.ajax({
+					url: '/nyumbani/index.php/Timeline/get_jobs',
+					type: 'POST',
+					dataType: 'json',
+					data: 'search_term=' + term
+				}).done(function (res) {
+					if (res.hasOwnProperty('message') === true) {
+						self(Actions.clearState());
+						self(Actions.getSuggestions(res));
+					} else {
+						self(Actions.clearState());
+						self(Actions.setState(res));
+					}
+				});
+			};
+		},
 		search: function search(term) {
 
 			//collects the search term from the component
@@ -40973,6 +40996,42 @@
 					var data = JSON.stringify(response);
 					try {
 						localStorage.setItem('JantaUniqueCategories', data);
+						return true;
+					} catch (exception) {
+						return false;
+					}
+				});
+			};
+		},
+		pullJobs: function pullJobs() {
+			return function (dispatch) {
+				var self = dispatch;
+				_jquery2.default.ajax({
+					url: '/nyumbani/index.php/profile/getJobs',
+					type: 'POST',
+					dataType: 'json'
+				}).done(function (response) {
+					var data = JSON.stringify(response);
+					try {
+						localStorage.setItem('JantaUniqueJobs', data);
+						return true;
+					} catch (exception) {
+						return false;
+					}
+				});
+			};
+		},
+		pullJobCategories: function pullJobCategories() {
+			return function (dispatch) {
+				var self = dispatch;
+				_jquery2.default.ajax({
+					url: '/nyumbani/index.php/Timeline/getJobCategories',
+					type: 'POST',
+					dataType: 'json'
+				}).done(function (response) {
+					var data = JSON.stringify(response);
+					try {
+						localStorage.setItem('JantaJobCategories', data);
 						return true;
 					} catch (exception) {
 						return false;
@@ -43057,7 +43116,7 @@
 					{ style: styleDIV },
 					_react2.default.createElement(
 						_reactRouter.Link,
-						{ to: '/nyumbani/index.php/home/Category/' + this.props.category },
+						{ to: '/nyumbani/index.php/home/Category/' + this.props.category.replace('/', '_') },
 						this.props.category
 					)
 				);
@@ -43397,8 +43456,8 @@
 	    key: 'getUserInformation',
 	    value: function getUserInformation() {
 	      var employees = this.getLocalStorage();
-	      var option = this.props.params.option;
-
+	      //the replace function has been put in place to handle employees who might have slashes as part of their title
+	      var option = this.props.params.option.replace('_', '/');
 	      var data = employees.filter(function (value, index) {
 	        return value.profession === option ? employees[index] : false;
 	      });
