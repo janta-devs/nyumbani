@@ -16,8 +16,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <script src="<?php print base_url();?>assets/node_modules/bootstrap/assets/js/ie-emulation-modes-warning.js"></script>
     <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap/dist/css/custom.css">
+     <!-- <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap/dist/css/bootstrap.css"> -->
     <script src="<?php print base_url();?>assets/node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="<?php print base_url(); ?>assets/node_modules/material-design-lite/material.js" type="text/javascript" charset="utf-8" async defer></script>
+    <script src="<?php print base_url(); ?>assets/node_modules/material-design-lite/material.js" type="text/javascript"></script>
     <style>
         .mdl-data-table{
             width: 100%;
@@ -97,11 +98,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </div>
     <script src="<?php print base_url(); ?>assets/node_modules/react/dist/react.js" type="text/javascript" charset="utf-8"></script>
     <script src="<?php print base_url(); ?>assets/node_modules/react-dom/dist/react-dom.js" type="text/javascript" charset="utf-8" ></script>
+     <script src="<?php print base_url(); ?>assets/node_modules/bootstrap/dist/js/bootstrap.js" type="text/javascript" charset="utf-8" ></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script> -->
     <script src="<?php print base_url(); ?>assets/js/babel-core.js" type="text/javascript"></script>
 <!--     <script src="<?php print base_url(); ?>assets/js/job_search.js" type="text/babel"></script> --><!-- 
     <script src="<?php print base_url(); ?>assets/navbar/dist/navbar-bundle.js"></script>  -->
-    <script src="<?php print base_url(); ?>assets/search-employee-view/dist/bundle.js"></script>
+    <script src="<?php print base_url(); ?>assets/search-view/dist/bundle.js"></script>
     <script>
         var logout = document.getElementById('logout');
         logout.addEventListener('click', function( event ){

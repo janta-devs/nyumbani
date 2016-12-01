@@ -14,55 +14,117 @@ class Profile extends CI_Controller{
 		$this->load->helper('upload_helper');
 		@$path = upload_file();
 	}
-	public function sendBasicInformation($login_id = 3){
+	public function sendBasicInformation(){
 		$this->load->model('Basic_information');
 		$basic = new Basic_information();
 
-		$data = $this->session->userdata();
-
+		$data_sess = $this->session->userdata();
 		$dataArr = $this->input->post();
-		$dataArr['login_id'] = $data['login_id'];
+		
+		$dataArr['login_id'] = $data_sess['login_id'];
 
-		$insert_id = $basic->insert( $dataArr );
+		($basic->update('login_id', $dataArr['login_id'], $dataArr )) ? 
+		print json_encode(['update_status' => true]) : print json_encode(['update_status' => false]);
 
-		print json_encode(['insert_id' => $insert_id]);
 
 	}
-	public function sendEducationInformation( $login_id = 3){
+	public function sendEducationInformation( ){
 		/*
 		* It has to be changed to properly format the data in the new database design
 		*
 		*/
 
-		// $this->load->model('Education_information');
-		// $education = new Education_information();
+		$this->load->model('Education_information');
+		$education = new Education_information();
 
-		// $data = $this->input->post();
-		// $data['login_id'] = $login_id;
+		$data_sess = $this->session->userdata();
+		$data = $this->input->post();
 
-		// $past_job = "";
-		// foreach ($data as $key => $value) {
-		// 	if( preg_match('/past_job/i', $key))
-		// 	{
-		// 		$past_job.=$value . ', ';
-		// 		unset($data[$key]);
-		// 	}
-		// }
+		unset($data['primary_school']);
+		unset($data['secondary_school']);
+		unset($data['university']);
+		unset($data['kcpe_grade']);
+		unset($data['kcse_grade']);
+		unset($data['university_grade']);
+		unset($data['primary_certificate']);
+		unset($data['secondary_certificate']);
+		unset($data['university_certificate']);
 
-		// $data['past_job'] = $past_job;
+		$data['login_id'] = $data_sess['login_id'];
 
-		// $insert_id = $education->insert( $data );
+		$complete = "";
+		$past_job = "";
+		$title = "";
+		$start = "";
+		$end = "";
+		foreach ($data as $key => $value) {
+			if( preg_match('/past_job/i', $key))
+			{
+				$past_job.=$value . ',';
+				unset($data[$key]);
+			}
+			if( preg_match('/title_/i', $key))
+			{
+				$title.=$value . ',';
+				unset($data[$key]);
+			}
+			if( preg_match('/start_date_/i', $key))
+			{
+				$start.=$value . '-';
+				unset($data[$key]);
+			}
+			if( preg_match('/end_date_/i', $key))
+			{
+				$end.=$value . '-';
+				unset($data[$key]);
+			}
+			$complete = $past_job.'='.$start.','.$end.'='.$title;
+		}
+		
+		$data['past_job'] = $complete;
 
-		// print json_encode(['insert_id' => $insert_id]);
+
+		$prim = $data['primary_history'];
+
+
+		$primary = "";
+
+		foreach ($prim as $key => $value) {
+			$primary.=$value.',';
+		}
+		$data['primary_history'] = $primary;
+
+		$sec = $data['secondary_history'];
+		$secondary = "";
+
+		foreach ($sec as $key => $value) {
+			$secondary.=$value.',';
+		}
+		$data['secondary_history'] = $secondary;
+
+		$uni = $data['university_history'];
+		$university = "";
+
+		foreach ($uni as $key => $value) {
+			$university.=$value.',';
+		}
+		$data['university_history'] = $university;
+
+
+		($education->update('login_id', $data['login_id'], $data )) ? 
+		print json_encode(['update_status' => true]) : print json_encode(['update_status' => false]);
+
+	
 
 	}
-	public function sendSkillInformation($login_id = 3)
+	public function sendSkillInformation()
 	{
 		$this->load->model('Education_information');
 		$education = new Education_information();
 
+		$data_sess = $this->session->userdata();
 		$data = $this->input->post();
-		$data['login_id'] = $login_id;
+		$data['login_id'] = $data_sess['login_id'];
 
 		$skill = "";
 		$mode = "";
@@ -81,6 +143,8 @@ class Profile extends CI_Controller{
 		}
 
 		$data['skills'] = $skill_data;
+
+		print_r( $data );
 
 		($education->update('login_id', $data['login_id'], $data )) ? 
 		print json_encode(['update_status' => true]) : print json_encode(['update_status' => false]);
@@ -322,6 +386,7 @@ class Profile extends CI_Controller{
 		$res = $jobs->get();
 		print json_encode( $res );
 	}
+
 
 }
 ?>

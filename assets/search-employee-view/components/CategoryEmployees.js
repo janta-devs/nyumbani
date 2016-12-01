@@ -3,13 +3,15 @@ import React, { Component } from 'react';
 import ResultTable from './ResultTable';
 
 class CategoryEmployees extends Component{
-	constructor( context, props ){
+	constructor( context, props )
+  {
 		super( context, props );
 
 		this.getLocalStorage();
       	this.data = this.getUserInformation();
 	}
-	getLocalStorage(){
+	getLocalStorage()
+  {
       try
       {
         var localstore = localStorage.getItem('JantaUniqueJobs');

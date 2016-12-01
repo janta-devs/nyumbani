@@ -155,7 +155,7 @@ let Actions =
 			type: 'POPULATE_EMPLOYEE_CATEGORIES',
 			data: data
 		}
-	}
+	},
 	pullEmployeeData: function( id ){
 		return( dispatch ) => {
 			var self = dispatch;
