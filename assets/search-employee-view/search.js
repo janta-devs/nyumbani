@@ -21,10 +21,10 @@ import store, { history } from '../DataStore/Store';
 render(
 	<Provider store={store}>
 		<Router history={history}>
-			<Route path = {`/nyumbani/index.php/home`} component={MainApp}/>
-			<Route path = {`/nyumbani/index.php/home/`} component={MainApp}/>
-			<Route path = {`/nyumbani/index.php/home/ordernumber/:option`} component={Main}/>
-			<Route path = {`/nyumbani/index.php/home/Order/:option`} component={CategoryEmployees}/>
+			<Route path = {`/nyumbani/index.php/home/employee_timeline`} component={MainApp}/>
+			<Route path = {`/nyumbani/index.php/home/employee_timeline/`} component={MainApp}/>
+			<Route path = {`/nyumbani/index.php/home/employee_timeline/ordernumber/:option`} component={Main}/>
+			<Route path = {`/nyumbani/index.php/home/employee_timeline/Order/:option`} component={CategoryEmployees}/>
 		</Router>
 	</Provider>, 
 	document.getElementById('component'));

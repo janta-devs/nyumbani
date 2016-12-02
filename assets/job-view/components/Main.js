@@ -14,7 +14,7 @@ import Skills from './Skills';
 import BasicDetails from './BasicDetails';
 import ContactDetails from './ContactDetails';
 
-import BackComponent from '../../search-view/components/BackComponent';
+import BackComponent from '../../search-employee-view/components/BackComponent';
 
 class MainComponent  extends Component{
     constructor( context, props )

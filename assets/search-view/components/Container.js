@@ -22,7 +22,7 @@ class Container extends Component{
 	    };
 		return(
 			<div style ={styleDIV}>
-				<Link to={`/nyumbani/index.php/home/Category/${this.props.category.replace('/','_')}`}>{this.props.category}</Link>
+				<Link to={`/nyumbani/index.php/home/timeline/Category/${this.props.category.replace('/','_')}`}>{this.props.category}</Link>
 			</div>
 		)
 	}

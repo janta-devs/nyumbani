@@ -220,7 +220,7 @@ class Profile extends CI_Controller{
 	public function getProfileData()
 	{
 		$employee_id = $this->input->post();
-		$data['id'] = $employee_id['id'];
+		@$data['id'] = $employee_id['id'];
 
 		if( isset( $data ) && !empty($data))
 		{
@@ -247,7 +247,7 @@ class Profile extends CI_Controller{
 			$recomm = (Array)$recommendation->getRecommendations( $login_id )[0];
 			unset($recomm['employee_login_id']);
 
-			$past_job = $this->job_refactor( $education_data['past_job']);
+			$past_job = $this->job_refactor( @$education_data['past_job']);
 			$education_data['past_job'] = $past_job;
 
 			$primary_history = $this->school_history_refactor($education_data['primary_history']);

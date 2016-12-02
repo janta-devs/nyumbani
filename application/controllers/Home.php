@@ -19,10 +19,25 @@ class Home extends CI_Controller{
 		/*homepage*/
 		$data = $this->session->userdata;	
 		if(($this->session->userdata['role']) != $this->config->item('default_role')){
+			$this->load->view('Registration', $data);
+		} else {
+			$this->load->view('timeline', $data);
+		}
+	}
+	public function timeline(){
+		if(empty($this->session->userdata['email'])){
+			redirect(site_url().'/home/login');
+		}	
+		/*homepage*/
+		$data = $this->session->userdata;	
+		if(($this->session->userdata['role']) != $this->config->item('default_role')){
 			$this->load->view('employee_timeline', $data);
 		} else {
 			$this->load->view('timeline', $data);
 		}
+	}
+	public function employee_timeline(){
+		$this->load->view('employee_timeline');
 	}
 	public function completeReg(){
 		$this->load->view('home');
@@ -67,7 +82,7 @@ class Home extends CI_Controller{
 
 				$url = site_url() . '/home/complete/token/' . $qstring;
 				$link = '<a href="' . $url .'">' . $url . '</a>';
-				$from_email = 'ochiodhis@gmail.com';
+				$from_email = 'jantadevs@gmail.com';
 				$to_email = $this->input->post('email_add');
 				$subject = 'Verify Your Email Address';
 				$message = '';
@@ -176,7 +191,17 @@ class Home extends CI_Controller{
 			foreach($userInfo as $key=>$val){
 				$this->session->set_userdata($key, $val);
 			}
-			redirect(site_url(). '/home/');
+			$user_role = $this->session->userdata();
+			if( $user_role['role'] == 'employer'){
+				redirect(site_url(). '/home/timeline/');
+			}
+			else{
+				redirect(site_url(). '/home/employee_timeline/');
+				$this->load->view('employee_timeline');
+			}
+			
+
+			
 		}
 	}
 
@@ -264,41 +289,10 @@ class Home extends CI_Controller{
     public function base64url_encode($data) { 
       return rtrim(strtr(base64_encode($data), '+/', '-_'), '='); 
     } 
-		public function base64url_decode($data)	{
-			return base64_decode(str_pad(strtr($data, '-_', '+/'), strlen($data) % 4, '=', STR_PAD_RIGHT));
-		}
-
-		/*}
-		$data = $this->input->post();
-		if( $data['email'] == '' || $data['username'] == '' ){
-			print json_encode(['status'=>'error']);
-		}
-		else if(isset( $data ) && is_array( $data ) && !empty( $data )){
-			unset($data['re_password']);
-			$user_login = new user_login();
-			$user_login->insert( $data );
-		}
-	}
-	public function update(){
-		$this->load->model('user_login');
-		$user_login = new user_login();
-		// example of how the update function ought to be used
-		/*
-		*@parameters two arrays first one with old user_information
-		*@parameters second array with new user_information to be updated
-		*	Example
-		/
-		// $old_data = ['username'=>'antony', 'password'=>'pass','re_password'=>'pass'];
-		// $new_data = ['username'=>'Jadz', 'password'=>'ngayo','re_password'=>'ngayo'];	
-		// $user_login->update( $old_data, $new_data );
+	public function base64url_decode($data)	{
+		return base64_decode(str_pad(strtr($data, '-_', '+/'), strlen($data) % 4, '=', STR_PAD_RIGHT));
 	}
 
-	public function delete(){
-		$this->load->model('user_login');
-		$user_login = new user_login();
-		$data = ['username'=>'theantonymars@gmail.com'];
-		$user_login->delete($data);
-	}*/
 }
 
 ?>

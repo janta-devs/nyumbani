@@ -21,7 +21,7 @@ class TableCell extends Component{
 					<td>{this.props.city}</td>
 					<td>{this.props.id_pass}</td>
 					<td>
-					<Link to={`/nyumbani/index.php/home/Employee/${this.props.id}`}>
+					<Link to={`/nyumbani/index.php/home/timeline/Employee/${this.props.id}`}>
 						<button style={styleIEButton}	className = 'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored'>View Profile <i className="material-icons">account_box</i>
 						</button>
 					</Link>

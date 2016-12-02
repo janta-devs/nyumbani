@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 
 class TopActionComponent extends Component{
 
@@ -23,7 +22,9 @@ class TopActionComponent extends Component{
 				<div className="mdl-cell mdl-cell--12-col">
 				Welcome {firstname} {lastname}!
 				<div style={floatStlye} >
-						<Link className = 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored' to={`/nyumbani/index.php/home/PostJob`}>Post Job</Link>
+						<a 
+						className = 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored' 
+						href="/nyumbani/index.php/PostJob/job">Post Job</a>
 				</div>	
 				</div>
 			</div>

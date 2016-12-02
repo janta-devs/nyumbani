@@ -18,12 +18,12 @@ class ProfileComponent extends Component{
 		});
 	}
 	handleNext( e ){
-		e.preventDefault();
-		e.stopPropagation();
-		var el = e.target, elName = $(el).attr('name'), tabs = this.refs.list, linkName = '#'+elName;
-		var link = $(tabs).find('li.active').next().addClass('active').find('a[data-toggle=tab]');
+		// e.preventDefault();
+		// e.stopPropagation();
+		// var el = e.target, elName = $(el).attr('name'), tabs = this.refs.list, linkName = '#'+elName;
+		// var link = $(tabs).find('li.active').next().addClass('active').find('a[data-toggle=tab]');
 
-		$(link[0]).click();
+		// $(link[0]).click();
 	}	
 	render() {
 		return (

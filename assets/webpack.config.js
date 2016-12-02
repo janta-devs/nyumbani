@@ -1,8 +1,8 @@
 var webpack = require("webpack");
 module.exports = {
-	entry:['./registration/registration.js'],
+	entry:['./search-view/search.js'],
 	output:{
-		path:'./registration/dist',
+		path:'./search-view/dist',
 		filename:'bundle.js',
 		publicPath:'/'
 	},

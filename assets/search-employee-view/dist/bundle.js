@@ -95,10 +95,10 @@
 		_react2.default.createElement(
 			_reactRouter.Router,
 			{ history: _Store.history },
-			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home', component: _MainApp2.default }),
-			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home/', component: _MainApp2.default }),
-			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home/ordernumber/:option', component: _Main2.default }),
-			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home/Order/:option', component: _CategoryEmployees2.default })
+			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home/employee_timeline', component: _MainApp2.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home/employee_timeline/', component: _MainApp2.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home/employee_timeline/ordernumber/:option', component: _Main2.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home/employee_timeline/Order/:option', component: _CategoryEmployees2.default })
 		)
 	), document.getElementById('component'));
 
@@ -39092,7 +39092,7 @@
 							null,
 							_react2.default.createElement(
 								_reactRouter.Link,
-								{ to: '/nyumbani/index.php/home/ordernumber/' + this.props.order_id },
+								{ to: '/nyumbani/index.php/home/employee_timeline/ordernumber/' + this.props.order_id },
 								_react2.default.createElement(
 									'button',
 									{ style: styleIEButton, className: 'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored' },
@@ -42583,7 +42583,7 @@
 					{ className: 'mdl-cell mdl-cell--12-col' },
 					_react2.default.createElement(
 						_reactRouter.Link,
-						{ to: '/nyumbani/index.php/home',
+						{ to: '/nyumbani/index.php/home/timeline/',
 							className: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent', ref: 'back' },
 						'Back to Search'
 					)
@@ -43129,7 +43129,7 @@
 					{ style: styleDIV },
 					_react2.default.createElement(
 						_reactRouter.Link,
-						{ to: '/nyumbani/index.php/home/Order/' + this.props.category.replace('/', '_') },
+						{ to: '/nyumbani/index.php/home/employee_timeline/Order/' + this.props.category.replace('/', '_') },
 						this.props.category
 					)
 				);
@@ -43457,7 +43457,7 @@
 					{ className: 'mdl-cell mdl-cell--12-col' },
 					_react2.default.createElement(
 						_reactRouter.Link,
-						{ to: '/nyumbani/index.php/home',
+						{ to: '/nyumbani/index.php/home/employee_timeline/',
 							className: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent', ref: 'back' },
 						'Back to Search'
 					)
@@ -43534,7 +43534,7 @@
 
 	var _ContactDetails2 = _interopRequireDefault(_ContactDetails);
 
-	var _BackComponent = __webpack_require__(297);
+	var _BackComponent = __webpack_require__(304);
 
 	var _BackComponent2 = _interopRequireDefault(_BackComponent);
 

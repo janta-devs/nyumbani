@@ -21490,15 +21490,12 @@
 		}, {
 			key: 'handleNext',
 			value: function handleNext(e) {
-				e.preventDefault();
-				e.stopPropagation();
-				var el = e.target,
-				    elName = (0, _jquery2.default)(el).attr('name'),
-				    tabs = this.refs.list,
-				    linkName = '#' + elName;
-				var link = (0, _jquery2.default)(tabs).find('li.active').next().addClass('active').find('a[data-toggle=tab]');
+				// e.preventDefault();
+				// e.stopPropagation();
+				// var el = e.target, elName = $(el).attr('name'), tabs = this.refs.list, linkName = '#'+elName;
+				// var link = $(tabs).find('li.active').next().addClass('active').find('a[data-toggle=tab]');
 
-				(0, _jquery2.default)(link[0]).click();
+				// $(link[0]).click();
 			}
 		}, {
 			key: 'render',
@@ -32907,6 +32904,7 @@
 				if (dataCollection_skill.hasOwnProperty('skill1') && dataCollection_skill.hasOwnProperty('mode1')) {
 					this.setState({ alert: true });
 					this.props.populateProfile(method, dataCollection_skill);
+					window.location.href = "/nyumbani/index.php/home/employee_timeline/";
 				} else {
 					this.setState({ alert: false });
 				}
@@ -32934,11 +32932,6 @@
 								'button',
 								{ className: 'btn btn-info pull-left', onClick: this.onSave.bind(this) },
 								'Save'
-							),
-							_react2.default.createElement(
-								'button',
-								{ className: 'btn btn-warning pull-right', onClick: this.props.handleNext, name: 'skills' },
-								'Next'
 							)
 						)
 					)

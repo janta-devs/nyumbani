@@ -103,7 +103,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="<?php print base_url(); ?>assets/js/babel-core.js" type="text/javascript"></script>
 <!--     <script src="<?php print base_url(); ?>assets/js/job_search.js" type="text/babel"></script> --><!-- 
     <script src="<?php print base_url(); ?>assets/navbar/dist/navbar-bundle.js"></script>  -->
-    <script src="<?php print base_url(); ?>assets/search-view/dist/bundle.js"></script>
+    <script src="<?php print base_url(); ?>assets/search-employee-view/dist/bundle.js"></script>
     <script>
         var logout = document.getElementById('logout');
         logout.addEventListener('click', function( event ){

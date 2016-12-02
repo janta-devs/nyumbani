@@ -39,7 +39,7 @@ class Categories extends Component{
   }
   createPagination(){
 
-    if( this.info === null ){
+    if( this.info === null || this.info === undefined ){
       window.location.href = "";
     }
     else

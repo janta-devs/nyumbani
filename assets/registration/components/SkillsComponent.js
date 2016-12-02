@@ -28,6 +28,7 @@ class SkillsComponent extends Component{
 		if( dataCollection_skill.hasOwnProperty('skill1') && dataCollection_skill.hasOwnProperty('mode1')){
 			this.setState({alert: true});
 			this.props.populateProfile( method, dataCollection_skill );	
+			window.location.href = "/nyumbani/index.php/home/employee_timeline/"; 
 		}
 		else{
 			this.setState({alert: false});
@@ -46,7 +47,6 @@ class SkillsComponent extends Component{
 
 							<div className="col-md-8">
 								<button className="btn btn-info pull-left" onClick={this.onSave.bind(this)}>Save</button>
-								<button className="btn btn-warning pull-right" onClick = {this.props.handleNext} name = "skills">Next</button>
 							</div>
 							</div>
 					</div>
