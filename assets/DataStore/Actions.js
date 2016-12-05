@@ -84,13 +84,6 @@ let Actions =
 			})
 		}
 	},
-	changeAppMode: function( newMode ){
-		//changing the AppMode (It is simpler using Actions as the data is always synchronized)
-		return{
-			type: 'CHANGE_APP_MODE',
-			newMode: newMode,
-		}
-	},
 	accountUserInformation: function( res ){
 		//setting up data of the person who has been logged into the system
 		return{
@@ -108,33 +101,21 @@ let Actions =
 			})
 			.done(function( response ) {
 				self( Actions.accountUserInformation( response ))
+				var data = JSON.stringify( response )
+				try{
+					localStorage.setItem('JantaAccountUser', data );
+					return true;
+				}
+				catch( exception ){
+					return false;
+				}
 			});
 			
 		}
 	},
-	IncrementRecommendation: function( id ){
+	IncrementRecommendation: function( data ){
 		return{
 			type: 'RECOMMEND',
-			data: id
-		}
-	},
-	AddUserRecommendation: function( id ){
-			return( dispatch ) => {
-				var self = dispatch;
-				$.ajax({
-				url: 'http://localhost/nyumbani/index.php/profile/getRecommendations',
-				type: 'POST',
-				dataType: 'json',
-				data: id,
-			})
-			.done(function( response ) {
-				self( Actions.IncrementRecommendation( response ))
-			});
-		}
-	},
-	populateEmployeeData: function( data ){
-		return{
-			type:'POPULATE_EMPLOYEE_DATA',
 			data: data
 		}
 	},
@@ -144,15 +125,44 @@ let Actions =
 			data: data
 		}
 	},
-	populateJobCategories: function( data ){
+	AddUserRecommendation: function( orderId, employeeId, employer_id ){
+			return( dispatch ) => {
+				var self = dispatch;
+				$.ajax({
+				url: 'http://localhost/nyumbani/index.php/jobs/AddRecommendation',
+				type: 'POST',
+				dataType: 'json',
+				data: {order_id: orderId, employee_login_id: employeeId, employer_login_id: employer_id}
+			})
+			.done(function( response ) {
+				if( response['message'] === true || response['message'] === 'exists'){
+					self( Actions.IncrementRecommendation( {order_id: orderId} ))
+					return true;
+				}
+			});
+		}
+	},
+	populateEmployeeData: function( data ){
 		return{
-			type: 'POPULATE_JOBS_CATEGORIES',
+			type:'POPULATE_EMPLOYEE_DATA',
 			data: data
 		}
 	},
-	populateEmployeeCategories: function( data ){
+	populateJobCategories: function( data ){
 		return{
-			type: 'POPULATE_EMPLOYEE_CATEGORIES',
+			type: 'JOBS_CATEGORIES',
+			data: data
+		}
+	},
+	populateEmployees: function( data ){
+		return{
+			type: 'POPULATE_EMPLOYEES',
+			data: data
+		}
+	},
+	populateEmployeeCategories:function( data ){
+		return{
+			type:'POPULATE_EMPLOYEE_CATEGORIES',
 			data: data
 		}
 	},
@@ -180,6 +190,7 @@ let Actions =
 			})
 			.done(function( response ){
 				var data = JSON.stringify( response )
+				self( Actions.populateEmployees( response ));
 				try{
 					localStorage.setItem('JantaUniqueEmployeesInformation', data )
 					return true;
@@ -199,6 +210,8 @@ let Actions =
 				dataType: 'json'
 			})
 			.done(function( response ){
+				self(Actions.populateEmployeeCategories( response ))
+				
 				var data = JSON.stringify( response )
 				try{
 					localStorage.setItem('JantaUniqueCategories', data )
@@ -220,6 +233,9 @@ let Actions =
 				dataType: 'json'
 			})
 			.done(function( response ){
+
+				self(Actions.populateJobs( response ));	// triggering the action to populate the jobs array
+
 				var data = JSON.stringify( response )
 				try{
 					localStorage.setItem('JantaUniqueJobs', data )
@@ -231,7 +247,7 @@ let Actions =
 			});
 		}
 	},
-	pullJobCategories: function(){
+	pullJobSpecificCategories: function(){
 		return( dispatch ) => {
 			var self = dispatch;
 			$.ajax({
@@ -239,7 +255,8 @@ let Actions =
 				type: 'POST',
 				dataType: 'json'
 			})
-			.done(function( response ){
+			.done(function( response ){				
+				self(Actions.populateJobCategories( response ));				
 				var data = JSON.stringify( response )
 				try{
 					localStorage.setItem('JantaJobCategories', data )

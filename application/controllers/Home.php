@@ -37,7 +37,8 @@ class Home extends CI_Controller{
 		}
 	}
 	public function employee_timeline(){
-		$this->load->view('employee_timeline');
+		$data = $this->session->userdata;
+		$this->load->view('employee_timeline', $data);
 	}
 	public function completeReg(){
 		$this->load->view('home');
@@ -82,7 +83,7 @@ class Home extends CI_Controller{
 
 				$url = site_url() . '/home/complete/token/' . $qstring;
 				$link = '<a href="' . $url .'">' . $url . '</a>';
-				$from_email = 'jantadevs@gmail.com';
+				$from_email = 'ochiodhis@gmail.com';
 				$to_email = $this->input->post('email_add');
 				$subject = 'Verify Your Email Address';
 				$message = '';

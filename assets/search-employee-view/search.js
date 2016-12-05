@@ -11,7 +11,7 @@ import {Router, Route, IndexRoute } from 'react-router';
 
 import MainApp from './components/MainApp';
 import PostJobComponent from './components/PostJobComponent';
-import Main from '../job-view/components/Main';
+import Main from './job-view/components/Main';
 import CategoryEmployees from './components/CategoryEmployees';
 
 import store, { history } from '../DataStore/Store';

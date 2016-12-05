@@ -29,6 +29,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </style>
 </head>
 <body>
+<?php 
+ $sess_data = $this->session->userdata();
+?>
   <div class="mdl-layout__container">
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header" id="nav-bar">
             <header class="mdl-layout__header">
@@ -39,14 +42,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   </span>
                     <div class="mdl-layout-spacer">
                     </div>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
-                  <label class="mdl-button mdl-js-button mdl-button--icon" for="fixed-header-drawer-exp">
-                      <i class="material-icons">search</i>
-                    </label>
-                    <div class="mdl-textfield__expandable-holder">
-                      <input class="mdl-textfield__input" type="text" name="sample" id="fixed-header-drawer-exp" />
-                    </div>
-                </div>
+                <strong>Welcome, <?php print $sess_data['fname'];?> <?php print $sess_data['lname'];?>!</strong>
                 <nav class="mdl-navigation">
                   <a class="mdl-navigation__link" href="">
                     Notifications <i class="material-icons">notifications</i>
@@ -55,7 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     Messages <i class="material-icons">message</i>
                   </a>
                     <button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon">
-                      <img class="demo-avatar" src="/nyumbani/photo_assets/anony.jpg" /> 
+                      <img class="demo-avatar" src=<?php print $sess_data['profile_photo'];?> /> 
                     </button>
                         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" 
                         for="demo-menu-lower-right">

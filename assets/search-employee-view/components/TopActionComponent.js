@@ -10,18 +10,12 @@ class TopActionComponent extends Component{
 		console.log( this )
 	}
 	render() {
-
-		if(this.props.State.AccountUser.hasOwnProperty('login_id')){
-			var firstname = this.props.State.AccountUser.fname;
-			var lastname = this.props.State.AccountUser.lname;
-		}
 		const floatStlye = {
 			float: 'right',
 		};
 		return (
 			<div>
 				<div className="mdl-cell mdl-cell--12-col">
-				Welcome {firstname} {lastname}!	
 				</div>
 			</div>
 			);

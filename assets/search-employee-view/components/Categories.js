@@ -8,7 +8,9 @@ class Categories extends Component{
 	{
 		super( context, props );
 
-    this.info = this.getLocalStorage();
+    this.info = ( this.props.State.Categories.length === 0 ||  this.props.State.Categories.length === undefined ) 
+    ? this.getLocalStorage() : this.props.State.Categories;
+
     this.pages = this.createPagination();
 
     this.state = {

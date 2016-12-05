@@ -212,6 +212,7 @@ class Profile extends CI_Controller{
 
 			$UserInfo = array_merge_recursive($education_data, $basic_data, $user_login_data, $recomm);
 			$UserInfo['login_id'] = $UserInfo['login_id'][0]; 
+			$this->session->set_userdata( $UserInfo );
 			print json_encode( (object)$UserInfo );
 		}
 		
@@ -356,10 +357,10 @@ class Profile extends CI_Controller{
 			}
 		return( $new_array );
 	}
-	public function getRecommendations(){
+	public function getRecommendations( $employee_login_id  = ""){
 		$this->load->model('Recommendations');
 		$recommendation = new Recommendations();
-		return $res = $recommendation->getRecommendations();
+		return $res = $recommendation->getRecommendations( $employee_login_id );
 	}
 	public function localStoragedata(){
 		//Use the join table paradigm to collecct the information of the users

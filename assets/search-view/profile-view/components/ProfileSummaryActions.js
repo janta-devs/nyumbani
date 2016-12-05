@@ -4,6 +4,7 @@ class ProfileSummaryActions  extends Component{
 
   handleRecommend(){
     console.log('clicked');
+    console.log( this.props.state );
   }
   render() {
     return (

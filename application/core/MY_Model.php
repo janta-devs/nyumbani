@@ -72,6 +72,12 @@ class MY_Model extends CI_Model{
               ->get($this::TABLE, $employee_login_id);
         return $query->result();
 	}
+	public function addWithoutChecking( $data ){
+		//adds to db without checking if the value already exists
+		
+		$this->db->insert($this::TABLE, $data );
+		return $this->db->insert_id();
+	}
 }
 
 ?>

@@ -9,7 +9,7 @@ import Actions from '../../DataStore/Actions';
 
 
 const MainApp  = (props) => {
-	props.Actions.pullJobCategories();
+
 	return(<Search State = {props} searchAction = {props.Actions.searchJobs} data = {props.search_results}
 		suggestions = {props.suggestions}/>);
 }

@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 
 class ProfileSummaryActions  extends Component{
-
+  constructor( context, props ){
+      super( context, props );
+      this.AccountUser = this.props.state.state.AccountUser;
+  }
   handleRecommend(){
-    console.log('clicked');
+    var CurrentOrder = this.props.userInfo;
+    this.props.state.state.Actions.AddUserRecommendation(CurrentOrder.order_id,this.AccountUser.login_id,CurrentOrder.login_id );
   }
   render() {
-    return (
+      return (
                 <div className="row">
                   <div className="column d-1-1">
                     <div className="button-group-actions">

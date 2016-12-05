@@ -28,6 +28,7 @@ class Search extends Component{
 		}
 	}
 	componentWillMount(){
+		this.props.State.Actions.pullCategories();
 		this.props.State.Actions.pullAccountUserData();
 		this.props.State.Actions.pullAllEmployees();
 	}
@@ -49,7 +50,7 @@ class Search extends Component{
 									<SearchBar searchAction = {this.props.searchAction}/>
 									{checker}
 								</div>
-								<Categories />								
+								<Categories State = {this.props.State}/>								
 							</div>
 						</div>	
 					</section>
