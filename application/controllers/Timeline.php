@@ -91,14 +91,16 @@ class Timeline extends CI_Controller {
 		$this->load->model('Job_Model');
 		$jobs = new Job_Model();
 		$categories = $jobs->getData('job_title')->result();
-
+		$new_arr = [];
+		$final_array = [];
+		
 		foreach ($categories as $row) {
 			$new_arr[] = $row->job_title;
 		}
 
-		$new_arr = array_unique($new_arr);
+		$new_array = array_unique( $new_arr );
 
-		foreach ($new_arr as $key => $value) {
+		foreach ($new_array as $key => $value) {
 			$final_array[] = $value;
 		}
 		print json_encode( $final_array );
