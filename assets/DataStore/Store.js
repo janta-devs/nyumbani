@@ -31,4 +31,5 @@ const store = finalCreateStore( rootReducer, initialState, window.__REDUX_DEVTOO
 //exporting the history object that will be mapped over the Provider Component from redux
 export const history = syncHistoryWithStore(browserHistory, store);
 
+
 export default store;

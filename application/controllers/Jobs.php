@@ -14,6 +14,14 @@ class Jobs extends CI_Controller
 		print ( is_numeric( $res ) == true ) ? json_encode(['message' => true]) : 
 		($res == true ) ? json_encode(['message' => 'exists']) : '';
 	}
+	public function GetBids(){
+		$this->load->model('Recommendations');
+		$recommendation = new Recommendations();
 
+		$sess_data = $this->session->userdata();
+		$employee_login_id = $sess_data['login_id'];
+
+		print json_encode($recommendation->getEmployeeBids( $employee_login_id ) );
+	}
 
 }

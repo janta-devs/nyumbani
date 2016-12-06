@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 class ProfileSummaryStats extends Component{
   render() {
-    console.log( this.props.userInfo )
     return (
                 <div className="row">
                   <div className="column d-1-1">

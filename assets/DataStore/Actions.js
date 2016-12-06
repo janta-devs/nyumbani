@@ -136,7 +136,7 @@ let Actions =
 			})
 			.done(function( response ) {
 				if( response['message'] === true || response['message'] === 'exists'){
-					self( Actions.IncrementRecommendation( {order_id: orderId} ))
+					self( Actions.getEmployeeBids() )
 					return true;
 				}
 			});
@@ -265,6 +265,19 @@ let Actions =
 				catch( exception ){
 					return false;
 				}
+			});
+		}
+	},
+	getEmployeeBids: function(){
+		return( dispatch ) => {
+			var self = dispatch;
+			$.ajax({
+				url: '/nyumbani/index.php/Jobs/GetBids',
+				type: 'POST',
+				dataType: 'json'
+			})
+			.done(function( response ){			
+				self( Actions.IncrementRecommendation( response ))				
 			});
 		}
 	}

@@ -25,9 +25,10 @@ class Search extends Component{
 		}
 	}
 	componentWillMount(){
-		this.props.State.Actions.pullJobSpecificCategories();
 		this.props.State.Actions.pullAccountUserData();
+		this.props.State.Actions.pullJobSpecificCategories();
 		this.props.State.Actions.pullJobs();
+		this.props.State.Actions.getEmployeeBids();
 	}
 	componentWillUpdate(nxtProp, nxtState ){
 		

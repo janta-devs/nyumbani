@@ -9,7 +9,7 @@ class Categories extends Component{
 		super( context, props );
 
     this.info = ( this.props.State.Categories.length === 0 ||  this.props.State.Categories.length === undefined ) 
-    ? this.getLocalStorage() : this.props.State.Categories;
+    ? this.getLocalStorage() : (this.props.State.Categories.length !== null ) ? this.props.State.Categories : [];
 
     this.pages = this.createPagination();
 
@@ -21,7 +21,9 @@ class Categories extends Component{
     this.data = this.pages[this.state.count]
 	}
   componentWillMount(){
-    this.info = this.getLocalStorage();
+    this.info = ( this.props.State.Categories.length === 0 ||  this.props.State.Categories.length === undefined ) 
+    ? this.getLocalStorage() : (this.props.State.Categories.length !== null ) ? this.props.State.Categories : [];
+    
     this.setState({ data: this.pages[this.state.count] });
   }
   componentWillUpdate(nxtProp, nxtState ){
@@ -42,13 +44,13 @@ class Categories extends Component{
   createPagination(){
     //refreshes page if the data is not fully loaded
 
-    // if( !this.info ){
-    //     setTimeout(()=>{
-    //         window.location.href = "";
-    //     },1000);
-    // }
-    // else
-    // {
+    if( !this.info ){
+        setTimeout(()=>{
+            window.location.href = "";
+        },1000);
+    }
+    else
+    {
         var counter = (Math.floor(this.info.length / 12))
         var NextNum = 12;
         var start = 0;
@@ -72,7 +74,7 @@ class Categories extends Component{
         }
         holder.push( this.info );
         return holder;
-    //}
+    }
     
   }
   handleNextClick( e ){

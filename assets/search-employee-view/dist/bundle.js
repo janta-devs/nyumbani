@@ -79,7 +79,7 @@
 
 	var _Main2 = _interopRequireDefault(_Main);
 
-	var _CategoryEmployees = __webpack_require__(307);
+	var _CategoryEmployees = __webpack_require__(309);
 
 	var _CategoryEmployees2 = _interopRequireDefault(_CategoryEmployees);
 
@@ -38363,9 +38363,10 @@
 		_createClass(Search, [{
 			key: 'componentWillMount',
 			value: function componentWillMount() {
-				this.props.State.Actions.pullJobSpecificCategories();
 				this.props.State.Actions.pullAccountUserData();
+				this.props.State.Actions.pullJobSpecificCategories();
 				this.props.State.Actions.pullJobs();
+				this.props.State.Actions.getEmployeeBids();
 			}
 		}, {
 			key: 'componentWillUpdate',
@@ -39456,7 +39457,7 @@
 
 	    var _this = _possibleConstructorReturn(this, (Categories.__proto__ || Object.getPrototypeOf(Categories)).call(this, context, props));
 
-	    _this.info = _this.props.State.Categories.length === 0 || _this.props.State.Categories.length === undefined ? _this.getLocalStorage() : _this.props.State.Categories;
+	    _this.info = _this.props.State.Categories.length === 0 || _this.props.State.Categories.length === undefined ? _this.getLocalStorage() : _this.props.State.Categories.length !== null ? _this.props.State.Categories : [];
 
 	    _this.pages = _this.createPagination();
 
@@ -39472,7 +39473,8 @@
 	  _createClass(Categories, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      this.info = this.getLocalStorage();
+	      this.info = this.props.State.Categories.length === 0 || this.props.State.Categories.length === undefined ? this.getLocalStorage() : this.props.State.Categories.length !== null ? this.props.State.Categories : [];
+
 	      this.setState({ data: this.pages[this.state.count] });
 	    }
 	  }, {
@@ -39495,33 +39497,31 @@
 	    value: function createPagination() {
 	      //refreshes page if the data is not fully loaded
 
-	      // if( !this.info ){
-	      //     setTimeout(()=>{
-	      //         window.location.href = "";
-	      //     },1000);
-	      // }
-	      // else
-	      // {
-	      var counter = Math.floor(this.info.length / 12);
-	      var NextNum = 12;
-	      var start = 0;
-	      var holder = [];
-	      for (var i = 0; i < counter; i++) {
-	        var num = 'arr' + (i + 1);
-	        if (i === 0) {
-	          num = this.info.splice(start, NextNum);
-	          NextNum + 12;
-	          start = NextNum + 1;
-	        } else {
-	          num = this.info.splice(start, NextNum);
-	          NextNum + 12;
-	          start = NextNum + 1;
+	      if (!this.info) {
+	        setTimeout(function () {
+	          window.location.href = "";
+	        }, 1000);
+	      } else {
+	        var counter = Math.floor(this.info.length / 12);
+	        var NextNum = 12;
+	        var start = 0;
+	        var holder = [];
+	        for (var i = 0; i < counter; i++) {
+	          var num = 'arr' + (i + 1);
+	          if (i === 0) {
+	            num = this.info.splice(start, NextNum);
+	            NextNum + 12;
+	            start = NextNum + 1;
+	          } else {
+	            num = this.info.splice(start, NextNum);
+	            NextNum + 12;
+	            start = NextNum + 1;
+	          }
+	          holder.push(num);
 	        }
-	        holder.push(num);
+	        holder.push(this.info);
+	        return holder;
 	      }
-	      holder.push(this.info);
-	      return holder;
-	      //}
 	    }
 	  }, {
 	    key: 'handleNextClick',
@@ -40120,7 +40120,7 @@
 					data: { order_id: orderId, employee_login_id: employeeId, employer_login_id: employer_id }
 				}).done(function (response) {
 					if (response['message'] === true || response['message'] === 'exists') {
-						self(Actions.IncrementRecommendation({ order_id: orderId }));
+						self(Actions.getEmployeeBids());
 						return true;
 					}
 				});
@@ -40135,6 +40135,12 @@
 		populateJobCategories: function populateJobCategories(data) {
 			return {
 				type: 'JOBS_CATEGORIES',
+				data: data
+			};
+		},
+		populateEmployees: function populateEmployees(data) {
+			return {
+				type: 'POPULATE_EMPLOYEES',
 				data: data
 			};
 		},
@@ -40166,6 +40172,7 @@
 					dataType: 'json'
 				}).done(function (response) {
 					var data = JSON.stringify(response);
+					self(Actions.populateEmployees(response));
 					try {
 						localStorage.setItem('JantaUniqueEmployeesInformation', data);
 						return true;
@@ -40183,6 +40190,8 @@
 					type: 'POST',
 					dataType: 'json'
 				}).done(function (response) {
+					self(Actions.populateEmployeeCategories(response));
+
 					var data = JSON.stringify(response);
 					try {
 						localStorage.setItem('JantaUniqueCategories', data);
@@ -40232,6 +40241,18 @@
 					}
 				});
 			};
+		},
+		getEmployeeBids: function getEmployeeBids() {
+			return function (dispatch) {
+				var self = dispatch;
+				_jquery2.default.ajax({
+					url: '/nyumbani/index.php/Jobs/GetBids',
+					type: 'POST',
+					dataType: 'json'
+				}).done(function (response) {
+					self(Actions.IncrementRecommendation(response));
+				});
+			};
 		}
 
 	};
@@ -40266,39 +40287,39 @@
 
 	var _Actions2 = _interopRequireDefault(_Actions);
 
-	var _ProfileSummary = __webpack_require__(294);
+	var _ProfileSummary = __webpack_require__(296);
 
 	var _ProfileSummary2 = _interopRequireDefault(_ProfileSummary);
 
-	var _ProfileInterests = __webpack_require__(298);
+	var _ProfileInterests = __webpack_require__(300);
 
 	var _ProfileInterests2 = _interopRequireDefault(_ProfileInterests);
 
-	var _ProfileInterestedEmployers = __webpack_require__(299);
+	var _ProfileInterestedEmployers = __webpack_require__(301);
 
 	var _ProfileInterestedEmployers2 = _interopRequireDefault(_ProfileInterestedEmployers);
 
-	var _ProfileInterestedIn = __webpack_require__(301);
+	var _ProfileInterestedIn = __webpack_require__(303);
 
 	var _ProfileInterestedIn2 = _interopRequireDefault(_ProfileInterestedIn);
 
-	var _ProfessionalExperience = __webpack_require__(302);
+	var _ProfessionalExperience = __webpack_require__(304);
 
 	var _ProfessionalExperience2 = _interopRequireDefault(_ProfessionalExperience);
 
-	var _EducationBackground = __webpack_require__(303);
+	var _EducationBackground = __webpack_require__(305);
 
 	var _EducationBackground2 = _interopRequireDefault(_EducationBackground);
 
-	var _Skills = __webpack_require__(304);
+	var _Skills = __webpack_require__(306);
 
 	var _Skills2 = _interopRequireDefault(_Skills);
 
-	var _BasicDetails = __webpack_require__(305);
+	var _BasicDetails = __webpack_require__(307);
 
 	var _BasicDetails2 = _interopRequireDefault(_BasicDetails);
 
-	var _ContactDetails = __webpack_require__(306);
+	var _ContactDetails = __webpack_require__(308);
 
 	var _ContactDetails2 = _interopRequireDefault(_ContactDetails);
 
@@ -40446,11 +40467,11 @@
 
 	var _reactRouterRedux = __webpack_require__(275);
 
-	var _reduxLogger = __webpack_require__(287);
+	var _reduxLogger = __webpack_require__(289);
 
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 
-	var _reduxThunk = __webpack_require__(293);
+	var _reduxThunk = __webpack_require__(295);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
@@ -40515,6 +40536,14 @@
 
 	var _jobCategoryReducer2 = _interopRequireDefault(_jobCategoryReducer);
 
+	var _allEmployeesReducer = __webpack_require__(287);
+
+	var _allEmployeesReducer2 = _interopRequireDefault(_allEmployeesReducer);
+
+	var _employeeCategoryReducer = __webpack_require__(288);
+
+	var _employeeCategoryReducer2 = _interopRequireDefault(_employeeCategoryReducer);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	//combining the various Reducers into one single reducer file 
@@ -40530,7 +40559,9 @@
 		EmployeeData: _EmployeeReducer2.default,
 		Bids: _BiddedJobsReducer2.default,
 		Jobs: _jobReducer2.default,
-		Categories: _jobCategoryReducer2.default
+		Categories: _jobCategoryReducer2.default,
+		AllEmployees: _allEmployeesReducer2.default,
+		EmployeeCategories: _employeeCategoryReducer2.default
 	});
 
 	//importing the varous reducer files that are responsible 
@@ -41047,13 +41078,16 @@
 		value: true
 	});
 
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 	var BiddedJobsReducer = function BiddedJobsReducer() {
 		var Bids = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 		var action = arguments[1];
 
 		switch (action.type) {
 			case 'RECOMMEND':
-				return Bids = Object.assign([], Bids, Bids.push(action.data));
+				console.log([].concat(_toConsumableArray(action.data)));
+				return Bids = Object.assign([], [].concat(_toConsumableArray(Bids)), [].concat(_toConsumableArray(action.data)));
 			default:
 				return Bids;
 		}
@@ -41111,6 +41145,54 @@
 
 /***/ },
 /* 287 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var allEmployeesReducer = function allEmployeesReducer() {
+		var AllEmployees = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+		var action = arguments[1];
+
+		switch (action.type) {
+			case 'POPULATE_EMPLOYEES':
+				return Object.assign([], AllEmployees, action.data);
+			default:
+				return AllEmployees;
+		}
+	};
+
+	exports.default = allEmployeesReducer;
+
+/***/ },
+/* 288 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var employeeCategoryReducer = function employeeCategoryReducer() {
+		var EmployeeCategories = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+		var action = arguments[1];
+
+		switch (action.type) {
+			case 'POPULATE_EMPLOYEE_CATEGORIES':
+				return Object.assign([], EmployeeCategories, action.data);
+			default:
+				return EmployeeCategories;
+		}
+	};
+
+	exports.default = employeeCategoryReducer;
+
+/***/ },
+/* 289 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41121,11 +41203,11 @@
 	  value: true
 	});
 
-	var _core = __webpack_require__(288);
+	var _core = __webpack_require__(290);
 
-	var _helpers = __webpack_require__(289);
+	var _helpers = __webpack_require__(291);
 
-	var _defaults = __webpack_require__(292);
+	var _defaults = __webpack_require__(294);
 
 	var _defaults2 = _interopRequireDefault(_defaults);
 
@@ -41228,7 +41310,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 288 */
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41238,9 +41320,9 @@
 	});
 	exports.printBuffer = printBuffer;
 
-	var _helpers = __webpack_require__(289);
+	var _helpers = __webpack_require__(291);
 
-	var _diff = __webpack_require__(290);
+	var _diff = __webpack_require__(292);
 
 	var _diff2 = _interopRequireDefault(_diff);
 
@@ -41369,7 +41451,7 @@
 	}
 
 /***/ },
-/* 289 */
+/* 291 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -41393,7 +41475,7 @@
 	var timer = exports.timer = typeof performance !== "undefined" && performance !== null && typeof performance.now === "function" ? performance : Date;
 
 /***/ },
-/* 290 */
+/* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41403,7 +41485,7 @@
 	});
 	exports.default = diffLogger;
 
-	var _deepDiff = __webpack_require__(291);
+	var _deepDiff = __webpack_require__(293);
 
 	var _deepDiff2 = _interopRequireDefault(_deepDiff);
 
@@ -41489,7 +41571,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 291 */
+/* 293 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(global) {/*!
@@ -41918,7 +42000,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 292 */
+/* 294 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -41969,7 +42051,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 293 */
+/* 295 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -41997,7 +42079,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 294 */
+/* 296 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42012,15 +42094,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ProfileSummaryStats = __webpack_require__(295);
+	var _ProfileSummaryStats = __webpack_require__(297);
 
 	var _ProfileSummaryStats2 = _interopRequireDefault(_ProfileSummaryStats);
 
-	var _ProfileSummaryActions = __webpack_require__(296);
+	var _ProfileSummaryActions = __webpack_require__(298);
 
 	var _ProfileSummaryActions2 = _interopRequireDefault(_ProfileSummaryActions);
 
-	var _ProfileSummaryBio = __webpack_require__(297);
+	var _ProfileSummaryBio = __webpack_require__(299);
 
 	var _ProfileSummaryBio2 = _interopRequireDefault(_ProfileSummaryBio);
 
@@ -42085,7 +42167,7 @@
 	exports.default = ProfileSummary;
 
 /***/ },
-/* 295 */
+/* 297 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -42120,7 +42202,6 @@
 	  _createClass(ProfileSummaryStats, [{
 	    key: "render",
 	    value: function render() {
-	      console.log(this.props.userInfo);
 	      return _react2.default.createElement(
 	        "div",
 	        { className: "row" },
@@ -42160,7 +42241,7 @@
 	exports.default = ProfileSummaryStats;
 
 /***/ },
-/* 296 */
+/* 298 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -42263,7 +42344,7 @@
 	exports.default = ProfileSummaryActions;
 
 /***/ },
-/* 297 */
+/* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -42347,7 +42428,7 @@
 	exports.default = ProfileSummaryBio;
 
 /***/ },
-/* 298 */
+/* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42454,7 +42535,7 @@
 	exports.default = ProfileInterests;
 
 /***/ },
-/* 299 */
+/* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42469,7 +42550,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _InterestedEmployersList = __webpack_require__(300);
+	var _InterestedEmployersList = __webpack_require__(302);
 
 	var _InterestedEmployersList2 = _interopRequireDefault(_InterestedEmployersList);
 
@@ -42538,7 +42619,7 @@
 	exports.default = ProfileInterestedEmployers;
 
 /***/ },
-/* 300 */
+/* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42631,7 +42712,7 @@
 	exports.default = InterestedEmployersList;
 
 /***/ },
-/* 301 */
+/* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42646,7 +42727,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _InterestedEmployersList = __webpack_require__(300);
+	var _InterestedEmployersList = __webpack_require__(302);
 
 	var _InterestedEmployersList2 = _interopRequireDefault(_InterestedEmployersList);
 
@@ -42715,7 +42796,7 @@
 	exports.default = ProfileInterestedIn;
 
 /***/ },
-/* 302 */
+/* 304 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -42817,7 +42898,7 @@
 	exports.default = ProfessionalExperience;
 
 /***/ },
-/* 303 */
+/* 305 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -43003,7 +43084,7 @@
 	exports.default = EducationBackground;
 
 /***/ },
-/* 304 */
+/* 306 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43048,7 +43129,7 @@
 	exports.default = Skills;
 
 /***/ },
-/* 305 */
+/* 307 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -43274,7 +43355,7 @@
 	exports.default = BasicDetails;
 
 /***/ },
-/* 306 */
+/* 308 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -43434,7 +43515,7 @@
 	exports.default = ContactDetails;
 
 /***/ },
-/* 307 */
+/* 309 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

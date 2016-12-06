@@ -5,6 +5,10 @@ import DangerAlert from './DangerAlert';
 import InformationAlert from './InformationAlert';
 import SuccessAlert from './SuccessAlert';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import Actions from '../../DataStore/Actions';
+
 var dataCollection = {};
 
 import $ from 'jquery';
@@ -150,4 +154,17 @@ class PostJobComponent extends Component{
 	}
 }
 
-export default PostJobComponent;
+
+function mapStateToProps( state ){              
+    return state;                              
+}
+
+function mapDispatchToProps(dispatch){         
+    return{
+        Actions: bindActionCreators( Actions, dispatch )
+    }
+}
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostJobComponent);

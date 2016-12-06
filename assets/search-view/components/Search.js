@@ -11,7 +11,6 @@ import Categories from './Categories';
 
 import PostJobComponent from './PostJobComponent';
 
-import $ from 'jquery';
 
 //importing 
 

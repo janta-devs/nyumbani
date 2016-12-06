@@ -4,8 +4,6 @@ import { render } from 'react-dom';
 
 import { Provider } from 'react-redux';
 
-import $ from 'jquery';
-
 import {Router, Route, IndexRoute } from 'react-router';
 
 

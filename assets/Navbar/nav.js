@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { render } from 'react-dom';
+
+
 
 import { Provider } from 'react-redux';
 
@@ -10,13 +12,10 @@ import store, { history } from '../DataStore/Store';
 
 
 
+import NavbarComponent from './components/NavbarComponent';
 
-import PostJobComponent from './component/PostJobComponent';
-
-
-
-render( 
+render(
 	<Provider store={store}>
-		<PostJobComponent />
+		<NavbarComponent store = {store}/>
 	</Provider>, 
-	document.getElementById('component'));
+document.getElementById('NavCompoent'));
