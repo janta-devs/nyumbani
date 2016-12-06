@@ -39490,31 +39490,27 @@
 	    key: 'createPagination',
 	    value: function createPagination() {
 
-	      if (this.info === null || this.info === undefined) {
-	        window.location.href = "";
-	      } else {
-	        var counter = Math.floor(this.info.length / 12);
-	        var NextNum = 12;
-	        var start = 0;
-	        var holder = [];
+	      var counter = Math.floor(this.info.length / 12);
+	      var NextNum = 12;
+	      var start = 0;
+	      var holder = [];
 
-	        for (var i = 0; i < counter; i++) {
-	          var num = 'arr' + (i + 1);
+	      for (var i = 0; i < counter; i++) {
+	        var num = 'arr' + (i + 1);
 
-	          if (i === 0) {
-	            num = this.info.splice(start, NextNum);
-	            NextNum + 12;
-	            start = NextNum + 1;
-	          } else {
-	            num = this.info.splice(start, NextNum);
-	            NextNum + 12;
-	            start = NextNum + 1;
-	          }
-	          holder.push(num);
+	        if (i === 0) {
+	          num = this.info.splice(start, NextNum);
+	          NextNum + 12;
+	          start = NextNum + 1;
+	        } else {
+	          num = this.info.splice(start, NextNum);
+	          NextNum + 12;
+	          start = NextNum + 1;
 	        }
-	        holder.push(this.info);
-	        return holder;
+	        holder.push(num);
 	      }
+	      holder.push(this.info);
+	      return holder;
 	    }
 	  }, {
 	    key: 'handleNextClick',
@@ -40113,7 +40109,7 @@
 					data: { order_id: orderId, employee_login_id: employeeId, employer_login_id: employer_id }
 				}).done(function (response) {
 					if (response['message'] === true || response['message'] === 'exists') {
-						self(Actions.IncrementRecommendation({ order_id: orderId }));
+						self(Actions.getEmployeeBids());
 						return true;
 					}
 				});
@@ -40232,6 +40228,18 @@
 					} catch (exception) {
 						return false;
 					}
+				});
+			};
+		},
+		getEmployeeBids: function getEmployeeBids() {
+			return function (dispatch) {
+				var self = dispatch;
+				_jquery2.default.ajax({
+					url: '/nyumbani/index.php/Jobs/GetBids',
+					type: 'POST',
+					dataType: 'json'
+				}).done(function (response) {
+					self(Actions.IncrementRecommendation(response));
 				});
 			};
 		}
@@ -41063,13 +41071,16 @@
 		value: true
 	});
 
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 	var BiddedJobsReducer = function BiddedJobsReducer() {
 		var Bids = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 		var action = arguments[1];
 
 		switch (action.type) {
 			case 'RECOMMEND':
-				return Bids = Object.assign([], Bids, Bids.push(action.data));
+				console.log([].concat(_toConsumableArray(action.data)));
+				return Bids = Object.assign([], [].concat(_toConsumableArray(Bids)), [].concat(_toConsumableArray(action.data)));
 			default:
 				return Bids;
 		}

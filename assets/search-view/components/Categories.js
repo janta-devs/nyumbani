@@ -41,11 +41,6 @@ class Categories extends Component{
   }
   createPagination(){
 
-    if( this.info === null || this.info === undefined ){
-      window.location.href = "";
-    }
-    else
-    {
     var counter = (Math.floor(this.info.length / 12))
     var NextNum = 12;
     var start = 0;
@@ -54,22 +49,22 @@ class Categories extends Component{
     for( var i = 0; i < counter; i++ ){
       var num = `arr${i+1}`;
      
-      if( i === 0 ){
-         num = this.info.splice(start, NextNum)
-         NextNum + 12;
-         start = NextNum + 1;
-      }
-      else{
+      if( i === 0 )
+      {
         num = this.info.splice(start, NextNum)
-         NextNum + 12;
-         start = NextNum + 1;
+        NextNum + 12;
+        start = NextNum + 1;
+      }
+      else
+      {
+        num = this.info.splice(start, NextNum)
+        NextNum + 12;
+        start = NextNum + 1;
       }
       holder.push( num );
     }
     holder.push( this.info );
-    return holder;
-    }
-    
+    return holder;   
   }
   handleNextClick( e ){
     e.preventDefault();

@@ -1,9 +1,9 @@
 var webpack = require("webpack");
 module.exports = {
-	entry:['./Navbar/nav.js'],
+	entry:['./search-view/search.js'],
 	output:{
-		path:'./Navbar/dist',
-		filename:'navbundle.js',
+		path:'./search-view/dist',
+		filename:'bundle.js',
 		publicPath:'/'
 	},
 	module:{
