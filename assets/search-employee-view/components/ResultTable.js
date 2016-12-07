@@ -5,12 +5,17 @@ import TableCell from './TableCell';
 
 class ResultTable extends Component{
 	render() {
+		const tableStyle = {
+			width: '80%',
+			margin:'auto',
+		};
+
 		var populate = this.props.data.map( x => 
 		<TableCell key = { x.order_id } order_id = {x.order_id} employer = { x.login_id } description = {x.description} job_title = {x.job_title} location = {x.location} 
 		profession = {x.profession} budget = {x.budget}/>);
 
 		return (
-			<div className="table-responsive-vertical shadow-z-1">
+			<div className="table-responsive-vertical shadow-z-1" style={tableStyle}>
 				<table className = "table table-hover table-mc-light-blue ">
 						<thead>
 							<tr>

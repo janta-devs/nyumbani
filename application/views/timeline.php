@@ -18,6 +18,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="<?php print base_url();?>assets/node_modules/jquery/dist/jquery.min.js"></script>
     <script src="<?php print base_url(); ?>assets/node_modules/material-design-lite/material.js" type="text/javascript" charset="utf-8" async defer></script>
     <style>
+        body{
+            background: rgba(220, 220, 220, 0.12);
+        }
         .mdl-data-table{
             width: 100%;
         }
@@ -44,7 +47,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!--     <script src="<?php print base_url(); ?>assets/js/job_search.js" type="text/babel"></script> --><!-- 
     <script src="<?php print base_url(); ?>assets/navbar/dist/navbar-bundle.js"></script>  -->
     <script src="<?php print base_url(); ?>assets/search-view/dist/bundle.js"></script>
-    <script src="<?php print base_url(); ?>assets/Navbar/dist/navbundle.js"></script>
+    <script src="<?php print base_url(); ?>assets/Navbar_Employer/dist/navbundle.js"></script>
         <script>
         var logout = document.getElementById('logout');
         logout.addEventListener('click', function( event ){

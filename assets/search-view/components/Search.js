@@ -12,10 +12,6 @@ import Categories from './Categories';
 import PostJobComponent from './PostJobComponent';
 
 
-//importing 
-
-
-
 class Search extends Component{
 
 	constructor( context, props ){
@@ -30,6 +26,7 @@ class Search extends Component{
 		this.props.State.Actions.pullCategories();
 		this.props.State.Actions.pullAccountUserData();
 		this.props.State.Actions.pullAllEmployees();
+		this.props.State.Actions.getMyOrders();
 	}
 	componentWillUpdate(nxtProp, nxtState ){
 		

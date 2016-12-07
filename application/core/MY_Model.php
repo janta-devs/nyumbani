@@ -78,8 +78,16 @@ class MY_Model extends CI_Model{
 		$this->db->insert($this::TABLE, $data );
 		return $this->db->insert_id();
 	}
-	public function getEmployeeBids($employee_login_id = 4){
+	public function getEmployeeBids($employee_login_id ){
 		$query = $this->db->select('*')->where("employee_login_id = {$employee_login_id}")->get( $this::TABLE );
+		return $query->result();
+	}
+	public function getOrderBids( $order_id ){
+		$query = $this->db->select('*')->where("order_id = {$order_id}")->get( $this::TABLE );
+		return $query->result();
+	}
+	public function getEmployerOrders( $login_id ){
+		$query = $this->db->select('*')->where("login_id = {$login_id}")->get( $this::TABLE );
 		return $query->result();
 	}
 }

@@ -8,10 +8,14 @@ class Categories extends Component{
 	{
 		super( context, props );
 
-    this.info = ( this.props.State.EmployeeCategories.length === 0 ||  this.props.State.EmployeeCategories.length === undefined ) 
-    ? this.getLocalStorage() : this.props.State.EmployeeCategories;
+    let EmployeeCat = this.props.State.EmployeeCategories;
+    this.info = ( EmployeeCat.length === 0 || !EmployeeCat.length ) 
+    ? this.getLocalStorage(): this.props.State.EmployeeCategories;
 
-    this.pages = this.createPagination();
+    if( this.info.length ){
+      this.pages = this.createPagination();
+    }
+    
     this.state = {
       data: [],
       count: 0,
@@ -25,7 +29,7 @@ class Categories extends Component{
     this.setState({ data: this.pages[this.state.count] });
   }
   componentWillUpdate(nxtProp, nxtState ){
-    //this.setState({ data: this.pages[this.state.count] });
+   
   } 
   getLocalStorage()
   {

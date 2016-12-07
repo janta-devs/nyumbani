@@ -23,5 +23,24 @@ class Jobs extends CI_Controller
 
 		print json_encode($recommendation->getEmployeeBids( $employee_login_id ) );
 	}
+	public function GetMyOrders(){
+		$this->load->model('Job_Model');
+		$Job_Model = new Job_Model();
+
+		$this->load->model('Recommendations');
+		$recommendation = new Recommendations();
+
+		$sess_data = $this->session->userdata();
+		$login_id = $sess_data['login_id'];
+
+		$orders = $Job_Model->getEmployerOrders( $login_id );
+
+		foreach ($orders as $row) {
+			$res = $recommendation->getOrderBids( $row->order_id );
+			$row->interested_employees = $res;
+		}
+
+		print json_encode( $orders );
+	}
 
 }

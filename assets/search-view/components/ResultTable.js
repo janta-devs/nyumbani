@@ -4,20 +4,19 @@ import TableCell from './TableCell';
 
 
 class ResultTable extends Component{
-	// componentDidMount(){
-	// 	var data = [];
-	// 	var ids = this.props.data.map( x => {
-	// 		data.push(x.id)
-	// 	});
-	// 	this.props.State.Actions.pullEmployeeData( ids );
-	// }
+
 	render() {
+		const tableStyle = {
+			width: '80%',
+			margin:'auto',
+		};
+
 		var populate = this.props.data.map( x => 
 		<TableCell key = { x.login_id } id = { x.login_id } surname = {x.surname} id_pass = {x.id_pass} city = {x.city} 
 		profession = {x.profession} />);
 
 		return (
-			<div className="table-responsive-vertical shadow-z-1">
+			<div className="table-responsive-vertical shadow-z-1" style = {tableStyle}>
 				<table className = "table table-hover table-mc-light-blue ">
 						<thead>
 							<tr>

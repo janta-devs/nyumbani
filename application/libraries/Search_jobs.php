@@ -127,7 +127,7 @@ class Search_jobs {
 		foreach ( $location->result() as $row ) 
 		{
 			$v = explode(' ', (string)trim($row->location) );
-			if( strlen($v[0]) > 3 )
+			if( strlen($v[0]) > 2 )
 			{
 				$this->db_results['location'][] = (string)$v[0];
 			}
@@ -139,7 +139,7 @@ class Search_jobs {
 		foreach ( $job_title->result() as $row ) 
 		{
 			$v = explode(' ', (string)trim($row->job_title) );
-			if( strlen($v[0]) > 3 )
+			if( strlen($v[0]) > 2 )
 			{
 				$this->db_results['job_title'][] = (string)$v[0];
 			}

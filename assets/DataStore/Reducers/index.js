@@ -16,6 +16,7 @@ import jobReducer from './jobReducer';
 import jobCategoryReducer from './jobCategoryReducer';
 import allEmployeesReducer from './allEmployeesReducer';
 import employeeCategoryReducer from './employeeCategoryReducer';
+import MyOrdersReducer from './MyOrdersReducer';
 
 
 //combining the various Reducers into one single reducer file 
@@ -32,7 +33,8 @@ const rootReducer = combineReducers({
 	Jobs: jobReducer,
 	Categories: jobCategoryReducer,
 	AllEmployees: allEmployeesReducer,
-	EmployeeCategories: employeeCategoryReducer
+	EmployeeCategories: employeeCategoryReducer,
+	MyOrders: MyOrdersReducer
 });
 
 

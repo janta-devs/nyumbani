@@ -119,6 +119,12 @@ let Actions =
 			data: data
 		}
 	},
+	countJobs: function( data ){
+		return{
+			type: 'POPULATE_MY_ORDERS',
+			data: data
+		}
+	},
 	populateJobs: function( data ){
 		return{
 			type: 'POPULATE_JOBS',
@@ -278,6 +284,19 @@ let Actions =
 			})
 			.done(function( response ){			
 				self( Actions.IncrementRecommendation( response ))				
+			});
+		}
+	},
+	getMyOrders: function(){
+		return( dispatch ) => {
+			var self = dispatch;
+			$.ajax({
+				url: '/nyumbani/index.php/Jobs/GetMyOrders',
+				type: 'POST',
+				dataType: 'json'
+			})
+			.done(function( response ){			
+				self( Actions.countJobs( response ))				
 			});
 		}
 	}
