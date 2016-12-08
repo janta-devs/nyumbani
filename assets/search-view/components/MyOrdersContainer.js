@@ -15,7 +15,9 @@ class MyOrdersContainer extends Component{
 		interested_employees = {x.interested_employees} budget = {x.budget}/>);
 
 		return (
+			<div>
 				<div className="table-responsive-vertical shadow-z-1" style={tableStyle}>
+				<h3 className = "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">MY ORDERS</h3>
 					<table className = "table table-hover">
 							<thead>
 								<tr>
@@ -37,7 +39,8 @@ class MyOrdersContainer extends Component{
 									</tr>
 							</tfoot>
 					</table>
-				</div>		
+				</div>	
+			</div>	
 		);
 	}
 }

@@ -39561,7 +39561,9 @@
 	        margin: 'auto',
 	        display: 'block'
 	      };
-
+	      var floatStlye = {
+	        float: 'right'
+	      };
 	      var info = this.state.data.map(function (x, y) {
 	        return _react2.default.createElement(_Container2.default, { category: x, key: y, count: y });
 	      });
@@ -39573,7 +39575,7 @@
 	          { className: 'mdl-cell mdl-cell--12-col' },
 	          _react2.default.createElement(
 	            'button',
-	            { className: 'mdl-button--raised mdl-button--colored' },
+	            { className: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored' },
 	            'EMPLOYEE CATEGORIES AVAILABLE'
 	          )
 	        ),
@@ -39581,12 +39583,12 @@
 	        info,
 	        _react2.default.createElement(
 	          'button',
-	          { className: 'mdl-button--raised mdl-button--colored', onClick: this.handlePrevClick.bind(this) },
+	          { className: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored', onClick: this.handlePrevClick.bind(this) },
 	          'Prev'
 	        ),
 	        _react2.default.createElement(
 	          'button',
-	          { className: 'mdl-button--raised mdl-button--colored', onClick: this.handleNextClick.bind(this) },
+	          { style: floatStlye, className: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored', onClick: this.handleNextClick.bind(this) },
 	          'Next'
 	        )
 	      );
@@ -39646,8 +39648,8 @@
 					borderRadius: '10px',
 					lineHeight: '10px',
 					padding: '1px 1px 1px 1px',
-					backgroundColor: '#e8eaf6'
-				}, _defineProperty(_styleDIV, 'padding', '43px 5px 20px 14px'), _defineProperty(_styleDIV, 'border', '1px solid black'), _defineProperty(_styleDIV, 'textAlign', 'center'), _defineProperty(_styleDIV, 'float', 'left'), _defineProperty(_styleDIV, 'marginLeft', '10px'), _defineProperty(_styleDIV, 'marginBottom', '10px'), _defineProperty(_styleDIV, 'lineHeight', '200%'), _defineProperty(_styleDIV, 'zIndex', '5'), _styleDIV);
+					backgroundColor: 'white'
+				}, _defineProperty(_styleDIV, 'padding', '43px 5px 20px 10px'), _defineProperty(_styleDIV, 'border', '3px solid black'), _defineProperty(_styleDIV, 'textAlign', 'center'), _defineProperty(_styleDIV, 'float', 'left'), _defineProperty(_styleDIV, 'marginRight', '15px'), _defineProperty(_styleDIV, 'marginBottom', '10px'), _defineProperty(_styleDIV, 'lineHeight', '200%'), _defineProperty(_styleDIV, 'zIndex', '5'), _defineProperty(_styleDIV, 'color', 'black'), _defineProperty(_styleDIV, 'fontWeight', 'bold'), _defineProperty(_styleDIV, 'textTransform', 'uppercase'), _defineProperty(_styleDIV, 'wordWrap', 'break-word'), _styleDIV);
 				return _react2.default.createElement(
 					'div',
 					{ style: styleDIV },
@@ -43841,74 +43843,83 @@
 
 				return _react2.default.createElement(
 					'div',
-					{ className: 'table-responsive-vertical shadow-z-1', style: tableStyle },
+					null,
 					_react2.default.createElement(
-						'table',
-						{ className: 'table table-hover' },
+						'div',
+						{ className: 'table-responsive-vertical shadow-z-1', style: tableStyle },
 						_react2.default.createElement(
-							'thead',
-							null,
-							_react2.default.createElement(
-								'tr',
-								null,
-								_react2.default.createElement(
-									'th',
-									null,
-									'JOB TITLE'
-								),
-								_react2.default.createElement(
-									'th',
-									null,
-									'DESCRIPTION'
-								),
-								_react2.default.createElement(
-									'th',
-									null,
-									'LOCATION'
-								),
-								_react2.default.createElement(
-									'th',
-									null,
-									'BIDS'
-								),
-								_react2.default.createElement(
-									'th',
-									null,
-									'ACTION'
-								)
-							)
+							'h3',
+							{ className: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored' },
+							'MY ORDERS'
 						),
-						populate,
 						_react2.default.createElement(
-							'tfoot',
-							null,
+							'table',
+							{ className: 'table table-hover' },
 							_react2.default.createElement(
-								'tr',
+								'thead',
 								null,
 								_react2.default.createElement(
-									'td',
+									'tr',
 									null,
-									'_'
-								),
+									_react2.default.createElement(
+										'th',
+										null,
+										'JOB TITLE'
+									),
+									_react2.default.createElement(
+										'th',
+										null,
+										'DESCRIPTION'
+									),
+									_react2.default.createElement(
+										'th',
+										null,
+										'LOCATION'
+									),
+									_react2.default.createElement(
+										'th',
+										null,
+										'BIDS'
+									),
+									_react2.default.createElement(
+										'th',
+										null,
+										'ACTION'
+									)
+								)
+							),
+							populate,
+							_react2.default.createElement(
+								'tfoot',
+								null,
 								_react2.default.createElement(
-									'td',
+									'tr',
 									null,
-									'_'
-								),
-								_react2.default.createElement(
-									'td',
-									null,
-									'\xA9 2016'
-								),
-								_react2.default.createElement(
-									'td',
-									null,
-									'_'
-								),
-								_react2.default.createElement(
-									'td',
-									null,
-									'_'
+									_react2.default.createElement(
+										'td',
+										null,
+										'_'
+									),
+									_react2.default.createElement(
+										'td',
+										null,
+										'_'
+									),
+									_react2.default.createElement(
+										'td',
+										null,
+										'\xA9 2016'
+									),
+									_react2.default.createElement(
+										'td',
+										null,
+										'_'
+									),
+									_react2.default.createElement(
+										'td',
+										null,
+										'_'
+									)
 								)
 							)
 						)
@@ -44134,6 +44145,11 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
+	        _react2.default.createElement(
+	          'h3',
+	          { className: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored' },
+	          'INTERESTED EMPLOYEES'
+	        ),
 	        _react2.default.createElement(_ResultTable2.default, { data: this.container })
 	      );
 	    }

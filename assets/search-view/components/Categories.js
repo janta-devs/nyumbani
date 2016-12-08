@@ -91,19 +91,21 @@ class Categories extends Component{
       margin: 'auto',
       display:'block'
     };
-
+    const floatStlye = {
+      float: 'right'
+    };
   	var info = this.state.data.map( (x,y) => {
   		return <Container category = {x} key={y} count = {y}/>;
   	});
   	return(
   		<div style={ElementStyle}>
       <div className="mdl-cell mdl-cell--12-col">
-  			<button className = "mdl-button--raised mdl-button--colored">EMPLOYEE CATEGORIES AVAILABLE</button>
+  			<button className = "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">EMPLOYEE CATEGORIES AVAILABLE</button>
       </div>
       <br />
   			{info}
-      <button className = "mdl-button--raised mdl-button--colored" onClick = {this.handlePrevClick.bind(this)}>Prev</button>
-      <button className = "mdl-button--raised mdl-button--colored" onClick = {this.handleNextClick.bind(this)}>Next</button>
+      <button className = "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onClick = {this.handlePrevClick.bind(this)}>Prev</button>
+      <button style = {floatStlye} className = "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onClick = {this.handleNextClick.bind(this)}>Next</button>
   		</div>
   	)
   }

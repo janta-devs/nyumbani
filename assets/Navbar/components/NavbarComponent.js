@@ -5,58 +5,31 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Actions from '../../DataStore/Actions';
 
-
+import { Link } from 'react-router';
 
 
 
 class NavbarComponent extends Component{
     constructor( context, props ){
         super( context, props );
-
-
         this.AccountUser = this.props.Actions.pullAccountUserData();
         this.props.Actions.getEmployeeBids();
         this.props.Actions.pullAccountUserData();
         this.props.Actions.pullJobSpecificCategories();
         this.props.Actions.pullJobs();
-        this.props.Actions.getEmployeeBids();
-
-
-        var store =this.props.store;
-        var CurrentState = store.getState();
-
-        this.state = {
-            AccountUser: {},
-            Bids: []
-        }
-
-        this.props.store.subscribe(()=>{
-            var state = this.props.store.getState();
-            if(CurrentState.AccountUser !== state.AccountUser || CurrentState.Bids !== state.Bids ){
-                this.setState({
-                    AccountUser: state.AccountUser,
-                    Bids: state.Bids
-                });
-                CurrentState.Bids = this.state.Bids;
-            }
-
-        });
+        this.props.Actions.getEmployeeBids(); 
+        this.props.Actions.getMyMessages();
+        this.props.Actions.getMySentMessages();
+    }
+    componentWillUpdate(nextState, nextProps){
+        console.log(nextState)
+        console.log( nextProps )
     }
     render(){
-        var CurrentState = this.props.store.getState();
         const profileStyle = {
             height: '70px',
             minWidth: '60px',
         };
-        setTimeout( () => {
-            var state = this.props.store.getState();
-            if( CurrentState.Bids !== state.Bids ){
-                this.setState({
-                    Bids: state.Bids
-                })
-                CurrentState.Bids = this.state.Bids;
-            }
-        }, 3000)
         return(
             <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header" id="nav-bar">
             <header className="mdl-layout__header">
@@ -67,30 +40,21 @@ class NavbarComponent extends Component{
                   </span>
                     <div className="mdl-layout-spacer">
                     </div>
-                    <strong>Welcome, {this.state.AccountUser.fname} {this.state.AccountUser.lname}!</strong>
+                    <strong>Welcome, {this.props.AccountUser.fname} {this.props.AccountUser.lname}!</strong>
                 <nav className="mdl-navigation">
-                 <a className="mdl-navigation__link" href="">
-                    Bids <strong><span>{this.state.Bids.length}</span></strong>
-                    <i className="material-icons">notifications</i>
-                  </a>
-                  <a className="mdl-navigation__link" href="">
-                    Notifications <i className="material-icons">notifications</i>
-                  </a>
-                  <a className="mdl-navigation__link" href="">
-                    Messages <i className="material-icons">message</i>
-                  </a>
+                 
                     <button id="demo-menu-lower-right" className="mdl-button mdl-js-button mdl-button--icon" style={profileStyle}>
-                      <img className="demo-avatar" src={this.state.AccountUser.profile_photo} alt ={this.state.AccountUser.profile_photo}/> 
+                      <img className="demo-avatar" src={this.props.AccountUser.profile_photo} alt ={this.props.AccountUser.profile_photo}/> 
                     </button>
                         <ul className="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" 
                         htmlFor="demo-menu-lower-right">
                             <li className="mdl-menu__item">
-                                <a className="" href="/nyumbani/index.php/">
+                                <a className="" href="/nyumbani/index.php/home/employee_timeline/">
                                     <i className="material-icons">home</i> Home
                                 </a>
                             </li>
                             <li className="mdl-menu__item">
-                                <a className="" href="/nyumbani/index.php/timeline/profile/">
+                                <a className="" href="/nyumbani/index.php/home/employee_timeline/">
                                     <i className="material-icons">people</i> My Profile
                                 </a>
                             </li>
@@ -119,7 +83,10 @@ class NavbarComponent extends Component{
 }
 
 function mapStateToProps( state ){              
-    return state;                              
+    return {
+        AccountUser: state.AccountUser,
+        Bids: state.Bids
+    }                              
 }
 
 function mapDispatchToProps(dispatch){         

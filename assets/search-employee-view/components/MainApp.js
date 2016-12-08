@@ -14,8 +14,18 @@ const MainApp  = (props) => {
 		suggestions = {props.suggestions}/>);
 }
 
-function mapStateToProps( state ){				// passes the state object to the APP component 
-	return state;								//taking the entire state
+function mapStateToProps( state ){				
+	return{
+		AccountUser: state.AccountUser,
+		Bids: state.Bids,
+		Jobs: state.Jobs,
+		Categories: state.Categories,
+		search_results: state.search_results,
+		suggestions: state.suggestions,
+		routing: state.routing,
+		Messages: state.Messages,
+		SentMessages: state.SentMessages
+	}								
 }
 
 function mapDispatchToProps(dispatch){ 			//this function makes it that we do not have to call the dispatch method each time

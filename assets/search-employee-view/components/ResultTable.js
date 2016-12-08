@@ -10,8 +10,8 @@ class ResultTable extends Component{
 			margin:'auto',
 		};
 
-		var populate = this.props.data.map( x => 
-		<TableCell key = { x.order_id } order_id = {x.order_id} employer = { x.login_id } description = {x.description} job_title = {x.job_title} location = {x.location} 
+		var populate = this.props.data.map( (x, y) => 
+		<TableCell key = { y } order_id = {x.order_id} employer = { x.login_id } description = {x.description} job_title = {x.job_title} location = {x.location} 
 		profession = {x.profession} budget = {x.budget}/>);
 
 		return (

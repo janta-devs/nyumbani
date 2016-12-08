@@ -8,7 +8,7 @@ class ProfileSummaryStats extends Component{
                     <section className="statistics-content">
                       <ul className="stat-group clearfix">
                         <li className="stat-box with-tooltip stat-publications" id="interests" tabIndex="0">
-                          <data className="number" value="138">{this.props.userInfo.bids}</data>
+                          <data className="number" value={this.props.userInfo.bids.length}>{this.props.userInfo.bids.length}</data>
                           <p className="caption" id="interests" data-toggle="popover" data-trigger="hover" data-content="Number of times employers have shown interest on this person’s on Janta." data-placement="left">Bids</p>
                         </li>
                       </ul>

@@ -29,6 +29,8 @@ class Search extends Component{
 		this.props.State.Actions.pullJobSpecificCategories();
 		this.props.State.Actions.pullJobs();
 		this.props.State.Actions.getEmployeeBids();
+		this.props.State.Actions.getMyMessages();
+		this.props.State.Actions.getMySentMessages();
 	}
 	componentWillUpdate(nxtProp, nxtState ){
 		

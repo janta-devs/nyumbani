@@ -67,7 +67,7 @@
 
 	var _Store2 = _interopRequireDefault(_Store);
 
-	var _NavbarComponent = __webpack_require__(280);
+	var _NavbarComponent = __webpack_require__(283);
 
 	var _NavbarComponent2 = _interopRequireDefault(_NavbarComponent);
 
@@ -76,7 +76,7 @@
 	(0, _reactDom.render)(_react2.default.createElement(
 		_reactRedux.Provider,
 		{ store: _Store2.default },
-		_react2.default.createElement(_NavbarComponent2.default, { store: _Store2.default })
+		_react2.default.createElement(_NavbarComponent2.default, null)
 	), document.getElementById('NavCompoent'));
 
 /***/ },
@@ -28003,11 +28003,11 @@
 
 	var _reactRouterRedux = __webpack_require__(258);
 
-	var _reduxLogger = __webpack_require__(273);
+	var _reduxLogger = __webpack_require__(276);
 
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 
-	var _reduxThunk = __webpack_require__(279);
+	var _reduxThunk = __webpack_require__(282);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
@@ -28080,13 +28080,27 @@
 
 	var _employeeCategoryReducer2 = _interopRequireDefault(_employeeCategoryReducer);
 
+	var _MyOrdersReducer = __webpack_require__(273);
+
+	var _MyOrdersReducer2 = _interopRequireDefault(_MyOrdersReducer);
+
+	var _MessageReducer = __webpack_require__(274);
+
+	var _MessageReducer2 = _interopRequireDefault(_MessageReducer);
+
+	var _SentMessageReducer = __webpack_require__(275);
+
+	var _SentMessageReducer2 = _interopRequireDefault(_SentMessageReducer);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	//combining the various Reducers into one single reducer file 
 	//the store only accepts only one reducer file, in this case{ it is the index.js reducer file}
 
 
-	//importing the reducer custom made to handle browser history, it will be tracked by the store 
+	//importing the varous reducer files that are responsible 
+	//for protecting the individual pieces of state in their custody
+
 	var rootReducer = (0, _redux.combineReducers)({
 		search_results: _searchReducer2.default,
 		suggestions: _suggestionReducer2.default,
@@ -28097,12 +28111,13 @@
 		Jobs: _jobReducer2.default,
 		Categories: _jobCategoryReducer2.default,
 		AllEmployees: _allEmployeesReducer2.default,
-		EmployeeCategories: _employeeCategoryReducer2.default
+		EmployeeCategories: _employeeCategoryReducer2.default,
+		MyOrders: _MyOrdersReducer2.default,
+		Messages: _MessageReducer2.default,
+		SentMessages: _SentMessageReducer2.default
 	});
 
-	//importing the varous reducer files that are responsible 
-	//for protecting the individual pieces of state in their custody
-
+	//importing the reducer custom made to handle browser history, it will be tracked by the store 
 	exports.default = rootReducer;
 
 /***/ },
@@ -38848,7 +38863,6 @@
 
 		switch (action.type) {
 			case 'RECOMMEND':
-				console.log([].concat(_toConsumableArray(action.data)));
 				return Bids = Object.assign([], [].concat(_toConsumableArray(Bids)), [].concat(_toConsumableArray(action.data)));
 			default:
 				return Bids;
@@ -38955,6 +38969,84 @@
 
 /***/ },
 /* 273 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+	var MyOrdersReducer = function MyOrdersReducer() {
+		var MyOrders = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+		var action = arguments[1];
+
+		switch (action.type) {
+			case 'POPULATE_MY_ORDERS':
+				return MyOrders = Object.assign([], [].concat(_toConsumableArray(MyOrders)), [].concat(_toConsumableArray(action.data)));
+			default:
+				return MyOrders;
+		}
+	};
+
+	exports.default = MyOrdersReducer;
+
+/***/ },
+/* 274 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+	var MessageReducer = function MessageReducer() {
+		var Messages = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+		var action = arguments[1];
+
+		switch (action.type) {
+			case 'POPULATE_MY_MESSAGES':
+				return Messages = Object.assign([], [].concat(_toConsumableArray(Messages)), [].concat(_toConsumableArray(action.data)));
+			default:
+				return Messages;
+		}
+	};
+
+	exports.default = MessageReducer;
+
+/***/ },
+/* 275 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+	var SentMessageReducer = function SentMessageReducer() {
+		var SentMessages = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+		var action = arguments[1];
+
+		switch (action.type) {
+			case 'POPULATE_SENT_MESSAGES':
+				return SentMessages = Object.assign([], [].concat(_toConsumableArray(SentMessages)), [].concat(_toConsumableArray(action.data)));
+			default:
+				return SentMessages;
+		}
+	};
+
+	exports.default = SentMessageReducer;
+
+/***/ },
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38965,11 +39057,11 @@
 	  value: true
 	});
 
-	var _core = __webpack_require__(274);
+	var _core = __webpack_require__(277);
 
-	var _helpers = __webpack_require__(275);
+	var _helpers = __webpack_require__(278);
 
-	var _defaults = __webpack_require__(278);
+	var _defaults = __webpack_require__(281);
 
 	var _defaults2 = _interopRequireDefault(_defaults);
 
@@ -39072,7 +39164,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 274 */
+/* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39082,9 +39174,9 @@
 	});
 	exports.printBuffer = printBuffer;
 
-	var _helpers = __webpack_require__(275);
+	var _helpers = __webpack_require__(278);
 
-	var _diff = __webpack_require__(276);
+	var _diff = __webpack_require__(279);
 
 	var _diff2 = _interopRequireDefault(_diff);
 
@@ -39213,7 +39305,7 @@
 	}
 
 /***/ },
-/* 275 */
+/* 278 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -39237,7 +39329,7 @@
 	var timer = exports.timer = typeof performance !== "undefined" && performance !== null && typeof performance.now === "function" ? performance : Date;
 
 /***/ },
-/* 276 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39247,7 +39339,7 @@
 	});
 	exports.default = diffLogger;
 
-	var _deepDiff = __webpack_require__(277);
+	var _deepDiff = __webpack_require__(280);
 
 	var _deepDiff2 = _interopRequireDefault(_deepDiff);
 
@@ -39333,7 +39425,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 277 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(global) {/*!
@@ -39762,7 +39854,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 278 */
+/* 281 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -39813,7 +39905,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 279 */
+/* 282 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -39841,7 +39933,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 280 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39860,9 +39952,11 @@
 
 	var _redux = __webpack_require__(180);
 
-	var _Actions = __webpack_require__(281);
+	var _Actions = __webpack_require__(284);
 
 	var _Actions2 = _interopRequireDefault(_Actions);
+
+	var _reactRouter = __webpack_require__(203);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -39886,47 +39980,24 @@
 	        _this.props.Actions.pullJobSpecificCategories();
 	        _this.props.Actions.pullJobs();
 	        _this.props.Actions.getEmployeeBids();
-
-	        var store = _this.props.store;
-	        var CurrentState = store.getState();
-
-	        _this.state = {
-	            AccountUser: {},
-	            Bids: []
-	        };
-
-	        _this.props.store.subscribe(function () {
-	            var state = _this.props.store.getState();
-	            if (CurrentState.AccountUser !== state.AccountUser || CurrentState.Bids !== state.Bids) {
-	                _this.setState({
-	                    AccountUser: state.AccountUser,
-	                    Bids: state.Bids
-	                });
-	                CurrentState.Bids = _this.state.Bids;
-	            }
-	        });
+	        _this.props.Actions.getMyMessages();
+	        _this.props.Actions.getMySentMessages();
 	        return _this;
 	    }
 
 	    _createClass(NavbarComponent, [{
+	        key: 'componentWillUpdate',
+	        value: function componentWillUpdate(nextState, nextProps) {
+	            console.log(nextState);
+	            console.log(nextProps);
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var _this2 = this;
-
-	            var CurrentState = this.props.store.getState();
 	            var profileStyle = {
 	                height: '70px',
 	                minWidth: '60px'
 	            };
-	            setTimeout(function () {
-	                var state = _this2.props.store.getState();
-	                if (CurrentState.Bids !== state.Bids) {
-	                    _this2.setState({
-	                        Bids: state.Bids
-	                    });
-	                    CurrentState.Bids = _this2.state.Bids;
-	                }
-	            }, 3000);
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'mdl-layout mdl-js-layout mdl-layout--fixed-header', id: 'nav-bar' },
@@ -39946,57 +40017,18 @@
 	                            'strong',
 	                            null,
 	                            'Welcome, ',
-	                            this.state.AccountUser.fname,
+	                            this.props.AccountUser.fname,
 	                            ' ',
-	                            this.state.AccountUser.lname,
+	                            this.props.AccountUser.lname,
 	                            '!'
 	                        ),
 	                        _react2.default.createElement(
 	                            'nav',
 	                            { className: 'mdl-navigation' },
 	                            _react2.default.createElement(
-	                                'a',
-	                                { className: 'mdl-navigation__link', href: '' },
-	                                'Bids ',
-	                                _react2.default.createElement(
-	                                    'strong',
-	                                    null,
-	                                    _react2.default.createElement(
-	                                        'span',
-	                                        null,
-	                                        this.state.Bids.length
-	                                    )
-	                                ),
-	                                _react2.default.createElement(
-	                                    'i',
-	                                    { className: 'material-icons' },
-	                                    'notifications'
-	                                )
-	                            ),
-	                            _react2.default.createElement(
-	                                'a',
-	                                { className: 'mdl-navigation__link', href: '' },
-	                                'Notifications ',
-	                                _react2.default.createElement(
-	                                    'i',
-	                                    { className: 'material-icons' },
-	                                    'notifications'
-	                                )
-	                            ),
-	                            _react2.default.createElement(
-	                                'a',
-	                                { className: 'mdl-navigation__link', href: '' },
-	                                'Messages ',
-	                                _react2.default.createElement(
-	                                    'i',
-	                                    { className: 'material-icons' },
-	                                    'message'
-	                                )
-	                            ),
-	                            _react2.default.createElement(
 	                                'button',
 	                                { id: 'demo-menu-lower-right', className: 'mdl-button mdl-js-button mdl-button--icon', style: profileStyle },
-	                                _react2.default.createElement('img', { className: 'demo-avatar', src: this.state.AccountUser.profile_photo, alt: this.state.AccountUser.profile_photo })
+	                                _react2.default.createElement('img', { className: 'demo-avatar', src: this.props.AccountUser.profile_photo, alt: this.props.AccountUser.profile_photo })
 	                            ),
 	                            _react2.default.createElement(
 	                                'ul',
@@ -40007,7 +40039,7 @@
 	                                    { className: 'mdl-menu__item' },
 	                                    _react2.default.createElement(
 	                                        'a',
-	                                        { className: '', href: '/nyumbani/index.php/' },
+	                                        { className: '', href: '/nyumbani/index.php/home/employee_timeline/' },
 	                                        _react2.default.createElement(
 	                                            'i',
 	                                            { className: 'material-icons' },
@@ -40021,7 +40053,7 @@
 	                                    { className: 'mdl-menu__item' },
 	                                    _react2.default.createElement(
 	                                        'a',
-	                                        { className: '', href: '/nyumbani/index.php/timeline/profile/' },
+	                                        { className: '', href: '/nyumbani/index.php/home/employee_timeline/' },
 	                                        _react2.default.createElement(
 	                                            'i',
 	                                            { className: 'material-icons' },
@@ -40084,7 +40116,10 @@
 	}(_react.Component);
 
 	function mapStateToProps(state) {
-	    return state;
+	    return {
+	        AccountUser: state.AccountUser,
+	        Bids: state.Bids
+	    };
 	}
 
 	function mapDispatchToProps(dispatch) {
@@ -40096,7 +40131,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NavbarComponent);
 
 /***/ },
-/* 281 */
+/* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40216,6 +40251,12 @@
 				data: data
 			};
 		},
+		countJobs: function countJobs(data) {
+			return {
+				type: 'POPULATE_MY_ORDERS',
+				data: data
+			};
+		},
 		populateJobs: function populateJobs(data) {
 			return {
 				type: 'POPULATE_JOBS',
@@ -40233,6 +40274,22 @@
 				}).done(function (response) {
 					if (response['message'] === true || response['message'] === 'exists') {
 						self(Actions.getEmployeeBids());
+						return true;
+					}
+				});
+			};
+		},
+		SendMessage: function SendMessage(data) {
+			return function (dispatch) {
+				var self = dispatch;
+				_jquery2.default.ajax({
+					url: 'http://localhost/nyumbani/index.php/jobs/SendMessage',
+					type: 'POST',
+					dataType: 'json',
+					data: data
+				}).done(function (response) {
+					if (response['message'] === true) {
+						self(Actions.populateSentMessages());
 						return true;
 					}
 				});
@@ -40259,6 +40316,18 @@
 		populateEmployeeCategories: function populateEmployeeCategories(data) {
 			return {
 				type: 'POPULATE_EMPLOYEE_CATEGORIES',
+				data: data
+			};
+		},
+		populateMessages: function populateMessages(data) {
+			return {
+				type: 'POPULATE_MY_MESSAGES',
+				data: data
+			};
+		},
+		populateSentMessages: function populateSentMessages(data) {
+			return {
+				type: 'POPULATE_SENT_MESSAGES',
 				data: data
 			};
 		},
@@ -40363,6 +40432,42 @@
 					dataType: 'json'
 				}).done(function (response) {
 					self(Actions.IncrementRecommendation(response));
+				});
+			};
+		},
+		getMyOrders: function getMyOrders() {
+			return function (dispatch) {
+				var self = dispatch;
+				_jquery2.default.ajax({
+					url: '/nyumbani/index.php/Jobs/GetMyOrders',
+					type: 'POST',
+					dataType: 'json'
+				}).done(function (response) {
+					self(Actions.countJobs(response));
+				});
+			};
+		},
+		getMyMessages: function getMyMessages() {
+			return function (dispatch) {
+				var self = dispatch;
+				_jquery2.default.ajax({
+					url: '/nyumbani/index.php/Jobs/GetMyMessages',
+					type: 'POST',
+					dataType: 'json'
+				}).done(function (response) {
+					self(Actions.populateMessages(response));
+				});
+			};
+		},
+		getMySentMessages: function getMySentMessages() {
+			return function (dispatch) {
+				var self = dispatch;
+				_jquery2.default.ajax({
+					url: '/nyumbani/index.php/Jobs/GetMySentMessages',
+					type: 'POST',
+					dataType: 'json'
+				}).done(function (response) {
+					self(Actions.populateSentMessages(response));
 				});
 			};
 		}

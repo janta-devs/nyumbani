@@ -384,8 +384,17 @@ class Profile extends CI_Controller{
 	public function getJobs(){
 		$this->load->model('Job_Model');
 		$jobs = new Job_Model();
-		$res = $jobs->get();
-		print json_encode( $res );
+
+		$this->load->model('Recommendations');
+		$recommendation = new Recommendations();
+
+		$clientJobs = $jobs->get();
+
+		foreach ($clientJobs as $row ) {
+			$response = $recommendation->getOrderBids( $row->order_id );
+			$row->bids = $response;
+		}
+		print json_encode( $clientJobs );
 	}
 
 

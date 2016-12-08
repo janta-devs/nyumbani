@@ -49,6 +49,7 @@ class InterestedEmployees extends Component{
 	render(){
 		return(
 			<div>
+        <h3 className = "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">INTERESTED EMPLOYEES</h3>
 				<ResultTable data = {this.container}/>
 			</div>
 		)

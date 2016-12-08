@@ -42,5 +42,40 @@ class Jobs extends CI_Controller
 
 		print json_encode( $orders );
 	}
+	public function GetMyMessages(){
+		$this->load->model('Messages');
+		$Messages = new Messages();
+		$sess_data = $this->session->userdata();
+		$msgs= $Messages->getMessages('to_id', ['to_id'=>$sess_data['login_id']]);
+		
+		foreach( $msgs as $row ){
+			$row->timestamp = date( 'Y-m-d H:i:s', strtotime($row->timestamp));
+		}	
+		print json_encode( $msgs );		
+	}
+	public function GetMySentMessages(){
+		$this->load->model('Messages');
+		$Messages = new Messages();
+		$sess_data = $this->session->userdata();
+		$msgs= $Messages->getMessages('from_id', ['from_id'=>$sess_data['login_id']]);
+
+		foreach( $msgs as $row ){
+			$row->timestamp = date( 'Y-m-d H:i:s', strtotime($row->timestamp));
+		}	
+		print json_encode( $msgs );
+	}
+	public function SendMessage(){
+		$this->load->model('Messages');
+		$Messages = new Messages();
+
+		$data = $this->input->post();
+		foreach ($data as $key => $value) {
+			if( $key == 'message_title' ||  $key == 'message_body' ){
+				strip_tags( trim($value) );
+			}
+		}
+		$res = $Messages->insert( $data );
+		print ( is_numeric($res) ) ? json_encode(['message'=>true]) : json_encode(['message'=>false]);
+	}
 
 }

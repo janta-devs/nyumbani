@@ -16,6 +16,6 @@ import NavbarComponent from './components/NavbarComponent';
 
 render(
 	<Provider store={store}>
-		<NavbarComponent store = {store}/>
+		<NavbarComponent />
 	</Provider>, 
 document.getElementById('NavCompoent'));

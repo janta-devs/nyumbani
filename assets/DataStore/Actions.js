@@ -148,6 +148,23 @@ let Actions =
 			});
 		}
 	},
+	SendMessage: function( data ){
+			return( dispatch ) => {
+				var self = dispatch;
+				$.ajax({
+				url: 'http://localhost/nyumbani/index.php/jobs/SendMessage',
+				type: 'POST',
+				dataType: 'json',
+				data: data
+			})
+			.done(function( response ) {
+				if( response['message'] === true ){
+					self( Actions.populateSentMessages() )
+					return true;
+				}
+			});
+		}
+	},
 	populateEmployeeData: function( data ){
 		return{
 			type:'POPULATE_EMPLOYEE_DATA',
@@ -169,6 +186,18 @@ let Actions =
 	populateEmployeeCategories:function( data ){
 		return{
 			type:'POPULATE_EMPLOYEE_CATEGORIES',
+			data: data
+		}
+	},
+	populateMessages: function( data ){
+		return{
+			type: 'POPULATE_MY_MESSAGES',
+			data: data
+		}
+	},
+	populateSentMessages: function( data ){
+		return{
+			type: 'POPULATE_SENT_MESSAGES',
 			data: data
 		}
 	},
@@ -297,6 +326,32 @@ let Actions =
 			})
 			.done(function( response ){			
 				self( Actions.countJobs( response ))				
+			});
+		}
+	},
+	getMyMessages: function(){
+		return( dispatch ) => {
+			var self = dispatch;
+			$.ajax({
+				url: '/nyumbani/index.php/Jobs/GetMyMessages',
+				type: 'POST',
+				dataType: 'json'
+			})
+			.done(function( response ){			
+				self( Actions.populateMessages( response ))				
+			});
+		}
+	},
+	getMySentMessages: function(){
+		return( dispatch ) => {
+			var self = dispatch;
+			$.ajax({
+				url: '/nyumbani/index.php/Jobs/GetMySentMessages',
+				type: 'POST',
+				dataType: 'json'
+			})
+			.done(function( response ){			
+				self( Actions.populateSentMessages( response ))				
 			});
 		}
 	}

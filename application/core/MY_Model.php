@@ -90,6 +90,15 @@ class MY_Model extends CI_Model{
 		$query = $this->db->select('*')->where("login_id = {$login_id}")->get( $this::TABLE );
 		return $query->result();
 	}
+	public function getMessages( $field ,$arr_with_params ){
+		/*
+		* $field is the field to be checked while selecting
+		* @param $arr_with_params its an array with a key and value
+		* @example ['login_id' => 2]
+		*/
+		$query = $this->db->select('*')->where("{$field} = {$arr_with_params[$field]}")->get( $this::TABLE );
+		return $query->result();
+	}
 }
 
 ?>

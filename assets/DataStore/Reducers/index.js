@@ -17,6 +17,8 @@ import jobCategoryReducer from './jobCategoryReducer';
 import allEmployeesReducer from './allEmployeesReducer';
 import employeeCategoryReducer from './employeeCategoryReducer';
 import MyOrdersReducer from './MyOrdersReducer';
+import MessageReducer from './MessageReducer';
+import SentMessageReducer from './SentMessageReducer';
 
 
 //combining the various Reducers into one single reducer file 
@@ -34,7 +36,9 @@ const rootReducer = combineReducers({
 	Categories: jobCategoryReducer,
 	AllEmployees: allEmployeesReducer,
 	EmployeeCategories: employeeCategoryReducer,
-	MyOrders: MyOrdersReducer
+	MyOrders: MyOrdersReducer,
+	Messages: MessageReducer,
+	SentMessages: SentMessageReducer,
 });
 
 

@@ -19,7 +19,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="<?php print base_url(); ?>assets/node_modules/material-design-lite/material.js" type="text/javascript" charset="utf-8" async defer></script>
     <style>
         body{
-            background: rgba(220, 220, 220, 0.12);
+            background: #e8eaf6;
         }
         .mdl-data-table{
             width: 100%;
