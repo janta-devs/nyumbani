@@ -8,7 +8,7 @@ class MessageComponent extends Component{
     return (
               <div className="card" id="profile-followers">
                 <header className="followers-header">
-                  <h2>Message Pane</h2>
+                  <h2>Reply</h2>
                 </header>
                 <section className="followers-content">
                     <div className="follower-list with-small-images">

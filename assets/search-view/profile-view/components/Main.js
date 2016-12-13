@@ -66,8 +66,7 @@ class MainComponent  extends Component{
                 <div className="row">
                   <div className="column d-1-3 m-5-12 s-1-1 xs-1-1">
                     <ProfileInterests data = {this.data[0]}/>
-                    <ProfileInterestedEmployers/>
-                    <ProfileInterestedIn />
+                    <ProfileInterestedEmployers />
                   </div>
                   <div className="column d-2-3 m-7-12 s-1-1 xs-1-1">
                       
@@ -84,8 +83,8 @@ class MainComponent  extends Component{
     }
 }
 
-function mapStateToProps( state ){       
-  return state;               
+function mapStateToProps( state ){         
+  return state;           
 }
 function mapDispatchToProps(dispatch){   
   return{
@@ -96,6 +95,7 @@ function mapDispatchToProps(dispatch){
 
 class Main extends Component{
   render() {
+    console.log( this.props );
     return (
         <MainComponent state = {this.props}/>
     );

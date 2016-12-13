@@ -91,6 +91,10 @@
 
 	var _MessageComponent2 = _interopRequireDefault(_MessageComponent);
 
+	var _MessageView = __webpack_require__(310);
+
+	var _MessageView2 = _interopRequireDefault(_MessageView);
+
 	var _Store = __webpack_require__(273);
 
 	var _Store2 = _interopRequireDefault(_Store);
@@ -108,7 +112,8 @@
 			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home/employee_timeline/ordernumber/:option', component: _Main2.default }),
 			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home/employee_timeline/Order/:option', component: _CategoryEmployees2.default }),
 			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home/employee_timeline/MyBids/', component: _MyBids2.default }),
-			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home/employee_timeline/Messages/', component: _MessageComponent2.default })
+			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home/employee_timeline/Messages/', component: _MessageComponent2.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: '/nyumbani/index.php/home/employee_timeline/Messages/Message/:id', component: _MessageView2.default })
 		)
 	), document.getElementById('component'));
 
@@ -41392,12 +41397,15 @@
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 	var SentMessageReducer = function SentMessageReducer() {
+		var _SentMessages;
+
 		var SentMessages = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 		var action = arguments[1];
 
 		switch (action.type) {
 			case 'POPULATE_SENT_MESSAGES':
-				return SentMessages = Object.assign([], [].concat(_toConsumableArray(SentMessages)), [].concat(_toConsumableArray(action.data)));
+				//return SentMessages = Object.assign([], [ ...SentMessages], [ ...action.data] )
+				return SentMessages = (_SentMessages = SentMessages).concat.apply(_SentMessages, _toConsumableArray(action.data));
 			default:
 				return SentMessages;
 		}
@@ -43293,6 +43301,10 @@
 
 	var _Actions2 = _interopRequireDefault(_Actions);
 
+	var _MessageTable = __webpack_require__(309);
+
+	var _MessageTable2 = _interopRequireDefault(_MessageTable);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -43303,7 +43315,8 @@
 
 	function mapStateToProps(state) {
 		return {
-			Message: state.Message
+			Messages: state.Messages,
+			SentMessages: state.SentMessages
 		};
 	}
 
@@ -43313,26 +43326,94 @@
 		};
 	}
 
-	var MessageComponent = function (_Component) {
-		_inherits(MessageComponent, _Component);
+	var Chooser = function (_Component) {
+		_inherits(Chooser, _Component);
+
+		function Chooser() {
+			_classCallCheck(this, Chooser);
+
+			return _possibleConstructorReturn(this, (Chooser.__proto__ || Object.getPrototypeOf(Chooser)).apply(this, arguments));
+		}
+
+		_createClass(Chooser, [{
+			key: 'handleClick',
+			value: function handleClick(e) {
+				e.preventDefault();
+				e.stopPropagation();
+
+				this.props.getState(e.target.name);
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				var ContainerStyle = {
+					width: '80%',
+					margin: 'auto'
+				};
+				var sentMessages = {
+					float: 'right'
+				};
+				return _react2.default.createElement(
+					'div',
+					{ style: ContainerStyle },
+					_react2.default.createElement(
+						'button',
+						{ onClick: this.handleClick.bind(this), name: 'client_messages', className: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored', ref: 'client_messages' },
+						'CLIENT MESSAGES'
+					),
+					_react2.default.createElement(
+						'button',
+						{ onClick: this.handleClick.bind(this), name: 'my_messages', style: sentMessages, className: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect', ref: 'my_messages' },
+						'MY SENT MESSAGES'
+					)
+				);
+			}
+		}]);
+
+		return Chooser;
+	}(_react.Component);
+
+	var MessageComponent = function (_Component2) {
+		_inherits(MessageComponent, _Component2);
 
 		function MessageComponent(context, props) {
 			_classCallCheck(this, MessageComponent);
 
-			var _this = _possibleConstructorReturn(this, (MessageComponent.__proto__ || Object.getPrototypeOf(MessageComponent)).call(this, context, props));
+			var _this2 = _possibleConstructorReturn(this, (MessageComponent.__proto__ || Object.getPrototypeOf(MessageComponent)).call(this, context, props));
 
-			console.log(_this.props);
-			return _this;
+			_this2.state = {
+				default: "client_messages"
+			};
+			return _this2;
 		}
 
 		_createClass(MessageComponent, [{
+			key: 'getState',
+			value: function getState(state) {
+				this.setState({ default: state });
+			}
+		}, {
 			key: 'render',
 			value: function render() {
-				return _react2.default.createElement(
-					'div',
-					null,
-					'These are your messages'
-				);
+				if (this.state.default === 'client_messages') {
+					return _react2.default.createElement(
+						'div',
+						null,
+						_react2.default.createElement(Chooser, { getState: this.getState.bind(this) }),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement(_MessageTable2.default, { data: this.props.Messages })
+					);
+				} else {
+					return _react2.default.createElement(
+						'div',
+						null,
+						_react2.default.createElement(Chooser, { getState: this.getState.bind(this) }),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement(_MessageTable2.default, { data: this.props.SentMessages })
+					);
+				}
 			}
 		}]);
 
@@ -43340,6 +43421,762 @@
 	}(_react.Component);
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MessageComponent);
+
+/***/ },
+/* 309 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(204);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var MessageTable = function (_Component) {
+		_inherits(MessageTable, _Component);
+
+		function MessageTable() {
+			_classCallCheck(this, MessageTable);
+
+			return _possibleConstructorReturn(this, (MessageTable.__proto__ || Object.getPrototypeOf(MessageTable)).apply(this, arguments));
+		}
+
+		_createClass(MessageTable, [{
+			key: 'render',
+			value: function render() {
+				var tableStyle = {
+					width: '80%',
+					margin: 'auto'
+				};
+
+				var populate = this.props.data.map(function (x, y) {
+					return _react2.default.createElement(TableCell, { key: x.id, id: x.id, number: y + 1, title: x.message_title, timeposted: x.timestamp, status: x.status });
+				});
+
+				return _react2.default.createElement(
+					'div',
+					{ className: 'table-responsive-vertical shadow-z-1', style: tableStyle },
+					_react2.default.createElement(
+						'table',
+						{ className: 'table table-hover table-mc-light-blue ' },
+						_react2.default.createElement(
+							'thead',
+							null,
+							_react2.default.createElement(
+								'tr',
+								null,
+								_react2.default.createElement(
+									'th',
+									null,
+									'MESSAGE NO.'
+								),
+								_react2.default.createElement(
+									'th',
+									null,
+									'TITLE'
+								),
+								_react2.default.createElement(
+									'th',
+									null,
+									'TIME'
+								),
+								_react2.default.createElement(
+									'th',
+									null,
+									'STATUS'
+								),
+								_react2.default.createElement(
+									'th',
+									null,
+									'ACTIONS'
+								)
+							),
+							_react2.default.createElement(
+								'tr',
+								null,
+								_react2.default.createElement('td', null),
+								_react2.default.createElement('td', null),
+								_react2.default.createElement('td', null),
+								_react2.default.createElement('td', null),
+								_react2.default.createElement('td', null)
+							)
+						),
+						populate,
+						_react2.default.createElement(
+							'tfoot',
+							null,
+							_react2.default.createElement(
+								'tr',
+								null,
+								_react2.default.createElement(
+									'td',
+									null,
+									'_'
+								),
+								_react2.default.createElement(
+									'td',
+									null,
+									'_'
+								),
+								_react2.default.createElement(
+									'td',
+									null,
+									'\xA9 2016'
+								),
+								_react2.default.createElement(
+									'td',
+									null,
+									'_'
+								),
+								_react2.default.createElement(
+									'td',
+									null,
+									'_'
+								)
+							)
+						)
+					)
+				);
+			}
+		}]);
+
+		return MessageTable;
+	}(_react.Component);
+
+	var TableCell = function (_Component2) {
+		_inherits(TableCell, _Component2);
+
+		function TableCell() {
+			_classCallCheck(this, TableCell);
+
+			return _possibleConstructorReturn(this, (TableCell.__proto__ || Object.getPrototypeOf(TableCell)).apply(this, arguments));
+		}
+
+		_createClass(TableCell, [{
+			key: 'render',
+			value: function render() {
+				var styleIEButton = {
+					lineHeight: '10px',
+					padding: '1px 1px 1px 1px',
+					textTransform: 'unset'
+				};
+				var rowStyle = {
+					fontSize: '.95rem'
+				};
+				var date = new Date(Date.parse(this.props.timeposted));
+				return _react2.default.createElement(
+					'tbody',
+					null,
+					_react2.default.createElement(
+						'tr',
+						null,
+						_react2.default.createElement(
+							'td',
+							{ style: rowStyle },
+							this.props.number
+						),
+						_react2.default.createElement(
+							'td',
+							{ style: rowStyle },
+							this.props.title
+						),
+						_react2.default.createElement(
+							'td',
+							{ style: rowStyle },
+							date.toString()
+						),
+						_react2.default.createElement(
+							'td',
+							{ style: rowStyle },
+							this.props.status
+						),
+						_react2.default.createElement(
+							'td',
+							null,
+							_react2.default.createElement(
+								_reactRouter.Link,
+								{ to: '/nyumbani/index.php/home/employee_timeline/Messages/Message/' + this.props.id },
+								_react2.default.createElement(
+									'button',
+									{ style: styleIEButton, className: 'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored' },
+									'View Message ',
+									_react2.default.createElement(
+										'i',
+										{ className: 'material-icons' },
+										'account_box'
+									)
+								)
+							)
+						)
+					),
+					_react2.default.createElement(
+						'tr',
+						null,
+						_react2.default.createElement('td', null),
+						_react2.default.createElement('td', null),
+						_react2.default.createElement('td', null),
+						_react2.default.createElement('td', null),
+						_react2.default.createElement('td', null)
+					)
+				);
+			}
+		}]);
+
+		return TableCell;
+	}(_react.Component);
+
+	exports.default = MessageTable;
+
+/***/ },
+/* 310 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(173);
+
+	var _redux = __webpack_require__(180);
+
+	var _Actions = __webpack_require__(260);
+
+	var _Actions2 = _interopRequireDefault(_Actions);
+
+	var _BasicDetails = __webpack_require__(311);
+
+	var _BasicDetails2 = _interopRequireDefault(_BasicDetails);
+
+	var _MessageComponent = __webpack_require__(312);
+
+	var _MessageComponent2 = _interopRequireDefault(_MessageComponent);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	//importint the components for the chat view
+
+	function mapStateToProps(state) {
+		return {
+			Messages: state.Messages,
+			SentMessages: state.SentMessages,
+			AccountUser: state.AccountUser
+		};
+	}
+
+	function mapDispatchToProps(dispatch) {
+		return {
+			Actions: (0, _redux.bindActionCreators)(_Actions2.default, dispatch)
+		};
+	}
+
+	var MessageView = function (_Component) {
+		_inherits(MessageView, _Component);
+
+		function MessageView(context, props) {
+			_classCallCheck(this, MessageView);
+
+			var _this = _possibleConstructorReturn(this, (MessageView.__proto__ || Object.getPrototypeOf(MessageView)).call(this, context, props));
+
+			var messages = [];
+			messages = _this.props.Messages.concat(_this.props.SentMessages);
+			var message_id = _this.props.params.id;
+			_this.message_content = messages.filter(function (value, index) {
+				return value.id === message_id ? messages[index] : false;
+			});
+			return _this;
+		}
+
+		_createClass(MessageView, [{
+			key: 'componentWillUpdate',
+			value: function componentWillUpdate() {
+				this.props.Actions.getMySentMessages();
+				this.props.Actions.getMyMessages();
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'div',
+						{ className: 'with-container content' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'column d-4-3 m-10-12 s-1-1 xs-1-1' },
+							_react2.default.createElement(_BasicDetails2.default, { message: this.message_content }),
+							_react2.default.createElement(_MessageComponent2.default, { message: this.message_content, state: this.props })
+						)
+					)
+				);
+			}
+		}]);
+
+		return MessageView;
+	}(_react.Component);
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MessageView);
+
+/***/ },
+/* 311 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var BasicDetails = function (_Component) {
+	  _inherits(BasicDetails, _Component);
+
+	  function BasicDetails() {
+	    _classCallCheck(this, BasicDetails);
+
+	    return _possibleConstructorReturn(this, (BasicDetails.__proto__ || Object.getPrototypeOf(BasicDetails)).apply(this, arguments));
+	  }
+
+	  _createClass(BasicDetails, [{
+	    key: "render",
+	    value: function render() {
+	      var date = new Date(Date.parse(this.props.message[0].timestamp));
+	      return _react2.default.createElement(
+	        "div",
+	        { className: "card", id: "profile-employment" },
+	        _react2.default.createElement(
+	          "header",
+	          { className: "employment-header" },
+	          _react2.default.createElement(
+	            "h2",
+	            null,
+	            "Message"
+	          )
+	        ),
+	        _react2.default.createElement(
+	          "section",
+	          { className: "employment-content" },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "timeline-record-list " },
+	            _react2.default.createElement(
+	              "div",
+	              { className: "record-row" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "timeline-record-right" },
+	                _react2.default.createElement(
+	                  "p",
+	                  { className: "timeline-record-title" },
+	                  this.props.message[0].message_title
+	                )
+	              ),
+	              _react2.default.createElement(
+	                "div",
+	                { className: "timeline-record-left" },
+	                _react2.default.createElement(
+	                  "p",
+	                  { className: "timeline-record-date" },
+	                  _react2.default.createElement(
+	                    "span",
+	                    { className: "block" },
+	                    "Message title"
+	                  ),
+	                  _react2.default.createElement("span", { className: "block" })
+	                )
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "timeline-record-list " },
+	            _react2.default.createElement(
+	              "div",
+	              { className: "record-row" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "timeline-record-right" },
+	                _react2.default.createElement(
+	                  "p",
+	                  { className: "timeline-record-title" },
+	                  date.toString()
+	                ),
+	                _react2.default.createElement(
+	                  "p",
+	                  { className: "timeline-record-place" },
+	                  "time"
+	                )
+	              ),
+	              _react2.default.createElement(
+	                "div",
+	                { className: "timeline-record-left" },
+	                _react2.default.createElement(
+	                  "p",
+	                  { className: "timeline-record-date" },
+	                  _react2.default.createElement(
+	                    "span",
+	                    { className: "block" },
+	                    "Time Sent"
+	                  ),
+	                  _react2.default.createElement("span", { className: "block" })
+	                )
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "timeline-record-list " },
+	            _react2.default.createElement(
+	              "div",
+	              { className: "record-row" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "timeline-record-right" },
+	                _react2.default.createElement(
+	                  "p",
+	                  { className: "timeline-record-title" },
+	                  "Employer # ",
+	                  this.props.message[0].from_id
+	                )
+	              ),
+	              _react2.default.createElement(
+	                "div",
+	                { className: "timeline-record-left" },
+	                _react2.default.createElement(
+	                  "p",
+	                  { className: "timeline-record-date" },
+	                  _react2.default.createElement(
+	                    "span",
+	                    { className: "block" },
+	                    "From"
+	                  ),
+	                  _react2.default.createElement("span", { className: "block" })
+	                )
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "timeline-record-list " },
+	            _react2.default.createElement(
+	              "div",
+	              { className: "record-row" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "timeline-record-right" },
+	                _react2.default.createElement(
+	                  "p",
+	                  { className: "timeline-record-title" },
+	                  this.props.message[0].message_body
+	                )
+	              ),
+	              _react2.default.createElement(
+	                "div",
+	                { className: "timeline-record-left" },
+	                _react2.default.createElement(
+	                  "p",
+	                  { className: "timeline-record-date" },
+	                  _react2.default.createElement(
+	                    "span",
+	                    { className: "block" },
+	                    "Message"
+	                  ),
+	                  _react2.default.createElement("span", { className: "block" })
+	                )
+	              )
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return BasicDetails;
+	}(_react.Component);
+
+	exports.default = BasicDetails;
+
+/***/ },
+/* 312 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _EmailComponent = __webpack_require__(313);
+
+	var _EmailComponent2 = _interopRequireDefault(_EmailComponent);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var MessageComponent = function (_Component) {
+	  _inherits(MessageComponent, _Component);
+
+	  function MessageComponent() {
+	    _classCallCheck(this, MessageComponent);
+
+	    return _possibleConstructorReturn(this, (MessageComponent.__proto__ || Object.getPrototypeOf(MessageComponent)).apply(this, arguments));
+	  }
+
+	  _createClass(MessageComponent, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'card', id: 'profile-followers' },
+	        _react2.default.createElement(
+	          'header',
+	          { className: 'followers-header' },
+	          _react2.default.createElement(
+	            'h2',
+	            null,
+	            'Reply'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'section',
+	          { className: 'followers-content' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'follower-list with-small-images' },
+	            _react2.default.createElement(_EmailComponent2.default, { data: this.props })
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return MessageComponent;
+	}(_react.Component);
+
+	exports.default = MessageComponent;
+
+/***/ },
+/* 313 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var MessageInfo = {};
+
+	var Confirmation = function Confirmation() {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    'Message Sent!'
+	  );
+	};
+
+	var Form = function (_Component) {
+	  _inherits(Form, _Component);
+
+	  function Form() {
+	    _classCallCheck(this, Form);
+
+	    return _possibleConstructorReturn(this, (Form.__proto__ || Object.getPrototypeOf(Form)).apply(this, arguments));
+	  }
+
+	  _createClass(Form, [{
+	    key: 'takeInput',
+	    value: function takeInput(e) {
+	      e.preventDefault();
+	      e.stopPropagation();
+	      MessageInfo['to_id'] = this.refs.employer_id.value.replace(/Employer ID :/, "").trim();
+	      MessageInfo['message_title'] = this.refs.title.value;
+	      MessageInfo['message_body'] = this.refs.message_body.value;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var styleIEButton = {
+	        lineHeight: '10px',
+	        padding: '1px 1px 1px 1px',
+	        textTransform: 'unset'
+	      };
+	      var styleChat = {
+	        height: '200px',
+	        width: '250px',
+	        borderRadius: '10px',
+	        border: '1px solid black',
+	        padding: '10px 10px 10px 10px',
+	        marginBottom: '10px'
+	      };
+	      var inputWidth = {
+	        width: '100%'
+	      };
+	      var tdWidth = {
+	        width: '800px'
+	      };
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'form-group label-floating' },
+	        _react2.default.createElement(
+	          'form',
+	          { onSubmit: this.props.handleSend },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'mdl-textfield mdl-js-textfield' },
+	            _react2.default.createElement('input', { className: 'mdl-textfield__input', type: 'text', id: 'sample1', name: 'employer_id', ref: 'employer_id', value: 'Employer ID : ' + this.props.userLogin, readOnly: true })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label', style: inputWidth },
+	            _react2.default.createElement('input', { className: 'mdl-textfield__input', type: 'text', id: 'sample1', name: 'title', ref: 'title', onBlur: this.takeInput.bind(this) }),
+	            _react2.default.createElement(
+	              'label',
+	              { className: 'mdl-textfield__label', htmlFor: 'smaple1' },
+	              'Type Message Title'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label', style: inputWidth },
+	            _react2.default.createElement('textarea', { cols: '200', rows: '4.52', className: 'mdl-textfield__input', type: 'text', id: 'sample1', name: 'message_body', ref: 'message_body', onBlur: this.takeInput.bind(this) }),
+	            _react2.default.createElement(
+	              'label',
+	              { className: 'mdl-textfield__label', htmlFor: 'smaple1' },
+	              'Message'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'button',
+	            { className: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored' },
+	            'Send Message'
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Form;
+	}(_react.Component);
+
+	var EmailComponent = function (_Component2) {
+	  _inherits(EmailComponent, _Component2);
+
+	  function EmailComponent(context, props) {
+	    _classCallCheck(this, EmailComponent);
+
+	    var _this2 = _possibleConstructorReturn(this, (EmailComponent.__proto__ || Object.getPrototypeOf(EmailComponent)).call(this));
+
+	    _this2.state = {
+	      MessageSent: false
+	    };
+	    return _this2;
+	  }
+
+	  _createClass(EmailComponent, [{
+	    key: 'handleSend',
+	    value: function handleSend(e) {
+	      e.preventDefault();
+	      e.stopPropagation();
+	      MessageInfo['from_id'] = this.props.data.message[0].to_id;
+
+	      if (MessageInfo.hasOwnProperty('message_title') && MessageInfo.hasOwnProperty('message_body') && MessageInfo.hasOwnProperty('to_id')) {
+	        this.setState({ MessageSent: true });
+	        this.props.data.state.Actions.SendMessage(MessageInfo);
+	      } else {
+	        console.log(MessageInfo);
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      console.log(this.props);
+	      if (this.state.MessageSent === false) {
+	        return _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(Form, { handleSend: this.handleSend.bind(this), userLogin: this.props.data.message[0].from_id })
+	        );
+	      } else {
+	        return _react2.default.createElement(Confirmation, null);
+	      }
+	    }
+	  }]);
+
+	  return EmailComponent;
+	}(_react.Component);
+
+	;
+
+	exports.default = EmailComponent;
 
 /***/ }
 /******/ ]);

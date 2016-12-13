@@ -77,5 +77,28 @@ class Jobs extends CI_Controller
 		$res = $Messages->insert( $data );
 		print ( is_numeric($res) ) ? json_encode(['message'=>true]) : json_encode(['message'=>false]);
 	}
-
+	public function MarkMessageAsRead(){
+		$this->load->model('Messages');
+		$Messages = new Messages();
+		$data = $this->input->post();
+		$Messages->updater('status','read','id', $data);
+		print json_encode( ['message'=>true] );
+	}
+	public function MyRequestedEmployee(){
+		$this->load->model('Request');
+		$Request = new Request();
+		$sess_data = $this->session->userdata();
+		$response = $Request->getMessages('employer_login_id', ['employer_login_id' => $sess_data['login_id']]);
+		foreach( $response as $row ){
+			$row->timestamp = date( 'Y-m-d H:i:s', strtotime($row->timestamp));
+		}
+		print json_encode( $response );
+	}
+	public function SendRequest(){
+		$this->load->model('Request');
+		$Request = new Request();
+		$data = $this->input->post();
+		$res = $Request->insert( $data );
+		print ( is_numeric($res) ) ? json_encode(['message'=>true]) : json_encode(['message'=>'exists']);	
+	}
 }

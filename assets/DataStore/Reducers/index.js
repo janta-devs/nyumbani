@@ -19,6 +19,7 @@ import employeeCategoryReducer from './employeeCategoryReducer';
 import MyOrdersReducer from './MyOrdersReducer';
 import MessageReducer from './MessageReducer';
 import SentMessageReducer from './SentMessageReducer';
+import RequestsReducer from './RequestsReducer';
 
 
 //combining the various Reducers into one single reducer file 
@@ -39,6 +40,7 @@ const rootReducer = combineReducers({
 	MyOrders: MyOrdersReducer,
 	Messages: MessageReducer,
 	SentMessages: SentMessageReducer,
+	Requests: RequestsReducer,
 });
 
 

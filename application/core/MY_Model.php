@@ -99,6 +99,11 @@ class MY_Model extends CI_Model{
 		$query = $this->db->select('*')->where("{$field} = {$arr_with_params[$field]}")->get( $this::TABLE );
 		return $query->result();
 	}
+	public function updater($field_to_change = "", $value_to_updateWith = "", $id_of_row = "", $data){
+		$this->db->set($field_to_change, $value_to_updateWith );
+		$this->db->where($id_of_row, $data[$id_of_row]);
+		return ($this->db->update( $this::TABLE ) == true ) ? true : false;
+	}
 }
 
 ?>

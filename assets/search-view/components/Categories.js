@@ -8,24 +8,44 @@ class Categories extends Component{
 	{
 		super( context, props );
 
-    let EmployeeCat = this.props.State.EmployeeCategories;
-    this.info = ( EmployeeCat.length === 0 || !EmployeeCat.length ) 
-    ? this.getLocalStorage(): this.props.State.EmployeeCategories;
+    this.pages = [];
 
-    if( this.info.length ){
-      this.pages = this.createPagination();
-    }
-    
     this.state = {
       data: [],
       count: 0,
       maxLength: this.pages.length
     }
+
+    let EmployeeCat = this.props.State.EmployeeCategories;
+
+    this.info = ( !EmployeeCat.length ) ? this.getLocalStorage(): this.props.State.EmployeeCategories;
+
+    if( this.info === null || !this.info.length )
+    {
+      setTimeout( () => {
+        location.href = "";
+      }, 1000);
+    }
+    else
+    {
+      this.pages = this.createPagination( this.info )
+    }
+
     this.data = this.pages[this.state.count]
    
 	}
   componentWillMount(){
-    this.info = this.getLocalStorage();
+    let EmployeeCat = this.props.State.EmployeeCategories;
+
+    //checking whether the EmployeeCat is populated
+    this.info = ( !EmployeeCat.length ) 
+    ? this.getLocalStorage(): this.props.State.EmployeeCategories;
+
+    //if the info is populated, reload the page to render the content
+
+    ( !this.info.length ) ? window.location.href = "" : this.info;
+
+    //set the defaults into the state
     this.setState({ data: this.pages[this.state.count] });
   }
   componentWillUpdate(nxtProp, nxtState ){
@@ -43,32 +63,38 @@ class Categories extends Component{
       return false;
     }
   }
-  createPagination(){
-
-    var counter = (Math.floor(this.info.length / 12))
-    var NextNum = 12;
-    var start = 0;
-    var holder = [];
-
-    for( var i = 0; i < counter; i++ ){
-      var num = `arr${i+1}`;
-     
-      if( i === 0 )
-      {
-        num = this.info.splice(start, NextNum)
-        NextNum + 12;
-        start = NextNum + 1;
-      }
-      else
-      {
-        num = this.info.splice(start, NextNum)
-        NextNum + 12;
-        start = NextNum + 1;
-      }
-      holder.push( num );
+  createPagination( data ){
+    if( !data.length ){
+      setTimeout( ()=> {
+        window.location.href = "";
+      }, 1000);      
     }
-    holder.push( this.info );
-    return holder;   
+    else
+    {
+      var counter = (Math.floor(data.length / 12))
+      var NextNum = 12;
+      var start = 0;
+      var holder = [];
+
+      for( var i = 0; i < counter; i++ ){
+        var num = `arr${i+1}`;
+        if( i === 0 )
+        {
+          num = data.splice(start, NextNum)
+          NextNum + 12;
+          start = NextNum + 1;
+        }
+        else
+        {
+          num = data.splice(start, NextNum)
+          NextNum + 12;
+          start = NextNum + 1;
+        }
+        holder.push( num );
+      }
+      holder.push( data );
+      return holder;   
+    }
   }
   handleNextClick( e ){
     e.preventDefault();

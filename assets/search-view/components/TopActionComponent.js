@@ -11,14 +11,8 @@ class TopActionComponent extends Component{
 			<div>
 				<div className="mdl-cell mdl-cell--12-col">
 				<div style={floatStlye} >
-						<Link
-						to = {`/nyumbani/index.php/home/timeline/MyOrders/`}
-						className = 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored' 
-						>My Orders</Link>
-				</div>	
-				<div style={floatStlye} >
 						<a 
-						className = 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored' 
+						className = 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect' 
 						href="/nyumbani/index.php/PostJob/job">Post Job</a>
 				</div>	
 				</div>
@@ -26,5 +20,6 @@ class TopActionComponent extends Component{
 			);
 	}
 }
+
 
 export default TopActionComponent;

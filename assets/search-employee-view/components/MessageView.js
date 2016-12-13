@@ -7,19 +7,14 @@ import Actions from '../../DataStore/Actions';
 //importint the components for the chat view
 
 import BasicDetails from '../MessageViewComponent/BasicDetails';
-
-import EmailComponent from '../MessageViewComponent/EmailComponent';
-
 import MessageComponent from '../MessageViewComponent/MessageComponent';
-
-import ProfileSummary from '../MessageViewComponent/ProfileSummary';
-
 
 
 function mapStateToProps( state ){				
 	return {
 		Messages: state.Messages,
-		SentMessages: state.SentMessages 
+		SentMessages: state.SentMessages,
+		AccountUser: state.AccountUser 
 	};								
 }
 
@@ -36,11 +31,9 @@ class MessageView extends Component{
 		var messages = [];
 		messages = this.props.Messages.concat(this.props.SentMessages);
 		var message_id = this.props.params.id;
-		var message_content = messages.filter(( value, index ) => {
+		this.message_content = messages.filter(( value, index ) => {
 		 	return ( value.id === message_id ) ? messages[index] : false;
 		 });
-		console.log( message_content )
-
 	} 
 	componentWillUpdate(){
 		this.props.Actions.getMySentMessages();
@@ -49,18 +42,14 @@ class MessageView extends Component{
 	render(){
 		return(
 		<div>
-			<ProfileSummary />
 			<div className="with-container content">
-	                <div className="column d-1-3 m-5-12 s-1-1 xs-1-1">
-						<MessageComponent/>
-					</div>
-					<div className="column d-2-3 m-7-12 s-1-1 xs-1-1">
-						<BasicDetails/>
+	                <div className="column d-4-3 m-10-12 s-1-1 xs-1-1">
+	                	<BasicDetails message = {this.message_content}/>
+						<MessageComponent message = {this.message_content} state = {this.props}/>
 					</div>
 			</div>
 		</div>
 		)	
 	}
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(MessageView);

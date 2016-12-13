@@ -1,35 +1,20 @@
 import React, { Component } from 'react';
-import { Link, Match } from 'react-router';
 
 import TopActionComponent from './TopActionComponent';
-import SuggestedEmployees from './SuggestedEmployees';
-import StatusUpdate from './StatusUpdate';
 import ResultTable from './ResultTable';
 import SearchBar from './SearchBar';
 import NoSearchResult from './NoSearchResult';
 import Categories from './Categories';
 
-import PostJobComponent from './PostJobComponent';
-
-
-class Search extends Component{
-
-	constructor( context, props ){
+class Search extends Component
+{
+	constructor( context, props )
+	{
 		super( context, props );
-
 		this.state = {
 			data: [], 
 			search_term: ""
 		}
-	}
-	componentWillMount(){
-		this.props.State.Actions.pullCategories();
-		this.props.State.Actions.pullAccountUserData();
-		this.props.State.Actions.pullAllEmployees();
-		this.props.State.Actions.getMyOrders();
-	}
-	componentWillUpdate(nxtProp, nxtState ){
-		
 	}
 	render() {
 		var checker = ( this.props.data.length !== 0 && !this.props.data.hasOwnProperty('message') ) ? 
@@ -54,5 +39,4 @@ class Search extends Component{
 		);
 	}
 }
-
 export default Search;

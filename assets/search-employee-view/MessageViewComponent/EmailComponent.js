@@ -13,9 +13,9 @@ class Form extends Component{
   takeInput( e ){
     e.preventDefault();
     e.stopPropagation();
-    // MessageInfo['to_id'] = this.refs.employer_id.value.replace(/Employer ID :/, "").trim();
-    // MessageInfo['message_title'] = this.refs.title.value;
-    // MessageInfo['message_body'] = this.refs.message_body.value;
+    MessageInfo['to_id'] = this.refs.employer_id.value.replace(/Employer ID :/, "").trim();
+    MessageInfo['message_title'] = this.refs.title.value;
+    MessageInfo['message_body'] = this.refs.message_body.value;
   }
   render(){
     const styleIEButton = {
@@ -41,7 +41,7 @@ class Form extends Component{
     <div className="form-group label-floating">
           <form onSubmit = {this.props.handleSend}>
           <div className="mdl-textfield mdl-js-textfield">
-               <input className="mdl-textfield__input" type="text" id="sample1" name = "employer_id" ref = "employer_id" value ="" readOnly/>
+               <input className="mdl-textfield__input" type="text" id="sample1" name = "employer_id" ref = "employer_id" value ={`Employer ID : ${this.props.userLogin}`} readOnly/>
             </div>
             <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"  style={inputWidth} >
                 <input className="mdl-textfield__input" type="text" id="sample1" name = "title" ref = "title" onBlur = {this.takeInput.bind(this)}/>
@@ -66,27 +66,28 @@ class EmailComponent extends Component {
     }
   }
   handleSend( e ){
-    // e.preventDefault();
-    // e.stopPropagation();
-    // MessageInfo['from_id'] = this.props.data.state.state.AccountUser.login_id;
+    e.preventDefault();
+    e.stopPropagation();
+    MessageInfo['from_id'] = this.props.data.message[0].to_id;
 
-    // if(  MessageInfo.hasOwnProperty('message_title') 
-    //   && MessageInfo.hasOwnProperty('message_body')
-    //   && MessageInfo.hasOwnProperty('to_id'))
-    // {
-    //   this.setState({MessageSent: true });
-    //   this.props.data.state.state.Actions.SendMessage( MessageInfo );
-    // }
-    // else
-    // {
-    //   console.log( MessageInfo );
-    // }
+    if(  MessageInfo.hasOwnProperty('message_title') 
+      && MessageInfo.hasOwnProperty('message_body')
+      && MessageInfo.hasOwnProperty('to_id'))
+    {
+      this.setState({MessageSent: true });
+      this.props.data.state.Actions.SendMessage( MessageInfo );
+    }
+    else
+    {
+      console.log( MessageInfo );
+    }
   }
   render(){
+    console.log( this.props )
     if(this.state.MessageSent === false ){
       return ( 
           <div>
-            <Form />
+            <Form handleSend = {this.handleSend.bind(this)} userLogin = {this.props.data.message[0].from_id}/>
           </div>                     
       );
     }

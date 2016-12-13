@@ -1,7 +1,8 @@
 let SentMessageReducer  = function( SentMessages = [], action ){
 	switch( action.type ){
-		case 'POPULATE_SENT_MESSAGES':
+		case 'SENT_MESSAGES':
 			return SentMessages = Object.assign([], [ ...SentMessages], [ ...action.data] )
+			// return SentMessages = SentMessages.concat(...action.data);
 		default:
 			return SentMessages;
 	}

@@ -1,8 +1,8 @@
 var webpack = require("webpack");
 module.exports = {
-	entry:['./search-employee-view/search.js'],
+	entry:['./search-view/search.js'],
 	output:{
-		path:'./search-employee-view/dist',
+		path:'./search-view/dist',
 		filename:'bundle.js',
 		publicPath:'/'
 	},
@@ -13,8 +13,12 @@ module.exports = {
 				loader:'babel-loader',
 				exclude:/node_modules/,
 				query:{
-					presets:['react','es2015']
+					presets:['react','es2015','stage-2']
 				}
+			},
+			{
+				test: /\.less$/,
+				loader: 'style!css!less'
 			}
 		]
 	},

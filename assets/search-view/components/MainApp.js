@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Search from './Search';
-import PostJobComponent from './PostJobComponent';
+import NavbarComponent from './NavbarComponent';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -9,8 +9,20 @@ import Actions from '../../DataStore/Actions';
 
 
 const MainApp  = (props) => {
-	return(<Search State = {props} searchAction = {props.Actions.search} data = {props.search_results}
-		suggestions = {props.suggestions}/>);
+	const topStyle = {
+		top: '10%',
+	};
+	return(
+		<div>
+			<NavbarComponent />
+				<main className="mdl-layout__container" style={topStyle}>
+			      	<div className="mdl-grid">
+						<Search State = {props} searchAction = {props.Actions.search} data = {props.search_results}
+						suggestions = {props.suggestions}/>
+					</div>
+				</main>
+		</div>
+		);
 }
 
 function mapStateToProps( state ){				// passes the state object to the APP component 

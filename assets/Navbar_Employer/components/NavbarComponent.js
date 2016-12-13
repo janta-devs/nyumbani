@@ -15,9 +15,11 @@ class NavbarComponent extends Component{
 
 
         this.props.Actions.pullAccountUserData();
-        this.props.Actions.pullCategories();
-        this.props.Actions.pullAllEmployees();
-        this.props.Actions.getMyOrders();
+        // this.props.Actions.pullCategories();
+        // this.props.Actions.pullAllEmployees();
+        // this.props.Actions.getMyOrders();
+        // this.props.Actions.getMyMessages();
+        // this.props.Actions.getMyRequests();
         
 
         var store =this.props.store;
@@ -67,28 +69,18 @@ class NavbarComponent extends Component{
                     </div>
                     <strong>Welcome, {this.state.AccountUser.fname} {this.state.AccountUser.lname}!</strong>
                 <nav className="mdl-navigation">
-                 <a className="mdl-navigation__link" href="">
-                    Interests <strong><span>14</span></strong>
-                    <i className="material-icons">notifications</i>
-                  </a>
-                  <a className="mdl-navigation__link" href="">
-                    Notifications <i className="material-icons">notifications</i>
-                  </a>
-                  <a className="mdl-navigation__link" href="">
-                    Messages <i className="material-icons">message</i>
-                  </a>
-                    <button id="demo-menu-lower-right" className="mdl-button mdl-js-button mdl-button--icon" style={profileStyle}>
+                      <button id="demo-menu-lower-right" className="mdl-button mdl-js-button mdl-button--icon" style={profileStyle}>
                       <img className="demo-avatar" src={this.state.AccountUser.profile_photo} alt ={this.state.AccountUser.profile_photo}/> 
                     </button>
                         <ul className="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" 
                         htmlFor="demo-menu-lower-right">
                             <li className="mdl-menu__item">
-                                <a className="" href="/nyumbani/index.php/">
+                                <a className="" href="/nyumbani/index.php/home/timeline/">
                                     <i className="material-icons">home</i> Home
                                 </a>
                             </li>
                             <li className="mdl-menu__item">
-                                <a className="" href="/nyumbani/index.php/timeline/profile/">
+                                <a className="" href="/nyumbani/index.php/home/timeline/profile/">
                                     <i className="material-icons">people</i> My Profile
                                 </a>
                             </li>

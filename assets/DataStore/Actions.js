@@ -84,6 +84,12 @@ let Actions =
 			})
 		}
 	},
+	MarkAsRead: function( id ){
+		return{
+			type: 'MARK_AS_READ',
+			id: id
+		}
+	},
 	accountUserInformation: function( res ){
 		//setting up data of the person who has been logged into the system
 		return{
@@ -95,7 +101,7 @@ let Actions =
 		return(  dispatch ) =>{
 			var self = dispatch;
 			$.ajax({
-				url: '/nyumbani/index.php/profile/getAccountUserData',
+				url: '/nyumbani/index.php/Profile/getAccountUserData',
 				type: 'POST',
 				dataType: 'json',
 			})
@@ -135,7 +141,7 @@ let Actions =
 			return( dispatch ) => {
 				var self = dispatch;
 				$.ajax({
-				url: 'http://localhost/nyumbani/index.php/jobs/AddRecommendation',
+				url: 'http://localhost/nyumbani/index.php/Jobs/AddRecommendation',
 				type: 'POST',
 				dataType: 'json',
 				data: {order_id: orderId, employee_login_id: employeeId, employer_login_id: employer_id}
@@ -152,14 +158,13 @@ let Actions =
 			return( dispatch ) => {
 				var self = dispatch;
 				$.ajax({
-				url: 'http://localhost/nyumbani/index.php/jobs/SendMessage',
+				url: 'http://localhost/nyumbani/index.php/Jobs/SendMessage',
 				type: 'POST',
 				dataType: 'json',
 				data: data
 			})
 			.done(function( response ) {
 				if( response['message'] === true ){
-					self( Actions.populateSentMessages() )
 					return true;
 				}
 			});
@@ -191,13 +196,19 @@ let Actions =
 	},
 	populateMessages: function( data ){
 		return{
-			type: 'POPULATE_MY_MESSAGES',
+			type: 'MY_MESSAGES',
 			data: data
 		}
 	},
 	populateSentMessages: function( data ){
 		return{
-			type: 'POPULATE_SENT_MESSAGES',
+			type: 'SENT_MESSAGES',
+			data: data
+		}
+	},
+	populateRequests: function( data ){
+		return{
+			type: 'POPULATE_REQUESTS',
 			data: data
 		}
 	},
@@ -205,7 +216,7 @@ let Actions =
 		return( dispatch ) => {
 			var self = dispatch;
 			$.ajax({
-				url: '/nyumbani/index.php/profile/getProfileData',
+				url: '/nyumbani/index.php/Profile/getProfileData',
 				type: 'POST',
 				dataType: 'json',
 				data: {'id':id},
@@ -219,7 +230,7 @@ let Actions =
 		return( dispatch ) => {
 			var self = dispatch;
 			$.ajax({
-				url: '/nyumbani/index.php/profile/localStoragedata',
+				url: '/nyumbani/index.php/Profile/localStoragedata',
 				type: 'POST',
 				dataType: 'json'
 			})
@@ -240,7 +251,7 @@ let Actions =
 		return( dispatch ) => {
 			var self = dispatch;
 			$.ajax({
-				url: '/nyumbani/index.php/timeline/categories',
+				url: '/nyumbani/index.php/Timeline/categories',
 				type: 'POST',
 				dataType: 'json'
 			})
@@ -263,7 +274,7 @@ let Actions =
 		return( dispatch ) => {
 			var self = dispatch;
 			$.ajax({
-				url: '/nyumbani/index.php/profile/getJobs',
+				url: '/nyumbani/index.php/Profile/getJobs',
 				type: 'POST',
 				dataType: 'json'
 			})
@@ -354,7 +365,56 @@ let Actions =
 				self( Actions.populateSentMessages( response ))				
 			});
 		}
-	}
+	},
+	getMyRequests: function(){
+		return( dispatch ) => {
+			var self = dispatch;
+			$.ajax({
+				url: '/nyumbani/index.php/Jobs/MyRequestedEmployee',
+				type: 'POST',
+				dataType: 'json'
+			})
+			.done(function( response ){			
+				self( Actions.populateRequests( response ))				
+			});
+		}
+	},
+	sendRequest: function( data ){
+			return( dispatch ) => 
+			{
+				var self = dispatch;
+				$.ajax({
+				url: 'http://localhost/nyumbani/index.php/Jobs/SendRequest',
+				type: 'POST',
+				//dataType: 'json',
+				data: data
+			})
+			.done(function( response ) {
+				if( response['message'] === true ){
+					self( Actions.populateRequests( [] ) )
+					return true;
+				}
+			});
+		}
+	},
+	MarkMessageAsRead: function( db_id, id ){
+			return( dispatch ) => 
+			{
+				var self = dispatch;
+				$.ajax({
+				url: 'http://localhost/nyumbani/index.php/Jobs/MarkMessageAsRead',
+				type: 'POST',
+				dataType: 'json',
+				data: {id: db_id}
+			})
+			.done(function( response ){
+				if( response['message'] === true )
+				{
+					self( Actions.MarkAsRead( id ) );
+				}
+			});
+		}
+	},
 
 
 }
