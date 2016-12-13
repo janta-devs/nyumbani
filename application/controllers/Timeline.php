@@ -70,7 +70,7 @@ class Timeline extends CI_Controller {
 		$this->load->helper('upload_helper');
 		@$path = upload_file();
 	}
-	public function categories(){
+	public function Categories(){
 		$this->load->model('Jobseeker');
 		$job = new Jobseeker();
 

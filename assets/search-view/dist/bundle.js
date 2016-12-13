@@ -39741,7 +39741,7 @@
 			return function (dispatch) {
 				var self = dispatch;
 				_jquery2.default.ajax({
-					url: 'http://localhost/nyumbani/index.php/Jobs/AddRecommendation',
+					url: '/nyumbani/index.php/Jobs/AddRecommendation',
 					type: 'POST',
 					dataType: 'json',
 					data: { order_id: orderId, employee_login_id: employeeId, employer_login_id: employer_id }
@@ -39757,7 +39757,7 @@
 			return function (dispatch) {
 				var self = dispatch;
 				_jquery2.default.ajax({
-					url: 'http://localhost/nyumbani/index.php/Jobs/SendMessage',
+					url: '/nyumbani/index.php/Jobs/SendMessage',
 					type: 'POST',
 					dataType: 'json',
 					data: data
@@ -39846,7 +39846,7 @@
 			return function (dispatch) {
 				var self = dispatch;
 				_jquery2.default.ajax({
-					url: '/nyumbani/index.php/Timeline/categories',
+					url: '/nyumbani/index.php/Timeline/Categories',
 					type: 'POST',
 					dataType: 'json'
 				}).done(function (response) {
@@ -39966,9 +39966,9 @@
 			return function (dispatch) {
 				var self = dispatch;
 				_jquery2.default.ajax({
-					url: 'http://localhost/nyumbani/index.php/Jobs/SendRequest',
+					url: '/nyumbani/index.php/Jobs/SendRequest',
 					type: 'POST',
-					//dataType: 'json',
+					dataType: 'json',
 					data: data
 				}).done(function (response) {
 					if (response['message'] === true) {
@@ -39982,7 +39982,7 @@
 			return function (dispatch) {
 				var self = dispatch;
 				_jquery2.default.ajax({
-					url: 'http://localhost/nyumbani/index.php/Jobs/MarkMessageAsRead',
+					url: '/nyumbani/index.php/Jobs/MarkMessageAsRead',
 					type: 'POST',
 					dataType: 'json',
 					data: { id: db_id }
@@ -48067,7 +48067,7 @@
 					_react2.default.createElement(_elemental.ModalHeader, { text: 'Janta Recommendation Service' }),
 					_react2.default.createElement(
 						_elemental.ModalBody,
-						null,
+						{ onClick: this.handleFocus.bind(this) },
 						_react2.default.createElement(
 							'h4',
 							null,

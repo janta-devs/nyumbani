@@ -141,7 +141,7 @@ let Actions =
 			return( dispatch ) => {
 				var self = dispatch;
 				$.ajax({
-				url: 'http://localhost/nyumbani/index.php/Jobs/AddRecommendation',
+				url: '/nyumbani/index.php/Jobs/AddRecommendation',
 				type: 'POST',
 				dataType: 'json',
 				data: {order_id: orderId, employee_login_id: employeeId, employer_login_id: employer_id}
@@ -158,7 +158,7 @@ let Actions =
 			return( dispatch ) => {
 				var self = dispatch;
 				$.ajax({
-				url: 'http://localhost/nyumbani/index.php/Jobs/SendMessage',
+				url: '/nyumbani/index.php/Jobs/SendMessage',
 				type: 'POST',
 				dataType: 'json',
 				data: data
@@ -251,7 +251,7 @@ let Actions =
 		return( dispatch ) => {
 			var self = dispatch;
 			$.ajax({
-				url: '/nyumbani/index.php/Timeline/categories',
+				url: '/nyumbani/index.php/Timeline/Categories',
 				type: 'POST',
 				dataType: 'json'
 			})
@@ -384,9 +384,9 @@ let Actions =
 			{
 				var self = dispatch;
 				$.ajax({
-				url: 'http://localhost/nyumbani/index.php/Jobs/SendRequest',
+				url: '/nyumbani/index.php/Jobs/SendRequest',
 				type: 'POST',
-				//dataType: 'json',
+				dataType: 'json',
 				data: data
 			})
 			.done(function( response ) {
@@ -402,7 +402,7 @@ let Actions =
 			{
 				var self = dispatch;
 				$.ajax({
-				url: 'http://localhost/nyumbani/index.php/Jobs/MarkMessageAsRead',
+				url: '/nyumbani/index.php/Jobs/MarkMessageAsRead',
 				type: 'POST',
 				dataType: 'json',
 				data: {id: db_id}

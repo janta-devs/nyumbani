@@ -19,7 +19,7 @@ class MPesaComponent extends Component{
 		return(
 		<Modal isOpen={this.props.modalIsOpen} onClick={this.props.toggleModal} backdropClosesModal>
 	          <ModalHeader text="Janta Recommendation Service" />
-	            <ModalBody>
+	            <ModalBody  onClick = {this.handleFocus.bind(this)}>
 	               <h4>Follow Steps Below</h4>
 	               <ol>
 	               		<li>Go to the MPESA Menu</li>
