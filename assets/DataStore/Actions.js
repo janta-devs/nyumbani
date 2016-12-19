@@ -410,7 +410,7 @@ let Actions =
 			.done(function( response ){
 				if( response['message'] === true )
 				{
-					self( Actions.MarkAsRead( id ) );
+					//self( Actions.MarkAsRead( id ) );
 				}
 			});
 		}

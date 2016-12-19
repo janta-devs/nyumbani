@@ -21,8 +21,11 @@ class Home extends CI_Controller{
 		if(($this->session->userdata['role']) != $this->config->item('default_role')){
 			$this->load->view('Registration', $data);
 		} else {
-			$this->load->view('timeline', $data);
+			$this->load->view('EmployerRegistration', $data);
 		}
+
+
+		// $this->load->view('Registration');
 	}
 	public function timeline(){
 		if(empty($this->session->userdata['email'])){

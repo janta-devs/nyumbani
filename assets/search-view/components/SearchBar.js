@@ -28,7 +28,8 @@ class SearchBar extends Component{
 									<td style={tdWidth} >
 										<div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"  style={inputWidth} >
 										    <input className="mdl-textfield__input" type="text" id="sample1" name = "search_term" value={this.props.search_term} ref = "search"
-											/>
+											onFocus = {this.props.onChange}
+											onBlur = {this.props.onChange}/>
 										   	<label className="mdl-textfield__label" htmlFor="smaple1">Search here for more employees</label>
 										</div>
 									</td>

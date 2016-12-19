@@ -5,6 +5,11 @@ import SuccessAlert from './SuccessAlert';
 import DangerAlert from './DangerAlert';
 import InformationAlert from './InformationAlert';
 
+import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
+import ExpandTransition from 'material-ui/internal/ExpandTransition';
+import TextField from 'material-ui/TextField';
+
 var dataCollection_skill = {};
 
 class SkillsComponent extends Component{
@@ -27,15 +32,13 @@ class SkillsComponent extends Component{
 		var method = "sendSkillInformation";
 		if( dataCollection_skill.hasOwnProperty('skill1') && dataCollection_skill.hasOwnProperty('mode1')){
 			this.setState({alert: true});
-			this.props.populateProfile( method, dataCollection_skill );	
-			window.location.href = "/nyumbani/index.php/home/employee_timeline/"; 
+			// this.props.populateProfile( method, dataCollection_skill );	
+			// window.location.href = "/nyumbani/index.php/home/employee_timeline/"; 
+			this.props.handleNext();
 		}
 		else{
 			this.setState({alert: false});
 		}
-		
-
-		//console.log( dataCollection_skill );
 	}
 	render () {
 		return (
@@ -46,7 +49,19 @@ class SkillsComponent extends Component{
 
 
 							<div className="col-md-8">
-								<button className="btn btn-info pull-left" onClick={this.onSave.bind(this)}>Save</button>
+							      <FlatButton
+						            label="Back"
+						            disabled={this.props.stepIndex === 0}
+						            onTouchTap={this.props.handlePrev}
+						            style={{marginRight: 12}}
+						            className = "pull-left"
+						          />
+						          <RaisedButton
+						            label={this.props.stepIndex === 2 ? 'Finish' : 'Next'}
+						            primary={true}
+						            onTouchTap={this.onSave.bind(this)}
+						            className = "pull-right"
+						          />
 							</div>
 							</div>
 					</div>

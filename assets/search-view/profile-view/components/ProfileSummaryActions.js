@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import DefaultComponent from './Payments/DefaultComponent';
 import MPesaComponent from './Payments/MPesaComponent';
 
-
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class ProfileSummaryActions  extends Component{
   constructor( context, props ){
@@ -56,12 +57,9 @@ class ProfileSummaryActions  extends Component{
                   <div className="column d-1-1">
                     <div className="button-group-actions">
                       <div className="button-group">
-                       Recommend <button type="button" data-toggle="popover" data-trigger="hover" data-content="Recommend" 
-                        data-placement="bottom" 
-                        className="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-js-ripple-effect" data-state="follow" 
-                        data-profile-id="9373ea86-06b3-3a51-90b9-f99cda6577ad" onClick ={this.handleRecommend.bind(this)}>
-                          <span><i className="material-icons">thumb_up</i></span>
-                        </button>
+                        <MuiThemeProvider>
+                          <RaisedButton label = {`REQUEST ${this.props.userInfo.surname}`} primary = {true}onTouchTap = {this.handleRecommend.bind(this)}/>
+                        </MuiThemeProvider>
                       </div>
                     </div>
                   </div>

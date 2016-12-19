@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Container from './Container';
-
+import AppBar from 'material-ui/AppBar';
 
 class Categories extends Component{
 	constructor(context, props)
@@ -9,6 +9,7 @@ class Categories extends Component{
 		super( context, props );
 
     this.pages = [];
+    this.count = 0;
 
     this.state = {
       data: [],
@@ -47,6 +48,7 @@ class Categories extends Component{
 
     //set the defaults into the state
     this.setState({ data: this.pages[this.state.count] });
+    this.setState({maxLength: this.pages.length});
   }
   componentWillUpdate(nxtProp, nxtState ){
    
@@ -99,18 +101,16 @@ class Categories extends Component{
   handleNextClick( e ){
     e.preventDefault();
     e.stopPropagation();
-    var count = this.state.count + 1;
-    ( count === this.state.maxLength ) ? count = 0 : count;
-    this.setState({ count: count});
-    this.setState({ data: this.pages[count] });
+    ( this.state.count >= this.state.maxLength - 1 ) ? this.count = 0 : this.count = this.state.count + 1;   
+    this.setState({ count: this.count});
+    this.setState({ data: this.pages[ this.count ] });
   }
   handlePrevClick( e ){
     e.preventDefault();
     e.stopPropagation();
-    var count = this.state.count - 1;
-    ( count === 0 ) ? count = this.state.maxLength : count;
-    this.setState({ count: count});
-    this.setState({ data: this.pages[count] });
+    ( this.count === 0 ) ? this.count = this.state.maxLength - 1: this.count = this.state.count - 1;
+    this.setState({ count: this.count});
+    this.setState({ data: this.pages[ this.count ] });
   } 
   render(){
     const ElementStyle = {
@@ -120,19 +120,29 @@ class Categories extends Component{
     const floatStlye = {
       float: 'right'
     };
+    const style = {
+      backgroundColor: 'rgb(33,150,243)'
+    }
+    const footerStyle = {
+      position: 'inherit'
+    }
   	var info = this.state.data.map( (x,y) => {
   		return <Container category = {x} key={y} count = {y}/>;
   	});
   	return(
-  		<div style={ElementStyle}>
-      <div className="mdl-cell mdl-cell--12-col">
-  			<button className = "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">EMPLOYEE CATEGORIES AVAILABLE</button>
+      <div>
+      		<div style={ElementStyle}>
+          <MuiThemeProvider>
+             <AppBar title="Jobseekers Available" iconClassNameRight="muidocs-icon-navigation-expand-more" style={style}/>
+          </MuiThemeProvider>
+          <br />
+      			{info}
+          </div>
+          <footer style={footerStyle}>
+            <button className = "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onClick = {this.handlePrevClick.bind(this)}>Prev</button>
+            <button style = {floatStlye} className = "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onClick = {this.handleNextClick.bind(this)}>Next</button>
+          </footer>
       </div>
-      <br />
-  			{info}
-      <button className = "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onClick = {this.handlePrevClick.bind(this)}>Prev</button>
-      <button style = {floatStlye} className = "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onClick = {this.handleNextClick.bind(this)}>Next</button>
-  		</div>
   	)
   }
 }

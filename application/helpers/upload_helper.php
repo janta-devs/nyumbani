@@ -9,7 +9,8 @@ function upload_file()
 	if( isset( $_FILES ) && !empty( $_FILES ))
 	{
 		$file = $_FILES[0];
-		$accepted_extensions = ['image/jpeg', 'image/png', 'image/gif'];
+
+		//$accepted_extensions = ['image/jpeg', 'image/png', 'image/gif', ''];
 
 		//Collecting the requisite information about the file that has been uploaded
 		$name = $file['name'];
@@ -18,12 +19,14 @@ function upload_file()
 		$size = intval( $file['size'] );
 
 		//converting file size into Kbs or Mbs
+
 		$x = (floor($size/1024));
 		$x = ( $x < 1000 ) ? $x.' Kb' : (floor($x/1024)).' Mb';
 
-		//Checking if the extension meets systems expectations ('image/jpeg', 'image/png', 'image/gif')
-		( in_array($type, $accepted_extensions) == TRUE ) 
-		? $new_loc =  "./order_attachments/" : $new_loc = "../order_attachments/";
+		// //Checking if the extension meets systems expectations ('image/jpeg', 'image/png', 'image/gif')
+		// ( in_array($type, $accepted_extensions) == TRUE ) 
+		// ? 
+		$new_loc =  "./order_attachments/"; 
 
 		//Moving files from the temporary location to the file location 
 

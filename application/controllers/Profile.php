@@ -176,7 +176,7 @@ class Profile extends CI_Controller{
 			unset($basic_data['id']);
 			$education_data = (array)$education->load_user_data( ['login_id'=> $login_id] );
 			unset($education_data['id']);
-			$recomm = (Array)$recommendation->getRecommendations( $login_id )[0];
+			$recomm = @(Array)$recommendation->getRecommendations( $login_id )[0];
 			unset($recomm['employee_login_id']);
 
 			$past_job = $this->job_refactor( $education_data['past_job']);

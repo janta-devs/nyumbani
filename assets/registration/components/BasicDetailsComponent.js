@@ -3,6 +3,19 @@ import React, { Component } from 'react';
 import SuccessAlert from './SuccessAlert';
 import DangerAlert from './DangerAlert';
 import InformationAlert from './InformationAlert';
+import $ from 'jquery';
+
+import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
+import ExpandTransition from 'material-ui/internal/ExpandTransition';
+import TextField from 'material-ui/TextField';
+
+import DatePicker from 'material-ui/DatePicker';
+
+
+import '../../node_modules/bootstrap/less/bootstrap.less'; 
+
+
 
 var datacollection_basic = {};
 
@@ -31,10 +44,15 @@ class BasicDetailsComponent extends Component{
 		});
 	}
 	getValue( e ){
-		e.preventDefault();
-		e.stopPropagation();
-		datacollection_basic[e.target.name] = e.target.value;
-		console.log( datacollection_basic );
+		// e.preventDefault();
+		// e.stopPropagation();
+		//datacollection_basic[e.target.name] = e.target.value;
+
+		console.log( e.target.value );
+	}
+	getSpecialValues( event, value ){
+		let date = this.formatDate( value )
+		datacollection_basic['date'] = date;
 	}
 	_uploadFile( e ){
 		e.preventDefault();
@@ -76,17 +94,26 @@ class BasicDetailsComponent extends Component{
 		if( datacollection_basic.hasOwnProperty('surname') 
 			&& datacollection_basic.hasOwnProperty('id_pass') 
 			&& datacollection_basic.hasOwnProperty('profession')){
-				this.props.populateProfile(method, datacollection_basic );
+				//this.props.populateProfile(method, datacollection_basic );
 				this.setState({ alert: true });
+				this.props.handleNext();
 			}
 		else{
 				this.setState({ alert: false });
 			}
-		
-
-		//console.log( datacollection_basic );
 	}
+
+	formatDate(date){
+		return (date.getMonth() + 1) + "-" + date.getDate() + "-" + date.getFullYear();
+	}
+
 	render() {
+		const fieldWidth = {
+			width: '200px',
+		};
+		const TextAreaWidth = {
+			width: '200px'
+		};
 		return (
 						<div className="tab-pane active" id="basic" role="tabpanel">
 							{(this.state.alert === true) ? <SuccessAlert /> : (this.state.alert === 'default') ? <InformationAlert /> : <DangerAlert />}
@@ -94,76 +121,98 @@ class BasicDetailsComponent extends Component{
 							<div className="col-md-4">
 								<div className="form-group label-floating">
 				                        <label className="control-label" htmlFor="email">E-mail</label>
-				                        <input type="text" id="email" name="email" className="form-control form-control-sm" value = {this.state.data.email} onBlur = {this.getValue.bind(this)}/>
+									<TextField name = "email" value = {this.state.data.email} onChange = {this.getValue.bind(this)} style={fieldWidth}/>
 								</div>
 							</div>
 							<div className="col-md-4">
 								<div className="form-group label-floating">
-				                        <label className="control-label" htmlFor="phone">Phone Number</label>
-				                        <input type="tel" id="phone" name="phone" className="form-control form-control-sm" value = {this.state.data.phone} onBlur = {this.getValue.bind(this)}/>
+				                    <label className="control-label" htmlFor="phone">Phone Number</label>
+									<TextField name="phone" value = {this.state.data.phone} onChange = {this.getValue.bind(this)} style={fieldWidth}/>
 								</div>
 							</div>
 							<div className="col-md-4">
 								<div className="form-group label-floating">
 				                        <label className="control-label" htmlFor="email">Profession</label>
-				                        <input type="text" id="profession" name="profession" className="form-control form-control-sm" value = {this.state.data.profession} onBlur = {this.getValue.bind(this)}/>
+									<TextField name="profession" value = {this.state.data.profession} onChange = {this.getValue.bind(this)} style={fieldWidth}/>
 								</div>
 							</div>
 							<div className="col-md-4">
 								<div className="form-group label-floating">
-				                        <label className="control-label" htmlFor="firstname">First Name</label>
-				                        <input type="text" id="firstname" name="firstname" className="form-control form-control-sm" value = {this.state.data.fname} onBlur = {this.getValue.bind(this)}/>
+				                    <label className="control-label" htmlFor="firstname">First Name</label>
+									<TextField name="fname" value = {this.state.data.fname} onChange = {this.getValue.bind(this)} style={fieldWidth}/>
 								</div>
 							</div>
 							<div className="col-md-4">
 								<div className="form-group label-floating">
-				                        <label className="control-label" htmlFor="lastname">Last Name</label>
-				                        <input type="text" id="lastname" name="lastname" className="form-control form-control-sm" value = {this.state.data.lname} onBlur = {this.getValue.bind(this)}/>
+					                <label className="control-label" htmlFor="lastname">Last Name</label>
+									<TextField name="lname" value = {this.state.data.lname} onChange = {this.getValue.bind(this)} style={fieldWidth}/>
 								</div>
 							</div>	
 							<div className="col-md-4">
 								<div className="form-group label-floating">
-				                        <label className="control-label" htmlFor="surname">Surname</label>
-				                        <input type="text" id="surname" name="surname" className="form-control form-control-sm" onBlur = {this.getValue.bind(this)}/>
+			                        <label className="control-label" htmlFor="surname">Surname</label>
+								<TextField name="surname" onChange = {this.getValue.bind(this)} style={fieldWidth}/>
+								</div>
+							</div>
+							<div className="col-md-4">
+								<div className="form-group label-floating">
+				                    <label className="control-label" htmlFor="id_pass">ID/Passport</label> 
+				                	<TextField name="id_pass" onChange = {this.getValue.bind(this)} style={fieldWidth}/>
+								</div>
+							</div>
+							<div className="col-md-4">
+								<div className="form-group label-floating">
+			                        <label className="control-label" htmlFor="city">City/Town</label>
+									<TextField name="city" onChange = {this.getValue.bind(this)} style={fieldWidth}/>
 								</div>
 							</div>
 							<div className="col-md-6">
 								<div className="form-group label-floating">
-				                        <label className="control-label" htmlFor="id_pass">ID/Passport</label>
-				                        <input type="text" id="id_pass" name="id_pass" className="form-control" onBlur = {this.getValue.bind(this)}/>
-								</div>
-							</div>
-							<div className="col-md-6">
-								<div className="form-group label-floating">
-				                        <label className="control-label" htmlFor="city">City/Town</label>
-				                        <input type="text" id="city" name="city" className="form-control form-control-sm" onBlur = {this.getValue.bind(this)}/>
-								</div>
-							</div>
-							<div className="col-md-6">
-								<div className="form-group label-floating">
-				                        <label className="control-label" htmlFor="estate">Estate/Locality</label>
-				                        <input type="text" id="estate" name="estate" className="form-control form-control-sm" onBlur = {this.getValue.bind(this)}/>
+				                    <label className="control-label" htmlFor="estate">Estate/Locality</label> 
+									<TextField name="estate" onChange = {this.getValue.bind(this)} style={fieldWidth}/>
 								</div>
 							</div>
 							<div className="col-md-6">
 								<div className="form-group">
-				                        <label className="control-label" htmlFor="dob">DOB</label>
-				                        <input type="date" id="dob" name="dob" placeholder="06/25/1980" className="form-control form-control-sm" onBlur = {this.getValue.bind(this)}/>
+				                        <label className="control-label" htmlFor="dob">Date of Birth</label>
+				                        <DatePicker hintText="Your Date of Birth" 
+				                        container="inline" mode="landscape" 
+				                        formatDate={this.formatDate}
+				                        onChange = {this.getSpecialValues.bind(this)} 
+				                        name = "dob"
+				                        onTouchTap={this.getValue.bind(this)}
+				                        />
 								</div>
 							</div>
 							</div>
 							<div className="col-md-6">
 								<div className="form-group label-floating">
-								    <label htmlFor="t1" className="control-label">Describe yourself here</label>
-								    <textarea id="t1" name = "description" className="form-control form-control-sm" rows="3" onBlur = {this.getValue.bind(this)}></textarea>
+									<label htmlFor="t1" className="control-label">Describe yourself here</label><br />
+									<TextField name = "description" onChange = {this.getValue.bind(this)}
+									  multiLine={true}
+								      rows={3}
+								      rowsMax={4}
+								      textareaStyle={TextAreaWidth}
+									/>
 								</div>
 							<div className="form-group">
 								<img src={this.state.defaultProfile} width="150" height="150" className="img-circle span5"/>
 								<input type="file" id="attach-file" multiple="" name = "profile_photo" onChange = {this._uploadFile.bind(this)}/>
 							</div>
 							<div className="col-md-12">
-								<button className="btn btn-info pull-left" onClick={this.onSave.bind(this)}>Save</button>
-								<button className="btn btn-warning pull-right" onClick = {this.props.handleNext} name = "basic">Next</button>
+								  <FlatButton
+						            label="Back"
+						            disabled={this.props.stepIndex === 0}
+						            onTouchTap={this.props.handlePrev}
+						            style={{marginRight: 12}}
+						            className = "pull-left"
+						          />
+						          <RaisedButton
+						            label={this.props.stepIndex === 2 ? 'Finish' : 'Next'}
+						            primary={true}
+						            onTouchTap={this.onSave.bind(this)}
+						            className = "pull-right"
+						          />
 							</div>
 							<br /><br />
 						</div>

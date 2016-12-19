@@ -20,7 +20,9 @@ class DynamicFields extends Component{
 	}
 	render(){
 
-		var populate = x.map( x => <Field key = {x} unique = {x} getValue = {this.props.getValue}/> );
+		var populate = x.map( x => <Field key = {x} unique = {x} getValue = {this.props.getValue}
+			getStartDate = {this.props.getStartDate}
+			getEndDate = {this.props.getEndDate} /> );
 		return (
 			<div>
 				{populate}

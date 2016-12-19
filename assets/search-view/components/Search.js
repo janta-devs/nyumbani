@@ -13,8 +13,13 @@ class Search extends Component
 		super( context, props );
 		this.state = {
 			data: [], 
-			search_term: ""
+			search_term: "",
+			onFocus: false
 		}
+	}
+	onChange(){
+		(this.state.onFocus === false && this.props.data.length === 0 ) ? this.setState({onFocus: true}) : this.setState({onFocus: false });
+		console.log( this.state.onFocus );
 	}
 	render() {
 		var checker = ( this.props.data.length !== 0 && !this.props.data.hasOwnProperty('message') ) ? 
@@ -28,10 +33,10 @@ class Search extends Component
 						<div id="new-items">
 							<div className="row">
 								<div className="column l-3-4 recommendations">
-									<SearchBar searchAction = {this.props.searchAction}/>
+									<SearchBar searchAction = {this.props.searchAction} onChange = {this.onChange.bind(this)}/>
 									{checker}
 								</div>
-								<Categories State = {this.props.State}/>								
+								 {(this.state.onFocus === false) ? <Categories State = {this.props.State}/> : "" } 							
 							</div>
 						</div>	
 					</section>

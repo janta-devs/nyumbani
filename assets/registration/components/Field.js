@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import TextField from 'material-ui/TextField';
+import DatePicker from 'material-ui/DatePicker';
 
 class Field extends Component{
 	render() {
@@ -11,22 +12,29 @@ class Field extends Component{
 		var title = "title_"+this.props.unique;
 		var start_date = "start_date_"+this.props.unique;
 		var end_date = "end_date_"+this.props.unique;
+
+		const fieldWidth = {
+			width: '100px',
+		};
+		const TextfieldWidth = {
+			width: '150px',
+		};
 		return (
 		<div className="form-group label-floating">
 			<div className="input-group">
                 <label className="control-label" htmlFor="past_job">Past Employment</label><br />
                 <div style={divStyle}>
                 <div className="col-md-3">
-                Company<br/><input type="text" id="past_job" name={name} className="form-control form-control-sm" onBlur = {this.props.getValue}/> <br />
+                Company<br/><TextField id="past_job" name={name} onChange = {this.props.getValue} style={TextfieldWidth}/><br />
 				</div>
 				<div className="col-md-3">
-				Job title<br/><input type="text" id="job_title" name={title} className="form-control form-control-sm" onBlur = {this.props.getValue}/> <br />
+				Job title<br/><TextField id="job_title" name={title} onChange = {this.props.getValue} style={TextfieldWidth}/><br />
 				</div>
 				<div className="col-md-3">
-				Start date<br/><input type="date" id="start_date" name={start_date} className="form-control form-control-sm" onBlur = {this.props.getValue}/> <br />
+				Start date<br/><DatePicker hintText="Started" container="inline" mode="landscape" onChange = {this.props.getStartDate} id={start_date} textFieldStyle={fieldWidth}/>
 				</div>
 				<div className="col-md-3">
-				End date<br/><input type="date" id="end_date" name={end_date} className="form-control form-control-sm" onBlur = {this.props.getValue}/> <br />
+				End date<br/><DatePicker hintText="Ended" container="inline" mode="landscape" onChange = {this.props.getEndDate} id={end_date} textFieldStyle={fieldWidth}/>
 				</div>
 				</div>
 			</div>

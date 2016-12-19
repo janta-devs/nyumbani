@@ -6,6 +6,11 @@ import SuccessAlert from './SuccessAlert';
 import DangerAlert from './DangerAlert';
 import InformationAlert from './InformationAlert';
 
+import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
+import ExpandTransition from 'material-ui/internal/ExpandTransition';
+import TextField from 'material-ui/TextField';
+
 import $ from 'jquery';
 
 var datacollection_education = {};
@@ -17,13 +22,24 @@ class EducationBackgroundComponent extends Component{
 		this.state = {
 			alert: 'default'
 		}
-	
+	}
+	componentWillUpdate(nextState, nextProps ){
+		console.log( nextState );
+		console.log( nextProps );
 	}
 	getValue( e ){
 		e.preventDefault();
 		e.stopPropagation();
 		datacollection_education[e.target.name] = e.target.value;
 	}	
+	getStartDate(){
+		let date = this.formatDate( value )
+		datacollection_education['start_date'] = date;
+	}
+	getEndDate(){
+		let date = this.formatDate( value )
+		datacollection_education['end_date'] = date;
+	}
 	onSave( e ){
 		e.preventDefault();
 		e.stopPropagation();
@@ -58,14 +74,13 @@ class EducationBackgroundComponent extends Component{
 			&& datacollection_education.hasOwnProperty('university_history'))
 		{
 			this.setState({ alert: true });
-			this.props.populateProfile(method, datacollection_education );
+			//this.props.populateProfile(method, datacollection_education );
+			this.props.handleNext();
 		}
 		else
 		{
 			this.setState({ alert: false });
 		}
-		
-		// console.log( datacollection_education );
 	}	
 	_uploadFile( e ){
 		e.preventDefault();
@@ -102,6 +117,9 @@ class EducationBackgroundComponent extends Component{
 		const pad = {
 			paddingTop: '20px'
 		};
+		const fieldWidth = {
+			width: '200px',
+		}
 		return(
 			<div className="tab-pane" id="education" role="tabpanel">
 			{(this.state.alert === true) ? <SuccessAlert /> : (this.state.alert === 'default') ? <InformationAlert /> : <DangerAlert />}
@@ -109,20 +127,19 @@ class EducationBackgroundComponent extends Component{
 				<div style={divStyle}>
 					<div className="col-md-4">
 						<div className="form-group label-floating">
-	                        <label className="control-label" htmlFor="primary">Prim. Sch./KCPE</label>
-	                        <input type="text" id="primary" name="primary_school" className="form-control form-control-sm" onBlur = {this.getValue.bind(this)}/>
+	                        <label className="control-label" htmlFor="primary">Prim. Sch./KCPE</label> 
+						<TextField name="primary_school" onChange = {this.getValue.bind(this)} style={fieldWidth}/>
 						</div>
 					</div>
 					<div className="col-md-4">
 						<div className="form-group label-floating">
 	                        <label className="control-label" htmlFor="grade1">KCPE Grade</label>
-	                        <input type="text" id="grade1" name="kcpe_grade" className="form-control form-control-sm" onBlur = {this.getValue.bind(this)}/>
+						<TextField name="kcpe_grade" onChange = {this.getValue.bind(this)} style={fieldWidth}/>
 						</div>
 					</div>
 					<div className="col-md-4" style={pad}>
 						<div className="form-group">
 						<input type="file" id="primary_cert" name = "primary_certificate" multiple="" onChange = {this._uploadFile.bind(this)}/>
-	    			
 						</div>
 					</div>
 
@@ -131,20 +148,19 @@ class EducationBackgroundComponent extends Component{
 					<div style = {divStyle}>
 					<div className="col-md-4">
 						<div className="form-group label-floating">
-		                        <label className="control-label" htmlFor="secondary">High Sch./KCSE</label>
-		                        <input type="text" id="secondary" name="secondary_school" className="form-control form-control-sm" onBlur = {this.getValue.bind(this)}/>
+		                        <label className="control-label" htmlFor="secondary">High Sch./KCSE</label> 
+						<TextField name="secondary_school" onChange = {this.getValue.bind(this)} style={fieldWidth}/>
 						</div>
 					</div>
 					<div className="col-md-4">
 						<div className="form-group label-floating">
-		                        <label className="control-label" htmlFor="grade">KCSE Grade</label>
-		                        <input type="text" id="grade" name="kcse_grade" className="form-control form-control-sm" onBlur = {this.getValue.bind(this)}/>
+			                <label className="control-label" htmlFor="grade">KCSE Grade</label>  
+							<TextField name="kcse_grade" onChange = {this.getValue.bind(this)} style={fieldWidth}/>
 						</div>
 					</div>
 					<div className="col-md-4">
 						<div className="form-group" style={pad}>
-						<input type="file" id="primary_cert" multiple="" name = "secondary_certificate" onChange = {this._uploadFile.bind(this)}/>
-	    			
+							<input type="file" id="primary_cert" multiple="" name = "secondary_certificate" onChange = {this._uploadFile.bind(this)}/>
 						</div>
 					</div>
 					</div>
@@ -152,14 +168,14 @@ class EducationBackgroundComponent extends Component{
 					<div style = {divStyle}>
 					<div className="col-md-4">
 									<div className="form-group label-floating">
-					                        <label className="control-label" htmlFor="uni">College/Uni</label>
-					                        <input type="text" id="uni" name="university" className="form-control form-control-sm" onBlur = {this.getValue.bind(this)}/>
+						                <label className="control-label" htmlFor="uni">College/Uni</label>
+										<TextField name="university" onChange = {this.getValue.bind(this)} style={fieldWidth}/>
 									</div>
 								</div>
 								<div className="col-md-4">
 									<div className="form-group label-floating">
-					                        <label className="control-label" htmlFor="grade2">Honors/GPA</label>
-					                        <input type="text" id="grade2" name="university_grade" className="form-control form-control-sm" onBlur = {this.getValue.bind(this)}/>
+					                    <label className="control-label" htmlFor="grade2">Honors/GPA</label>
+										<TextField name="university_grade" onBlur = {this.getValue.bind(this)} style={fieldWidth}/>
 									</div>
 								</div>
 								<div className="col-md-4" style={pad}>
@@ -173,8 +189,19 @@ class EducationBackgroundComponent extends Component{
 				<div className="col-md-6">
 					<DynamicFields getValue = {this.getValue.bind(this)}/><br /><br /><br />
 					<div className="col-md-12">
-						<button className="btn btn-info pull-left" onClick={this.onSave.bind(this)}>Save</button>
-						<button className="btn btn-warning pull-right" onClick = {this.props.handleNext} name = "education">Next</button>
+								  <FlatButton
+						            label="Back"
+						            disabled={this.props.stepIndex === 0}
+						            onTouchTap={this.props.handlePrev}
+						            style={{marginRight: 12}}
+						            className = "pull-left"
+						          />
+						          <RaisedButton
+						            label={this.props.stepIndex === 2 ? 'Finish' : 'Next'}
+						            primary={true}
+						            onTouchTap={this.onSave.bind(this)}
+						            className = "pull-right"
+						          />
 						<br /><br />
 					</div>
 				</div>		
