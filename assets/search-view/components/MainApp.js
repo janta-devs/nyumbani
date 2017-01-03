@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Actions from '../../DataStore/Actions';
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 
 const MainApp  = (props) => {
 	const topStyle = {

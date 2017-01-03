@@ -32,8 +32,8 @@ class SkillsComponent extends Component{
 		var method = "sendSkillInformation";
 		if( dataCollection_skill.hasOwnProperty('skill1') && dataCollection_skill.hasOwnProperty('mode1')){
 			this.setState({alert: true});
-			// this.props.populateProfile( method, dataCollection_skill );	
-			// window.location.href = "/nyumbani/index.php/home/employee_timeline/"; 
+			this.props.populateProfile( method, dataCollection_skill );	
+			window.location.href = "/nyumbani/index.php/home/employee_timeline/"; 
 			this.props.handleNext();
 		}
 		else{

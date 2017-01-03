@@ -44,15 +44,13 @@ class BasicDetailsComponent extends Component{
 		});
 	}
 	getValue( e ){
-		// e.preventDefault();
-		// e.stopPropagation();
-		//datacollection_basic[e.target.name] = e.target.value;
-
-		console.log( e.target.value );
+		e.preventDefault();
+		e.stopPropagation();
+		datacollection_basic[e.target.name] = e.target.value;
 	}
 	getSpecialValues( event, value ){
 		let date = this.formatDate( value )
-		datacollection_basic['date'] = date;
+		//datacollection_basic['dob'] = date;
 	}
 	_uploadFile( e ){
 		e.preventDefault();
@@ -94,7 +92,7 @@ class BasicDetailsComponent extends Component{
 		if( datacollection_basic.hasOwnProperty('surname') 
 			&& datacollection_basic.hasOwnProperty('id_pass') 
 			&& datacollection_basic.hasOwnProperty('profession')){
-				//this.props.populateProfile(method, datacollection_basic );
+				this.props.populateProfile(method, datacollection_basic );
 				this.setState({ alert: true });
 				this.props.handleNext();
 			}

@@ -15,11 +15,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link rel="stylesheet" type="text/css" href="<?php print base_url(); ?>assets/node_modules/material-design-lite/material.min.css">
     <script src="<?php print base_url();?>assets/node_modules/bootstrap/assets/js/ie-emulation-modes-warning.js"></script>
     <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap/dist/css/custom.css">
-    <script src="<?php print base_url();?>assets/node_modules/jquery/dist/jquery.min.js"></script>
     <script src="<?php print base_url(); ?>assets/node_modules/material-design-lite/material.js" type="text/javascript" charset="utf-8" async defer></script>
     <style>
         body{
-            background: #e8eaf6;
+            background: white;
         }
         .mdl-data-table{
             width: 100%;

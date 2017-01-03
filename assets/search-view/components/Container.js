@@ -11,12 +11,23 @@ import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'mat
 import FlatButton from 'material-ui/FlatButton';
 
 class Container extends Component{
+	constructor( context, props ){
+		super( context, props );
+
+		this.state = {
+			worker_avator: "/nyumbani/photo_assets/work.png",
+		}
+	}
+	handleClick( e ){
+		e.preventDefault();
+		window.location = `/nyumbani/index.php/home/timeline/Category/${this.props.category.replace('/','_')}`;
+	}
 	render()
 	{
 		const styleDIV = {
 			height: '150px',
 			width:'150px',
-		    lineHeight: '10px',
+		    lineHeight: '5px',
 		    padding: '1px 1px 1px 1px',
 		    backgroundColor: 'white',
 		 	padding: '43px 5px 20px 10px',
@@ -25,12 +36,15 @@ class Container extends Component{
 		    float: 'left',
 		    marginRight: '16px',
 		    marginBottom: '16px',
-		    lineHeight: '200%',
+		    lineHeight: '100%',
 		    zIndex:'5',
 		    color: 'black',
 		    fontWeight: 'bold',
 		    textTransform: 'uppercase',
-		    wordWrap: 'break-word'
+		    wordWrap: 'break-word',
+		    cursor:'pointer',
+		    color: 'blue'
+
 	    };
 	    const style = {
 			height: '200px',
@@ -40,8 +54,9 @@ class Container extends Component{
 		}
 		return(
 		<MuiThemeProvider>
-			<Paper style={styleDIV} zDepth={5}>
-					<Link to={`/nyumbani/index.php/home/timeline/Category/${this.props.category.replace('/','_')}`}>{this.props.category}</Link>
+			<Paper style={styleDIV} zDepth={5} onTouchTap = {this.handleClick.bind(this)}>
+				<img src ={this.state.worker_avator} height = "50" width = "50"/><br/>
+				{this.props.category}
 			</Paper>
 		</MuiThemeProvider>
 		)

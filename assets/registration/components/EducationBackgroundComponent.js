@@ -31,6 +31,8 @@ class EducationBackgroundComponent extends Component{
 		e.preventDefault();
 		e.stopPropagation();
 		datacollection_education[e.target.name] = e.target.value;
+
+		console.log( datacollection_education );
 	}	
 	getStartDate(){
 		let date = this.formatDate( value )
@@ -74,7 +76,7 @@ class EducationBackgroundComponent extends Component{
 			&& datacollection_education.hasOwnProperty('university_history'))
 		{
 			this.setState({ alert: true });
-			//this.props.populateProfile(method, datacollection_education );
+			this.props.populateProfile(method, datacollection_education );
 			this.props.handleNext();
 		}
 		else

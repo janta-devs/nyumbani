@@ -18,8 +18,8 @@ class Search extends Component
 		}
 	}
 	onChange(){
-		(this.state.onFocus === false && this.props.data.length === 0 ) ? this.setState({onFocus: true}) : this.setState({onFocus: false });
-		console.log( this.state.onFocus );
+		// (this.state.onFocus === false && this.props.data.length === 0 ) ? this.setState({onFocus: true}) : this.setState({onFocus: false });
+		// console.log( this.state.onFocus );
 	}
 	render() {
 		var checker = ( this.props.data.length !== 0 && !this.props.data.hasOwnProperty('message') ) ? 

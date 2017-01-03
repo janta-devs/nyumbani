@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
+
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
+import FontIcon from 'material-ui/FontIcon';
+import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
+
 import Container from './Container';
 import AppBar from 'material-ui/AppBar';
 
@@ -24,16 +29,14 @@ class Categories extends Component{
     if( this.info === null || !this.info.length )
     {
       setTimeout( () => {
-        location.href = "";
+        location.href = ""; //refreshes page to load up the content
       }, 1000);
     }
     else
     {
-      this.pages = this.createPagination( this.info )
+      this.pages = this.createPagination( this.info );
     }
-
-    this.data = this.pages[this.state.count]
-   
+    this.data = this.pages[this.state.count];
 	}
   componentWillMount(){
     let EmployeeCat = this.props.State.EmployeeCategories;
@@ -77,8 +80,9 @@ class Categories extends Component{
       var NextNum = 12;
       var start = 0;
       var holder = [];
+      var leftovers = [];
 
-      for( var i = 0; i < counter; i++ ){
+      for( var i = 0; i <= counter; i++ ){
         var num = `arr${i+1}`;
         if( i === 0 )
         {
@@ -92,9 +96,23 @@ class Categories extends Component{
           NextNum + 12;
           start = NextNum + 1;
         }
-        holder.push( num );
+
+        ( num.length === 12 ) ? holder.push( num ) : leftovers.push( num );
+        console.log( leftovers);
       }
-      holder.push( data );
+
+      if(data.length === 12 ){
+        holder.push( data )
+      }
+      else
+      {
+        if( data.length > 12 ){
+          num = data.splice(0, 12);
+          holder.push( num );
+        }
+        data.concat( leftovers );
+        holder.push( data );
+      }
       return holder;   
     }
   }
@@ -129,6 +147,9 @@ class Categories extends Component{
   	var info = this.state.data.map( (x,y) => {
   		return <Container category = {x} key={y} count = {y}/>;
   	});
+    const recentsIcon = <FontIcon className="material-icons">restore</FontIcon>;
+    const favoritesIcon = <FontIcon className="material-icons">skipnext</FontIcon>;
+    const nearbyIcon = <IconLocationOn />;
   	return(
       <div>
       		<div style={ElementStyle}>
@@ -138,13 +159,26 @@ class Categories extends Component{
           <br />
       			{info}
           </div>
-          <footer style={footerStyle}>
-            <button className = "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onClick = {this.handlePrevClick.bind(this)}>Prev</button>
-            <button style = {floatStlye} className = "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onClick = {this.handleNextClick.bind(this)}>Next</button>
-          </footer>
+          <MuiThemeProvider>
+            <BottomNavigation>
+              <BottomNavigationItem
+                label="BACK"
+                icon={favoritesIcon}
+                onTouchTap={this.handlePrevClick.bind(this)}
+              />
+              <BottomNavigationItem
+                label="NEXT"
+                icon={favoritesIcon}
+                onTouchTap={this.handleNextClick.bind(this)}
+              /> 
+            </BottomNavigation>
+          </MuiThemeProvider>
       </div>
   	)
   }
 }
 
 export default Categories;
+
+
+

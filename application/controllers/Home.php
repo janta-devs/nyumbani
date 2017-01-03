@@ -86,7 +86,7 @@ class Home extends CI_Controller{
 
 				$url = site_url() . '/home/complete/token/' . $qstring;
 				$link = '<a href="' . $url .'">' . $url . '</a>';
-				$from_email = 'ochiodhis@gmail.com';
+				$from_email = 'jantadevs@gmail.com';
 				$to_email = $this->input->post('email_add');
 				$subject = 'Verify Your Email Address';
 				$message = '';
@@ -97,7 +97,8 @@ class Home extends CI_Controller{
 				$config['smtp_host'] = 'ssl://smtp.gmail.com'; //smtp host name
 				$config['smtp_port'] = '465'; //smtp port number
 				$config['smtp_user'] = $from_email;
-				$config['smtp_pass'] = 'Checkmate061987NoOn?!'; //$from_email password
+				//$config['smtp_pass'] = 'Checkmate061987NoOn?!'; //$from_email password
+				$config['smtp_pass'] = 'dexter123';
 				$config['mailtype'] = 'html';
 				$config['charset'] = 'iso-8859-1';
 				$config['wordwrap'] = TRUE;

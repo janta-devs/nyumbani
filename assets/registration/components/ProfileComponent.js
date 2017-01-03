@@ -27,6 +27,17 @@ class ProfileComponent extends Component{
 		    stepIndex: 0,
 		}
 	}
+  populateProfile(method, data ){
+    $.ajax({
+      url: '/nyumbani/index.php/profile/'+method,
+      type: 'POST',
+      dataType: 'json',
+      data: data,
+    })
+    .done(function( res ) {
+      console.log( res );
+    });
+  } 
 dummyAsync = (cb) => {
     this.setState({loading: true}, () => {
       this.asyncTimer = setTimeout(cb, 500);
@@ -58,15 +69,21 @@ getStepContent(stepIndex) {
     switch (stepIndex) {
       case 0:
         return (
-         <BasicDetailsComponent handleNext = {this.handleNext.bind(this)} stepIndex = {this.state.stepIndex}/>
+         <BasicDetailsComponent handleNext = {this.handleNext.bind(this)} stepIndex = {this.state.stepIndex}
+         populateProfile = {this.populateProfile.bind(this)}
+         />
         );
       case 1:
         return (
-     		<EducationBackgroundComponent handleNext = {this.handleNext.bind(this)} stepIndex = {this.state.stepIndex}/>
+     		<EducationBackgroundComponent handleNext = {this.handleNext.bind(this)} stepIndex = {this.state.stepIndex}
+        populateProfile = {this.populateProfile.bind(this)}
+        />
         );
       case 2:
         return (
- 			<SkillsComponent handleNext = {this.handleNext.bind(this)} stepIndex = {this.state.stepIndex}/>
+ 			<SkillsComponent handleNext = {this.handleNext.bind(this)} stepIndex = {this.state.stepIndex}
+        populateProfile = {this.populateProfile.bind(this)}
+      />
         );
       default:
         return 'You\'re a long way from home sonny jim!';
@@ -126,17 +143,6 @@ getStepContent(stepIndex) {
     </MuiThemeProvider>
     );
   }
-	populateProfile(method, data ){
-		$.ajax({
-			url: '/nyumbani/index.php/profile/'+method,
-			type: 'POST',
-			dataType: 'json',
-			data: data,
-		})
-		.done(function( res ) {
-			console.log( res );
-		});
-	}	
-};
+}
 
 export default ProfileComponent;

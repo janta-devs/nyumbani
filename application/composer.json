@@ -1,0 +1,12 @@
+{
+    "name": "root/application",
+    "authors": [
+        {
+            "name": "Anto-Linux",
+            "email": "jadzantonyngayo@gmail.com"
+        }
+    ],
+    "require": {
+    	"tyrola/xmpphp": "2.0"
+    }
+}
