@@ -9,6 +9,22 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Actions from '../../DataStore/Actions';
 
+
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+import { Step,Stepper,StepLabel } from 'material-ui/Stepper';
+
+import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
+import ExpandTransition from 'material-ui/internal/ExpandTransition';
+import TextField from 'material-ui/TextField';
+import DatePicker from 'material-ui/DatePicker';
+
+import injectTapEventPlugin from 'react-tap-event-plugin';
+ injectTapEventPlugin();
+
+
+
 var dataCollection = {};
 
 import $ from 'jquery';
@@ -72,6 +88,17 @@ class PostJobComponent extends Component{
 			console.log( res );
 		});
 	}
+	getStartDate( event, value ){
+		let date = this.formatDate( value )
+		dataCollection['startDate'] = date;
+	}
+	getEndDate( event, value ){
+		let date = this.formatDate( value )
+		dataCollection['startDate'] = date;
+	}
+	formatDate(date){
+		return ( date.getFullYear() + "-" + (Number(date.getMonth())+1) + "-" + date.getDate() );
+	}
 	onSave( e ) {
 		e.preventDefault();
 		e.stopPropagation();
@@ -86,6 +113,7 @@ class PostJobComponent extends Component{
 			{
 				this.setState({ alert: true });
 				this._send( dataCollection );
+				window.location.href = "/nyumbani/index.php/home/timeline/";
 			}
 		else
 			{
@@ -93,62 +121,112 @@ class PostJobComponent extends Component{
 			}
 	}
 	render() {
+		const fieldWidth = {
+			width: '200px',
+		};
+		const TextAreaWidth = {
+			width: '200px'
+		};
+		const formStyle = {
+			height: "500px",
+		    width: "90%",
+		    border: "1px solid black",
+		    borderRadius: "5px",
+		    marginLeft: "5%",
+		    paddingTop: "2%",
+		    zIndex: '5',
+		    boxShadow: '5px 10px 41px #888789',
+		};
+		const headerStyle = {
+			color: 'blue',
+			textAlign: 'center',
+			textDecoration: 'underline',
+		};
 		return (
 			<div>
 			{(this.state.alert === true) ? <SuccessAlert /> : (this.state.alert === 'default') ? <InformationAlert /> : <DangerAlert />}
 			<BackComponent State = {this.props.State}/>
-			<form onSubmit={this.onSave} method="post" encType = "multipart/form-data" >
+			<MuiThemeProvider>
+			<form onSubmit={this.onSave} method="post" encType = "multipart/form-data" style={formStyle}>
+				<h4 style={headerStyle}>CREATE AN ORDER</h4><br /><br/>
 				<div className="col-md-6">
 					<div className="col-md-12">
 						<div className="form-group label-floating">
-		                        <label className="control-label" htmlFor="profession">I am Looking For</label>
-		                        <input type="text" id="profession" name="profession" className="form-control" onBlur = {this.getValue.bind(this)} ref = "profession"/>
+	                        <label className="control-label" htmlFor="profession">I am Looking For</label>
+							<TextField name = "profession" onChange = {this.getValue.bind(this)} style={fieldWidth}/>
+						</div>
+					</div><br /><br /><br /><br />
+					<div className="col-md-6">
+						<div className="form-group label-floating">
+		                    <label className="control-label" htmlFor="job_title">Job Title</label>
+							<TextField name = "job_title" onChange = {this.getValue.bind(this)} style={fieldWidth}/>
 						</div>
 					</div>
 					<div className="col-md-6">
 						<div className="form-group label-floating">
-		                        <label className="control-label" htmlFor="job_title">Job Title</label>
-		                        <input type="text" id="job_title" name="job_title" className="form-control" onBlur = {this.getValue.bind(this)} ref = "job_title"/>
+		                    <label className="control-label" htmlFor="location">Location</label>   
+							<TextField name = "location" onChange = {this.getValue.bind(this)} style={fieldWidth}/>
 						</div>
-					</div>
+					</div>	<br /><br /><br /><br />
 					<div className="col-md-6">
 						<div className="form-group label-floating">
-		                        <label className="control-label" htmlFor="location">Location</label>
-		                        <input type="text" id="location" name="location" className="form-control" onBlur = {this.getValue.bind(this)} ref = "location"/>
-						</div>
-					</div>	
-					<div className="col-md-6">
-						<div className="form-group label-floating">
-		                        <label className="control-label" htmlFor="startDate">Start Date</label>
-		                        <input type="date" id="startDate" name="start" className="form-control"  data-dtp="" onBlur = {this.getValue.bind(this)} ref = "startDate" />
+		                     <label className="control-label" htmlFor="startDate">Start Date</label>
+							 <DatePicker hintText="Select date" 
+		                        container="inline" mode="landscape" 
+		                        formatDate={this.formatDate}
+		                        onChange = {this.getStartDate.bind(this)} 
+		                        name = "dob"
+		                        locale ="en-US"
+				               />
 						</div>
 					</div>
 					<div className="col-md-6">
 						<div className="form-group label-floating">
 		                        <label className="control-label" htmlFor="endDate">End Date</label>
-		                        <input type="date" id="endDate" name="end" className="form-control"  onBlur = {this.getValue.bind(this)} ref = "endDate"/>
+		                        <DatePicker hintText="Select date" 
+			                        container="inline" mode="landscape" 
+			                        formatDate={this.formatDate}
+			                        onChange = {this.getEndDate.bind(this)} 
+			                        name = "dob"
+			                        locale ="en-US"
+				               />
 						</div>
-					</div>
+					</div><br /><br /><br /><br /><br /><br />
 					<div className="col-md-12">
 						<div className="form-group label-floating">
-		                        <label className="control-label" htmlFor="budget">Budget/Remuneration</label>
-		                        <input type="text" id="budget" name="budget" className="form-control"  onBlur = {this.getValue.bind(this)} ref="budget"/>
+		                    <label className="control-label" htmlFor="budget">Budget in KSh.</label>
+							<TextField name = "budget" onChange = {this.getValue.bind(this)} style={fieldWidth}/>
 						</div>
 					</div>
 					</div>
 					<div className="col-md-6">
 						<div className="form-group label-floating">
-						    <label htmlFor="t1" className="control-label">Job description goes here</label>
-						    <textarea name = "description" id="t1" className="form-control" rows="5" onBlur = {this.getValue.bind(this)} ref = "description"></textarea>
-						</div>
+						    <label htmlFor="t1" className="control-label">Job description goes here</label><br /><br />
+						    		<TextField name = "description" onChange = {this.getValue.bind(this)}
+						    		hintText="Enter Project description here.."
+									  multiLine={true}
+								      rows={3}
+								      rowsMax={4}
+								      textareaStyle={TextAreaWidth}
+									/>
+						</div><br /><br />
 						<div className="form-group">
-						<input type="file" id="attach-file" multiple="" onChange = {this.uploadFile.bind(this)}/>
+						 	<label htmlFor="t1" className="control-label">File Attachments Upload</label><br /><br />
+							<input type="file" id="attach-file" multiple="" onChange = {this.uploadFile.bind(this)}/>
 						</div>
-					</div>
+					</div><br /><br /><br /><br /><br /><br />
 				<div className="col-md-6">
-					<button className="btn btn-block btn-raised btn-info" onClick={this.onSave.bind(this)}>Submit</button>
+					      <RaisedButton
+						            label="Save"
+						            primary={true}
+						            onTouchTap={this.onSave.bind(this)}
+						            className = "pull-right"
+						  />
+					
 				</div>
+				
 			</form>
+			</MuiThemeProvider>
 			</div>
 		);
 	}

@@ -13,7 +13,7 @@ import AccountUserReducer from './AccountUserReducer';
 import EmployeeReducer from './EmployeeReducer';
 import BiddedJobsReducer from './BiddedJobsReducer';
 import jobReducer from './jobReducer';
-import jobCategoryReducer from './jobCategoryReducer';
+import jobAvailableReducer from './jobAvailableReducer';
 import allEmployeesReducer from './allEmployeesReducer';
 import employeeCategoryReducer from './employeeCategoryReducer';
 import MyOrdersReducer from './MyOrdersReducer';
@@ -34,7 +34,7 @@ const rootReducer = combineReducers({
 	EmployeeData: EmployeeReducer,
 	Bids: BiddedJobsReducer,
 	Jobs: jobReducer,
-	Categories: jobCategoryReducer,
+	JobsAvailable: jobAvailableReducer,
 	AllEmployees: allEmployeesReducer,
 	EmployeeCategories: employeeCategoryReducer,
 	MyOrders: MyOrdersReducer,

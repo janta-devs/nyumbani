@@ -6,12 +6,12 @@ import TableCell from './TableCell';
 class ResultTable extends Component{
 	render() {
 		const tableStyle = {
-			width: '80%',
+			width: '85%',
 			margin:'auto',
 		};
 
 		var populate = this.props.data.map( (x, y) => 
-		<TableCell key = { y } order_id = {x.order_id} employer = { x.login_id } description = {x.description} job_title = {x.job_title} location = {x.location} 
+		<TableCell key = { y } order_id = {x.order_id} employer = { x.login_id } description = {x.description} job_title = {x.profession} location = {x.location} 
 		profession = {x.profession} budget = {x.budget}/>);
 
 		return (
@@ -20,18 +20,11 @@ class ResultTable extends Component{
 						<thead>
 							<tr>
 								<th>ORDER NO.</th>
-								<th>JOB TITLE</th>
+								<th>PROFESSION</th>
 								<th>DESCRIPTION</th>
 								<th>LOCATION</th>
 								<th className="mdl-data-table__header--sorted-ascending">BUDGET</th>
 								<th>ACTIONS</th>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>					
 							</tr>
 						</thead>
 							{populate}
@@ -39,9 +32,10 @@ class ResultTable extends Component{
 								<tr>
 									<td>_</td>
 									<td>_</td>
+									<td><center>&copy; 2016</center></td>
 									<td>_</td>
-									<td>&copy; 2016</td>
 									<td>_</td>
+									<td>_</td>	
 								</tr>
 						</tfoot>
 				</table>

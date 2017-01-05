@@ -31,10 +31,28 @@ class Field extends Component{
 				Job title<br/><TextField id="job_title" name={title} onChange = {this.props.getValue} style={TextfieldWidth}/><br />
 				</div>
 				<div className="col-md-3">
-				Start date<br/><DatePicker hintText="Started" name = {start_date}container="inline" mode="landscape" onChange = {this.props.getStartDate} id={start_date} textFieldStyle={fieldWidth}/>
+				Start date<br/><DatePicker 
+						hintText="Started" 
+						name = {start_date} 
+						container="inline" 
+						mode="landscape" 
+						onChange={this.props.getStartDate} 
+						id={start_date} 
+						textFieldStyle={fieldWidth}
+						locale ="en-US"
+				/>
 				</div>
 				<div className="col-md-3">
-				End date<br/><DatePicker hintText="Ended" name = {end_date} container="inline" mode="landscape" onChange = {this.props.getEndDate} id={end_date} textFieldStyle={fieldWidth}/>
+				End date<br/><DatePicker 
+						hintText="Ended" 
+						name = {end_date} 
+						container="inline" 
+						mode="landscape" 
+						onChange={this.props.getEndDate} 
+						id={end_date} 
+						textFieldStyle={fieldWidth}
+						locale ="en-US"
+				/>
 				</div>
 				</div>
 			</div>

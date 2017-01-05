@@ -13,10 +13,8 @@
     <link rel="stylesheet" type="text/css" href="<?php print base_url(); ?>assets/node_modules/material-design-lite/material.min.css">
 
     <script src="<?php print base_url();?>assets/node_modules/bootstrap/assets/js/ie-emulation-modes-warning.js"></script>
-    <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap/dist/css/custom.css">
     <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap/dist/css/bootstrap.css">
     <script src="<?php print base_url();?>assets/node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="<?php print base_url(); ?>assets/node_modules/material-design-lite/material.js" type="text/javascript"></script>
     <style>
         .mdl-data-table{
             width: 100%;

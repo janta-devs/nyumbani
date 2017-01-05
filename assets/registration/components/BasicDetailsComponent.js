@@ -50,7 +50,7 @@ class BasicDetailsComponent extends Component{
 	}
 	getSpecialValues( event, value ){
 		let date = this.formatDate( value )
-		//datacollection_basic['dob'] = date;
+		datacollection_basic['dob'] = date;
 	}
 	_uploadFile( e ){
 		e.preventDefault();
@@ -100,11 +100,9 @@ class BasicDetailsComponent extends Component{
 				this.setState({ alert: false });
 			}
 	}
-
 	formatDate(date){
-		return (date.getMonth() + 1) + "-" + date.getDate() + "-" + date.getFullYear();
+		return ( date.getFullYear() + "-" + (Number(date.getMonth())+1) + "-" + date.getDate() );
 	}
-
 	render() {
 		const fieldWidth = {
 			width: '200px',
@@ -178,6 +176,7 @@ class BasicDetailsComponent extends Component{
 				                        formatDate={this.formatDate}
 				                        onChange = {this.getSpecialValues.bind(this)} 
 				                        name = "dob"
+				                        locale ="en-US"
 				                        onTouchTap={this.getValue.bind(this)}
 				                        />
 								</div>

@@ -46518,7 +46518,7 @@
 			key: 'getSpecialValues',
 			value: function getSpecialValues(event, value) {
 				var date = this.formatDate(value);
-				//datacollection_basic['dob'] = date;
+				datacollection_basic['dob'] = date;
 			}
 		}, {
 			key: '_uploadFile',
@@ -46570,12 +46570,13 @@
 					this.props.handleNext();
 				} else {
 					this.setState({ alert: false });
+					console.log(datacollection_basic);
 				}
 			}
 		}, {
 			key: 'formatDate',
 			value: function formatDate(date) {
-				return date.getMonth() + 1 + "-" + date.getDate() + "-" + date.getFullYear();
+				return date.getFullYear() + "-" + (Number(date.getMonth()) + 1) + "-" + date.getDate();
 			}
 		}, {
 			key: 'render',
@@ -46735,6 +46736,7 @@
 									formatDate: this.formatDate,
 									onChange: this.getSpecialValues.bind(this),
 									name: 'dob',
+									locale: 'en-US',
 									onTouchTap: this.getValue.bind(this)
 								})
 							)
@@ -52944,59 +52946,75 @@
 				console.log(nextProps);
 			}
 		}, {
+			key: 'formatDate',
+			value: function formatDate(date) {
+				return date.getFullYear() + "-" + (Number(date.getMonth()) + 1) + "-" + date.getDate();
+			}
+		}, {
 			key: 'getValue',
 			value: function getValue(e) {
 				e.preventDefault();
 				e.stopPropagation();
 				datacollection_education[e.target.name] = e.target.value;
-
-				console.log(datacollection_education);
 			}
 		}, {
 			key: 'getStartDate',
-			value: function getStartDate() {
-				var date = this.formatDate(value);
-				datacollection_education['start_date'] = date;
+			value: function getStartDate(event, dateValue) {
+				console.log(dateValue);
+				var date = this.formatDate(dateValue);
+				datacollection_education['start_date_1'] = date;
 			}
 		}, {
 			key: 'getEndDate',
-			value: function getEndDate() {
-				var date = this.formatDate(value);
-				datacollection_education['end_date'] = date;
+			value: function getEndDate(emptyVal, dateValue) {
+				var date = this.formatDate(dateValue);
+				datacollection_education['end_date_1'] = date;
 			}
 		}, {
 			key: 'onSave',
 			value: function onSave(e) {
 				e.preventDefault();
 				e.stopPropagation();
-				var method = "sendEducationInformation";
+				// var method = "sendEducationInformation";
 
-				var primary_history = {};
-				var secondary_history = {};
-				var university_history = {};
+				// var primary_history = {};
+				// var secondary_history = {};
+				// var university_history = {};
 
-				primary_history['primary_school'] = datacollection_education['primary_school'];
-				primary_history['kcpe_grade'] = datacollection_education['kcpe_grade'];
-				primary_history['primary_certificate'] = datacollection_education['primary_certificate'];
-				datacollection_education['primary_history'] = primary_history;
+				// primary_history['primary_school'] = datacollection_education['primary_school'];
+				// primary_history['kcpe_grade'] = datacollection_education['kcpe_grade'];
+				// primary_history['primary_certificate'] = datacollection_education['primary_certificate'];
+				// datacollection_education['primary_history'] = primary_history;
 
-				secondary_history['secondary_school'] = datacollection_education['secondary_school'];
-				secondary_history['kcse_grade'] = datacollection_education['kcse_grade'];
-				secondary_history['secondary_certificate'] = datacollection_education['secondary_certificate'];
-				datacollection_education['secondary_history'] = secondary_history;
+				// secondary_history['secondary_school'] = datacollection_education['secondary_school'];
+				// secondary_history['kcse_grade'] = datacollection_education['kcse_grade'];
+				// secondary_history['secondary_certificate'] = datacollection_education['secondary_certificate'];
+				// datacollection_education['secondary_history'] = secondary_history;
 
-				university_history['university'] = datacollection_education['university'];
-				university_history['university_grade'] = datacollection_education['university_grade'];
-				university_history['university_certificate'] = datacollection_education['university_certificate'];
-				datacollection_education['university_history'] = university_history;
+				// university_history['university'] = datacollection_education['university'];
+				// university_history['university_grade'] = datacollection_education['university_grade'];
+				// university_history['university_certificate'] = datacollection_education['university_certificate'];
+				// datacollection_education['university_history'] = university_history;
 
-				if (datacollection_education.hasOwnProperty('past_job_1') && datacollection_education.hasOwnProperty('title_1') && datacollection_education.hasOwnProperty('start_date_1') && datacollection_education.hasOwnProperty('end_date_1') && datacollection_education.hasOwnProperty('primary_history') && datacollection_education.hasOwnProperty('secondary_history') && datacollection_education.hasOwnProperty('university_history')) {
-					this.setState({ alert: true });
-					this.props.populateProfile(method, datacollection_education);
-					this.props.handleNext();
-				} else {
-					this.setState({ alert: false });
-				}
+
+				// if( datacollection_education.hasOwnProperty('past_job_1') 
+				// 	&& datacollection_education.hasOwnProperty('title_1') 
+				// 	&& datacollection_education.hasOwnProperty('start_date_1') 
+				// 	&& datacollection_education.hasOwnProperty('end_date_1')
+				// 	&& datacollection_education.hasOwnProperty('primary_history') 
+				// 	&& datacollection_education.hasOwnProperty('secondary_history') 
+				// 	&& datacollection_education.hasOwnProperty('university_history'))
+				// {
+				// 	this.setState({ alert: true });
+				// 	this.props.populateProfile(method, datacollection_education );
+				// 	this.props.handleNext();
+				// }
+				// else
+				// {
+				// 	this.setState({ alert: false });
+				// }
+
+				console.log(datacollection_education);
 			}
 		}, {
 			key: '_uploadFile',
@@ -53177,7 +53195,11 @@
 					_react2.default.createElement(
 						'div',
 						{ className: 'col-md-6' },
-						_react2.default.createElement(_DynamicFields2.default, { getValue: this.getValue.bind(this) }),
+						_react2.default.createElement(_DynamicFields2.default, {
+							getValue: this.getValue.bind(this),
+							getStartDate: this.getStartDate.bind(this),
+							getEndDate: this.getEndDate.bind(this)
+						}),
 						_react2.default.createElement('br', null),
 						_react2.default.createElement('br', null),
 						_react2.default.createElement('br', null),
@@ -53391,14 +53413,32 @@
 								{ className: 'col-md-3' },
 								'Start date',
 								_react2.default.createElement('br', null),
-								_react2.default.createElement(_DatePicker2.default, { hintText: 'Started', name: start_date, container: 'inline', mode: 'landscape', onChange: this.props.getStartDate, id: start_date, textFieldStyle: fieldWidth })
+								_react2.default.createElement(_DatePicker2.default, {
+									hintText: 'Started',
+									name: start_date,
+									container: 'inline',
+									mode: 'landscape',
+									onChange: this.props.getStartDate,
+									id: start_date,
+									textFieldStyle: fieldWidth,
+									locale: 'en-US'
+								})
 							),
 							_react2.default.createElement(
 								'div',
 								{ className: 'col-md-3' },
 								'End date',
 								_react2.default.createElement('br', null),
-								_react2.default.createElement(_DatePicker2.default, { hintText: 'Ended', name: end_date, container: 'inline', mode: 'landscape', onChange: this.props.getEndDate, id: end_date, textFieldStyle: fieldWidth })
+								_react2.default.createElement(_DatePicker2.default, {
+									hintText: 'Ended',
+									name: end_date,
+									container: 'inline',
+									mode: 'landscape',
+									onChange: this.props.getEndDate,
+									id: end_date,
+									textFieldStyle: fieldWidth,
+									locale: 'en-US'
+								})
 							)
 						)
 					)

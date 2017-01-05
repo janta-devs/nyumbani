@@ -69,6 +69,9 @@ class Categories extends Component{
     }
   }
   createPagination( data ){
+
+    //creates the 12 job categories that appear in the initial page of the employer page
+    
     if( !data.length ){
       setTimeout( ()=> {
         window.location.href = "";
@@ -96,9 +99,7 @@ class Categories extends Component{
           NextNum + 12;
           start = NextNum + 1;
         }
-
         ( num.length === 12 ) ? holder.push( num ) : leftovers.push( num );
-        console.log( leftovers);
       }
 
       if(data.length === 12 ){
@@ -106,7 +107,8 @@ class Categories extends Component{
       }
       else
       {
-        if( data.length > 12 ){
+        if( data.length > 12 )
+        {
           num = data.splice(0, 12);
           holder.push( num );
         }

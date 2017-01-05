@@ -15,15 +15,14 @@ class NavbarComponent extends Component{
         this.AccountUser = this.props.Actions.pullAccountUserData();
         this.props.Actions.getEmployeeBids();
         this.props.Actions.pullAccountUserData();
-        this.props.Actions.pullJobSpecificCategories();
         this.props.Actions.pullJobs();
         this.props.Actions.getEmployeeBids(); 
         this.props.Actions.getMyMessages();
         this.props.Actions.getMySentMessages();
+        this.props.Actions.pullSpecificJobs();
     }
     componentWillUpdate(nextState, nextProps){
-        console.log(nextState)
-        console.log( nextProps )
+
     }
     render(){
         const profileStyle = {

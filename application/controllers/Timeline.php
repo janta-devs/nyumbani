@@ -70,7 +70,8 @@ class Timeline extends CI_Controller {
 		$this->load->helper('upload_helper');
 		@$path = upload_file();
 	}
-	public function Categories(){
+	public function Categories()
+	{
 		$this->load->model('Jobseeker');
 		$job = new Jobseeker();
 
@@ -87,23 +88,17 @@ class Timeline extends CI_Controller {
 		}
 		print json_encode( $final_array );
 	}
-	public function getJobCategories(){
-		$this->load->model('Job_Model');
-		$jobs = new Job_Model();
-		$categories = $jobs->getData('job_title')->result();
-		$new_arr = [];
-		$final_array = [];
-		
-		foreach ($categories as $row) {
-			$new_arr[] = $row->job_title;
+	public function getJobCategories()
+	{
+		$this->load->library('Search_jobs');
+		$search = new Search_jobs();
+		$logged_in_user = $this->session->userdata();
+		$data['job'] = $logged_in_user['profession'];
+		if( isset( $data ) && !empty( $data ) && count( $data ) != 0 )
+		{
+			$results = $search->get_terms( $data['job'] );
+			print( $results );
 		}
-
-		$new_array = array_unique( $new_arr );
-
-		foreach ($new_array as $key => $value) {
-			$final_array[] = $value;
-		}
-		print json_encode( $final_array );
 	}
 }
 

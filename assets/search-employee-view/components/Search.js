@@ -2,16 +2,11 @@ import React, { Component } from 'react';
 import { Link, Match } from 'react-router';
 
 import TopActionComponent from './TopActionComponent';
-import SuggestedEmployees from './SuggestedEmployees';
-import StatusUpdate from './StatusUpdate';
 import ResultTable from './ResultTable';
 import SearchBar from './SearchBar';
 import NoSearchResult from './NoSearchResult';
-import Categories from './Categories';
-
 import PostJobComponent from './PostJobComponent';
 
-import $ from 'jquery';
 
 
 class Search extends Component{
@@ -26,18 +21,17 @@ class Search extends Component{
 	}
 	componentWillMount(){
 		this.props.State.Actions.pullAccountUserData();
-		this.props.State.Actions.pullJobSpecificCategories();
+		this.props.State.Actions.pullSpecificJobs();
 		this.props.State.Actions.pullJobs();
 		this.props.State.Actions.getEmployeeBids();
 		this.props.State.Actions.getMyMessages();
 		this.props.State.Actions.getMySentMessages();
 	}
-	componentWillUpdate(nxtProp, nxtState ){
-		
-	}
 	render() {
 		var checker = ( this.props.data.length !== 0 && !this.props.data.hasOwnProperty('message') ) ? 
 		<ResultTable data = {this.props.data} State = {this.props.State} /> : (this.props.suggestions.length !== 0 ) ? <NoSearchResult data = {this.props.suggestions} searchAction = {this.props.searchAction}/> : ""; // checks if the array is empty
+		
+		var availableJobs = ( this.props.State.JobsAvailable.length !== 0 ) ? <ResultTable data = {this.props.State.JobsAvailable} State = {this.props.State} /> : <div>No Jobs With Regards To Your Profession Are Available At This Time</div>;
 		return (			
 				<div className="mdl-cell mdl-cell--12-col" >
 					<section className="content with-container">
@@ -50,7 +44,7 @@ class Search extends Component{
 									<SearchBar searchAction = {this.props.searchAction}/>
 									{checker}
 								</div>
-								<Categories State = {this.props.State}/>								
+								{(this.props.data.length === 0 ) ? availableJobs : ""}
 							</div>
 						</div>	
 					</section>

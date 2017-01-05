@@ -39284,9 +39284,7 @@
 	            NextNum + 12;
 	            start = NextNum + 1;
 	          }
-
 	          num.length === 12 ? holder.push(num) : leftovers.push(num);
-	          console.log(leftovers);
 	        }
 
 	        if (data.length === 12) {

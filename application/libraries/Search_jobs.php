@@ -77,19 +77,19 @@ class Search_jobs {
 				}
 			}
 
-			foreach ($this->db_results['job_title'] as $key => $value) 
-			{
-				if(preg_match("@".preg_quote($value)."@i", $this->term))
-				{
-					if( !in_array($value, $this->job_title_result))
-					{
-						$this->job_title_result[] = $value;
-					}
-					if( count( $this->location_result != 0 ) ){
-						$this->unified_search_terms['job_title'] = $this->job_title_result;
-					}
-				}
-			}
+			// foreach ($this->db_results['job_title'] as $key => $value) 
+			// {
+			// 	if(preg_match("@".preg_quote($value)."@i", $this->term))
+			// 	{
+			// 		if( !in_array($value, $this->job_title_result))
+			// 		{
+			// 			$this->job_title_result[] = $value;
+			// 		}
+			// 		if( count( $this->location_result != 0 ) ){
+			// 			$this->unified_search_terms['job_title'] = $this->job_title_result;
+			// 		}
+			// 	}
+			// }
 
 
 			$res = $this->refactor( $this->unified_search_terms );
@@ -119,35 +119,23 @@ class Search_jobs {
 			{
 				$this->db_results['profession'][] = (string)$v[0];
 			}
-			else if( count($v) > 1 && strlen($v[1]) > 3 )
-			{
-				$this->db_results['profession'][] = (string)$v[1];
-			}
 		}
 		foreach ( $location->result() as $row ) 
 		{
 			$v = explode(' ', (string)trim($row->location) );
-			if( strlen($v[0]) > 2 )
+			if( strlen($v[0]) > 3 )
 			{
 				$this->db_results['location'][] = (string)$v[0];
 			}
-			else if( count($v) > 1 && strlen($v[1]) > 3 )
-			{
-				$this->db_results['location'][] = (string)$v[1];
-			}
 		}
-		foreach ( $job_title->result() as $row ) 
-		{
-			$v = explode(' ', (string)trim($row->job_title) );
-			if( strlen($v[0]) > 2 )
-			{
-				$this->db_results['job_title'][] = (string)$v[0];
-			}
-			else if( count($v) > 1 && strlen($v[1]) > 3 )
-			{
-				$this->db_results['job_title'][] = (string)$v[1];
-			}
-		}
+		// foreach ( $job_title->result() as $row ) 
+		// {
+		// 	$v = explode(' ', (string)trim($row->job_title) );
+		// 	if( strlen($v[0]) > 3 )
+		// 	{
+		// 		$this->db_results['job_title'][] = (string)$v[0];
+		// 	}
+		// }
 
 		return ( $this->db_results );
 	}

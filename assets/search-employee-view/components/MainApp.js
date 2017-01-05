@@ -24,7 +24,8 @@ function mapStateToProps( state ){
 		suggestions: state.suggestions,
 		routing: state.routing,
 		Messages: state.Messages,
-		SentMessages: state.SentMessages
+		SentMessages: state.SentMessages,
+		JobsAvailable: state.JobsAvailable
 	}								
 }
 

@@ -176,9 +176,9 @@ let Actions =
 			data: data
 		}
 	},
-	populateJobCategories: function( data ){
+	populateJobAvailable: function( data ){
 		return{
-			type: 'JOBS_CATEGORIES',
+			type: 'JOBS_AVAILABLE',
 			data: data
 		}
 	},
@@ -293,7 +293,7 @@ let Actions =
 			});
 		}
 	},
-	pullJobSpecificCategories: function(){
+	pullSpecificJobs: function(){
 		return( dispatch ) => {
 			var self = dispatch;
 			$.ajax({
@@ -301,8 +301,8 @@ let Actions =
 				type: 'POST',
 				dataType: 'json'
 			})
-			.done(function( response ){				
-				self(Actions.populateJobCategories( response ));				
+			.done(function( response ){			
+				self(Actions.populateJobAvailable( response ));				
 				var data = JSON.stringify( response )
 				try{
 					localStorage.setItem('JantaJobCategories', data )

@@ -1,0 +1,118 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "b7ba8d0f3d2b16580e80d3b7b28b043c",
+    "packages": [
+        {
+            "name": "netcarver/textile",
+            "version": "v3.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/textile/php-textile.git",
+                "reference": "bac6381fcab28cf6b6ae3d0e61b6a8c8d6adca13"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/textile/php-textile/zipball/bac6381fcab28cf6b6ae3d0e61b6a8c8d6adca13",
+                "reference": "bac6381fcab28cf6b6ae3d0e61b6a8c8d6adca13",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*",
+                "satooshi/php-coveralls": "0.6.*",
+                "squizlabs/php_codesniffer": "1.5.*",
+                "symfony/yaml": "2.4.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.6-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Netcarver\\Textile": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Textile markup language parser",
+            "homepage": "https://github.com/textile/php-textile",
+            "keywords": [
+                "document",
+                "format",
+                "html",
+                "language",
+                "markup",
+                "parser",
+                "php-textile",
+                "plaintext",
+                "textile"
+            ],
+            "time": "2016-11-17T14:18:12+00:00"
+        },
+        {
+            "name": "tyrola/xmpphp",
+            "version": "v2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BirknerAlex/XMPPHP.git",
+                "reference": "b0aae5123bbfe4b4112061a77adf35d44606d186"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/BirknerAlex/XMPPHP/zipball/b0aae5123bbfe4b4112061a77adf35d44606d186",
+                "reference": "b0aae5123bbfe4b4112061a77adf35d44606d186",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "BirknerAlex\\XMPPHP": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "BirknerAlex",
+                    "email": "alex.birkner@gmail.com"
+                }
+            ],
+            "description": "Jabber Library For Sending Jabber Messages",
+            "homepage": "https://github.com/BirknerAlex/XMPPHP",
+            "keywords": [
+                "jabber",
+                "xmpp",
+                "xmpphp"
+            ],
+            "time": "2015-01-15T23:08:57+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

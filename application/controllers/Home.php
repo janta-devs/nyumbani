@@ -1,7 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+use Netcarver\Textile;
+
 class Home extends CI_Controller{
+
+
 	public $status;
 	public $roles;
 	function __construct(){

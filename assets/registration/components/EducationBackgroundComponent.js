@@ -27,20 +27,22 @@ class EducationBackgroundComponent extends Component{
 		console.log( nextState );
 		console.log( nextProps );
 	}
+	formatDate(date){
+		return ( date.getFullYear() + "-" + (Number(date.getMonth())+1) + "-" + date.getDate() );
+	}
 	getValue( e ){
 		e.preventDefault();
 		e.stopPropagation();
 		datacollection_education[e.target.name] = e.target.value;
-
-		console.log( datacollection_education );
 	}	
-	getStartDate(){
-		let date = this.formatDate( value )
-		datacollection_education['start_date'] = date;
+	getStartDate( event, dateValue){
+		console.log( dateValue );
+		let date = this.formatDate( dateValue )
+		datacollection_education['start_date_1'] = date;
 	}
-	getEndDate(){
-		let date = this.formatDate( value )
-		datacollection_education['end_date'] = date;
+	getEndDate(emptyVal, dateValue ){
+		let date = this.formatDate( dateValue )
+		datacollection_education['end_date_1'] = date;
 	}
 	onSave( e ){
 		e.preventDefault();
@@ -82,6 +84,7 @@ class EducationBackgroundComponent extends Component{
 		else
 		{
 			this.setState({ alert: false });
+			console.log( datacollection_education );
 		}
 	}	
 	_uploadFile( e ){
@@ -189,7 +192,11 @@ class EducationBackgroundComponent extends Component{
 
 				</div>	
 				<div className="col-md-6">
-					<DynamicFields getValue = {this.getValue.bind(this)}/><br /><br /><br />
+					<DynamicFields 
+					getValue = {this.getValue.bind(this)}
+					getStartDate = {this.getStartDate.bind(this)}
+					getEndDate = {this.getEndDate.bind(this)}
+					/><br /><br /><br />
 					<div className="col-md-12">
 								  <FlatButton
 						            label="Back"
