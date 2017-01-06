@@ -40217,7 +40217,7 @@
 				var formStyle = {
 					height: "500px",
 					width: "90%",
-					border: "1px solid black",
+					border: "1px solid white",
 					borderRadius: "5px",
 					marginLeft: "5%",
 					paddingTop: "2%",

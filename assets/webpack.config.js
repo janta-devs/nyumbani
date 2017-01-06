@@ -1,8 +1,8 @@
 var webpack = require("webpack");
 module.exports = {
-	entry:['./postjob/postjob.js'],
+	entry:['./search-view/search.js'],
 	output:{
-		path:'./postjob/dist',
+		path:'./search-view/dist',
 		filename:'bundle.js',
 		publicPath:'/'
 	},

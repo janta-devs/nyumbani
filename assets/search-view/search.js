@@ -16,6 +16,7 @@ import InterestedEmployees from './components/InterestedEmployees';
 
 import MessageComponent from './components/MessageComponent';
 import MessageView from './components/MessageView';
+import Wallet from '../wallet/components/Wallet';
 
 import store, { history } from '../DataStore/Store';
 
@@ -31,6 +32,7 @@ render(
 			<Route path = {`/nyumbani/index.php/home/timeline/ViewBids/:MyBidId`} component={InterestedEmployees}/>
 			<Route path = {`/nyumbani/index.php/home/timeline/Messages/`} component={MessageComponent}/>
 			<Route path = {`/nyumbani/index.php/home/timeline/Messages/Message/:id`} component={MessageView}/>
+			<Route path = {`/nyumbani/index.php/home/timeline/wallet`} component={Wallet}/>
 		</Router>
 	</Provider>, 
 	document.getElementById('component'));
