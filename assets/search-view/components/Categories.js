@@ -8,6 +8,10 @@ import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
 import Container from './Container';
 import AppBar from 'material-ui/AppBar';
 
+//custom react transtion class 
+
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
 class Categories extends Component{
 	constructor(context, props)
 	{
@@ -56,8 +60,7 @@ class Categories extends Component{
   componentWillUpdate(nxtProp, nxtState ){
    
   } 
-  getLocalStorage()
-  {
+  getLocalStorage(){
     try
     {
       var localstore = localStorage.getItem('JantaUniqueCategories');
@@ -159,7 +162,12 @@ class Categories extends Component{
              <AppBar title="Jobseekers Available" iconClassNameRight="muidocs-icon-navigation-expand-more" style={style}/>
           </MuiThemeProvider>
           <br />
-      			{info}
+            <ReactCSSTransitionGroup 
+              transitionName="background" 
+              transitionEnterTimeout={1000} 
+              transitionLeaveTimeout={1000}>
+          			{info}
+            </ReactCSSTransitionGroup>
           </div>
           <MuiThemeProvider>
             <BottomNavigation>

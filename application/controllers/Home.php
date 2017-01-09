@@ -204,7 +204,11 @@ class Home extends CI_Controller{
 			if( $user_role['role'] == 'employer'){
 				redirect(site_url(). '/home/timeline/');
 			}
-			else{
+			else if( $user_role['role'] == 'admin' ){
+				redirect(site_url(). '/Admin/main/');
+			}
+			else
+			{
 				redirect(site_url(). '/home/employee_timeline/');
 				$this->load->view('employee_timeline');
 			}

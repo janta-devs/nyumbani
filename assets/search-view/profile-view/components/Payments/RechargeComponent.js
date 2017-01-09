@@ -20,7 +20,8 @@ class RechargeComponent extends Component
                you feel comfortable with and follow the outlined steps.<br /><br /><br />
                <strong>**Disclaimer**</strong><br/><br />
                Ensure that you keep your private information safe so as to negate the possibility of anyone hijacking and misusing<br /><br />
-               Janta Team
+               <strong>Yours Truly</strong><br />
+               ~ Janta Team
               <p>
               <strong>The payment options we offer are:</strong><br /><br /><br />
                 <Button type="primary" name = "mpesa" onClick = {this.props.ButtonClick}>MPESA</Button>

@@ -77,6 +77,8 @@ class Wallet extends Component{
 	    this.updateData = this.updateData.bind(this);
 	    this.toggleState = this.toggleState.bind(this);
 
+      this.store = this.getLocalStorage();
+
 	    this.state = {
 	      showToolTip: false,
 	      componentWidth: 300,
@@ -161,7 +163,17 @@ turnOnRandomData() {
       active: !this.state.active
     });
   }
-
+  getLocalStorage(){
+    try
+    {
+      var localstore = localStorage.getItem('JantaAccountUser');
+      return JSON.parse(localstore);
+    }
+    catch(exception)
+    {
+      return false;
+    }
+  }
 mouseOverHandler(d, e) {
     this.setState(
 	    {
@@ -195,8 +207,8 @@ mouseOverHandler(d, e) {
   }
 
   render(){
-    var defaultView = <RechargeComponent modalIsOpen = {this.state.modalIsOpen} toggleModal = {this.toggleModal.bind(this)} surname = {this.props.AccountUser.fname} ButtonClick = {this.ButtonClick.bind(this)}/>
-    var mpesaView = <MPesaComponent modalIsOpen = {this.state.modalIsOpen} toggleModal = {this.toggleModal.bind(this)} surname = {this.props.AccountUser.fname} ButtonClick = {this.ButtonClick.bind(this)}/>
+    var defaultView = <RechargeComponent modalIsOpen = {this.state.modalIsOpen} toggleModal = {this.toggleModal.bind(this)} surname = {this.store.fname} ButtonClick = {this.ButtonClick.bind(this)}/>
+    var mpesaView = <MPesaComponent modalIsOpen = {this.state.modalIsOpen} toggleModal = {this.toggleModal.bind(this)} surname = {this.store.fname} ButtonClick = {this.ButtonClick.bind(this)}/>
     
 
     const actions = [
@@ -253,9 +265,9 @@ mouseOverHandler(d, e) {
         <MuiThemeProvider>
           <Card>
             <CardHeader
-              avatar={this.props.AccountUser.profile_photo}
+              avatar={this.store.profile_photo}
             />
-            <CardTitle title = {this.props.AccountUser.fname+' '+this.props.AccountUser.lname} subtitle="Welcome to Wallet!" />
+            <CardTitle title = {this.store.fname+' '+this.store.lname} subtitle="Welcome to Wallet!" />
             <CardText>
                <p>This section provides all the information with regard to your spending while on our website</p>
                 <ul style={listStyle}>

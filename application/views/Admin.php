@@ -9,43 +9,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="<?php print base_url(); ?>photo_assets/justia.ico">
-    <title>Welcome to Janta</title>
+    <title>Janta ADMIN</title>
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" type="text/css" href="<?php print base_url(); ?>assets/node_modules/material-design-lite/material.min.css">
     <script src="<?php print base_url();?>assets/node_modules/bootstrap/assets/js/ie-emulation-modes-warning.js"></script>
     <link rel="stylesheet" type="text/css" href="<?php print base_url();?>assets/node_modules/bootstrap/dist/css/custom.css">
     <script src="<?php print base_url(); ?>assets/node_modules/material-design-lite/material.js" type="text/javascript" charset="utf-8" async defer></script>
-    <style>
-        body{
-            background: white;
-        }
-        .mdl-data-table{
-            width: 100%;
-        }
-        tr{
-          cursor: pointer;
-        }
-        .background-enter {
-          transform: translate(100%);
-        }
-        .background-enter.background-enter-active {
-          transform: translate(20%);
-          transition: transform 1000ms ease-in-out;
-        }
-        .background-leave {
-          transform: translate(20%);
-        }
-        .background-leave.background-leave-active {
-          transform: translate(-100%);
-          transition: transform 1000ms ease-in-out;
-        }
-    </style>
 </head>
 <body>
 <div class="mdl-layout__container">
     <div id="component" style="width: 100%;"></div>
 </div>
-<script src="<?php print base_url(); ?>assets/search-view/dist/bundle.js"></script>
+<script src="<?php print base_url(); ?>assets/Admin/dist/bundle.js"></script>
 </body>
 </html>

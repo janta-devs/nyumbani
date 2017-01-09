@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Actions from '../../DataStore/Actions';
-
+import NavbarWithOutUpdate from './NavbarWithOutUpdate';
 
 
 import ResultTable from './ResultTable';
@@ -49,6 +49,7 @@ class InterestedEmployees extends Component{
 	render(){
 		return(
 			<div>
+        <NavbarWithOutUpdate />
         <h3 className = "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">INTERESTED EMPLOYEES</h3>
 				<ResultTable data = {this.container}/>
 			</div>

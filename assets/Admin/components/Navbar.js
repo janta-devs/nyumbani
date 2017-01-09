@@ -14,7 +14,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import $ from 'jquery';
 
-class NavbarWithOutUpdate extends Component{
+class Navbar extends Component{
     constructor( context, props ){
         super( context, props );
         this.state = {
@@ -99,9 +99,7 @@ class NavbarWithOutUpdate extends Component{
                                   onRequestClose={this.handleClose.bind(this)}
                                 >
                                   <Menu>
-                                   <MenuItem primaryText="Home" containerElement={<Link to={`/nyumbani/index.php/home/timeline`}/>}/>
-                                    <MenuItem primaryText="Wallet" containerElement={<Link to={`/nyumbani/index.php/home/timeline/wallet`}/>}/>
-                                    <MenuItem primaryText="Profile"  containerElement={<Link to={`/nyumbani/index.php/home/timeline`}/>}/>
+                                    <MenuItem primaryText="Home" containerElement={<Link to={`/nyumbani/index.php/admin/main/`}/>}/>
                                     <MenuItem primaryText="Sign out" href="/nyumbani/index.php/home/logout" />
                                   </Menu>
                                 </Popover>
@@ -125,4 +123,4 @@ function mapDispatchToProps(dispatch){
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavbarWithOutUpdate);
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

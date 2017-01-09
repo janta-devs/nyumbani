@@ -22,6 +22,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       overflow-y: hidden;
       overflow-x: hidden;
     }
+    
   </style>
 </head>
 <body>

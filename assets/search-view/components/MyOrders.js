@@ -6,7 +6,7 @@ import Actions from '../../DataStore/Actions';
 
 
 import MyOrdersContainer from './MyOrdersContainer';
-
+import NavbarWithOutUpdate from './NavbarWithOutUpdate';
 
 
 
@@ -24,6 +24,7 @@ class MyOrders extends Component{
 	render(){
 		return( 
 			<div>
+				<NavbarWithOutUpdate />
 				<MyOrdersContainer data = {this.state.data}/>
 			</div>
 		)
