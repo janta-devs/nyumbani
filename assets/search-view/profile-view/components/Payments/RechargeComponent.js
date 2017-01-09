@@ -4,7 +4,7 @@ import '../../../../node_modules/elemental/less/elemental.less';
 
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'elemental';
 
-class DefaultComponent extends Component
+class RechargeComponent extends Component
 {
 	handleFocus( e ){
 		e.preventDefault();
@@ -16,11 +16,13 @@ class DefaultComponent extends Component
         <Modal isOpen={this.props.modalIsOpen} onClick={this.props.toggleModal} backdropClosesModal onClick = {this.handleFocus.bind(this)}>
           <ModalHeader text="Janta Recommendation Service"/>
             <ModalBody>
-               Thank you for <strong>recommending {this.props.surname}</strong>. For the linking service, Janta 
-               would be charging a standard fee of <strong>Ksh. 200</strong>, this ensures that the client is notified and 
-              given the appropriate information with regard to the type of work they are being requested for.
+               The buttons below indicate the services through which one can recharge their account. Please choose the option that
+               you feel comfortable with and follow the outlined steps.<br /><br /><br />
+               <strong>**Disclaimer**</strong><br/><br />
+               Ensure that you keep your private information safe so as to negate the possibility of anyone hijacking and misusing<br /><br />
+               Janta Team
               <p>
-              <strong>The payment options we offer are:</strong><br /><br />
+              <strong>The payment options we offer are:</strong><br /><br /><br />
                 <Button type="primary" name = "mpesa" onClick = {this.props.ButtonClick}>MPESA</Button>
                 &nbsp;&nbsp;&nbsp;&nbsp;<Button type="success" name = "paypal" onClick = {this.props.ButtonClick}>PAYPAL</Button>
                 &nbsp;&nbsp;&nbsp;&nbsp;<Button type="warning" name = "visa" onClick = {this.props.ButtonClick}>VISA</Button> 
@@ -36,4 +38,4 @@ class DefaultComponent extends Component
   }
 }
 
-export default DefaultComponent;
+export default RechargeComponent;

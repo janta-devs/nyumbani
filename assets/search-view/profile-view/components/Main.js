@@ -14,6 +14,7 @@ import Skills from './Skills';
 import BasicDetails from './BasicDetails';
 import ContactDetails from './ContactDetails';
 
+import NavbarWithOutUpdate from '../../components/NavbarWithOutUpdate';
 import BackComponent from '../../components/BackComponent';
 
 
@@ -60,6 +61,7 @@ class MainComponent  extends Component{
       //I removed the contact component so as to ensure the employer cannot view the employee's contact information
         return(
             <div>
+            <NavbarWithOutUpdate />
               <BackComponent />
               <ProfileSummary data = {this.data[0]} state = {this.props.state}/>
               <div className="with-container content">

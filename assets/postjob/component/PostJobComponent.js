@@ -9,14 +9,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Actions from '../../DataStore/Actions';
 
-
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import { Step,Stepper,StepLabel } from 'material-ui/Stepper';
 
 import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
-import ExpandTransition from 'material-ui/internal/ExpandTransition';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
 

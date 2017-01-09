@@ -18,6 +18,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     html, body {
       background: #ffffff;
     }
+    .mdl-layout__header-row{
+      overflow-y: hidden;
+      overflow-x: hidden;
+    }
   </style>
 </head>
 <body>

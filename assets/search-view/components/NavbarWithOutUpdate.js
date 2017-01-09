@@ -12,18 +12,11 @@ import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
+import $ from 'jquery';
 
-class NavbarComponent extends Component{
+class NavbarWithOutUpdate extends Component{
     constructor( context, props ){
         super( context, props );
-
-        this.props.Actions.pullAccountUserData();
-        this.props.Actions.pullCategories();
-        this.props.Actions.pullAllEmployees();
-        this.props.Actions.getMyOrders();
-        this.props.Actions.getMyMessages();
-        this.props.Actions.getMyRequests();
-
         this.state = {
             open: false
         }
@@ -37,6 +30,11 @@ class NavbarComponent extends Component{
             open: false
         });
     }
+    handleClick( e ){
+        e.preventDefault();
+        var el = e.target;
+        var text = $( el ).text();
+    }
     render(){
         const profileStyle = {
             height: '70px',
@@ -44,7 +42,8 @@ class NavbarComponent extends Component{
             overFlow: 'hidden'
         };
         const NavBarStyle = {
-            position: 'fixed'
+            position: 'fixed',
+            zIndex: '100'
         };
         var count = 0;
         if( this.props.Messages.length !== 0 ){
@@ -54,7 +53,7 @@ class NavbarComponent extends Component{
             })
         }
         return(
-            <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header" id="nav-bar" style={NavBarStyle}>
+            <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header" id="nav-bar">
             <header className="mdl-layout__header">
                 <div className="mdl-layout__header-row">
                   <span className="mdl-layout-title">
@@ -114,4 +113,4 @@ function mapDispatchToProps(dispatch){
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavbarComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(NavbarWithOutUpdate);

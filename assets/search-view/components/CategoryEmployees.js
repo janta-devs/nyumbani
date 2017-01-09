@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import ResultTable from './ResultTable';
+import NavbarComponent from './NavbarComponent';
 
 class CategoryEmployees extends Component{
 	constructor( context, props ){
@@ -32,6 +33,7 @@ class CategoryEmployees extends Component{
 	render(){
 		return(
 			<div>
+        <NavbarComponent /><br /><br /><br /><br />
 				<ResultTable data = {this.data}/>
 			</div>
 		)

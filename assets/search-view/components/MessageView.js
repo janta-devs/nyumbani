@@ -8,7 +8,7 @@ import Actions from '../../DataStore/Actions';
 
 import BasicDetails from '../MessageViewComponent/BasicDetails';
 import MessageComponent from '../MessageViewComponent/MessageComponent';
-
+import NavbarWithOutUpdate from './NavbarWithOutUpdate';
 
 function mapStateToProps( state ){				
 	return {
@@ -43,6 +43,7 @@ class MessageView extends Component{
 	render(){
 		return(
 		<div>
+		<NavbarWithOutUpdate />
 			<div className="with-container content">
 	                <div className="column d-4-3 m-10-12 s-1-1 xs-1-1">
 	                	<BasicDetails message = {this.message_content}/>

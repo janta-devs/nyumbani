@@ -8,12 +8,19 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Actions from '../../DataStore/Actions';
 
+import NavbarWithOutUpdate from '../../search-view/components/NavbarWithOutUpdate';
+
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+
+//MPESA Components
+
+import MPesaComponent from '../../search-view/profile-view/components/Payments/MPesaComponent';
+import RechargeComponent from '../../search-view/profile-view/components/Payments/RechargeComponent';
 
 
 const brandColors = {
@@ -73,7 +80,9 @@ class Wallet extends Component{
 	    this.state = {
 	      showToolTip: false,
 	      componentWidth: 300,
-        open: false
+        open: false,
+        message: 'default',
+        modalIsOpen: false,
 	    };
 	    this.styles = {
 	      '.pie-chart-lines': {
@@ -87,7 +96,7 @@ class Wallet extends Component{
 	    };
    }
    handleOpen(){
-    this.setState({ open: true })
+    this.setState({modalIsOpen: true});
    }
    handleClose(){
     this.setState({ open: false })
@@ -95,7 +104,19 @@ class Wallet extends Component{
   getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
   }
-
+  ButtonClick( e ){
+    e.preventDefault();
+    e.stopPropagation();
+   (this.state.message === 'default') ? this.setState({ message: 'mpesa'}) : this.setState({ message: 'default'});
+  }
+  toggleModal( e ){
+    e.preventDefault();
+    e.stopPropagation();
+    //toggles the payment view i.e open or closed
+    ( this.state.modalIsOpen === true ) ? this.setState({modalIsOpen: false}) : this.setState({modalIsOpen: true});
+    //ensuring that the default message view when recommending give user all the payment options
+    ( this.state.modalIsOpen === false ) ? this.setState({ message: 'default'}) : this.state.message;
+  }
   generateData() {
     const data = [];
     const keys = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
@@ -131,9 +152,6 @@ turnOnRandomData() {
     this.data = this.generateData();
     this.forceUpdate();
   }
-
-  
-
   clickHandler(d) {
     this.setState({ dataDisplay: `The amount selected is ${d.value}` });
   }
@@ -177,7 +195,10 @@ mouseOverHandler(d, e) {
   }
 
   render(){
-    console.log( this.props );
+    var defaultView = <RechargeComponent modalIsOpen = {this.state.modalIsOpen} toggleModal = {this.toggleModal.bind(this)} surname = {this.props.AccountUser.fname} ButtonClick = {this.ButtonClick.bind(this)}/>
+    var mpesaView = <MPesaComponent modalIsOpen = {this.state.modalIsOpen} toggleModal = {this.toggleModal.bind(this)} surname = {this.props.AccountUser.fname} ButtonClick = {this.ButtonClick.bind(this)}/>
+    
+
     const actions = [
       <FlatButton
         label="Cancel"
@@ -209,6 +230,8 @@ mouseOverHandler(d, e) {
   	var remainder = amount - spent;
   	{this.createTooltip()}
 		return(
+    <div>
+    <NavbarWithOutUpdate />
 		<div style = {divStyle}>
 			<div style={chartStyle}>
 				<PieChart
@@ -253,18 +276,10 @@ mouseOverHandler(d, e) {
             </CardActions>
           </Card>
         </MuiThemeProvider>
-          <MuiThemeProvider>
-              <Dialog
-                title="Dialog With Actions"
-                actions={actions}
-                modal={true}
-                open={this.state.open}
-              >
-                Only actions can close this dialog.
-              </Dialog>
-          </MuiThemeProvider>
+        {(this.state.message === 'default') ? defaultView : mpesaView }
 			  </div>
 		</div>
+    </div>
 		)
 	}
 }
